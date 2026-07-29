@@ -1,0 +1,3 @@
+<x-meta-info.meta :setup="$setup" type="WebPage" :title="($pageMeta->meta_title ?? 'Affiliate Login') . ' | ' . ($setup->site_name ?? 'Bhaiya Housing')" :description="$pageMeta->meta_description ??
+    'Log in to your affiliate dashboard to manage your referrals, track leads status, and view your earned commissions in real-time.'" :keywords="$pageMeta->meta_keywords ?? 'login, affiliate login, bhaiya housing portal, member access, sign in'"
+    :image="$setup->logo_url ?? asset('images/header/logo.png')" :canonical="url()->current()" :robots="'noindex, nofollow'" :breadcrumb="[['name' => 'Home', 'url' => route('home.index')], ['name' => 'Login', 'url' => url()->current()]]" />
