@@ -1693,54 +1693,107 @@
 
                 <div id="authView">
                     <div class="auth-shell">
-                        <div class="auth-tabs">
-                            <button class="auth-tab-btn active" data-auth="login">লগইন</button>
-                            <button class="auth-tab-btn" data-auth="register">রেজিস্ট্রেশন</button>
-                        </div>
+                        <?php if(session('verify_email')): ?>
+                            
+                            <div style="text-align: center; margin-bottom: 20px;">
+                                <h3 style="font-family: var(--serif); font-size: 18px; color: var(--gold-light);">
+                                    <?php echo e(session('can_reset_password') ? 'নতুন পাসওয়ার্ড দিন' : 'ইমেইল ভেরিফিকেশন'); ?>
 
+                                </h3>
+                                <p style="font-size: 12px; color: var(--muted);"><?php echo e(session('verify_email')); ?> এড্রেসে কোড
+                                    পাঠানো হয়েছে।</p>
+                            </div>
 
-
-                        <!-- Login Form -->
-                        <form id="loginForm" action="<?php echo e(route('affiliated.login')); ?>" method="POST">
-                            <?php echo csrf_field(); ?>
-                            <?php if($errors->any()): ?>
-                                <p style="color:red; font-size:12px;"><?php echo e($errors->first()); ?></p>
+                            <?php if(session('can_reset_password')): ?>
+                                <form action="<?php echo e(route('password.update.final')); ?>" method="POST">
+                                    <?php echo csrf_field(); ?>
+                                    <div class="auth-field"><input name="password" type="password" placeholder="নতুন পাসওয়ার্ড"
+                                            required></div>
+                                    <div class="auth-field"><input name="password_confirmation" type="password"
+                                            placeholder="নিশ্চিত করুন" required></div>
+                                    <button type="submit" class="auth-submit">আপডেট করুন</button>
+                                </form>
+                            <?php else: ?>
+                                <form action="<?php echo e(route('otp.verify.submit')); ?>" method="POST">
+                                    <?php echo csrf_field(); ?>
+                                    <div class="auth-field">
+                                        <input name="otp" type="text" placeholder="------" maxlength="6" required
+                                            style="text-align:center; letter-spacing:10px; font-size:24px; font-weight:900; background:var(--bg-alt); color:var(--gold-light);">
+                                    </div>
+                                    <button type="submit" class="auth-submit">ভেরিফাই করুন</button>
+                                    <div style="display: flex; justify-content: space-between; margin-top: 15px;">
+                                        <a href="<?php echo e(route('otp.resend')); ?>"
+                                            style="font-size: 12px; color: var(--muted); text-decoration: none;">আবার পাঠান</a>
+                                        <a href="<?php echo e(route('otp.cancel')); ?>"
+                                            style="font-size: 12px; color: #ff8484; text-decoration: none;">বাতিল</a>
+                                    </div>
+                                </form>
                             <?php endif; ?>
-                            <div class="auth-field">
-                                <label for="lemail">মোবাইল নম্বর</label>
-                                <input name="phone" id="lemail" type="tel" placeholder="01XXXXXXXXX" required>
-                            </div>
-                            <div class="auth-field">
-                                <label for="lpass">পাসওয়ার্ড</label>
-                                <input name="password" id="lpass" type="password" placeholder="••••••••" required>
-                            </div>
-                            <button type="submit" class="auth-submit">লগইন করুন</button>
-                        </form>
 
-                        <!-- Registration Form -->
-                        <form id="registerForm" style="display:none;" action="<?php echo e(route('affiliated.register')); ?>"
-                            method="POST">
-                            <?php echo csrf_field(); ?>
-                            <?php if($errors->any()): ?>
-                                <p style="color:red; font-size:12px;"><?php echo e($errors->first()); ?></p>
-                            <?php endif; ?>
-                            <div class="auth-field">
-                                <label for="rgname">পূর্ণ নাম</label>
-                                <input name="name" id="rgname" type="text" placeholder="আপনার নাম" required>
+                        <?php else: ?>
+                            <!-- ── সাধারণ লগইন ও রেজিস্ট্রেশন ট্যাব ── -->
+                            <div class="auth-tabs" id="tabHeader">
+                                <button class="auth-tab-btn active" onclick="showAuth('login')">লগইন</button>
+                                <button class="auth-tab-btn" onclick="showAuth('register')">রেজিস্ট্রেশন</button>
                             </div>
-                            <div class="auth-field">
-                                <label for="rgphone">মোবাইল নম্বর</label>
-                                <input name="phone" id="rgphone" type="tel" placeholder="01XXXXXXXXX" required>
+
+                            <!-- ১. লগইন ফর্ম (শুধু ইমেইল ও পাসওয়ার্ড) -->
+                            <div id="loginSection">
+                                <form action="<?php echo e(route('affiliated.login')); ?>" method="POST">
+                                    <?php echo csrf_field(); ?>
+                                    <?php if($errors->any()): ?>
+                                        <div style="background: rgba(255, 132, 132, 0.15); border: 1px solid #ff8484; color: #ff8484; padding: 10px; border-radius: 8px; margin-bottom: 15px; font-size: 13px; text-align: center;">
+                                            <i class="fas fa-exclamation-circle" style="margin-right: 5px;"></i>
+                                            <?php echo e($errors->first()); ?>
+
+                                        </div>
+                                    <?php endif; ?>
+                                    <div class="auth-field">
+                                        <label>ইমেইল এড্রেস</label>
+                                        <input name="email" type="email" placeholder="example@mail.com" required>
+                                    </div>
+                                    <div class="auth-field">
+                                        <label>পাসওয়ার্ড</label>
+                                        <input name="password" type="password" placeholder="••••••••" required>
+                                    </div>
+                                    <button type="submit" class="auth-submit">লগইন করুন</button>
+                                    <p onclick="showAuth('forgot')"
+                                        style="text-align:center; cursor:pointer; font-size:12px; margin-top:15px; color:var(--gold-light);">
+                                        পাসওয়ার্ড ভুলে গেছেন?</p>
+                                </form>
                             </div>
-                            <div class="auth-field">
-                                <label for="rgpass">পাসওয়ার্ড</label>
-                                <input name="password" id="rgpass" type="password" placeholder="একটি পাসওয়ার্ড দিন"
-                                    required>
+
+                            <!-- ২. রেজিস্ট্রেশন ফর্ম (ইমেইল ও ফোন নম্বর দুটিই) -->
+                            <div id="registerSection" style="display: none;">
+                                <form action="<?php echo e(route('affiliated.register')); ?>" method="POST">
+                                    <?php echo csrf_field(); ?>
+                                    <div class="auth-field"><label>পূর্ণ নাম</label><input name="name" type="text" required>
+                                    </div>
+                                    <div class="auth-field"><label>ইমেইল এড্রেস</label><input name="email" type="email"
+                                            required></div>
+                                    <div class="auth-field"><label>মোবাইল নম্বর</label><input name="phone" type="tel" required>
+                                    </div>
+                                    <div class="auth-field"><label>পাসওয়ার্ড</label><input name="password" type="password"
+                                            placeholder="সর্বনিম্ন ৬ ডিজিট" required></div>
+                                    <button type="submit" class="auth-submit">অ্যাকাউন্ট তৈরি করুন</button>
+                                </form>
                             </div>
-                            <button type="submit" class="auth-submit">অ্যাকাউন্ট তৈরি করুন</button>
-                        </form>
-                        <p class="auth-demo-note">* এটি একটি ডেমো — বাস্তব লগইন সিস্টেম Bhaiya Housing-এর সার্ভারের সাথে
-                            যুক্ত করতে হবে।</p>
+
+                            <!-- ৩. ফরগট পাসওয়ার্ড ফর্ম (ইমেইল দিয়ে) -->
+                            <div id="forgotSection" style="display: none;">
+                                <h3 style="text-align:center; margin-bottom:20px; color:var(--gold-light); font-size:18px;">
+                                    পাসওয়ার্ড রিসেট</h3>
+                                <form action="<?php echo e(route('password.sendOtp')); ?>" method="POST">
+                                    <?php echo csrf_field(); ?>
+                                    <div class="auth-field"><label>রেজিস্টার্ড ইমেইল এড্রেস</label><input name="email"
+                                            type="email" required></div>
+                                    <button type="submit" class="auth-submit">ওটিপি পাঠান</button>
+                                    <p onclick="showAuth('login')"
+                                        style="text-align:center; cursor:pointer; font-size:12px; margin-top:15px; color:var(--muted);">
+                                        ← লগইন-এ ফিরে যান</p>
+                                </form>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             <?php endif; ?>
@@ -1906,16 +1959,32 @@
         }
 
         // Auth tabs (login vs register)
-        document.querySelectorAll('.auth-tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.auth-tab-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                document.getElementById('loginForm').style.display = btn.dataset.auth === 'login' ?
-                    'block' : 'none';
-                document.getElementById('registerForm').style.display = btn.dataset.auth === 'register' ?
-                    'block' : 'none';
-            });
-        });
+        function showAuth(mode) {
+            const loginSec = document.getElementById('loginSection');
+            const registerSec = document.getElementById('registerSection');
+            const forgotSec = document.getElementById('forgotSection');
+            const tabHeader = document.getElementById('tabHeader');
+            const tabs = document.querySelectorAll('.auth-tab-btn');
+
+            // সব হাইড করা
+            loginSec.style.display = 'none';
+            registerSec.style.display = 'none';
+            forgotSec.style.display = 'none';
+            tabs.forEach(t => t.classList.remove('active'));
+
+            if (mode === 'login') {
+                loginSec.style.display = 'block';
+                tabHeader.style.display = 'flex';
+                tabs[0].classList.add('active');
+            } else if (mode === 'register') {
+                registerSec.style.display = 'block';
+                tabHeader.style.display = 'flex';
+                tabs[1].classList.add('active');
+            } else if (mode === 'forgot') {
+                forgotSec.style.display = 'block';
+                tabHeader.style.display = 'none'; // পাসওয়ার্ড রিসেট করার সময় ট্যাব লুকিয়ে রাখা
+            }
+        }
 
         function showDashboard() {
             document.getElementById('authView').style.display = 'none';
@@ -1942,7 +2011,7 @@
             const slug = select.value;
             const projectName = select.options[select.selectedIndex].text;
 
-           const refCode = "<?php echo e(auth()->check() ? auth()->user()->referral_code : ''); ?>";
+            const refCode = "<?php echo e(auth()->check() ? auth()->user()->referral_code : ''); ?>";
 
             if (!slug) { alert('প্রজেক্ট সিলেক্ট করুন'); return; }
 

@@ -2,53 +2,53 @@
 
 @section('content')
     <section class="container mx-auto px-4 lg:px-8 py-12" x-data="{
-                activeTab: '{{
-                    session('active_tab') ?? (
-                        request('active_tab') ?? (
-                            $errors->hasAny(['title', 'slug', 'start_date', 'end_date', 'name', 'views']) ? 'coupons' : (
-                                $errors->hasAny(['email', 'password']) ? 'team' : (
-                                    $errors->hasAny(['name', 'phone', 'budget']) ? 'leads' : 'dashboard'
-                                )
-                            )
-                        )
+                    activeTab: '{{
+        session('active_tab') ?? (
+            request('active_tab') ?? (
+                $errors->hasAny(['title', 'slug', 'start_date', 'end_date', 'name', 'views']) ? 'coupons' : (
+                    $errors->hasAny(['email', 'password']) ? 'team' : (
+                        $errors->hasAny(['name', 'phone', 'budget']) ? 'leads' : 'dashboard'
                     )
-                }}',
+                )
+            )
+        )
+                    }}',
 
-                {{-- ২. ভিউ মুড: সেশন থাকলে সেটি আগে কাজ করবে, নাহলে এরর থাকলে ফর্ম ওপেন হবে --}}
-                leadView: '{{ session('lead_view') ?? ($errors->hasAny(['name', 'phone', 'budget']) ? 'form' : 'list') }}',
-                teamView: '{{ $errors->hasAny(['email', 'password']) ? 'form' : (session('team_view') ?? 'list') }}',
-                couponView: '{{
-                    $errors->hasAny(['title', 'slug', 'start_date', 'end_date', 'name', 'views']) ? 'form' :
-                    (session('coupon_view') ?? 'list')
-                }}',
-                {{-- ৩. টিম মেম্বার ডাটা ধরে রাখা --}}
-                editingMember: {
-                    id: '{{ old('id') }}',
-                    name: '{{ old('member_name') }}',
-                    phone: '{{ old('member_phone') }}',
-                    email: '{{ old('email') }}'
-                },
+                    {{-- ২. ভিউ মুড: সেশন থাকলে সেটি আগে কাজ করবে, নাহলে এরর থাকলে ফর্ম ওপেন হবে --}}
+                    leadView: '{{ session('lead_view') ?? ($errors->hasAny(['name', 'phone', 'budget']) ? 'form' : 'list') }}',
+                    teamView: '{{ $errors->hasAny(['email', 'password']) ? 'form' : (session('team_view') ?? 'list') }}',
+                    couponView: '{{
+        $errors->hasAny(['title', 'slug', 'start_date', 'end_date', 'name', 'views']) ? 'form' :
+        (session('coupon_view') ?? 'list')
+                    }}',
+                    {{-- ৩. টিম মেম্বার ডাটা ধরে রাখা --}}
+                    editingMember: {
+                        id: '{{ old('id') }}',
+                        name: '{{ old('member_name') }}',
+                        phone: '{{ old('member_phone') }}',
+                        email: '{{ old('email') }}'
+                    },
 
-                {{-- ৪. কুপন ডাটা ধরে রাখা --}}
-                editingCoupon: {
-                    id: '{{ old('id') }}',
-                    title: '{{ old('title') }}',
-                    slug: '{{ old('slug') }}',
-                    start_date: '{{ old('start_date') }}',
-                    end_date: '{{ old('end_date') }}',
-                    name: '{{ old('usage_limit', 1) }}',
-                    views: '{{ old('total_limit', 100) }}'
-                },
+                    {{-- ৪. কুপন ডাটা ধরে রাখা --}}
+                    editingCoupon: {
+                        id: '{{ old('id') }}',
+                        title: '{{ old('title') }}',
+                        slug: '{{ old('slug') }}',
+                        start_date: '{{ old('start_date') }}',
+                        end_date: '{{ old('end_date') }}',
+                        name: '{{ old('usage_limit', 1) }}',
+                        views: '{{ old('total_limit', 100) }}'
+                    },
 
-                {{-- ৫. লিড ডাটা ধরে রাখা --}}
-                editingLead: {
-                    id: '{{ old('id') }}',
-                    name: '{{ old('name') }}',
-                    phone: '{{ old('phone') }}',
-                    interested_location: '{{ old('interested_location') }}',
-                    budget: '{{ old('budget') }}'
-                }
-            }">
+                    {{-- ৫. লিড ডাটা ধরে রাখা --}}
+                    editingLead: {
+                        id: '{{ old('id') }}',
+                        name: '{{ old('name') }}',
+                        phone: '{{ old('phone') }}',
+                        interested_location: '{{ old('interested_location') }}',
+                        budget: '{{ old('budget') }}'
+                    }
+                }">
 
         <div class="mb-10">
             <h1 class="text-[#003B7A] text-4xl font-light">My Account</h1>
@@ -110,7 +110,7 @@
                         <a href="{{ route('home.index') }}"
                             class="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 transition-all border-b border-gray-50">
                             <i class="fas fa-home w-5"></i>
-                            <span class="text-base font-medium">Home Page</span>
+                            <span class="text-base font-medium">Portal</span>
                         </a>
                         <a href="{{ route('home.filter') }}"
                             class="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 transition-all border-b border-gray-50">
@@ -270,8 +270,7 @@
                         <div class="overflow-x-auto">
                             <table class="w-full text-left border-collapse">
                                 <thead>
-                                    <tr
-                                        class="text-sm uppercase text-gray-500 font-bold border-b border-gray-100 bg-white">
+                                    <tr class="text-sm uppercase text-gray-500 font-bold border-b border-gray-100 bg-white">
                                         <th class="px-8 py-4">Member Name</th>
                                         <th class="px-8 py-4 text-center">Total Leads</th>
                                         <th class="px-8 py-4 text-center">Completed</th>
@@ -293,13 +292,14 @@
                                                     <img src="{{ $member->avatar_url ?? asset('./images/user/images.png') }}"
                                                         class="w-8 h-8 rounded-full border shadow-sm">
                                                     <div class="flex flex-col">
-                                                        <span class="text-base font-bold text-gray-800">{{ $member->name }}</span>
                                                         <span
-                                                            class="text-sm text-gray-500 ">{{ $member->phone }}</span>
+                                                            class="text-base font-bold text-gray-800">{{ $member->name }}</span>
+                                                        <span class="text-sm text-gray-500 ">{{ $member->phone }}</span>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="px-8 py-5 text-center font-black text-gray-700 text-base">{{ $total }}</td>
+                                            <td class="px-8 py-5 text-center font-black text-gray-700 text-base">{{ $total }}
+                                            </td>
                                             <td class="px-8 py-5 text-center">
                                                 <span
                                                     class="px-2 py-0.5 rounded-full bg-green-50 text-green-600 text-sm font-bold border border-green-100">{{ $completed }}</span>
@@ -325,16 +325,34 @@
                         </div>
                     </div>
                 </div>
-                <!-- Section 1: Personal Info (Show if activeTab is 'profile') -->
                 <div x-show="activeTab === 'profile'" class="p-8" x-transition>
-                    <h2 class="text-xl font-bold text-gray-800 mb-6 uppercase tracking-wider border-b pb-2">Profile
-                        Settings
-                    </h2>
+    <h2 class="text-xl font-bold text-gray-800 mb-6 uppercase border-b pb-2">Profile Settings</h2>
+
+    {{-- ── ১. সাকসেস মেসেজ ডিসপ্লে ── --}}
+    @if (session('success'))
+        <div style="background: rgba(143, 224, 166, 0.2); border: 1px solid #10b981; color: #10b981; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-size: 14px; font-weight: 600;">
+            <i class="fas fa-check-circle mr-2"></i> {{ session('success') }}
+        </div>
+    @endif
+
+    {{-- ── ২. জেনারেল এরর মেসেজ (যেমন পাসওয়ার্ড ভুল হলে) ── --}}
+    @if ($errors->any())
+        <div style="background: rgba(255, 132, 132, 0.15); border: 1px solid #ff8484; color: #ff8484; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-size: 14px;">
+            <ul class="list-disc list-inside">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+                    {{-- ১. এখানে enctype যোগ করা হয়েছে ছবি আপলোডের জন্য --}}
                     <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data"
                         class="max-w-xl">
                         @csrf
                         @method('PUT')
-                        <!-- Avatar Upload -->
+
+                        <!-- Avatar Upload (বাকি কোড আগের মতোই থাকবে) -->
                         <div class="mb-8 flex items-center gap-6">
                             <div class="relative group">
                                 <img id="avatarPreview"
@@ -353,7 +371,8 @@
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Name & Phone -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                             <div>
                                 <label class="block text-sm font-bold text-gray-500 uppercase mb-2">Full Name</label>
                                 <input type="text" name="name" value="{{ Auth::user()->name }}"
@@ -366,9 +385,38 @@
                             </div>
                         </div>
 
+                        <hr class="my-8 border-gray-100">
+
+                        <!-- ── Password Change Section (নতুন যোগ করুন) ── -->
+                        <h4 class="text-sm font-bold text-[#003B7A] uppercase mb-4 tracking-widest">Change Password</h4>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Current Password</label>
+                                <input type="password" name="current_password"
+                                    class="w-full border border-gray-300 px-4 py-2 text-base outline-none focus:border-[#003B7A]">
+                                @error('current_password')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-400 uppercase mb-1">New Password</label>
+                                    <input type="password" name="new_password"
+                                        class="w-full border border-gray-300 px-4 py-2 text-base outline-none focus:border-[#003B7A]">
+                                    @error('new_password')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Confirm New
+                                        Password</label>
+                                    <input type="password" name="new_password_confirmation"
+                                        class="w-full border border-gray-300 px-4 py-2 text-base outline-none focus:border-[#003B7A]">
+                                </div>
+                            </div>
+                        </div>
+
                         <button type="submit"
-                            class="mt-8 bg-[#003B7A] text-white px-8 py-3 font-bold uppercase text-sm tracking-widest hover:bg-[#003b7a] transition-all">
-                            Save Changes
+                            class="mt-8 bg-[#003B7A] text-white px-8 py-3 font-bold uppercase text-sm tracking-widest hover:bg-blue-900 transition-all">
+                            Update Profile
                         </button>
                     </form>
                 </div>
@@ -384,8 +432,7 @@
                     <div class="overflow-x-auto">
                         <table class="w-full text-left">
                             <thead>
-                                <tr
-                                    class="text-sm uppercase text-gray-600 font-bold border-b border-gray-100 bg-gray-50">
+                                <tr class="text-sm uppercase text-gray-600 font-bold border-b border-gray-100 bg-gray-50">
                                     <th class="px-6 py-4">Resource</th>
                                     <th class="px-6 py-4">Type</th>
                                     <th class="px-6 py-4 text-right">Date</th>
@@ -445,15 +492,18 @@
                         </button>
                     </div>
 
-                    <div class="mb-6" x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show" x-transition.duration.500ms>
+                    <div class="mb-6" x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show"
+                        x-transition.duration.500ms>
                         @if (session('success'))
-                            <div class="mb-4 bg-green-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
+                            <div
+                                class="mb-4 bg-green-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
                                 <span><i class="fas fa-check-circle mr-2"></i> {{ session('success') }}</span>
                                 <button @click="show = false"><i class="fas fa-times"></i></button>
                             </div>
                         @endif
                         @if (session('error'))
-                            <div class="mb-4 bg-red-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
+                            <div
+                                class="mb-4 bg-red-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
                                 <span><i class="fas fa-times-circle mr-2"></i> {{ session('error') }}</span>
                                 <button @click="show = false"><i class="fas fa-times"></i></button>
                             </div>
@@ -486,20 +536,23 @@
                         </button>
                     </div>
 
-                    <div class="mb-6" x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show" x-transition.duration.500ms>
-    @if (session('success'))
-        <div class="mb-4 bg-green-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
-            <span><i class="fas fa-check-circle mr-2"></i> {{ session('success') }}</span>
-            <button @click="show = false"><i class="fas fa-times"></i></button>
-        </div>
-    @endif
-    @if (session('error'))
-        <div class="mb-4 bg-red-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
-            <span><i class="fas fa-times-circle mr-2"></i> {{ session('error') }}</span>
-            <button @click="show = false"><i class="fas fa-times"></i></button>
-        </div>
-    @endif
-</div>
+                    <div class="mb-6" x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show"
+                        x-transition.duration.500ms>
+                        @if (session('success'))
+                            <div
+                                class="mb-4 bg-green-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
+                                <span><i class="fas fa-check-circle mr-2"></i> {{ session('success') }}</span>
+                                <button @click="show = false"><i class="fas fa-times"></i></button>
+                            </div>
+                        @endif
+                        @if (session('error'))
+                            <div
+                                class="mb-4 bg-red-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
+                                <span><i class="fas fa-times-circle mr-2"></i> {{ session('error') }}</span>
+                                <button @click="show = false"><i class="fas fa-times"></i></button>
+                            </div>
+                        @endif
+                    </div>
 
                     {{-- ১. টিম লিস্ট ইনক্লুড --}}
                     <div x-show="teamView === 'list'" x-transition>
@@ -525,22 +578,24 @@
                             <span x-text="couponView === 'list' ? '+ Add New' : 'Back to List'"></span>
                         </button>
                     </div>
-                    <div class="mb-6" x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show" x-transition.duration.500ms>
-    @if (session('success'))
-        <div class="mb-4 bg-green-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
-            <span><i class="fas fa-check-circle mr-2"></i> {{ session('success') }}</span>
-            <button @click="show = false"><i class="fas fa-times"></i></button>
-        </div>
-    @endif
-    @if (session('error'))
-        <div class="mb-4 bg-red-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
-            <span><i class="fas fa-times-circle mr-2"></i> {{ session('error') }}</span>
-            <button @click="show = false"><i class="fas fa-times"></i></button>
-        </div>
-    @endif
-</div>
+                    <div class="mb-6" x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show"
+                        x-transition.duration.500ms>
+                        @if (session('success'))
+                            <div
+                                class="mb-4 bg-green-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
+                                <span><i class="fas fa-check-circle mr-2"></i> {{ session('success') }}</span>
+                                <button @click="show = false"><i class="fas fa-times"></i></button>
+                            </div>
+                        @endif
+                        @if (session('error'))
+                            <div
+                                class="mb-4 bg-red-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
+                                <span><i class="fas fa-times-circle mr-2"></i> {{ session('error') }}</span>
+                                <button @click="show = false"><i class="fas fa-times"></i></button>
+                            </div>
+                        @endif
+                    </div>
 
-                    {{-- শুধু এই দুই লাইন দিয়ে লিস্ট এবং ফর্ম কল হবে --}}
                     <div x-show="couponView === 'list'">
                         @include('frontend.coupon.list')
                     </div>
@@ -551,3 +606,16 @@
             </div>
     </section>
 @endsection
+@push('scripts')
+<script>
+    function previewAvatar(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('avatarPreview').src = e.target.result;
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+@endpush

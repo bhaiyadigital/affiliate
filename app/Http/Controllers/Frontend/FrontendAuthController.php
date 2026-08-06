@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OTPMail;
 use App\Models\DownloadLog;
 use App\Models\Lead;
 use App\Models\Role;
@@ -10,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -57,84 +59,173 @@ class FrontendAuthController extends Controller
         $user = auth()->user();
 
         $request->validate([
-            'name' => 'required|string|max:255',
-            'phone' => 'nullable|string|max:255',
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'name'             => 'required|string|max:255',
+            'phone'            => 'nullable|string|max:255',
+            'avatar'           => 'nullable|image',
+            'current_password' => 'nullable|required_with:new_password',
+            'new_password'     => 'nullable|min:6|confirmed',
         ]);
 
+        $successMessage = 'Profile updated successfully.';
+
+        // নাম ও ফোন আপডেট
         $user->name = $request->name;
         $user->phone = $request->phone;
 
+        // ইমেজ আপলোড লজিক (আগের মতো)
         if ($request->hasFile('avatar')) {
-            if ($user->getAttributes()['avatar']) {
-                Storage::disk('public')->delete($user->getAttributes()['avatar']);
+            if ($user->avatar) {
+                Storage::disk('public')->delete($user->avatar);
             }
-            $path = $request->file('avatar')->store('avatars', 'public');
-            $user->avatar = $path;
+            $user->avatar = $request->file('avatar')->store('avatars', 'public');
+        }
+
+        // পাসওয়ার্ড পরিবর্তন লজিক এবং স্পেসিফিক মেসেজ সেট করা
+        if ($request->filled('new_password')) {
+            if (!Hash::check($request->current_password, $user->password)) {
+                return back()->withErrors(['current_password' => 'বর্তমান পাসওয়ার্ডটি সঠিক নয়।']);
+            }
+            $user->password = Hash::make($request->new_password);
+
+            // পাসওয়ার্ড চেঞ্জ হলে মেসেজ পাল্টে যাবে
+            $successMessage = 'Password changed successfully.';
         }
 
         $user->save();
 
-        return back()->with('success', 'Profile updated successfully.');
+        // 'active_tab' পাঠানো হচ্ছে যাতে আপনি প্রোফাইল পেজেই থাকেন
+        return back()->with([
+            'success' => $successMessage,
+            'active_tab' => 'profile'
+        ]);
     }
-
     public function register(Request $request)
     {
         $request->validate([
             'name'     => ['required', 'string', 'max:255'],
-            'email'    => ['nullable', 'email', 'unique:users,email'],
-            'phone' => ['required', 'string', 'unique:users,phone', 'regex:/^\+?[0-9]+$/'],
+            'email'    => 'required|email|unique:users,email',
+            'phone'    => ['required', 'string', 'unique:users,phone', 'regex:/^\+?[0-9]+$/'],
             'password' => ['required', 'min:6'],
         ]);
-        $parentId = null;
-        if (auth()->check()) {
-            $parentId = auth()->id();
-        } else {
-            $refCode = $request->cookie('referred_by');
-            if ($refCode) {
-                try {
-                    $decodedId = base_convert($refCode, 36, 10) - 50000;
-                    $parentId = ($decodedId > 0) ? User::where('id', $decodedId)->value('id') : null;
-                } catch (\Exception $e) {
-                    $parentId = null;
-                }
-            }
-        }
 
+        $otp = rand(100000, 999999);
         $user = User::create([
-            'name'      => $request->name,
-            'email'     => $request->email,
-            'phone'     => $request->phone,
-            'password'  => Hash::make($request->password),
-            'referral_code' => 'BH-' . strtoupper(Str::random(6)),
-            'parent_id' => $parentId,
-            'status'    => 'active',
+            'name'           => $request->name,
+            'email'          => $request->email,
+            'phone'          => $request->phone,
+            'password'       => Hash::make($request->password),
+            'referral_code'  => 'BH-' . strtoupper(Str::random(6)),
+            'parent_id'      => auth()->check() ? auth()->id() : null,
+            'status'         => 'inactive',
+            'otp_code'       => $otp,
+            'otp_expires_at' => now()->addMinutes(10),
         ]);
 
-        if (auth()->check()) {
-            return back()->with([
-                'success' => 'নতুন টিম মেম্বার একাউন্ট সফলভাবে তৈরি হয়েছে।',
-                'active_tab' => 'team',
-                'team_view'  => 'list'
-            ]);
-        }
+        Mail::to($user->email)->send(new OTPMail($otp, 'register'));
 
-        Auth::login($user);
-        return redirect()->route('profile.index');
+        session(['verify_email' => $user->email, 'otp_purpose' => 'register']);
+
+        return back()->with('success', 'রেজিস্ট্রেশন সফল! আপনার ইমেইলে ভেরিফিকেশন কোড পাঠানো হয়েছে।');
     }
 
-    public function affiliatedLogin(Request $request)
+    public function sendResetOtp(Request $request)
     {
-        $request->validate([
-            'phone'    => ['required', 'string'],
-            'password' => ['required'],
+        $request->validate(['email' => 'required|email|exists:users,email']);
+
+        $user = User::where('email', $request->email)->first();
+        $otp = rand(100000, 999999);
+
+        $user->update([
+            'otp_code'       => $otp,
+            'otp_expires_at' => now()->addMinutes(10)
         ]);
 
-        if (Auth::attempt(['phone' => $request->phone, 'password' => $request->password])) {
+        Mail::to($user->email)->send(new OTPMail($otp, 'reset_password'));
+
+        session(['verify_email' => $user->email, 'otp_purpose' => 'reset_password']);
+        return back()->with('success', 'আপনার ইমেইলে পাসওয়ারড রিসেট কোড পাঠানো হয়েছে।');
+    }
+
+    public function verifyOtp(Request $request)
+    {
+        $request->validate(['otp' => 'required']);
+        $email = session('verify_email');
+
+        $user = User::where('email', $email)->where('otp_code', $request->otp)->first();
+
+        if (!$user || now()->gt($user->otp_expires_at)) {
+            return back()->with('error', 'ভুল ওটিপি অথবা মেয়াদের সময় শেষ হয়ে গেছে!');
+        }
+
+        if (session('otp_purpose') === 'register') {
+            $user->update(['status' => 'active', 'phone_verified_at' => now(), 'otp_code' => null]);
+            Auth::login($user);
+            session()->forget(['verify_email', 'otp_purpose']);
             return redirect()->route('profile.index');
         }
 
-        return back()->withInput()->withErrors(['phone' => 'ভুল মোবাইল নম্বর বা পাসওয়ার্ড।']);
+        if (session('otp_purpose') === 'reset_password') {
+            session(['can_reset_password' => true]);
+            return back()->with('success', 'ইমেইল ভেরিফাইড! এখন নতুন পাসওয়ার্ড দিন।');
+        }
+    }
+
+    public function resendOtp()
+    {
+        $email = session('verify_email');
+        if (!$email) return back();
+
+        $otp = rand(100000, 999999);
+        $user = User::where('email', $email)->first();
+
+        $user->update([
+            'otp_code'       => $otp,
+            'otp_expires_at' => now()->addMinutes(10)
+        ]);
+
+        Mail::to($email)->send(new OTPMail($otp, session('otp_purpose')));
+
+        return back()->with('success', 'নতুন কোড পাঠানো হয়েছে।');
+    }
+
+    public function finalPasswordUpdate(Request $request)
+    {
+        $request->validate(['password' => 'required|min:6|confirmed']);
+
+        User::where('email', session('verify_email'))->update([
+            'password' => Hash::make($request->password),
+            'otp_code' => null,
+            'otp_expires_at' => null
+        ]);
+
+        session()->forget(['verify_email', 'otp_purpose', 'can_reset_password']);
+        return redirect()->route('landing.index')->with('success', 'পাসওয়ারড সফলভাবে পরিবর্তন হয়েছে। লগইন করুন।');
+    }
+
+    public function cancelAuth()
+    {
+        session()->forget(['verify_email', 'otp_purpose', 'can_reset_password']);
+        return back();
+    }
+    public function affiliatedLogin(Request $request)
+    {
+        $request->validate([
+            'email'    => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+
+            if (auth()->user()->status !== 'active') {
+                Auth::logout();
+                session(['verify_email' => $request->email, 'otp_purpose' => 'register']);
+                return back()->with('error', 'আপনার একাউন্টটি ভেরিফাই করা নেই। ওটিপি দিন।');
+            }
+
+            return redirect()->route('profile.index');
+        }
+
+        return back()->withInput()->withErrors(['email' => 'ভুল ইমেইল বা পাসওয়ার্ড।']);
     }
     public function logout(Request $request)
     {
@@ -166,7 +257,7 @@ class FrontendAuthController extends Controller
         return back()->with([
             'success'     => 'মেম্বারের তথ্য আপডেট করা হয়েছে।',
             'active_tab'  => 'team',
-            'team_view'   => 'list' // আপডেট শেষে লিস্টে ফেরত পাঠাবে
+            'team_view'   => 'list'
         ]);
     }
 }

@@ -21,9 +21,9 @@ $siteSetting = \App\Models\SiteSetting::first();
             <?php if(auth()->guard()->check()): ?>
             <!-- Home (active) -->
             <a href="<?php echo e(route('home.index')); ?>"
-                class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 border-b-2 border-white text-white">
+                class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 border-b-2 <?php echo e(request()->routeIs('home.index') ? 'border-white' : 'border-transparent hover:border-white/40'); ?>">
                 <i class="fas fa-home text-lg"></i>
-                <span class="text-sm tracking-wide">Home</span>
+                <span class="text-sm tracking-wide">Portal</span>
             </a>
 
             <!-- Campaigns -->
@@ -35,27 +35,23 @@ $siteSetting = \App\Models\SiteSetting::first();
 
             <!-- Assets -->
             <a href="<?php echo e(route('home.filter', ['section' => 'assets', 'sort' => 'latest'])); ?>"
-                class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white transition-colors border-b-2 border-transparent hover:border-white/40">
+                class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white transition-colors border-b-2 <?php echo e(request()->query('section') === 'assets' ? 'border-white' : 'border-transparent hover:border-white/40'); ?> hover:border-white/40">
                 <i class="fas fa-box text-lg"></i>
                 <span class="text-sm tracking-wide flex items-center gap-1">Assets </span>
             </a>
 
             <!-- Brand Assets -->
             <a href="<?php echo e(route('brand.index')); ?>"
-                class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white transition-colors border-b-2 border-transparent hover:border-white/40">
+                class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white transition-colors border-b-2 <?php echo e(request()->routeIs('brand.index') ? 'border-white' : 'border-transparent hover:border-white/40'); ?> hover:border-white/40">
                 <i class="fas fa-palette text-lg"></i>
                 <span class="text-sm tracking-wide">Brand Assets</span>
             </a>
             <?php endif; ?>
             <!-- Home -->
-            <a href="<?php echo e(route('landing.index')); ?>"
-                class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white transition-colors border-b-2 border-transparent hover:border-white/40">
-                <i class="fa-brands fa-affiliatetheme text-lg"></i>
-                <span class="text-sm tracking-wide">Home</span>
-            </a>
+            
             <!-- Project list -->
             <a href="<?php echo e(route('affiliated.project')); ?>"
-                class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white transition-colors border-b-2 border-transparent hover:border-white/40">
+                class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white transition-colors border-b-2 <?php echo e(request()->routeIs('affiliated.project*') ? 'border-white' : 'border-transparent hover:border-white/40'); ?> hover:border-white/40">
                 <i class="fa-regular fa-building text-lg"></i>
                 <span class="text-sm tracking-wide">Project list</span>
             </a>
@@ -64,7 +60,7 @@ $siteSetting = \App\Models\SiteSetting::first();
 
             <?php if(auth()->guard()->check()): ?>
             <a href="<?php echo e(route('profile.index')); ?>"
-                class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white transition-colors border-b-2 border-transparent hover:border-white/40">
+                class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white transition-colors border-b-2 <?php echo e(request()->routeIs('profile.index') ? 'border-white' : 'border-transparent hover:border-white/40'); ?> hover:border-white/40">
 
 
                 <img src="<?php echo e(Auth::user()->avatar_url ?? asset('./images/user/images.png')); ?>" alt="Profile"
@@ -83,7 +79,7 @@ $siteSetting = \App\Models\SiteSetting::first();
             </a>
 
             <a href="<?php echo e(route('bookmark.list')); ?>"
-                class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white transition-colors border-b-2 border-transparent hover:border-white/40">
+                class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white <?php echo e(request()->routeIs('bookmark.list') ? 'border-white' : 'border-transparent hover:border-white/40'); ?> border-b-2 border-transparent hover:border-white/40">
                 <div class="relative">
                     <i class="fa-regular fa-bookmark text-lg"></i>
                     <?php if($bookmarkCount > 0): ?>
@@ -175,14 +171,14 @@ $siteSetting = \App\Models\SiteSetting::first();
                 </div>
             </div>
             <a href="<?php echo e(route('tickets.index')); ?>"
-                class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white transition-colors border-b-2 border-transparent hover:border-white/40">
+                class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white <?php echo e(request()->routeIs('tickets.index') ? 'border-white' : 'border-transparent hover:border-white/40'); ?> border-b-2 border-transparent hover:border-white/40">
                 <i class="fa-regular fa-circle-question text-lg"></i>
                 <span class="text-sm tracking-wide flex items-center gap-1">Help</span>
             </a>
             <?php endif; ?>
             <?php if(auth()->user()?->isSuperAdmin()): ?>
             <a href="<?php echo e(route('dashboard')); ?>"
-                class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white transition-colors border-b-2 border-transparent hover:border-white/40">
+                class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white <?php echo e(request()->routeIs('dashboard') ? 'border-white' : 'border-transparent hover:border-white/40'); ?> border-b-2 border-transparent hover:border-white/40">
                 <i class="fa-solid fa-gauge text-lg"></i>
                 <span class="text-sm tracking-wide flex items-center gap-1">Admin Dashboard</span>
             </a>
@@ -210,7 +206,7 @@ $siteSetting = \App\Models\SiteSetting::first();
                 </div>
 
                 <div class="flex flex-col space-y-4 overflow-y-auto">
-                    <a href="<?php echo e(route('home.index')); ?>" class="text-lg font-medium border-b border-white/10 pb-2">Home</a>
+                    <a href="<?php echo e(route('home.index')); ?>" class="text-lg font-medium border-b border-white/10 pb-2">Portal</a>
                     <a href="<?php echo e(route('home.filter', ['section' => 'campaigns'])); ?>" class="text-lg font-medium border-b border-white/10 pb-2">Campaigns</a>
                     <a href="<?php echo e(route('home.filter', ['section' => 'assets', 'sort' => 'latest'])); ?>" class="text-lg font-medium border-b border-white/10 pb-2">Assets</a>
                     <a href="<?php echo e(route('brand.index')); ?>" class="text-lg font-medium border-b border-white/10 pb-2">Brand Assets</a>
