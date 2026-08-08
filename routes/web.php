@@ -193,6 +193,7 @@ Route::prefix('')->group(function () {
     Route::get('/projects', [WebController::class, 'project'])->name('affiliated.project');
     Route::get('/project/{slug}', [WebController::class, 'details'])->name('affiliated.project.details');
     Route::middleware('auth')->group(function () {
+        Route::get('/go-to-portal', [FrontendAuthController::class, 'portalRedirect'])->name('portal.redirect');
         Route::post('/contact-store', [WebController::class, 'contactStore'])->name('contact.store');
         Route::put('/leads/{lead}', [LeadController::class, 'updateLead'])->name('lead.update');
         Route::delete('/leads/{lead}', [LeadController::class, 'destroyLead'])->name('lead.destroy');

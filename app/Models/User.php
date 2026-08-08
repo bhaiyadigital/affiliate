@@ -32,7 +32,8 @@ class User extends Authenticatable
         'designation',
         'otp_code',
         'otp_expires_at',
-        'phone_verified_at'
+        'phone_verified_at',
+        'email_verified_at'
     ];
 
     /**

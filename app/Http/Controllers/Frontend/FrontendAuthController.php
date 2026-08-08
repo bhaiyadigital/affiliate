@@ -10,7 +10,9 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -68,32 +70,35 @@ class FrontendAuthController extends Controller
 
         $successMessage = 'Profile updated successfully.';
 
-        // নাম ও ফোন আপডেট
         $user->name = $request->name;
         $user->phone = $request->phone;
 
-        // ইমেজ আপলোড লজিক (আগের মতো)
         if ($request->hasFile('avatar')) {
             if ($user->avatar) {
                 Storage::disk('public')->delete($user->avatar);
             }
             $user->avatar = $request->file('avatar')->store('avatars', 'public');
         }
+        $remoteData = ['name' => $request->name];
 
-        // পাসওয়ার্ড পরিবর্তন লজিক এবং স্পেসিফিক মেসেজ সেট করা
         if ($request->filled('new_password')) {
             if (!Hash::check($request->current_password, $user->password)) {
                 return back()->withErrors(['current_password' => 'বর্তমান পাসওয়ার্ডটি সঠিক নয়।']);
             }
-            $user->password = Hash::make($request->new_password);
-
-            // পাসওয়ার্ড চেঞ্জ হলে মেসেজ পাল্টে যাবে
-            $successMessage = 'Password changed successfully.';
+            $newHash = Hash::make($request->new_password);
+            $user->password = $newHash;
+            $remoteData['password'] = $newHash;
         }
 
         $user->save();
 
-        // 'active_tab' পাঠানো হচ্ছে যাতে আপনি প্রোফাইল পেজেই থাকেন
+        try {
+            DB::connection('asset_db')->table('users')
+                ->where('email', $user->email)
+                ->update($remoteData);
+        } catch (\Exception $e) {
+            Log::error("Remote Profile Update Failed: " . $e->getMessage());
+        }
         return back()->with([
             'success' => $successMessage,
             'active_tab' => 'profile'
@@ -108,24 +113,59 @@ class FrontendAuthController extends Controller
             'password' => ['required', 'min:6'],
         ]);
 
-        $otp = rand(100000, 999999);
+        $isSuperAdminAction = auth()->check() && auth()->user()->isSuperAdmin();
+        $hashedPassword = Hash::make($request->password);
+
+        $status = $isSuperAdminAction ? 'active' : 'inactive';
+        $verifiedAt = $isSuperAdminAction ? now() : null;
+        $otp = $isSuperAdminAction ? null : rand(100000, 999999);
+
         $user = User::create([
             'name'           => $request->name,
             'email'          => $request->email,
             'phone'          => $request->phone,
-            'password'       => Hash::make($request->password),
+            'password'       => $hashedPassword,
             'referral_code'  => 'BH-' . strtoupper(Str::random(6)),
             'parent_id'      => auth()->check() ? auth()->id() : null,
-            'status'         => 'inactive',
+            'status'         => $status,
+            'email_verified_at' => $verifiedAt,
             'otp_code'       => $otp,
-            'otp_expires_at' => now()->addMinutes(10),
+            'otp_expires_at' => $isSuperAdminAction ? null : now()->addMinutes(10),
         ]);
 
-        Mail::to($user->email)->send(new OTPMail($otp, 'register'));
+        try {
+            $remoteUserId = DB::connection('asset_db')->table('users')->insertGetId([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $hashedPassword,
+                'status' => 'active',
+                'source' => 'affiliate',
+                'email_verified_at' => $verifiedAt,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+            $role = DB::connection('asset_db')->table('roles')->where('name', 'frontend_user')->first();
+            if ($role) {
+                DB::connection('asset_db')->table('user_roles')->insert(['user_id' => $remoteUserId, 'role_id' => $role->id]);
+            }
+        } catch (\Exception $e) {
+            Log::error("Remote Sync Failed: " . $e->getMessage());
+        }
+
+        if (!$isSuperAdminAction) {
+            Mail::to($user->email)->send(new OTPMail($otp, 'register'));
+        }
+
+        if (auth()->check()) {
+            return back()->with([
+                'success' => $isSuperAdminAction ? 'মেম্বার সরাসরি যুক্ত হয়েছে।' : 'মেম্বার যুক্ত হয়েছে, লগইনের সময় তাকে ভেরিফাই করতে হবে।',
+                'active_tab' => 'team',
+                'team_view'  => 'list'
+            ]);
+        }
 
         session(['verify_email' => $user->email, 'otp_purpose' => 'register']);
-
-        return back()->with('success', 'রেজিস্ট্রেশন সফল! আপনার ইমেইলে ভেরিফিকেশন কোড পাঠানো হয়েছে।');
+        return back()->with('success', 'রেজিস্ট্রেশন সফল! ইমেইলে ওটিপি পাঠানো হয়েছে।');
     }
 
     public function sendResetOtp(Request $request)
@@ -150,15 +190,30 @@ class FrontendAuthController extends Controller
     {
         $request->validate(['otp' => 'required']);
         $email = session('verify_email');
-
         $user = User::where('email', $email)->where('otp_code', $request->otp)->first();
 
         if (!$user || now()->gt($user->otp_expires_at)) {
-            return back()->with('error', 'ভুল ওটিপি অথবা মেয়াদের সময় শেষ হয়ে গেছে!');
+            return back()->with('error', 'ভুল ওটিপি অথবা মেয়াদের সময় শেষ!');
         }
 
         if (session('otp_purpose') === 'register') {
-            $user->update(['status' => 'active', 'phone_verified_at' => now(), 'otp_code' => null]);
+            // এখানে email_verified_at আপডেট করা হলো যেহেতু ইমেইল দিয়ে ভেরিফাই হচ্ছে
+            $user->update([
+                'status'            => 'active',
+                'email_verified_at' => now(), // ফোনের বদলে ইমেইল ভেরিফাইড মার্ক করুন
+                'otp_code'          => null,
+                'otp_expires_at'    => null
+            ]);
+
+            // রিমোট সাইটে (Asset Site) সিঙ্ক করা
+            try {
+                DB::connection('asset_db')->table('users')
+                    ->where('email', $email)
+                    ->update(['email_verified_at' => now()]);
+            } catch (\Exception $e) {
+                Log::error("Remote Email Verification Sync Failed: " . $e->getMessage());
+            }
+
             Auth::login($user);
             session()->forget(['verify_email', 'otp_purpose']);
             return redirect()->route('profile.index');
@@ -191,15 +246,27 @@ class FrontendAuthController extends Controller
     public function finalPasswordUpdate(Request $request)
     {
         $request->validate(['password' => 'required|min:6|confirmed']);
+        $newHash = Hash::make($request->password);
+        $email = session('verify_email');
 
-        User::where('email', session('verify_email'))->update([
-            'password' => Hash::make($request->password),
+        // ১. লোকাল ডাটাবেস আপডেট
+        User::where('email', $email)->update([
+            'password' => $newHash,
             'otp_code' => null,
             'otp_expires_at' => null
         ]);
 
+        // ২. রিমোট ডাটাবেস (Asset Site) আপডেট করা (এটি আগে ছিল না)
+        try {
+            DB::connection('asset_db')->table('users')
+                ->where('email', $email)
+                ->update(['password' => $newHash]);
+        } catch (\Exception $e) {
+            Log::error("Remote Password Reset Sync Failed: " . $e->getMessage());
+        }
+
         session()->forget(['verify_email', 'otp_purpose', 'can_reset_password']);
-        return redirect()->route('landing.index')->with('success', 'পাসওয়ারড সফলভাবে পরিবর্তন হয়েছে। লগইন করুন।');
+        return redirect()->route('landing.index')->with('success', 'পাসওয়ার্ড সফলভাবে পরিবর্তন হয়েছে। লগইন করুন।');
     }
 
     public function cancelAuth()
@@ -215,11 +282,23 @@ class FrontendAuthController extends Controller
         ]);
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            $user = auth()->user();
 
-            if (auth()->user()->status !== 'active') {
+            if (!$user->email_verified_at) {
+
+                if (!$user->otp_code) {
+                    $otp = rand(100000, 999999);
+                    $user->update([
+                        'otp_code' => $otp,
+                        'otp_expires_at' => now()->addMinutes(10)
+                    ]);
+                    Mail::to($user->email)->send(new OTPMail($otp, 'register'));
+                }
+
                 Auth::logout();
-                session(['verify_email' => $request->email, 'otp_purpose' => 'register']);
-                return back()->with('error', 'আপনার একাউন্টটি ভেরিফাই করা নেই। ওটিপি দিন।');
+                session(['verify_email' => $user->email, 'otp_purpose' => 'register']);
+
+                return back()->with('success', 'আপনার একাউন্টটি ভেরিফাই করা নেই। ইমেইলে পাঠানো ওটিপি দিন।');
             }
 
             return redirect()->route('profile.index');
@@ -259,5 +338,18 @@ class FrontendAuthController extends Controller
             'active_tab'  => 'team',
             'team_view'   => 'list'
         ]);
+    }
+    public function portalRedirect()
+    {
+        $user = auth()->user();
+        $secret = env('PORTAL_SECRET_KEY');
+
+        $signature = hash_hmac('sha256', $user->email, $secret);
+
+        $baseUrl = env('ASSET_WEBSITE_URL');
+
+        $url = $baseUrl . "/auto-login?email=" . urlencode($user->email) . "&signature=" . $signature;
+
+        return redirect()->away($url);
     }
 }
