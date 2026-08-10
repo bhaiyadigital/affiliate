@@ -16,6 +16,7 @@ class LeadController extends Controller
 
         $request->validate([
             'name'  => 'required|string|max:255',
+            'email' => 'nullable|email|max:255',
             'phone' => [
                 'required',
                 'string',
@@ -74,6 +75,7 @@ class LeadController extends Controller
             'user_id'             => $ownerId,
             'referrer_id'         => $leaderId,
             'name'                => $request->name,
+            'email'               => $request->email,
             'phone'               => $request->phone,
             'interested_location' => $request->interested_location,
             'budget'              => $request->budget,
@@ -94,7 +96,8 @@ class LeadController extends Controller
 
         $request->validate([
             'name'  => 'required|string|max:255',
-            'phone' => 'required|string|max:20',
+            'email' => 'nullable|email|max:255',
+            'phone' => 'nullable|string|max:20',
             'interested_location' => 'nullable|string|max:255',
             'budget' => 'nullable|numeric|min:0', // এখানেও min:0 যোগ করে দিন
         ]);
@@ -173,6 +176,7 @@ class LeadController extends Controller
 
         $validated = $request->validate([
             'name'                => 'required|string|max:255',
+            'email'               => 'nullable|email|max:255',
             'phone'               => [
                 'required',
                 'string',

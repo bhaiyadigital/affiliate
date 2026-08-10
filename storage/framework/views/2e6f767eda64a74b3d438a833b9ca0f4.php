@@ -1,4 +1,10 @@
 <div class="max-w-2xl mx-auto bg-[#f8fafc] p-10 rounded-2xl border border-blue-100 shadow-inner">
+     <div class="text-center mb-8">
+        <h2 class="text-2xl font-bold text-[#003B7A] uppercase"
+        x-text="viewOnly ? 'Lead Details' : (editingLead.id ? 'Update Lead Details' : 'Submit New Lead')">
+    </h2>
+        <p class="text-gray-400 text-xs mt-1">Please provide accurate information about the potential client.</p>
+    </div>
     <form :action="editingLead.id ? '/leads/' + editingLead.id : '<?php echo e(route('lead.store')); ?>'" method="POST">
         <?php echo csrf_field(); ?>
         <?php if($errors->any()): ?>
@@ -21,18 +27,41 @@
         <div class="space-y-6">
             <div>
                 <label class="text-sm font-bold text-gray-500 uppercase mb-1 block">Customer Name</label>
-                <input type="text" name="name" required x-model="editingLead.name" placeholder="Full Name"
+                <input type="text" name="name" :disabled="viewOnly" required x-model="editingLead.name" placeholder="Full Name"
                     class="w-full border border-gray-300 px-4 py-3 text-base rounded-xl focus:border-[#003B7A] outline-none bg-white">
             </div>
             <div>
                 <label class="text-sm font-bold text-gray-500 uppercase mb-1 block">Phone Number</label>
-                <input type="tel" name="phone" required x-model="editingLead.phone" placeholder="01XXXXXXXXX"
+                <input type="tel" name="phone" :disabled="viewOnly" x-model="editingLead.phone" placeholder="01XXXXXXXXX"
                     class="w-full border border-gray-300 px-4 py-3 text-base rounded-xl focus:border-[#003B7A] outline-none bg-white">
+            </div>
+            
+            <div>
+                <label class="text-sm font-bold text-gray-500 uppercase mb-1 block">Email Address (Optional)</label>
+                <input type="email" name="email" :disabled="viewOnly" x-model="editingLead.email" placeholder="customer@example.com"
+                    class="w-full border px-4 py-3 text-base rounded-xl outline-none bg-white focus:border-[#003B7A] <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> border-red-500 <?php else: ?> border-gray-300 <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>">
+                <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                    <span class="text-red-500 text-[10px] font-bold uppercase mt-1"><?php echo e($message); ?></span>
+                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label class="text-sm font-bold text-gray-500 uppercase mb-1 block">Project</label>
-                    <select name="interested_location" x-model="editingLead.interested_location"
+                    <select name="interested_location" :disabled="viewOnly" x-model="editingLead.interested_location"
                         class="w-full border border-gray-300 px-4 py-3 text-base rounded-xl focus:border-[#003B7A] outline-none bg-white">
                         <option value="">Select Project</option>
                         <?php $__currentLoopData = $shared_projects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -42,16 +71,19 @@
                 </div>
                 <div>
                     <label class="text-sm font-bold text-gray-500 uppercase mb-1 block">Budget (Optional)</label>
-                    <input type="number" name="budget" min="1" x-model="editingLead.budget" placeholder="Budget"
+                    <input type="number" name="budget" :disabled="viewOnly" min="1" x-model="editingLead.budget" placeholder="Budget"
                         class="w-full border border-gray-300 px-4 py-3 text-base rounded-xl focus:border-[#003B7A] outline-none bg-white">
                 </div>
             </div>
             <button type="submit" class="w-full bg-[#003B7A] text-white py-4 rounded-2xl font-bold text-base uppercase tracking-widest hover:bg-blue-900 transition-all shadow-lg">
                 <span x-text="editingLead.id ? 'Update Changes' : 'Submit Lead Now'"></span>
             </button>
-            <button type="button" @click="leadView = 'list'; editingLead = {id:''}" class="text-gray-500 text-sm font-bold uppercase hover:text-red-500 mt-2">
-                Cancel
-            </button>
+            <div class="text-center">
+                <button type="button" @click="leadView = 'list'; editingLead = {id:''}"
+                    class="text-gray-600 text-sm font-semibold uppercase hover:text-red-500 transition-colors">
+                    Cancel
+                </button>
+            </div>
         </div>
     </form>
 </div>

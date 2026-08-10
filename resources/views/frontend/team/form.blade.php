@@ -1,16 +1,13 @@
 <div class="mb-10 bg-[#f8fafc] p-10 rounded-2xl border border-blue-100 shadow-inner max-w-3xl mx-auto">
-    <div class="flex justify-between items-center mb-6">
-        <h3 class="text-base font-bold text-[#003B7A] uppercase flex items-center gap-2">
-            {{-- কন্ডিশনে .id যোগ করা হয়েছে --}}
-            <i class="fas" :class="editingMember.id ? 'fa-user-edit' : 'fa-user-plus'"></i>
-            <span x-text="editingMember.id ? 'Edit Team Member' : 'Create New Team Member Account'"></span>
-        </h3>
-        {{-- ক্যানসেল করলে ডাটা রিসেট হবে --}}
-        <button @click="editingMember = { id: null, name: '', phone: '', email: '' }; teamView = 'list'" class="text-red-500 text-sm font-bold hover:underline">Cancel</button>
+<div class="text-center mb-8">
+        <h2 class="text-2xl font-bold text-[#003B7A] uppercase"
+            x-text="editingMember.id ? 'Edit Team Member' : 'Create Team Member'">
+        </h2>
+        <p class="text-gray-400 text-xs mt-1">Provide member details to manage your network account.</p>
     </div>
 
     {{-- ফর্ম অ্যাকশনে .id চেক করা হয়েছে --}}
-    <form :action="editingMember.id ? '/team/update/' + editingMember.id : '{{ route('affiliated.register') }}'" method="POST">
+   <form :action="editingMember.id ? '{{ url('/team/update') }}/' + editingMember.id : '{{ route('affiliated.register') }}'" method="POST">
         @csrf
         @if ($errors->any())
             <div class="mb-6 bg-red-50 border-l-4 border-red-500 p-4 rounded shadow-sm animate-hero-text">
@@ -68,6 +65,12 @@
                     class="w-full bg-[#003B7A] text-white py-4 rounded-2xl font-bold text-base uppercase tracking-widest hover:bg-[#002a58] transition-all shadow-lg">
                     <span x-text="editingMember.id ? 'Update Member Account' : 'Generate Member Account'"></span>
                 </button>
+                <div class="text-center mt-2">
+                    <button type="button" @click="teamView = 'list'; editingMember = {id:null, name:'', phone:'', email:''}"
+                        class="text-gray-400 text-xs font-bold uppercase hover:text-red-500 transition-colors">
+                        Cancel and Return to list
+                    </button>
+                </div>
             </div>
         </div>
     </form>

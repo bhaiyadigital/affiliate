@@ -29,7 +29,11 @@ class User extends Authenticatable
         'password',
         'type',
         'employee_id',
-        'designation'
+        'designation',
+        'otp_code',
+        'otp_expires_at',
+        'phone_verified_at',
+        'email_verified_at'
     ];
 
     /**

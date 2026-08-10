@@ -1,22 +1,15 @@
 <div class="max-w-xl mx-auto bg-white p-8">
-    <div class="mb-8 border-b pb-4 flex justify-between items-center">
-        <div>
-            {{-- টাইটেল এডিট মোড অনুযায়ী পরিবর্তন হবে --}}
-            <h3 class="text-lg font-bold text-[#003B7A] uppercase flex items-center gap-2"
-                x-text="editingCoupon && editingCoupon.id ? 'Edit Coupon' : 'Create New Coupon'">
-                <i class="fas fa-plus-circle"></i> Create New Coupon
-            </h3>
-            <p class="text-sm text-gray-500 mt-1">Fill all details to activate your custom discount code.</p>
-        </div>
-        {{-- এডিট মোড থেকে বের হওয়ার বাটন --}}
-        <button x-show="editingCoupon" @click="editingCoupon = null; couponView = 'list'"
-            class="text-red-500 text-sm font-bold hover:underline">Cancel Edit</button>
+
+    <div class="text-center mb-8">
+        <h2 class="text-2xl font-bold text-[#003B7A] uppercase text-center"
+            x-text="editingCoupon && editingCoupon.id ? 'Edit Coupon' : 'Create New Coupon'">
+        </h2>
+        <p class="text-gray-400 text-xs mt-1">Configure discount codes to enhance your referral marketing.</p>
     </div>
 
-    {{-- ফর্ম অ্যাকশন ডাইনামিক করা হয়েছে --}}
     <form
-    :action="editingCoupon && editingCoupon.id ? '/coupons/update/' + editingCoupon.id : '{{ route('coupons.store') }}'"
-    method="POST" class="space-y-4">
+        :action="editingCoupon && editingCoupon.id ? '/coupons/update/' + editingCoupon.id : '{{ route('coupons.store') }}'"
+        method="POST" class="space-y-4">
         @csrf
         @if ($errors->any())
             <div class="mb-6 bg-red-50 border-l-4 border-red-500 p-4 rounded shadow-sm animate-hero-text">
@@ -88,10 +81,10 @@
                 <span x-text="editingCoupon && editingCoupon.id ? 'Update Changes' : 'Generate and Save'"></span>
             </button>
             <button type="button"
-    @click="couponView = 'list'; editingCoupon = { id: null, title: '', slug: '', start_date: '', end_date: '', name: 1, views: 100 }"
-    class="text-gray-500 text-sm font-bold uppercase hover:text-red-500">
-    Cancel / Back to List
-</button>
+                @click="couponView = 'list'; editingCoupon = { id: null, title: '', slug: '', start_date: '', end_date: '', name: 1, views: 100 }"
+                class="text-gray-500 text-sm font-bold uppercase hover:text-red-500">
+                Cancel / Back to List
+            </button>
         </div>
     </form>
 </div>

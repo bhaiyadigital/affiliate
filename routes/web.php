@@ -182,11 +182,18 @@ Route::prefix('')->group(function () {
     Route::get('/', [HomeController::class, 'landing'])->name('landing.index');
     Route::get('/register', [FrontendAuthController::class, 'showSignin'])->name('signin');
     Route::post('/register', [FrontendAuthController::class, 'register'])->name('affiliated.register');
+    Route::post('/forgot-password-otp', [FrontendAuthController::class, 'sendResetOtp'])->name('password.sendOtp');
+    Route::get('/resend-otp', [FrontendAuthController::class, 'resendOtp'])->name('otp.resend');
+    Route::get('/cancel-auth', [FrontendAuthController::class, 'cancelAuth'])->name('otp.cancel');
+    Route::get('/verify-otp', [FrontendAuthController::class, 'verifyOtpForm'])->name('profile.otp');
+    Route::post('/verify-otp-unified', [FrontendAuthController::class, 'verifyOtp'])->name('otp.verify.submit');
+    Route::post('/update-password-final', [FrontendAuthController::class, 'finalPasswordUpdate'])->name('password.update.final');
     Route::post('/affiliated-login', [FrontendAuthController::class, 'affiliatedLogin'])->name('affiliated.login');
     Route::post('/lead-store', [LeadController::class, 'storeLead'])->name('lead.store');
     Route::get('/projects', [WebController::class, 'project'])->name('affiliated.project');
     Route::get('/project/{slug}', [WebController::class, 'details'])->name('affiliated.project.details');
     Route::middleware('auth')->group(function () {
+        Route::get('/go-to-portal', [FrontendAuthController::class, 'portalRedirect'])->name('portal.redirect');
         Route::post('/contact-store', [WebController::class, 'contactStore'])->name('contact.store');
         Route::put('/leads/{lead}', [LeadController::class, 'updateLead'])->name('lead.update');
         Route::delete('/leads/{lead}', [LeadController::class, 'destroyLead'])->name('lead.destroy');

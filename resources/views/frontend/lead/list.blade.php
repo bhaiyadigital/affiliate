@@ -1,9 +1,29 @@
-<form action="{{ route('profile.index') }}" method="GET" class="mb-6 flex flex-wrap gap-4 items-end  p-4">
+<!-- ── Stats Grid (Responsive) ── -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+    <div class="p-4 bg-blue-50 border border-blue-100 rounded-lg shadow-sm">
+        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">My Leads</span>
+        <div class="text-2xl font-black text-blue-900 mt-1">{{ $leads->where('user_id', auth()->id())->count() }}</div>
+    </div>
+    <div class="p-4 bg-purple-50 border border-purple-100 rounded-lg shadow-sm">
+        <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">Team Member Leads</span>
+        <div class="text-2xl font-black text-purple-900 mt-1">{{ $leads->where('referrer_id', auth()->id())->count() }}
+        </div>
+    </div>
+    <div class="p-4 bg-green-50 border border-green-100 rounded-lg shadow-sm sm:col-span-2 lg:col-span-1">
+        <span class="text-xs font-bold text-green-600 uppercase tracking-wider">Team Size</span>
+        <div class="text-2xl font-black text-green-900 mt-1">{{ auth()->user()->teamMembers->count() }}</div>
+    </div>
+</div>
+
+<!-- ── Filter Form (Responsive) ── -->
+<form action="{{ route('profile.index') }}" method="GET" class="mb-6 flex flex-col md:flex-row gap-4 items-end">
     <input type="hidden" name="active_tab" value="leads">
 
-    <div class="w-64">
-        <label class="text-xs font-semibold text-gray-500 uppercase block mb-1">Team Member</label>
-        <select name="member_id" class="w-full border p-2 text-sm outline-none">
+    <!-- Team Member Select -->
+    <div class="w-full md:flex-1">
+        <label class="text-[10px] font-bold text-gray-600 uppercase block mb-1 ml-1">Team Member</label>
+        <select name="member_id"
+            class="w-full border border-gray-300 rounded-lg p-2.5 text-sm outline-none focus:ring-2 focus:ring-[#003B7A] bg-white transition-all">
             <option value="">All Members</option>
             @foreach($members as $m)
                 <option value="{{ $m->id }}" {{ request('member_id') == $m->id ? 'selected' : '' }}>{{ $m->name }}</option>
@@ -11,9 +31,11 @@
         </select>
     </div>
 
-    <div class="w-48">
-        <label class="text-xs font-semibold text-gray-500 uppercase block mb-1">Status</label>
-        <select name="status" class="w-full border p-2 text-sm outline-none">
+    <!-- Status Select -->
+    <div class="w-full md:flex-1">
+        <label class="text-[10px] font-bold text-gray-400 uppercase block mb-1 ml-1">Status</label>
+        <select name="status"
+            class="w-full border border-gray-300 rounded-lg p-2.5 text-sm outline-none focus:ring-2 focus:ring-[#003B7A] bg-white transition-all">
             <option value="">All Status</option>
             @foreach(\App\Models\Lead::statusLabels() as $id => $label)
                 <option value="{{ $id }}" {{ request('status') == $id ? 'selected' : '' }}>{{ $label }}</option>
@@ -21,29 +43,24 @@
         </select>
     </div>
 
-    <button type="submit" class="bg-[#003B7A] text-white px-5 py-2 rounded text-sm font-bold">Filter</button>
-    <a href="{{ route('profile.index') }}?active_tab=leads" class="bg-gray-200 px-4 py-2 rounded text-sm">Reset</a>
+    <!-- Buttons -->
+    <div class="flex gap-2 w-full md:w-auto">
+        <button type="submit"
+            class="flex-1 md:flex-none bg-[#003B7A] text-white px-6 py-2.5 rounded-lg text-sm font-bold shadow-md hover:bg-blue-900 transition-colors uppercase tracking-wider">
+            Filter
+        </button>
+        <a href="{{ route('profile.index') }}?active_tab=leads"
+            class="flex-1 md:flex-none bg-white border border-gray-300 text-gray-600 px-4 py-2.5 rounded-lg text-sm font-bold text-center hover:bg-gray-100 transition-colors uppercase tracking-wider">
+            Reset
+        </a>
+    </div>
 </form>
-<!-- Stats Grid -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-    <div class="p-4 bg-blue-50 border border-blue-100 rounded-sm">
-        <span class="text-sm font-bold text-blue-600 uppercase">My Leads</span>
-        <div class="text-2xl font-bold text-blue-900">{{ $leads->where('user_id', auth()->id())->count() }}</div>
-    </div>
-    <div class="p-4 bg-purple-50 border border-purple-100 rounded-sm">
-        <span class="text-sm font-bold text-purple-600 uppercase">Team Member Leads</span>
-        <div class="text-2xl font-bold text-purple-900">{{ $leads->where('referrer_id', auth()->id())->count() }}</div>
-    </div>
-    <div class="p-4 bg-green-50 border border-green-100 rounded-sm">
-        <span class="text-sm font-bold text-green-600 uppercase">Team Size</span>
-        <div class="text-2xl font-bold text-green-900">{{ auth()->user()->teamMembers->count() }}</div>
-    </div>
-</div>
+
 
 <!-- Leads Table -->
 <div class="overflow-hidden border border-gray-100 rounded-sm bg-white ">
     <table class="w-full text-left">
-        <thead class="bg-gray-50 text-sm font-bold text-gray-500 uppercase border-b">
+        <thead class="bg-[#003B7A] text-sm font-bold text-white uppercase border-b">
             <tr>
                 <th class="px-6 py-4">Customer</th>
                 <th class="px-6 py-4">Source</th>
@@ -112,9 +129,15 @@
                     </td>
 
                     <td class="px-6 py-4 text-right">
+                        <button @click="editingLead = @js($lead); leadView = 'form'; viewOnly = true"
+                            class="text-emerald-500 hover:scale-110 transition-transform mr-2">
+                            <i class="fas fa-eye"></i>
+                        </button>
                         @if ($lead->user_id == auth()->id())
-                            <button @click="editingLead = @js($lead); leadView = 'form'" class="text-blue-500 mr-2"><i
-                                    class="fas fa-edit"></i></button>
+                            <button @click="editingLead = @js($lead); leadView = 'form'; viewOnly = false"
+                                class="text-blue-500 mr-2">
+                                <i class="fas fa-edit"></i>
+                            </button>
                             <form action="{{ route('lead.destroy', $lead->id) }}" method="POST" class="inline"
                                 onsubmit="return confirm('Delete?')">
                                 @csrf @method('DELETE')

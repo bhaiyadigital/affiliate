@@ -207,43 +207,6 @@ class Content extends Model
         return array_map(fn($p) => $this->getPublicUrl($p), $paths);
     }
 
-    public function isCouponValid()
-    {
-        if ($this->module !== 'coupons' || $this->status != self::STATUS_ACTIVE) {
-            return ['status' => false, 'msg' => 'কুপনটি বর্তমানে একটিভ নেই।'];
-        }
 
-        $now = now();
 
-        if ($this->start_date && $now < $this->start_date) {
-            return ['status' => false, 'msg' => 'কুপন অফারটি এখনো শুরু হয়নি।'];
-        }
-        if ($this->end_date && $now > $this->end_date) {
-            return ['status' => false, 'msg' => 'কুপনটির মেয়াদ শেষ হয়ে গেছে।'];
-        }
-
-        $totalLimit = (int) $this->views;
-        $totalUsed = isset($this->extra['used_count']) ? (int) $this->extra['used_count'] : 0;
-
-        if ($totalLimit > 0 && $totalUsed >= $totalLimit) {
-            return ['status' => false, 'msg' => 'কুপনটির ব্যবহারের মোট সীমা শেষ হয়ে গেছে।'];
-        }
-
-        return ['status' => true];
-    }
-
-    public function isUserLimitReached($phone)
-    {
-        $limitPerUser = (int) $this->name;
-
-        if ($limitPerUser > 0) {
-            $usageCount = \App\Models\Lead::where('phone', $phone)
-                ->where('coupon_code', $this->slug)
-                ->count();
-
-            return $usageCount >= $limitPerUser;
-        }
-
-        return false;
-    }
 }
