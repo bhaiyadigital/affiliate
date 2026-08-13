@@ -18,7 +18,11 @@
         </button>
 
         <nav class="hidden lg:flex items-stretch gap-0">
-
+            <a href="{{ route('affiliated.project') }}"
+                class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white transition-colors border-b-2 {{ request()->routeIs('affiliated.project*') ? 'border-white' : 'border-transparent hover:border-white/40' }} hover:border-white/40">
+                <i class="fa-regular fa-building text-lg"></i>
+                <span class="text-sm tracking-wide">Project list</span>
+            </a>
             @auth
                 <a href="{{ route('portal.redirect') }}"
                     class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 border-b-2 {{ request()->routeIs('home.index') ? 'border-white' : 'border-transparent hover:border-white/40' }}">
@@ -47,11 +51,7 @@
 
 
             @endauth
-            <a href="{{ route('affiliated.project') }}"
-                class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white transition-colors border-b-2 {{ request()->routeIs('affiliated.project*') ? 'border-white' : 'border-transparent hover:border-white/40' }} hover:border-white/40">
-                <i class="fa-regular fa-building text-lg"></i>
-                <span class="text-sm tracking-wide">Project list</span>
-            </a>
+
             @if(auth()->user()?->isSuperAdmin())
                 <a href="{{ route('dashboard') }}"
                     class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white {{ request()->routeIs('dashboard') ? 'border-white' : 'border-transparent hover:border-white/40' }} border-b-2 border-transparent hover:border-white/40">

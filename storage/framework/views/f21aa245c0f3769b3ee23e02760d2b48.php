@@ -18,7 +18,11 @@
         </button>
 
         <nav class="hidden lg:flex items-stretch gap-0">
-
+            <a href="<?php echo e(route('affiliated.project')); ?>"
+                class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white transition-colors border-b-2 <?php echo e(request()->routeIs('affiliated.project*') ? 'border-white' : 'border-transparent hover:border-white/40'); ?> hover:border-white/40">
+                <i class="fa-regular fa-building text-lg"></i>
+                <span class="text-sm tracking-wide">Project list</span>
+            </a>
             <?php if(auth()->guard()->check()): ?>
                 <a href="<?php echo e(route('portal.redirect')); ?>"
                     class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 border-b-2 <?php echo e(request()->routeIs('home.index') ? 'border-white' : 'border-transparent hover:border-white/40'); ?>">
@@ -47,11 +51,7 @@
 
 
             <?php endif; ?>
-            <a href="<?php echo e(route('affiliated.project')); ?>"
-                class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white transition-colors border-b-2 <?php echo e(request()->routeIs('affiliated.project*') ? 'border-white' : 'border-transparent hover:border-white/40'); ?> hover:border-white/40">
-                <i class="fa-regular fa-building text-lg"></i>
-                <span class="text-sm tracking-wide">Project list</span>
-            </a>
+
             <?php if(auth()->user()?->isSuperAdmin()): ?>
                 <a href="<?php echo e(route('dashboard')); ?>"
                     class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white <?php echo e(request()->routeIs('dashboard') ? 'border-white' : 'border-transparent hover:border-white/40'); ?> border-b-2 border-transparent hover:border-white/40">

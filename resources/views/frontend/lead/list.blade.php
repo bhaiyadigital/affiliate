@@ -33,7 +33,7 @@
 
     <!-- Status Select -->
     <div class="w-full md:flex-1">
-        <label class="text-[10px] font-bold text-gray-400 uppercase block mb-1 ml-1">Status</label>
+        <label class="text-[10px] font-bold text-gray-600 uppercase block mb-1 ml-1">Status</label>
         <select name="status"
             class="w-full border border-gray-300 rounded-lg p-2.5 text-sm outline-none focus:ring-2 focus:ring-[#003B7A] bg-white transition-all">
             <option value="">All Status</option>
@@ -57,105 +57,123 @@
 </form>
 
 
-<!-- Leads Table -->
-<div class="overflow-hidden border border-gray-100 rounded-sm bg-white ">
-    <table class="w-full text-left">
-        <thead class="bg-[#003B7A] text-sm font-bold text-white uppercase border-b">
-            <tr>
-                <th class="px-6 py-4">Customer</th>
-                <th class="px-6 py-4">Source</th>
-                <th class="px-6 py-4">Referred By</th>
-                <th class="px-6 py-4">Status</th>
-                <th class="px-6 py-4 text-right">Actions</th>
-            </tr>
-        </thead>
-        <tbody class="divide-y divide-gray-50">
-            @forelse($leads as $lead)
-                <tr class="hover:bg-gray-50 transition-colors text-base">
-                    <td class="px-6 py-4">
-                        <div class="font-bold text-gray-800">{{ $lead->name }}</div>
-                        <div class="text-sm text-gray-500">{{ $lead->phone }} | {{ $lead->interested_location }}</div>
-                    </td>
-                    {{-- কলাম ১: আসার মাধ্যম (Source Type) --}}
-                    <td class="px-6 py-4">
-                        @if($lead->type === 'manual')
-                            <span class="text-sm text-gray-500 font-bold flex items-center gap-1.5">
-                                <i class="fas fa-hand-pointer text-sm opacity-70"></i> MANUAL
-                            </span>
-                        @else
-                            <span class="text-sm text-indigo-500 font-bold flex items-center gap-1.5">
-                                <i class="fas fa-link text-sm opacity-70"></i> LINK
-                            </span>
-                        @endif
-                    </td>
-
-                    {{-- কলাম ২: কে রেফার করেছে (Referrer Info) --}}
-                    <td class="px-6 py-4">
-                        @if ($lead->user_id == auth()->id())
-                            {{-- নিজের লিড হলে --}}
-                            <span
-                                class="text-sm font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded border border-blue-100 w-fit uppercase">
-                                MY PERSONAL
-                            </span>
-                        @else
-                            {{-- টিমের মেম্বারের লিড হলে তার নাম ও ডিটেইলস --}}
-                            <div class="flex items-center gap-2">
-                                <img src="{{ $lead->user->avatar_url ?? asset('./images/user/images.png') }}"
-                                    class="w-6 h-6 rounded-full border border-gray-100 shadow-sm object-cover">
-                                <div class="flex flex-col leading-tight">
-                                    <span class="text-sm font-bold text-gray-700">{{ $lead->user->name }}</span>
-                                    <span class="text-sm text-gray-500">Team Member</span>
-                                </div>
-                            </div>
-                        @endif
-                    </td>
-                    <td class="px-6 py-4">
-                        @php
-                            // স্ট্যাটাস অনুযায়ী কালার নির্ধারণ
-                            $statusColor = match ($lead->status) {
-                                \App\Models\Lead::STATUS_PENDING => 'bg-gray-100 text-gray-600 border-gray-200',   // নতুন/পেন্ডিং (ধূসর)
-                                \App\Models\Lead::STATUS_CONTACTED => 'bg-blue-50 text-blue-700 border-blue-100',    // কথা হয়েছে (নীল)
-                                \App\Models\Lead::STATUS_VISIT => 'bg-orange-50 text-orange-700 border-orange-100', // ভিজিট করেছে (কমলা)
-                                \App\Models\Lead::STATUS_BOOKED => 'bg-purple-50 text-purple-700 border-purple-100', // বুকিং হয়েছে (বেগুনী)
-                                \App\Models\Lead::STATUS_COMPLETED => 'bg-green-50 text-green-700 border-green-100', // সম্পন্ন (সবুজ)
-                                default => 'bg-gray-50 text-gray-500 border-gray-100',
-                            };
-                        @endphp
-
-                        <span
-                            class="{{ $statusColor }} px-2 py-1 rounded text-[11px] font-black border uppercase tracking-wider">
-                            {{ $lead->status_label }}
-                        </span>
-                    </td>
-
-                    <td class="px-6 py-4 text-right">
-                        <button @click="editingLead = @js($lead); leadView = 'form'; viewOnly = true"
-                            class="text-emerald-500 hover:scale-110 transition-transform mr-2">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                        @if ($lead->user_id == auth()->id())
-                            <button @click="editingLead = @js($lead); leadView = 'form'; viewOnly = false"
-                                class="text-blue-500 mr-2">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <form action="{{ route('lead.destroy', $lead->id) }}" method="POST" class="inline"
-                                onsubmit="return confirm('Delete?')">
-                                @csrf @method('DELETE')
-                                <button type="submit" class="text-red-500"><i class="fas fa-trash"></i></button>
-                            </form>
-                        @else
-                            <i class="fas fa-lock text-gray-200"></i>
-                        @endif
-                    </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="4" class="px-6 py-12 text-center text-gray-500 italic">No leads found.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
-</div>
+<!-- ── Leads Section ── -->
 <div class="mt-4">
-    @include('partials.pagination', ['items' => $leads])
+
+    <!-- ১. Desktop Table View (বড় স্ক্রিনে দেখাবে, মোবাইলে হাইড থাকবে) -->
+    <div class="hidden md:block overflow-hidden border border-gray-100 rounded-lg bg-white shadow-sm">
+        <table class="w-full text-left">
+            <thead class="bg-[#003B7A] text-sm font-bold text-white uppercase border-b">
+                <tr>
+                    <th class="px-6 py-4">Customer</th>
+                    <th class="px-6 py-4">Source</th>
+                    <th class="px-6 py-4">Referred By</th>
+                    <th class="px-6 py-4">Status</th>
+                    <th class="px-6 py-4 text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-50">
+                @forelse($leads as $lead)
+                    <tr class="hover:bg-gray-50 transition-colors text-base">
+                        <td class="px-6 py-4">
+                            <div class="font-bold text-gray-800">{{ $lead->name }}</div>
+                            <div class="text-sm text-gray-500">{{ $lead->phone }} | {{ $lead->interested_location }}</div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="text-sm font-bold flex items-center gap-1.5 {{ $lead->type === 'manual' ? 'text-gray-500' : 'text-indigo-500' }}">
+                                <i class="fas {{ $lead->type === 'manual' ? 'fa-hand-pointer' : 'fa-link' }} opacity-70"></i>
+                                {{ strtoupper($lead->type) }}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4">
+                            @if ($lead->user_id == auth()->id())
+                                <span class="text-sm font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded border border-blue-100 w-fit uppercase">MY PERSONAL</span>
+                            @else
+                                <div class="flex items-center gap-2">
+                                    <img src="{{ $lead->user->avatar_url ?? asset('./images/user/images.png') }}" class="w-6 h-6 rounded-full border shadow-sm object-cover">
+                                    <div class="flex flex-col leading-tight">
+                                        <span class="text-sm font-bold text-gray-700">{{ $lead->user->name }}</span>
+                                        <span class="text-xs text-gray-500">Team Member</span>
+                                    </div>
+                                </div>
+                            @endif
+                        </td>
+                        <td class="px-6 py-4">
+                            @php
+                                $statusColor = match ($lead->status) {
+                                    \App\Models\Lead::STATUS_PENDING => 'bg-gray-100 text-gray-600 border-gray-200',
+                                    \App\Models\Lead::STATUS_COMPLETED => 'bg-green-50 text-green-700 border-green-100',
+                                    default => 'bg-blue-50 text-blue-700 border-blue-100',
+                                };
+                            @endphp
+                            <span class="{{ $statusColor }} px-2 py-1 rounded text-[11px] font-black border uppercase tracking-wider">
+                                {{ $lead->status_label }}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <div class="flex justify-end items-center gap-3">
+                                <button @click="editingLead = @js($lead); leadView = 'form'; viewOnly = true" class="text-emerald-500 hover:scale-110 transition-transform"><i class="fas fa-eye"></i></button>
+                                @if ($lead->user_id == auth()->id())
+                                    <button @click="editingLead = @js($lead); leadView = 'form'; viewOnly = false" class="text-blue-500"><i class="fas fa-edit"></i></button>
+                                    <form action="{{ route('lead.destroy', $lead->id) }}" method="POST" class="inline" onsubmit="return confirm('Delete?')">
+                                        @csrf @method('DELETE')
+                                        <button type="submit" class="text-red-500"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                @else
+                                    <i class="fas fa-lock text-gray-200"></i>
+                                @endif
+                            </div>
+                        </td>
+                    </tr>
+                @empty
+                    <tr><td colspan="5" class="px-6 py-12 text-center text-gray-500 italic">No leads found.</td></tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ২. Mobile Card View (ডেস্কটপে হাইড থাকবে, মোবাইলে একটির নিচে একটি কার্ড দেখাবে) -->
+    <div class="md:hidden space-y-4">
+        @forelse($leads as $lead)
+            <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <div class="font-bold text-gray-800">{{ $lead->name }}</div>
+                        <div class="text-xs text-gray-500">{{ $lead->phone }}</div>
+                    </div>
+                    <span class="px-2 py-1 rounded text-[9px] font-black border uppercase {{ $lead->status == \App\Models\Lead::STATUS_COMPLETED ? 'bg-green-50 text-green-600 border-green-100' : 'bg-blue-50 text-blue-600 border-blue-100' }}">
+                        {{ $lead->status_label }}
+                    </span>
+                </div>
+
+                <div class="text-xs text-gray-600 mb-3">
+                    <span class="font-bold uppercase text-gray-400 text-[10px] block">Location</span>
+                    {{ $lead->interested_location }}
+                </div>
+
+                <div class="flex justify-between items-center pt-3 border-t border-gray-50">
+                    <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                        Source: {{ $lead->type }}
+                    </div>
+                    <div class="flex gap-4">
+                        <button @click="editingLead = @js($lead); leadView = 'form'; viewOnly = true" class="text-emerald-500"><i class="fas fa-eye text-base"></i></button>
+                        @if ($lead->user_id == auth()->id())
+                            <button @click="editingLead = @js($lead); leadView = 'form'; viewOnly = false" class="text-blue-500"><i class="fas fa-edit text-base"></i></button>
+                            <form action="{{ route('lead.destroy', $lead->id) }}" method="POST" class="inline">
+                                @csrf @method('DELETE')
+                                <button type="submit" class="text-red-400"><i class="fas fa-trash text-base"></i></button>
+                            </form>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        @empty
+            <div class="p-8 text-center text-gray-400 italic">No leads found.</div>
+        @endforelse
+    </div>
+
+    <!-- Pagination -->
+    <div class="mt-6">
+        @include('partials.pagination', ['items' => $leads])
+    </div>
 </div>
