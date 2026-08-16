@@ -1,10 +1,10 @@
 <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 40px; background-color: #f4f7f6; color: #333;">
     <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 8px; border: 1px solid #e0e0e0;">
-        <h2 style="color: #003b7a; text-align: center;">Bhaiya Housing</h2>
+        <h2 style="color: #003b7a; text-align: center;">Bhaiya Housing Affiliate Program</h2>
         <p>হ্যালো,</p>
         <p>
             @if($purpose === 'register')
-                Bhaiya Housing-এ রেজিস্ট্রেশন করার জন্য আপনাকে ধন্যবাদ। আপনার একাউন্ট ভেরিফাই করতে নিচের ওটিপি কোডটি ব্যবহার করুন:
+                Bhaiya Housing Affiliate Program-এ রেজিস্ট্রেশন করার জন্য আপনাকে ধন্যবাদ। আপনার একাউন্ট ভেরিফাই করতে নিচের ওটিপি কোডটি ব্যবহার করুন:
             @else
                 আপনার পাসওয়ার্ড রিসেট করার জন্য একটি অনুরোধ পাওয়া গেছে। আপনার সিকিউরিটি কোডটি নিচে দেওয়া হলো:
             @endif

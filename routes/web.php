@@ -185,7 +185,7 @@ Route::prefix('')->group(function () {
     Route::post('/forgot-password-otp', [FrontendAuthController::class, 'sendResetOtp'])->name('password.sendOtp');
     Route::get('/resend-otp', [FrontendAuthController::class, 'resendOtp'])->name('otp.resend');
     Route::get('/cancel-auth', [FrontendAuthController::class, 'cancelAuth'])->name('otp.cancel');
-    Route::get('/verify-otp', [FrontendAuthController::class, 'verifyOtpForm'])->name('profile.otp');
+    Route::get('/verify-otp', [FrontendAuthController::class, 'verifyOtpForm'])->name('verify.otp');
     Route::post('/verify-otp-unified', [FrontendAuthController::class, 'verifyOtp'])->name('otp.verify.submit');
     Route::post('/update-password-final', [FrontendAuthController::class, 'finalPasswordUpdate'])->name('password.update.final');
     Route::post('/affiliated-login', [FrontendAuthController::class, 'affiliatedLogin'])->name('affiliated.login');
