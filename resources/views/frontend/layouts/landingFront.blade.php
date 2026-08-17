@@ -1372,6 +1372,16 @@
             });
         }
     </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        @if($errors->any())
+            const element = document.getElementById('dashboard');
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        @endif
+    });
+</script>
 </body>
 
 </html>

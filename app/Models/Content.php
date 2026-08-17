@@ -144,8 +144,6 @@ class Content extends Model
         };
     }
 
-
-
     // Slug helper — generate unique slug from a given string
     public static function generateSlug(string $title, ?int $ignoreId = null): string
     {
@@ -172,7 +170,6 @@ class Content extends Model
 
         return asset('storage/' . $cleanPath);
     }
-
 
     public function getImageUrlAttribute(): ?string
     {
@@ -207,6 +204,59 @@ class Content extends Model
         return array_map(fn($p) => $this->getPublicUrl($p), $paths);
     }
 
+// ------------------------------------------------------------------
+    // Coupon Logic Methods (Add these before the last '}')
+    // ------------------------------------------------------------------
 
+    /**
+     * চেক করে কুপনটি বর্তমানে কার্যকর কি না
+     */
+    public function isCouponValid()
+    {
+        $now = now();
 
+        // ১. স্ট্যাটাস চেক
+        if ($this->status != self::STATUS_ACTIVE) {
+            return ['status' => false, 'message' => 'Coupon is disabled.'];
+        }
+
+        // ২. শুরুর তারিখ চেক
+        if ($this->start_date && $now->lt($this->start_date)) {
+            return ['status' => false, 'message' => 'Coupon not active yet.'];
+        }
+
+        // ৩. শেষের তারিখ চেক
+        if ($this->end_date && $now->gt($this->end_date)) {
+            return ['status' => false, 'message' => 'Coupon has expired.'];
+        }
+
+        // ৪. মোট ব্যবহারের সীমা চেক (views কলামটি লিমিট হিসেবে ব্যবহৃত হচ্ছে)
+        $extra = $this->extra ?? [];
+        $usedCount = $extra['used_count'] ?? 0;
+
+        if ($this->views > 0 && $usedCount >= $this->views) {
+            return ['status' => false, 'message' => 'Total usage limit reached.'];
+        }
+
+        return ['status' => true, 'message' => 'Valid'];
+    }
+
+    /**
+     * চেক করে নির্দিষ্ট ফোন নম্বর দিয়ে কুপন ব্যবহারের সীমা শেষ কি না
+     */
+    public function isUserLimitReached($phone)
+    {
+        // 'name' কলামে প্রতি ইউজারের লিমিট রাখা হয়েছে
+        $perUserLimit = (int) ($this->name ?? 1);
+
+        $usageCount = \App\Models\Lead::where('coupon_code', $this->slug)
+            ->where('phone', $phone)
+            ->count();
+
+        return $usageCount >= $perUserLimit;
+    }
+    public function getUsedCountAttribute()
+    {
+        return $this->extra['used_count'] ?? 0;
+    }
 }

@@ -1,9 +1,87 @@
+<!DOCTYPE html>
+<html lang="bn">
 
-@extends('frontend.layouts.landingFront')
-
-@section('content')
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhaiya Housing — Refer &amp; Earn</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700;900&family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
+        :root {
+            --bg: #0F2A25;
+            --bg-alt: #123832;
+            --surface: #16413A;
+            --surface-2: #1C4C43;
+            --gold: #C9A227;
+            --gold-light: #E7C766;
+            --cream: #F4EFE2;
+            --muted: #9FBDB2;
+            --line: rgba(244, 239, 226, 0.14);
+            --shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+            --serif: 'Noto Serif Bengali', 'Noto Serif', serif;
+            --sans: 'Hind Siliguri', 'Inter', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--cream);
+            font-family: var(--sans);
+            line-height: 1.65;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        img,
+        svg {
+            display: block;
+            max-width: 100%;
+        }
+
+        .wrap {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        ::selection {
+            background: var(--gold);
+            color: #12241f;
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--gold-light);
+            outline-offset: 3px;
+        }
+
+        /* subtle backdrop texture */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 15% 8%, rgba(201, 162, 39, 0.10), transparent 45%),
+                radial-gradient(circle at 90% 25%, rgba(201, 162, 39, 0.06), transparent 40%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
         .auth-page {
             min-height: 80vh;
             display: flex;
@@ -22,6 +100,10 @@
             box-shadow: var(--shadow);
         }
     </style>
+</head>
+
+<body>
+
 
     <div class="auth-page">
         <div class="auth-shell">
@@ -136,6 +218,6 @@
             }, 1000);
         });
     </script>
-@endsection
+</body>
 
-
+</html>

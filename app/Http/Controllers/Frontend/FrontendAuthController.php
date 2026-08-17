@@ -393,7 +393,7 @@ class FrontendAuthController extends Controller
                 ->post(config('services.mailer.url'), [
                     'type'    => 'verification',
                     'to'      => trim($email),
-                    'subject' => $title . ' - Bhaiya Housing',
+                    'subject' => $title . ' - Bhaiya Housing Affiliate Program',
                     'data'    => [
                         'eyebrow' => 'Bhaiya Housing Affiliate Program',
                         'heading' => $title,

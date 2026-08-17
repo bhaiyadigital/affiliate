@@ -119,8 +119,7 @@
                 <div class="method-card">
                     <div class="method-badge">০২</div>
                     <svg viewBox="0 0 24 24" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                        <path
-                            d="M9 15 15 9M8 12l-2.5 2.5a3.5 3.5 0 0 0 5 5L13 17M16 12l2.5-2.5a3.5 3.5 0 0 0-5-5L11 7" />
+                        <path d="M9 15 15 9M8 12l-2.5 2.5a3.5 3.5 0 0 0 5 5L13 17M16 12l2.5-2.5a3.5 3.5 0 0 0-5-5L11 7" />
                     </svg>
                     <h3>আপনার রেফারেল লিংক শেয়ার করুন</h3>
                     <p>আপনার নিজের ইউনিক লিংক জেনারেট করুন এবং প্রজেক্টের লিংক তাকে পাঠান। তিনি লিংকে গিয়ে নিজেই তার
@@ -395,6 +394,10 @@
                         <div class="row">
                             <div><label>নাম</label><input name="name" type="text" required></div>
                             <div><label>নম্বর</label><input name="phone" type="tel" required></div>
+                            <div>
+                                <label>ইমেইল (ঐচ্ছিক)</label>
+                                <input name="email" type="email" placeholder="example@mail.com">
+                            </div>
                             <div><label>পছন্দের স্থান</label>
                                 <select name="interested_location"
                                     style="width: 100%; background: var(--bg-alt); color: var(--cream); padding: 12px; border: 1px solid var(--line); border-radius: 9px;">
@@ -411,7 +414,6 @@
                 </div>
             <?php else: ?>
                 <?php
-                    // ইউআরএল এ ref=123 আছে কি না দেখা
                     $refId = request()->query('ref') ?? request()->cookie('referred_by');
                 ?>
 
@@ -424,6 +426,11 @@
                         <div class="row">
                             <div><label>আপনার নাম</label><input name="name" type="text" required></div>
                             <div><label>আপনার নম্বর</label><input name="phone" type="tel" required></div>
+
+                            <div>
+                                <label>ইমেইল (ঐচ্ছিক)</label>
+                                <input name="email" type="email" placeholder="example@mail.com">
+                            </div>
                             <div><label>পছন্দের স্থান</label>
                                 <select name="interested_location"
                                     style="width: 100%; background: var(--bg-alt); color: var(--cream); padding: 12px; border: 1px solid var(--line); border-radius: 9px;">
@@ -455,68 +462,82 @@
                 <div id="authView">
                     <div class="auth-shell">
 
-                            <!-- ── সাধারণ লগইন ও রেজিস্ট্রেশন ট্যাব ── -->
-                            <div class="auth-tabs" id="tabHeader">
-                                <button class="auth-tab-btn active" onclick="showAuth('login')">লগইন</button>
-                                <button class="auth-tab-btn" onclick="showAuth('register')">রেজিস্ট্রেশন</button>
-                            </div>
+                        <!-- ── সাধারণ লগইন ও রেজিস্ট্রেশন ট্যাব ── -->
+                        <div class="auth-tabs" id="tabHeader">
+                            <button
+                                class="auth-tab-btn <?php echo e($errors->hasAny(['name', 'email', 'phone', 'password']) ? '' : 'active'); ?>"
+                                onclick="showAuth('login')">লগইন</button>
+                            <button
+                                class="auth-tab-btn <?php echo e($errors->hasAny(['name', 'email', 'phone', 'password']) ? 'active' : ''); ?>"
+                                onclick="showAuth('register')">রেজিস্ট্রেশন</button>
+                        </div>
 
-                            <!-- ১. লগইন ফর্ম (শুধু ইমেইল ও পাসওয়ার্ড) -->
-                            <div id="loginSection">
-                                <form action="<?php echo e(route('affiliated.login')); ?>" method="POST">
-                                    <?php echo csrf_field(); ?>
-                                    <?php if($errors->any()): ?>
-                                        <div style="background: rgba(255, 132, 132, 0.15); border: 1px solid #ff8484; color: #ff8484; padding: 10px; border-radius: 8px; margin-bottom: 15px; font-size: 13px; text-align: center;">
-                                            <i class="fas fa-exclamation-circle" style="margin-right: 5px;"></i>
-                                            <?php echo e($errors->first()); ?>
+                        <!-- ১. লগইন ফর্ম (শুধু ইমেইল ও পাসওয়ার্ড) -->
+                        <div id="loginSection"
+                            style="<?php echo e($errors->hasAny(['name', 'email', 'phone', 'password']) ? 'display: none;' : 'display: block;'); ?>">
+                            <form action="<?php echo e(route('affiliated.login')); ?>" method="POST">
+                                <?php echo csrf_field(); ?>
+                                <?php if($errors->any()): ?>
+                                    <div
+                                        style="background: rgba(255, 132, 132, 0.15); border: 1px solid #ff8484; color: #ff8484; padding: 10px; border-radius: 8px; margin-bottom: 15px; font-size: 13px; text-align: center;">
+                                        <i class="fas fa-exclamation-circle" style="margin-right: 5px;"></i>
+                                        <?php echo e($errors->first()); ?>
 
-                                        </div>
-                                    <?php endif; ?>
-                                    <div class="auth-field">
-                                        <label>ইমেইল এড্রেস</label>
-                                        <input name="email" type="email" placeholder="example@mail.com" required>
                                     </div>
-                                    <div class="auth-field">
-                                        <label>পাসওয়ার্ড</label>
-                                        <input name="password" type="password" placeholder="••••••••" required>
-                                    </div>
-                                    <button type="submit" class="auth-submit">লগইন করুন</button>
-                                    <p onclick="showAuth('forgot')"
-                                        style="text-align:center; cursor:pointer; font-size:12px; margin-top:15px; color:var(--gold-light);">
-                                        পাসওয়ার্ড ভুলে গেছেন?</p>
-                                </form>
-                            </div>
+                                <?php endif; ?>
+                                <div class="auth-field">
+                                    <label>ইমেইল এড্রেস</label>
+                                    <input name="email" type="email" placeholder="example@mail.com" required>
+                                </div>
+                                <div class="auth-field">
+                                    <label>পাসওয়ার্ড</label>
+                                    <input name="password" type="password" placeholder="••••••••" required>
+                                </div>
+                                <button type="submit" class="auth-submit">লগইন করুন</button>
+                                <p onclick="showAuth('forgot')"
+                                    style="text-align:center; cursor:pointer; font-size:12px; margin-top:15px; color:var(--gold-light);">
+                                    পাসওয়ার্ড ভুলে গেছেন?</p>
+                            </form>
+                        </div>
 
-                            <!-- ২. রেজিস্ট্রেশন ফর্ম (ইমেইল ও ফোন নম্বর দুটিই) -->
-                            <div id="registerSection" style="display: none;">
-                                <form action="<?php echo e(route('affiliated.register')); ?>" method="POST">
-                                    <?php echo csrf_field(); ?>
-                                    <div class="auth-field"><label>পূর্ণ নাম</label><input name="name" type="text" required>
-                                    </div>
-                                    <div class="auth-field"><label>ইমেইল এড্রেস</label><input name="email" type="email"
-                                            required></div>
-                                    <div class="auth-field"><label>মোবাইল নম্বর</label><input name="phone" type="tel" required>
-                                    </div>
-                                    <div class="auth-field"><label>পাসওয়ার্ড</label><input name="password" type="password"
-                                            placeholder="সর্বনিম্ন ৬ ডিজিট" required></div>
-                                    <button type="submit" class="auth-submit">অ্যাকাউন্ট তৈরি করুন</button>
-                                </form>
-                            </div>
+                        <!-- ২. রেজিস্ট্রেশন ফর্ম (ইমেইল ও ফোন নম্বর দুটিই) -->
+                        <div id="registerSection"
+                            style="<?php echo e($errors->hasAny(['name', 'email', 'phone', 'password']) ? 'display: block;' : 'display: none;'); ?>">
+                            <form action="<?php echo e(route('affiliated.register')); ?>" method="POST">
+                                <?php echo csrf_field(); ?>
+                                <?php if($errors->any() && $errors->hasAny(['name', 'email', 'phone', 'password'])): ?>
+                                    <div
+                                        style="background: rgba(255, 132, 132, 0.15); border: 1px solid #ff8484; color: #ff8484; padding: 10px; border-radius: 8px; margin-bottom: 15px; font-size: 13px; text-align: center;">
+                                        <?php echo e($errors->first()); ?>
 
-                            <!-- ৩. ফরগট পাসওয়ার্ড ফর্ম (ইমেইল দিয়ে) -->
-                            <div id="forgotSection" style="display: none;">
-                                <h3 style="text-align:center; margin-bottom:20px; color:var(--gold-light); font-size:18px;">
-                                    পাসওয়ার্ড রিসেট</h3>
-                                <form action="<?php echo e(route('password.sendOtp')); ?>" method="POST">
-                                    <?php echo csrf_field(); ?>
-                                    <div class="auth-field"><label>রেজিস্টার্ড ইমেইল এড্রেস</label><input name="email"
-                                            type="email" required></div>
-                                    <button type="submit" class="auth-submit">ওটিপি পাঠান</button>
-                                    <p onclick="showAuth('login')"
-                                        style="text-align:center; cursor:pointer; font-size:12px; margin-top:15px; color:var(--muted);">
-                                        ← লগইন-এ ফিরে যান</p>
-                                </form>
-                            </div>
+                                    </div>
+                                <?php endif; ?>
+                                <div class="auth-field"><label>পূর্ণ নাম</label><input name="name" type="text" required>
+                                </div>
+                                <div class="auth-field"><label>ইমেইল এড্রেস</label><input name="email" type="email" required>
+                                </div>
+                                <div class="auth-field"><label>মোবাইল নম্বর</label><input name="phone" type="tel" required>
+                                </div>
+                                <div class="auth-field"><label>পাসওয়ার্ড</label><input name="password" type="password"
+                                        placeholder="সর্বনিম্ন ৬ ডিজিট" required></div>
+                                <button type="submit" class="auth-submit">অ্যাকাউন্ট তৈরি করুন</button>
+                            </form>
+                        </div>
+
+                        <!-- ৩. ফরগট পাসওয়ার্ড ফর্ম (ইমেইল দিয়ে) -->
+                        <div id="forgotSection" style="display: none;">
+                            <h3 style="text-align:center; margin-bottom:20px; color:var(--gold-light); font-size:18px;">
+                                পাসওয়ার্ড রিসেট</h3>
+                            <form action="<?php echo e(route('password.sendOtp')); ?>" method="POST">
+                                <?php echo csrf_field(); ?>
+                                <div class="auth-field"><label>রেজিস্টার্ড ইমেইল এড্রেস</label><input name="email" type="email"
+                                        required></div>
+                                <button type="submit" class="auth-submit">ওটিপি পাঠান</button>
+                                <p onclick="showAuth('login')"
+                                    style="text-align:center; cursor:pointer; font-size:12px; margin-top:15px; color:var(--muted);">
+                                    ← লগইন-এ ফিরে যান</p>
+                            </form>
+                        </div>
 
                     </div>
                 </div>

@@ -256,3 +256,6 @@ Route::prefix('')->group(function () {
         ->name('assets.video.download')
         ->middleware('auth');
 });
+Route::fallback(function () {
+    return redirect()->route('landing.index');
+});
