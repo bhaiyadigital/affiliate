@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="container mx-auto px-4 lg:px-8 py-12" x-data="{
-                                                                        activeTab: '{{
+                                                                                activeTab: '{{
         session('active_tab') ?? (
             request('active_tab') ?? (
                 $errors->hasAny(['title', 'slug', 'start_date', 'end_date', 'name', 'views']) ? 'coupons' : (
@@ -12,43 +12,43 @@
                 )
             )
         )
-                                                                        }}',
+                                                                                }}',
 
-                                                                        leadView: '{{ session('lead_view') ?? ($errors->hasAny(['name', 'phone', 'budget']) ? 'form' : 'list') }}',
-                                                                        teamView: '{{ $errors->hasAny(['email', 'password']) ? 'form' : (session('team_view') ?? 'list') }}',
-                                                                        couponView: '{{
+                                                                                leadView: '{{ session('lead_view') ?? ($errors->hasAny(['name', 'phone', 'budget']) ? 'form' : 'list') }}',
+                                                                                teamView: '{{ $errors->hasAny(['email', 'password']) ? 'form' : (session('team_view') ?? 'list') }}',
+                                                                                couponView: '{{
         $errors->hasAny(['title', 'slug', 'start_date', 'end_date', 'name', 'views']) ? 'form' :
         (session('coupon_view') ?? 'list')
-                                                                        }}',
+                                                                                }}',
 
-                                                                        editingMember: {
-                                                                            id: '{{ old('id') }}',
-                                                                            name: '{{ old('member_name') }}',
-                                                                            phone: '{{ old('member_phone') }}',
-                                                                            email: '{{ old('email') }}'
-                                                                        },
+                                                                                editingMember: {
+                                                                                    id: '{{ old('id') }}',
+                                                                                    name: '{{ old('member_name') }}',
+                                                                                    phone: '{{ old('member_phone') }}',
+                                                                                    email: '{{ old('email') }}'
+                                                                                },
 
-                                                                        editingCoupon: {
-                                                                            id: '{{ old('id') }}',
-                                                                            title: '{{ old('title') }}',
-                                                                            slug: '{{ old('slug') }}',
-                                                                            start_date: '{{ old('start_date') }}',
-                                                                            end_date: '{{ old('end_date') }}',
-                                                                            name: '{{ old('usage_limit', 1) }}',
-                                                                            views: '{{ old('total_limit', 100) }}'
-                                                                        },
+                                                                                editingCoupon: {
+                                                                                    id: '{{ old('id') }}',
+                                                                                    title: '{{ old('title') }}',
+                                                                                    slug: '{{ old('slug') }}',
+                                                                                    start_date: '{{ old('start_date') }}',
+                                                                                    end_date: '{{ old('end_date') }}',
+                                                                                    name: '{{ old('usage_limit', 1) }}',
+                                                                                    views: '{{ old('total_limit', 100) }}'
+                                                                                },
 
-                                                                        editingLead: {
-                                                                            id: '{{ old('id') }}',
-                                                                            name: '{{ old('name') }}',
-                                                                            email: '{{ old('email') }}',
-                                                                            phone: '{{ old('phone') }}',
-                                                                            interested_location: '{{ old('interested_location') }}',
-                                                                            budget: '{{ old('budget') }}',
-                                                                            },
-                                                                            accountDrawer: false,
-                                                                            viewOnly: false,
-                                                                    }">
+                                                                                editingLead: {
+                                                                                    id: '{{ old('id') }}',
+                                                                                    name: '{{ old('name') }}',
+                                                                                    email: '{{ old('email') }}',
+                                                                                    phone: '{{ old('phone') }}',
+                                                                                    interested_location: '{{ old('interested_location') }}',
+                                                                                    budget: '{{ old('budget') }}',
+                                                                                    },
+                                                                                    accountDrawer: false,
+                                                                                    viewOnly: false,
+                                                                            }">
 
         <div class="mb-10 flex items-center gap-4">
 
@@ -125,239 +125,345 @@
             <!-- ── RIGHT CONTENT ── -->
             <div class="lg:col-span-9  min-h-[500px]">
 
-                <div x-show="activeTab === 'dashboard'" class="" x-transition>
+                <div x-show="activeTab === 'dashboard'" x-transition class="space-y-6 bg-[#F8FAFC] -m-4 p-4 md:-m-8 md:p-8">
+                    @php
+                        $statsLeads = isset($allLeads) ? $allLeads : $leads;
+                        $total = $statsLeads->count();
+                        $manual = $statsLeads->where('type', 'manual')->count();
+                        $link = $statsLeads->where('type', 'refer_link')->count();
+                        $coupon = $statsLeads->whereNotNull('coupon_code')->count();
+                        $teamLeadsCount = $statsLeads->where('user_id', '!=', auth()->id())->count();
+                        $conv = $statsLeads->where('status', \App\Models\Lead::STATUS_COMPLETED)->count();
+                        $rate = $total > 0 ? round(($conv / $total) * 100, 1) : 0;
+                        $totalCommission = $conv * 15000;
+
+                        // ট্রেন্ড চার্ট ডাটা
+                        $chartMonths = [];
+                        $chartValues = [];
+                        for ($i = 5; $i >= 0; $i--) {
+                            $date = now()->subMonths($i);
+                            $chartMonths[] = $date->format('M');
+                            $chartValues[] = $statsLeads->filter(fn($l) => $l->created_at->format('Y-m') == $date->format('Y-m'))->count();
+                        }
+
+                        $sNew = $statsLeads->where('status', \App\Models\Lead::STATUS_PENDING)->count();
+                        $sContacted = $statsLeads->where('status', \App\Models\Lead::STATUS_CONTACTED)->count();
+                        $sQualified = $statsLeads->where('status', \App\Models\Lead::STATUS_VISIT)->count();
+                        $sConverted = $statsLeads->where('status', \App\Models\Lead::STATUS_COMPLETED)->count();
+                    @endphp
+
                     <!-- ── HEADER ── -->
-                    <div class="mb-4 flex items-center justify-between border-b pb-4">
-                        <div>
-                            <h2 class="text-xl font-bold text-[#003B7A] uppercase tracking-wider">Performance Analytics</h2>
-                            <p class="text-sm text-gray-500 mt-1">Real-time statistics from your lead database.</p>
-                        </div>
-                        <div class="text-right">
-                            <span class="text-sm font-bold text-gray-500 uppercase block">Last Updated</span>
-                            <span class="text-base font-bold text-[#003B7A]">{{ now()->format('d M, Y') }}</span>
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <h2 class="text-xl font-bold text-gray-800">Affiliate Dashboard</h2>
+                        <div class="flex items-center gap-3">
+                            {{-- <div class="relative">
+                                <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-600"></i>
+                                <input type="text" placeholder="Search..."
+                                    class="pl-10 pr-4 py-2 bg-white border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#008060] w-64 shadow-sm">
+                            </div> --}}
+                            <div class="relative inline-block text-left" x-data="{ open: false, showCustom: false }"
+                                @mouseleave="open = false; showCustom = false">
+
+                                <!-- Button -->
+                                <button @mouseenter="open = true"
+                                    class="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-xl text-xs font-bold text-gray-500 shadow-sm transition-all hover:bg-gray-50">
+                                    <i class="far fa-calendar text-gray-600 text-sm"></i>
+                                    <span class="tracking-tight">
+                                        @if(request('date_range') == 'custom' && request('from') && request('to'))
+                                            {{-- এটি ১৮ Aug ২০২৬ ফরম্যাটে দেখাবে --}}
+                                            {{ \Carbon\Carbon::parse(request('from'))->format('d M Y') }} - {{ \Carbon\Carbon::parse(request('to'))->format('d M Y') }}
+                                        @elseif(request('date_range') == 'today')
+                                            Today ({{ now()->format('d M Y') }})
+                                        @elseif(request('date_range') == '7_days')
+                                            Last 7 Days
+                                        @elseif(request('date_range') == '30_days')
+                                            Last 30 Days
+                                        @elseif(request('date_range') == 'this_month')
+                                            This Month ({{ now()->format('M Y') }})
+                                        @else
+                                            Date Range
+                                        @endif
+                                    </span>
+                                    <i class="fas fa-chevron-down text-[10px] ml-1 transition-transform"
+                                        :class="open ? 'rotate-180' : ''"></i>
+                                </button>
+
+                                <!-- Dropdown Menu -->
+                                <div x-show="open" x-transition
+                                    class="absolute right-0 mt-1 w-56 origin-top-right bg-white border border-gray-100 rounded-2xl shadow-2xl z-50 overflow-hidden"
+                                    style="display: none;">
+
+                                    <!-- Preset Links -->
+                                    <div class="py-1" x-show="!showCustom">
+                                        <a href="{{ request()->fullUrlWithQuery(['date_range' => 'today']) }}"
+                                            class="block px-4 py-2.5 text-xs font-bold text-gray-600 hover:bg-gray-50 border-b border-gray-50">Today</a>
+                                        <a href="{{ request()->fullUrlWithQuery(['date_range' => '7_days']) }}"
+                                            class="block px-4 py-2.5 text-xs font-bold text-gray-600 hover:bg-gray-50 border-b border-gray-50">7
+                                            Days</a>
+                                        <a href="{{ request()->fullUrlWithQuery(['date_range' => '30_days']) }}"
+                                            class="block px-4 py-2.5 text-xs font-bold text-gray-600 hover:bg-gray-50 border-b border-gray-50">30
+                                            Days</a>
+                                        <a href="{{ request()->fullUrlWithQuery(['date_range' => 'this_month']) }}"
+                                            class="block px-4 py-2.5 text-xs font-bold text-gray-600 hover:bg-gray-50 border-b border-gray-50">This
+                                            Month</a>
+                                        <button @click="showCustom = true"
+                                            class="w-full text-left px-4 py-2.5 text-xs font-bold text-[#008060] hover:bg-gray-50 italic">Custom
+                                            Range...</button>
+                                    </div>
+
+                                    <!-- Custom Date Input Form -->
+                                    <div class="p-4 bg-gray-50" x-show="showCustom">
+                                        <form action="{{ route('profile.index') }}" method="GET" class="space-y-3">
+                                            <input type="hidden" name="active_tab" value="dashboard">
+                                            <input type="hidden" name="date_range" value="custom">
+
+                                            <div>
+                                                <label class="text-[9px] uppercase font-bold text-gray-600 mb-1 block">From
+                                                    Date</label>
+                                                <input type="date" name="from" value="{{ request('from') }}"
+                                                    class="w-full text-xs border-gray-200 rounded-lg p-2 outline-none focus:ring-1 focus:ring-[#008060]"
+                                                    required>
+                                            </div>
+                                            <div>
+                                                <label class="text-[9px] uppercase font-bold text-gray-600 mb-1 block">To
+                                                    Date</label>
+                                                <input type="date" name="to" value="{{ request('to') }}"
+                                                    class="w-full text-xs border-gray-200 rounded-lg p-2 outline-none focus:ring-1 focus:ring-[#008060]"
+                                                    required>
+                                            </div>
+
+                                            <div class="flex gap-2">
+                                                <button type="button" @click="showCustom = false"
+                                                    class="flex-1 bg-white border border-gray-200 text-gray-500 py-2 rounded-lg text-[10px] font-bold">Back</button>
+                                                <button type="submit"
+                                                    class="flex-1 bg-[#008060] text-white py-2 rounded-lg text-[10px] font-bold shadow-md shadow-emerald-100">Apply</button>
+                                            </div>
+                                        </form>
+                                        @if(request('date_range'))
+                                            <div class="border-t border-gray-100 mt-1">
+                                                <a href="{{ route('profile.index', ['active_tab' => 'dashboard']) }}"
+                                                    class="block px-4 py-2 text-[10px] text-red-500 font-black uppercase hover:bg-red-50 transition-colors">
+                                                    <i class="fas fa-times-circle mr-1"></i> Clear Filter
+                                                </a>
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- ── ১. মেইন ম্যাট্রিক্স (Top Cards) ── -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
-                        <!-- Total Network Leads (Personal + Team) -->
-                        <div class="p-4 bg-white border border-gray-100 shadow-sm rounded-xl border-t-4 border-t-blue-600">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <span class="text-sm font-bold text-gray-500 uppercase">Total Network Leads</span>
-                                    <div class="text-3xl font-black text-gray-800 mt-1">{{ $leads->count() }}</div>
-                                </div>
-                                <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-layer-group"></i>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- ── STATS CARDS (8 CARDS) ── -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- কার্ড মেকার ফাংশন স্টাইল -->
+                        @php
+                            $cards = [
+                                ['label' => 'Total Leads', 'value' => number_format($total), 'icon' => 'fas fa-users', 'color' => 'bg-emerald-50 text-emerald-600', 'trend' => '+12% vs last month'],
+                                ['label' => 'Direct Leads', 'value' => number_format($manual), 'icon' => 'fas fa-hand-pointer', 'color' => 'bg-indigo-50 text-indigo-600', 'trend' => '+5% vs last month'],
+                                ['label' => 'Refer Link Leads', 'value' => number_format($link), 'icon' => 'fas fa-link', 'color' => 'bg-rose-50 text-rose-600', 'trend' => '+8% vs last month'],
+                                ['label' => 'Refer Code Leads', 'value' => number_format($coupon), 'icon' => 'fas fa-hashtag', 'color' => 'bg-amber-50 text-amber-600', 'trend' => '+15% vs last month'],
+                                ['label' => 'Team Leads', 'value' => number_format($teamLeadsCount), 'icon' => 'fas fa-users-cog', 'color' => 'bg-purple-50 text-purple-600', 'trend' => '+8% vs last month'],
+                                ['label' => 'Converted Leads', 'value' => number_format($conv), 'icon' => 'fas fa-check-circle', 'color' => 'bg-green-50 text-green-600', 'trend' => '+15% vs last month'],
+                                ['label' => 'Conversion Rate', 'value' => $rate . '%', 'icon' => 'fas fa-chart-pie', 'color' => 'bg-orange-50 text-orange-600', 'trend' => '+2% vs last month'],
+                            ];
+                        @endphp
 
-                        <!-- Team Size (সরাসরি User Relation থেকে কাউন্ট) -->
-                        <div class="p-6 bg-white border border-gray-100 shadow-sm rounded-xl border-t-purple-600">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <span class="text-sm font-bold text-gray-500 uppercase">Direct Team Members</span>
-                                    <div class="text-3xl font-black text-gray-800 mt-1">
-                                        {{ auth()->user()->teamMembers->count() }} {{-- parent_id রিলেশন ব্যবহার করা হয়েছে
-                                        --}}
-                                    </div>
+                        @foreach($cards as $card)
+                            <div
+                                class="p-6 bg-white rounded-xl shadow-sm border border-gray-100 flex justify-between items-start">
+                                <div class="space-y-2">
+                                    <p class="text-xs font-bold text-gray-600 uppercase tracking-wider">{{ $card['label'] }}</p>
+                                    <h3 class="text-3xl lg:text-5xl font-bold text-gray-800">{{ $card['value'] }}</h3>
+                                    <p class="text-sm text-[#2d8368] font-bold flex items-center gap-1">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                        </svg> {{ $card['trend'] }}
+                                    </p>
                                 </div>
                                 <div
-                                    class="w-10 h-10 bg-purple-50 text-purple-600 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-users"></i>
+                                    class="w-12 h-12 {{ $card['color'] }} rounded-full flex items-center justify-center shadow-sm">
+                                    <i class="{{ $card['icon'] }} text-lg"></i>
                                 </div>
                             </div>
+                        @endforeach
+
+                        <!-- Card 8: Total Commission (Exact Image Color Match) -->
+                        <div
+                            class="p-6 bg-[#F6FBF9] rounded-xl border border-white shadow-sm flex justify-between items-start transition-all hover:shadow-md">
+                            <div class="space-y-2">
+                                <!-- হেডিং: হালকা ধূসর -->
+                                <p class="text-[11px] font-bold text-gray-600 uppercase tracking-widest">Total Commission
+                                </p>
+
+                                <!-- অ্যামাউন্ট: ডিপ গ্রিন (#006D44) -->
+                                <h3 class="text-4xl font-black text-[#006D44]">৳{{ number_format($conv * 15000) }}</h3>
+
+                                <!-- ট্রেন্ড: ডিপ গ্রিন -->
+                                <p class="text-[11px] text-[#006D44] font-bold flex items-center gap-1.5 mt-2">
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                    </svg>
+                                    +10% <span class="text-[#2d8368] ml-1 uppercase">vs last month</span>
+                                </p>
+                            </div>
+
+                            <!-- আইকন: ডিপ গ্রিন গোল ব্যাকগ্রাউন্ড এবং সাদা আইকন -->
+                            <div
+                                class="w-14 h-14 bg-[#006D44] text-white rounded-full flex items-center justify-center shadow-lg shadow-[#006d442b]">
+                                <i class="fas fa-wallet text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ── CHARTS ROW ── -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="lg:col-span-2 bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+                            <div class="flex items-center justify-between mb-8">
+                                <h3 class="font-bold text-gray-800">Lead Trend</h3>
+                                <i class="fas fa-ellipsis-v text-gray-300 cursor-pointer"></i>
+                            </div>
+                            <div class="h-72"><canvas id="leadTrendChart"></canvas></div>
                         </div>
 
-                        <!-- Successful Conversions -->
-                        <div class="p-6 bg-white border border-gray-100 shadow-sm rounded-xl border-t-4 border-t-green-600">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <span class="text-sm font-bold text-gray-500 uppercase">Completed Sales</span>
-                                    <div class="text-3xl font-black text-gray-800 mt-1">
-                                        {{ $leads->where('status', \App\Models\Lead::STATUS_COMPLETED)->count() }}
-                                    </div>
+                        <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm flex flex-col">
+                            <h3 class="font-bold text-gray-800 mb-8">Lead Status</h3>
+                            <div class="relative flex-1 flex items-center justify-center">
+                                <canvas id="leadStatusChart"></canvas>
+                                <div class="absolute flex flex-col items-center pointer-events-none">
+                                    <span
+                                        class="text-4xl font-black text-gray-800">{{ $total > 0 ? round(($sNew / $total) * 100) : 0 }}%</span>
+                                    <span class="text-sm font-bold text-gray-600 uppercase tracking-wider">New Leads</span>
                                 </div>
-                                <div
-                                    class="w-10 h-10 bg-green-50 text-green-600 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="mt-8 grid grid-cols-2 gap-x-4 gap-y-3">
+                                <div class="flex items-center gap-2 text-sm font-bold text-gray-500 uppercase">
+                                    <div class="w-2.5 h-2.5 bg-[#008060] rounded-full"></div> New
+                                    ({{ $total > 0 ? round(($sNew / $total) * 100) : 0 }}%)
+                                </div>
+                                <div class="flex items-center gap-2 text-sm font-bold text-gray-500 uppercase">
+                                    <div class="w-2.5 h-2.5 bg-[#10b981] rounded-full"></div> Contacted
+                                    ({{ $total > 0 ? round(($sContacted / $total) * 100) : 0 }}%)
+                                </div>
+                                <div class="flex items-center gap-2 text-sm font-bold text-gray-500 uppercase">
+                                    <div class="w-2.5 h-2.5 bg-[#4f46e5] rounded-full"></div> Qualified
+                                    ({{ $total > 0 ? round(($sQualified / $total) * 100) : 0 }}%)
+                                </div>
+                                <div class="flex items-center gap-2 text-sm font-bold text-gray-500 uppercase">
+                                    <div class="w-2.5 h-2.5 bg-[#e5e7eb] rounded-full"></div> Converted
+                                    ({{ $total > 0 ? round(($sConverted / $total) * 100) : 0 }}%)
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- ── ২. পাইপলাইন এবং সামারি ── -->
-                    <div class="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm">
-                        <h3 class="text-base font-bold text-gray-700 uppercase mb-4 flex items-center gap-2">
-                            <i class="fas fa-filter text-blue-500"></i> Lead Pipeline Distribution
-                        </h3>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                            <!-- Left: Progress Bars -->
-                            <div class="space-y-6">
-                                @php
-                                    $totalLeads = $leads->count() ?: 1;
-                                    $statusSettings = [
-                                        \App\Models\Lead::STATUS_PENDING => ['color' => 'bg-gray-300', 'label' => 'New / Pending'],
-                                        \App\Models\Lead::STATUS_CONTACTED => ['color' => 'bg-blue-400', 'label' => 'Contacted'],
-                                        \App\Models\Lead::STATUS_VISIT => ['color' => 'bg-orange-400', 'label' => 'Site Visit'],
-                                        \App\Models\Lead::STATUS_BOOKED => ['color' => 'bg-purple-500', 'label' => 'Booked'],
-                                        \App\Models\Lead::STATUS_COMPLETED => ['color' => 'bg-green-600', 'label' => 'Final Complete'],
-                                    ];
-                                @endphp
-
-                                @foreach($statusSettings as $statusId => $config)
-                                    @php
-                                        $count = $leads->where('status', $statusId)->count();
-                                        $percent = ($count / $totalLeads) * 100;
-                                    @endphp
-                                    <div>
-                                        <div class="flex justify-between items-center mb-2">
-                                            <span class="text-sm font-bold text-gray-600">{{ $config['label'] }}</span>
-                                            <span class="text-sm font-black text-gray-800">{{ $count }}
-                                                ({{ round($percent) }}%)</span>
-                                        </div>
-                                        <div class="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
-                                            <div class="h-full {{ $config['color'] }} transition-all duration-1000 shadow-sm"
-                                                style="width: {{ $percent }}%"></div>
-                                        </div>
+                    <!-- ── PERFORMANCE ROW ── -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- Project Performance -->
+                        <div class="bg-white p-8 rounded-xl border border-gray-100 shadow-sm">
+                            <h3 class="text-lg font-bold text-gray-800 mb-8">Project Performance</h3>
+                            <div class="space-y-4">
+                                @foreach($statsLeads->groupBy('interested_location')->take(3) as $location => $pLeads)
+                                    <div
+                                        class="flex items-center justify-between p-5 bg-white border border-gray-100 rounded-xl">
+                                        <span class="font-bold text-gray-700">{{ $location ?: 'General' }}</span>
+                                        <span class="font-bold text-[#008060] text-xl">{{ $pLeads->count() }}</span>
                                     </div>
                                 @endforeach
                             </div>
+                        </div>
 
-                            <!-- Right: Summary Box -->
-                            <div class="bg-gray-50 rounded-xl p-8 border border-gray-100 flex flex-col justify-center">
-                                <div class="space-y-5">
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-base text-gray-500 font-medium">Your Personal Submissions</span>
-                                        <span
-                                            class="text-base font-black text-blue-600">{{ $leads->where('user_id', auth()->id())->count() }}</span>
-                                    </div>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-base text-gray-500 font-medium">Leads from Your Team</span>
-                                        <span
-                                            class="text-base font-black text-purple-600">{{ $leads->where('user_id', '!=', auth()->id())->count() }}</span>
-                                    </div>
-                                    <div class="pt-4 border-t border-gray-200">
-                                        <div class="flex justify-between items-center">
-                                            <span class="text-base font-bold text-gray-700 uppercase">Overall Impact</span>
-                                            <span class="text-2xl font-black text-[#003B7A]">{{ $leads->count() }}</span>
+                        <!-- Team Performance -->
+                        <div class="bg-white p-8 rounded-xl border border-gray-100 shadow-sm">
+                            <h3 class="text-lg font-bold text-gray-800 mb-8">Team Performance</h3>
+                            <div class="space-y-4">
+                                @forelse(auth()->user()->teamMembers->take(2) as $index => $member)
+                                    @php
+                                        $mLeads = $statsLeads->where('user_id', $member->id);
+                                        $mConv = $mLeads->where('status', \App\Models\Lead::STATUS_COMPLETED)->count();
+                                    @endphp
+                                    <div class="flex items-center gap-4 p-5 border border-gray-100 rounded-xl bg-white">
+                                        <div
+                                            class="w-12 h-12 rounded-full {{ $index == 0 ? 'bg-[#008060]' : 'bg-indigo-100' }} flex items-center justify-center font-bold text-xl {{ $index == 0 ? 'text-white' : 'text-indigo-600' }}">
+                                            {{ $index + 1 }}
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="font-bold text-gray-800 leading-tight">{{ $member->name }}</h4>
+                                            <p class="text-xs text-gray-600 font-bold uppercase">
+                                                {{ $index == 0 ? 'Top Member' : 'Active Member' }}
+                                            </p>
+                                        </div>
+                                        <div class="text-right">
+                                            <p class="text-xl font-bold text-gray-800">{{ $mConv }} <span
+                                                    class="text-gray-300 text-sm">/ {{ $mLeads->count() ?: 1 }}</span></p>
+                                            <p class="text-[10px] text-gray-600 font-bold uppercase">Conv. / Leads</p>
                                         </div>
                                     </div>
-                                </div>
+                                @empty
+                                    <p class="text-gray-600 text-center py-10 italic">No team active.</p>
+                                @endforelse
                             </div>
                         </div>
                     </div>
 
-                    <!-- ── ৩. টিম পারফরম্যান্স টেবিল (Responsive Version) ── -->
-                    <div class="mt-4 bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden">
-                        <!-- Header -->
-                        <div class="p-4 md:p-6 border-b border-gray-50 bg-gray-50/50">
-                            <h3 class="text-sm md:text-base font-bold text-gray-700 uppercase flex items-center gap-2">
-                                <i class="fas fa-users text-purple-500"></i> Team Performance Breakdown
-                            </h3>
+                    <!-- ── RECENT LEADS TABLE ── -->
+                    <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                        <div
+                            class="p-8 border-b border-gray-50 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                            <h3 class="text-lg font-bold text-gray-800">Recent Leads</h3>
+                            {{-- <div class="flex items-center gap-3">
+                                <div class="relative">
+                                    <i
+                                        class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-600 text-xs"></i>
+                                    <input type="text" placeholder="Search leads..."
+                                        class="pl-9 pr-4 py-2 bg-gray-50 border-none rounded-xl text-xs w-64 focus:ring-1 focus:ring-[#008060]">
+                                </div>
+                                <button
+                                    class="px-4 py-2 bg-white border border-gray-200 rounded-xl text-xs font-bold text-gray-600 shadow-sm flex items-center gap-2">
+                                    <i class="fas fa-filter"></i> Filter
+                                </button>
+                            </div> --}}
                         </div>
 
-                        <!-- Desktop Table View (Hidden on Mobile) -->
-                        <div class="hidden md:block overflow-x-auto">
-                            <table class="w-full text-left border-collapse">
-                                <thead>
-                                    <tr class="text-xs uppercase text-gray-500 font-bold border-b border-gray-100 bg-white">
-                                        <th class="px-6 py-4">Member Name</th>
-                                        <th class="px-6 py-4 text-center">Total Leads</th>
-                                        <th class="px-6 py-4 text-center">Completed</th>
-                                        <th class="px-6 py-4 text-right">Success Rate</th>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left">
+                                <thead class="bg-gray-50 text-sm uppercase font-bold text-gray-600 tracking-wider">
+                                    <tr>
+                                        <th class="px-8 py-5">Name</th>
+                                        <th class="px-8 py-5">Project</th>
+                                        <th class="px-8 py-5">Source</th>
+                                        <th class="px-8 py-5">Team</th>
+                                        <th class="px-8 py-5">Status</th>
+                                        <th class="px-8 py-5">Date</th>
+                                        <th class="px-8 py-5 text-right">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-50">
-                                    @forelse(auth()->user()->teamMembers as $member)
-                                        @php
-                                            $memberLeads = $leads->where('user_id', $member->id);
-                                            $total = $memberLeads->count();
-                                            $completed = $memberLeads->where('status', \App\Models\Lead::STATUS_COMPLETED)->count();
-                                            $successRate = $total > 0 ? round(($completed / $total) * 100) : 0;
-                                        @endphp
-                                        <tr class="hover:bg-gray-50 transition-colors">
-                                            <td class="px-6 py-4">
-                                                <div class="flex items-center gap-3">
-                                                    <img src="{{ $member->avatar_url ?? asset('./images/user/images.png') }}"
-                                                        class="w-10 h-10 rounded-full border shadow-sm object-cover">
-                                                    <div class="flex flex-col">
-                                                        <span class="text-sm font-bold text-gray-800">{{ $member->name }}</span>
-                                                        <span class="text-xs text-gray-500">{{ $member->phone }}</span>
-                                                    </div>
-                                                </div>
+                                    @foreach($leads->take(3) as $lead)
+                                        <tr class="hover:bg-gray-50/50 transition-colors">
+                                            <td class="px-8 py-5 font-bold text-gray-700">{{ $lead->name }}</td>
+                                            <td class="px-8 py-5 text-gray-500">{{ $lead->interested_location ?: 'N/A' }}</td>
+                                            <td class="px-8 py-5 text-gray-600 text-xs">{{ strtoupper($lead->type) }}</td>
+                                            <td class="px-8 py-5 font-semibold text-gray-600">
+                                                {{ $lead->user_id == auth()->id() ? 'Direct' : $lead->user->name }}
                                             </td>
-                                            <td class="px-6 py-4 text-center font-bold text-gray-700">{{ $total }}</td>
-                                            <td class="px-6 py-4 text-center">
+                                            <td class="px-8 py-5">
                                                 <span
-                                                    class="px-2.5 py-0.5 rounded-full bg-green-50 text-green-600 text-xs font-bold border border-green-100">{{ $completed }}</span>
+                                                    class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter border
+                                                {{ $lead->status == \App\Models\Lead::STATUS_COMPLETED ? 'bg-green-50 text-green-600 border-green-100' : 'bg-blue-50 text-blue-600 border-blue-100' }}">
+                                                    {{ $lead->status_label }}
+                                                </span>
                                             </td>
-                                            <td class="px-6 py-4 text-right">
-                                                <div class="flex flex-col items-end">
-                                                    <span class="text-xs font-bold text-gray-700">{{ $successRate }}%</span>
-                                                    <div class="w-16 h-1.5 bg-gray-100 rounded-full mt-1 overflow-hidden">
-                                                        <div class="h-full bg-blue-600" style="width: {{ $successRate }}%">
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <td class="px-8 py-5 text-gray-600 text-sm">
+                                                {{ $lead->created_at->format('M d, Y') }}
+                                            </td>
+                                            <td class="px-8 py-5 text-right"><i class="fas fa-chevron-right text-gray-200"></i>
                                             </td>
                                         </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="4" class="px-6 py-10 text-center text-gray-400 italic">No team member
-                                                data available.</td>
-                                        </tr>
-                                    @endforelse
+                                    @endforeach
                                 </tbody>
                             </table>
-                        </div>
-
-                        <!-- Mobile Card View (Hidden on Desktop) -->
-                        <div class="md:hidden divide-y divide-gray-100">
-                            @forelse(auth()->user()->teamMembers as $member)
-                                @php
-                                    $memberLeads = $leads->where('user_id', $member->id);
-                                    $total = $memberLeads->count();
-                                    $completed = $memberLeads->where('status', \App\Models\Lead::STATUS_COMPLETED)->count();
-                                    $successRate = $total > 0 ? round(($completed / $total) * 100) : 0;
-                                @endphp
-                                <div class="p-4 space-y-4">
-                                    <!-- Profile Part -->
-                                    <div class="flex items-center gap-3">
-                                        <img src="{{ $member->avatar_url ?? asset('./images/user/images.png') }}"
-                                            class="w-12 h-12 rounded-full border shadow-sm object-cover">
-                                        <div class="flex flex-col">
-                                            <span class="text-base font-bold text-gray-800">{{ $member->name }}</span>
-                                            <span class="text-sm text-gray-500">{{ $member->phone }}</span>
-                                        </div>
-                                    </div>
-
-                                    <!-- Stats Part -->
-                                    <div class="grid grid-cols-3 gap-2 bg-gray-50 p-3 rounded-xl border border-gray-100">
-                                        <div class="text-center">
-                                            <span
-                                                class="block text-[10px] uppercase font-bold text-gray-400 tracking-tight">Total</span>
-                                            <span class="text-base font-black text-gray-700">{{ $total }}</span>
-                                        </div>
-                                        <div class="text-center border-x border-gray-200">
-                                            <span
-                                                class="block text-[10px] uppercase font-bold text-gray-400 tracking-tight">Done</span>
-                                            <span class="text-base font-black text-green-600">{{ $completed }}</span>
-                                        </div>
-                                        <div class="text-center">
-                                            <span
-                                                class="block text-[10px] uppercase font-bold text-gray-400 tracking-tight">Success</span>
-                                            <span class="text-base font-black text-blue-600">{{ $successRate }}%</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            @empty
-                                <div class="p-8 text-center text-gray-400 italic text-sm">
-                                    No team member data available.
-                                </div>
-                            @endforelse
                         </div>
                     </div>
                 </div>
@@ -424,7 +530,7 @@
                         <h4 class="text-sm font-bold text-[#003B7A] uppercase mb-4 tracking-widest">Change Password</h4>
                         <div class="space-y-4">
                             <div>
-                                <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Current Password</label>
+                                <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Current Password</label>
                                 <input type="password" name="current_password"
                                     class="w-full border border-gray-300 px-4 py-2 text-base outline-none focus:border-[#003B7A]">
                                 @error('current_password')
@@ -432,14 +538,14 @@
                             </div>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <label class="block text-xs font-bold text-gray-400 uppercase mb-1">New Password</label>
+                                    <label class="block text-xs font-bold text-gray-600 uppercase mb-1">New Password</label>
                                     <input type="password" name="new_password"
                                         class="w-full border border-gray-300 px-4 py-2 text-base outline-none focus:border-[#003B7A]">
                                     @error('new_password')
                                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Confirm New
+                                    <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Confirm New
                                         Password</label>
                                     <input type="password" name="new_password_confirmation"
                                         class="w-full border border-gray-300 px-4 py-2 text-base outline-none focus:border-[#003B7A]">
@@ -660,17 +766,17 @@
                     <div class="p-5 border-b flex justify-between items-center bg-gray-50">
                         <span class="font-bold text-[#003B7A] uppercase text-xs tracking-widest">Account Menu</span>
                         <button @click="accountDrawer = false"
-                            class="text-gray-400 hover:text-red-500 text-2xl leading-none">&times;</button>
+                            class="text-gray-600 hover:text-red-500 text-2xl leading-none">&times;</button>
                     </div>
 
                     <nav class="flex flex-col overflow-y-auto pt-2">
                         <template x-for="item in [
-                                    { id: 'dashboard', label: 'Dashboard', icon: 'fa-chart-column' },
-                                    { id: 'profile', label: 'Personal Info', icon: 'fa-user-circle' },
-                                    { id: 'leads', label: 'My Leads', icon: 'fa-users-rectangle' },
-                                    { id: 'team', label: 'Team', icon: 'fa-arrows-down-to-people' },
-                                    { id: 'coupons', label: 'Available Coupons', icon: 'fa-ticket-simple' }
-                                ]">
+                                            { id: 'dashboard', label: 'Dashboard', icon: 'fa-chart-column' },
+                                            { id: 'profile', label: 'Personal Info', icon: 'fa-user-circle' },
+                                            { id: 'leads', label: 'My Leads', icon: 'fa-users-rectangle' },
+                                            { id: 'team', label: 'Team', icon: 'fa-arrows-down-to-people' },
+                                            { id: 'coupons', label: 'Available Coupons', icon: 'fa-ticket-simple' }
+                                        ]">
                             <button @click="activeTab = item.id; accountDrawer = false"
                                 :class="activeTab === item.id ? 'bg-[#003B7A] text-white' : 'text-gray-700 hover:bg-gray-50'"
                                 class="flex items-center gap-3 px-6 py-4 border-b border-gray-50 text-left transition-colors">
@@ -706,5 +812,61 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // 1. LEAD TREND (Area Chart)
+            const trendCtx = document.getElementById('leadTrendChart').getContext('2d');
+            new Chart(trendCtx, {
+                type: 'line',
+                data: {
+                    labels: @js($chartMonths),
+                    datasets: [{
+                        data: @js($chartValues),
+                        borderColor: '#008060',
+                        backgroundColor: (context) => {
+                            const bg = context.chart.ctx.createLinearGradient(0, 0, 0, 400);
+                            bg.addColorStop(0, 'rgba(0, 128, 96, 0.15)');
+                            bg.addColorStop(1, 'rgba(0, 128, 96, 0)');
+                            return bg;
+                        },
+                        fill: true,
+                        tension: 0.4, // ইমেজের মতো ঢেউ খেলানোর জন্য
+                        pointRadius: 0,
+                        borderWidth: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { display: false },
+                        x: { grid: { display: false }, border: { display: false }, ticks: { color: '#94a3b8', font: { size: 11 } } }
+                    }
+                }
+            });
+
+            // 2. LEAD STATUS (Donut Chart)
+            const statusCtx = document.getElementById('leadStatusChart').getContext('2d');
+            new Chart(statusCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['New', 'Contacted', 'Qualified', 'Converted'],
+                    datasets: [{
+                        data: [@js($sNew), @js($sContacted), @js($sQualified), @js($sConverted)],
+                        backgroundColor: ['#008060', '#10b981', '#4f46e5', '#e5e7eb'],
+                        borderWidth: 0,
+                        cutout: '82%'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } }
+                }
+            });
+        });
     </script>
 @endpush

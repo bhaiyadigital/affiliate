@@ -47,14 +47,42 @@ class FrontendAuthController extends Controller
         if (request()->filled('status')) {
             $leadQuery->where('status', request('status'));
         }
+        if ($request->filled('date_range')) {
+            $range = $request->date_range;
 
+            if ($range == 'today') {
+                $leadQuery->whereDate('created_at', today());
+            } elseif ($range == '7_days') {
+                $leadQuery->where('created_at', '>=', now()->subDays(7));
+            } elseif ($range == '30_days') {
+                $leadQuery->where('created_at', '>=', now()->subDays(30));
+            } elseif ($range == 'this_month') {
+                $leadQuery->whereMonth('created_at', now()->month)
+                    ->whereYear('created_at', now()->year);
+            } elseif ($range == 'custom' && $request->filled('from') && $request->filled('to')) {
+                $leadQuery->whereBetween('created_at', [
+                    \Carbon\Carbon::parse($request->from)->startOfDay(),
+                    \Carbon\Carbon::parse($request->to)->endOfDay()
+                ]);
+            }
+        }
+        // সার্চ লজিক যোগ করুন
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $leadQuery->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%$search%")
+                    ->orWhere('phone', 'like', "%$search%")
+                    ->orWhere('interested_location', 'like', "%$search%");
+            });
+        }
+        $allLeads = (clone $leadQuery)->get();
         $leads = $leadQuery->latest()->paginate(10)->withQueryString();
 
         $members = $user->isSuperAdmin()
             ? User::orderBy('name')->get()
             : User::where('parent_id', $user->id)->orWhere('id', $user->id)->orderBy('name')->get();
 
-        return view('frontend.auth.profile', compact('downloadLogs', 'leads', 'members'));
+        return view('frontend.auth.profile', compact('downloadLogs', 'leads', 'members', 'allLeads'));
     }
     //profile update
     public function update(Request $request)
