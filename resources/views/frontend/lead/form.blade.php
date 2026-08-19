@@ -5,7 +5,7 @@
     </h2>
         <p class="text-gray-400 text-xs mt-1">Please provide accurate information about the potential client.</p>
     </div>
-    <form :action="editingLead.id ? '/leads/' + editingLead.id : '{{ route('lead.store') }}'" method="POST">
+    <form :action="editingLead.id ? '{{ url('leads') }}/' + editingLead.id : '{{ route('lead.store') }}'" method="POST">
         @csrf
         @if ($errors->any())
             <div class="mb-6 bg-red-50 border-l-4 border-red-500 p-4 rounded shadow-sm animate-hero-text">
@@ -21,7 +21,9 @@
             </div>
         @endif
         <input type="hidden" name="id" x-model="editingLead.id">
-        <template x-if="editingLead.id"><input type="hidden" name="_method" value="PUT"></template>
+        <template x-if="editingLead.id">
+        <input type="hidden" name="_method" value="PUT">
+        </template>
         <input type="hidden" name="type" value="manual">
 
         <div class="space-y-6">

@@ -24,7 +24,7 @@
                 <span class="text-sm tracking-wide">Project list</span>
             </a>
             @auth
-                <a href="{{ route('portal.redirect') }}"
+                <a href="{{ route('portal.redirect') }}" target="_blank"
                     class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 border-b-2 {{ request()->routeIs('home.index') ? 'border-white' : 'border-transparent hover:border-white/40' }}">
                     <i class="fa-brands fa-artstation text-lg"></i>
                     <span class="text-sm tracking-wide">Marketing Assets</span>

@@ -24,7 +24,7 @@
                 <span class="text-sm tracking-wide">Project list</span>
             </a>
             <?php if(auth()->guard()->check()): ?>
-                <a href="<?php echo e(route('portal.redirect')); ?>"
+                <a href="<?php echo e(route('portal.redirect')); ?>" target="_blank"
                     class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 border-b-2 <?php echo e(request()->routeIs('home.index') ? 'border-white' : 'border-transparent hover:border-white/40'); ?>">
                     <i class="fa-brands fa-artstation text-lg"></i>
                     <span class="text-sm tracking-wide">Marketing Assets</span>
