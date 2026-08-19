@@ -112,7 +112,7 @@ class FrontendAuthController extends Controller
 
         if ($request->filled('new_password')) {
             if (!Hash::check($request->current_password, $user->password)) {
-                return back()->withErrors(['current_password' => 'বর্তমান পাসওয়ার্ডটি সঠিক নয়।']);
+                return back()->withErrors(['current_password' => 'বর্তমান পাসওয়ার্ডটি সঠিক নয়।']) ->with('active_tab', 'profile'); 
             }
             $newHash = Hash::make($request->new_password);
             $user->password = $newHash;
@@ -182,7 +182,7 @@ class FrontendAuthController extends Controller
         }
 
         if (!$isSuperAdminAction) {
-            $this->sendOtp($user->email, $otp, 'register');
+            $this->sendOtp($user->email, $otp, $user->name, 'register');
         }
 
         if (auth()->check()) {
@@ -213,7 +213,7 @@ class FrontendAuthController extends Controller
         ]);
 
         $this->sendOtp($user->email, $otp, 'reset_password');
-        session(['verify_email' => $user->email, 'otp_purpose' => 'reset_password']);
+        session(['verify_email' => $user->email , 'otp_purpose' => 'reset_password']);
 
         return redirect()->route('verify.otp')->with('success', 'ওটিপি কোড পাঠানো হয়েছে।');
     }
@@ -286,7 +286,7 @@ class FrontendAuthController extends Controller
             'otp_expires_at' => now()->addMinutes(10)
         ]);
 
-        $this->sendOtp($email, $otp, session('otp_purpose'));
+        $this->sendOtp($email, $otp , $user->name, session('otp_purpose'));
 
         return back()->with('success', 'নতুন কোড পাঠানো হয়েছে।');
     }
@@ -340,7 +340,7 @@ class FrontendAuthController extends Controller
                         'otp_code' => $otp,
                         'otp_expires_at' => now()->addMinutes(10)
                     ]);
-                    $this->sendOtp($user->email, $otp, 'register');
+                    $this->sendOtp($user->email, $otp, $user->name, 'register');
                 }
 
                 Auth::logout();
@@ -400,7 +400,7 @@ class FrontendAuthController extends Controller
 
         return redirect()->away($url);
     }
-    private function sendOtp($email, $otp, $purpose = 'register')
+    private function sendOtp($email, $otp, $name = 'User', $purpose = 'register')
     {
         if ($purpose === 'register') {
             $title = 'Account Verification';
@@ -425,7 +425,7 @@ class FrontendAuthController extends Controller
                     'data'    => [
                         'eyebrow' => 'Bhaiya Housing Affiliate Program',
                         'heading' => $title,
-                        'name'    => 'User',
+                        'name' => $name,
                         'message' => $message,
                         'button_text' => 'OTP: ' . $otp,
                         'verification_link' => route('verify.otp'),
@@ -433,7 +433,7 @@ class FrontendAuthController extends Controller
                 ]);
 
             if ($response->successful()) {
-                Log::info("✅ OTP Sent Successfully", ['email' => $email, 'log_id' => $response->json('log_id')]);
+                Log::info("OTP Sent Successfully", ['email' => $email, 'log_id' => $response->json('log_id')]);
             } else {
                 Log::error("OTP Failed", ['status' => $response->status()]);
             }

@@ -1,48 +1,49 @@
 <?php $__env->startSection('content'); ?>
     <section class="container mx-auto px-4 lg:px-8 py-12" x-data="{
-                                                                                activeTab: '<?php echo e(session('active_tab') ?? (
-            request('active_tab') ?? (
+                                                                                    activeTab: '<?php echo e(session('active_tab') ?? (
+        request('active_tab') ?? (
+            $errors->hasAny(['current_password', 'new_password', 'avatar']) ? 'profile' : (
                 $errors->hasAny(['title', 'slug', 'start_date', 'end_date', 'name', 'views']) ? 'coupons' : (
                     $errors->hasAny(['email', 'password']) ? 'team' : (
-                        $errors->hasAny(['name', 'phone', 'budget']) ? 'leads' : 'dashboard'
+                        $errors->hasAny(['name', 'phone', 'email', 'budget']) ? 'leads' : 'dashboard'
                     )
                 )
             )
-        )); ?>',
+        ))); ?>',
 
-                                                                                leadView: '<?php echo e(session('lead_view') ?? ($errors->hasAny(['name', 'phone', 'budget']) ? 'form' : 'list')); ?>',
-                                                                                teamView: '<?php echo e($errors->hasAny(['email', 'password']) ? 'form' : (session('team_view') ?? 'list')); ?>',
-                                                                                couponView: '<?php echo e($errors->hasAny(['title', 'slug', 'start_date', 'end_date', 'name', 'views']) ? 'form' :
+                                                                                    leadView: '<?php echo e(session('lead_view') ?? ($errors->hasAny(['name', 'phone', 'email', 'budget']) ? 'form' : 'list')); ?>',
+                                                                                    teamView: '<?php echo e($errors->hasAny(['email', 'password']) ? 'form' : (session('team_view') ?? 'list')); ?>',
+                                                                                    couponView: '<?php echo e($errors->hasAny(['title', 'slug', 'start_date', 'end_date', 'name', 'views']) ? 'form' :
         (session('coupon_view') ?? 'list')); ?>',
 
-                                                                                editingMember: {
-                                                                                    id: '<?php echo e(old('id')); ?>',
-                                                                                    name: '<?php echo e(old('member_name')); ?>',
-                                                                                    phone: '<?php echo e(old('member_phone')); ?>',
-                                                                                    email: '<?php echo e(old('email')); ?>'
-                                                                                },
-
-                                                                                editingCoupon: {
-                                                                                    id: '<?php echo e(old('id')); ?>',
-                                                                                    title: '<?php echo e(old('title')); ?>',
-                                                                                    slug: '<?php echo e(old('slug')); ?>',
-                                                                                    start_date: '<?php echo e(old('start_date')); ?>',
-                                                                                    end_date: '<?php echo e(old('end_date')); ?>',
-                                                                                    name: '<?php echo e(old('usage_limit', 1)); ?>',
-                                                                                    views: '<?php echo e(old('total_limit', 100)); ?>'
-                                                                                },
-
-                                                                                editingLead: {
-                                                                                    id: '<?php echo e(old('id')); ?>',
-                                                                                    name: '<?php echo e(old('name')); ?>',
-                                                                                    email: '<?php echo e(old('email')); ?>',
-                                                                                    phone: '<?php echo e(old('phone')); ?>',
-                                                                                    interested_location: '<?php echo e(old('interested_location')); ?>',
-                                                                                    budget: '<?php echo e(old('budget')); ?>',
+                                                                                    editingMember: {
+                                                                                        id: '<?php echo e(old('id')); ?>',
+                                                                                        name: '<?php echo e(old('member_name')); ?>',
+                                                                                        phone: '<?php echo e(old('member_phone')); ?>',
+                                                                                        email: '<?php echo e(old('email')); ?>'
                                                                                     },
-                                                                                    accountDrawer: false,
-                                                                                    viewOnly: false,
-                                                                            }">
+
+                                                                                    editingCoupon: {
+                                                                                        id: '<?php echo e(old('id')); ?>',
+                                                                                        title: '<?php echo e(old('title')); ?>',
+                                                                                        slug: '<?php echo e(old('slug')); ?>',
+                                                                                        start_date: '<?php echo e(old('start_date')); ?>',
+                                                                                        end_date: '<?php echo e(old('end_date')); ?>',
+                                                                                        name: '<?php echo e(old('usage_limit', 1)); ?>',
+                                                                                        views: '<?php echo e(old('total_limit', 100)); ?>'
+                                                                                    },
+
+                                                                                    editingLead: {
+                                                                                        id: '<?php echo e(old('id')); ?>',
+                                                                                        name: '<?php echo e(old('name')); ?>',
+                                                                                        email: '<?php echo e(old('email')); ?>',
+                                                                                        phone: '<?php echo e(old('phone')); ?>',
+                                                                                        interested_location: '<?php echo e(old('interested_location')); ?>',
+                                                                                        budget: '<?php echo e(old('budget')); ?>',
+                                                                                        },
+                                                                                        accountDrawer: false,
+                                                                                        viewOnly: false,
+                                                                                }">
 
         <div class="mb-10 flex items-center gap-4">
 
@@ -161,7 +162,8 @@
                                     <span class="tracking-tight">
                                         <?php if(request('date_range') == 'custom' && request('from') && request('to')): ?>
                                             
-                                            <?php echo e(\Carbon\Carbon::parse(request('from'))->format('d M Y')); ?> - <?php echo e(\Carbon\Carbon::parse(request('to'))->format('d M Y')); ?>
+                                            <?php echo e(\Carbon\Carbon::parse(request('from'))->format('d M Y')); ?> -
+                                            <?php echo e(\Carbon\Carbon::parse(request('to'))->format('d M Y')); ?>
 
                                         <?php elseif(request('date_range') == 'today'): ?>
                                             Today (<?php echo e(now()->format('d M Y')); ?>)
@@ -401,108 +403,126 @@
                         </div>
                     </div>
 
-                   <!-- ── RECENT LEADS (All Device Responsive) ── -->
-<div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden mt-6">
-    <!-- Header -->
-    <div class="p-5 md:p-8 border-b border-gray-50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <h3 class="text-lg font-bold text-gray-800">Recent Leads</h3>
-        <button @click="activeTab = 'leads'" class="text-sm font-bold text-[#008060] hover:underline flex items-center gap-1">
-            View All <i class="fas fa-arrow-right text-xs"></i>
-        </button>
-    </div>
+                    <!-- ── RECENT LEADS (All Device Responsive) ── -->
+                    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden mt-6">
+                        <!-- Header -->
+                        <div
+                            class="p-5 md:p-8 border-b border-gray-50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                            <h3 class="text-lg font-bold text-gray-800">Recent Leads</h3>
+                            <button @click="activeTab = 'leads'"
+                                class="text-sm font-bold text-[#008060] hover:underline flex items-center gap-1">
+                                View All <i class="fas fa-arrow-right text-xs"></i>
+                            </button>
+                        </div>
 
-    <!-- Desktop View (Visible on Tablet and Desktop) -->
-    <div class="hidden md:block overflow-x-auto">
-        <table class="w-full text-left">
-            <thead class="bg-gray-50 text-[11px] uppercase font-black text-gray-400 tracking-wider border-b border-gray-100">
-                <tr>
-                    <th class="px-8 py-5">Name</th>
-                    <th class="px-8 py-5">Project</th>
-                    <th class="px-8 py-5">Source</th>
-                    <th class="px-8 py-5">Team</th>
-                    <th class="px-8 py-5 text-center">Status</th>
-                    <th class="px-8 py-5">Date</th>
-                    <th class="px-8 py-5 text-right">Action</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-50">
-                <?php $__empty_1 = true; $__currentLoopData = $leads->take(5); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $lead): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                    <tr class="hover:bg-gray-50/50 transition-colors">
-                        <td class="px-8 py-5 font-bold text-gray-700 text-sm"><?php echo e($lead->name); ?></td>
-                        <td class="px-8 py-5 text-gray-500 text-sm"><?php echo e($lead->interested_location ?: 'N/A'); ?></td>
-                        <td class="px-8 py-5 text-gray-400 text-[11px] font-bold uppercase"><?php echo e($lead->type); ?></td>
-                        <td class="px-8 py-5">
-                            <span class="text-sm font-semibold <?php echo e($lead->user_id == auth()->id() ? 'text-[#008060]' : 'text-indigo-600'); ?>">
-                                <?php echo e($lead->user_id == auth()->id() ? 'Direct' : $lead->user->name); ?>
+                        <!-- Desktop View (Visible on Tablet and Desktop) -->
+                        <div class="hidden md:block overflow-x-auto">
+                            <table class="w-full text-left">
+                                <thead
+                                    class="bg-gray-50 text-[11px] uppercase font-black text-gray-400 tracking-wider border-b border-gray-100">
+                                    <tr>
+                                        <th class="px-8 py-5">Name</th>
+                                        <th class="px-8 py-5">Project</th>
+                                        <th class="px-8 py-5">Source</th>
+                                        <th class="px-8 py-5">Team</th>
+                                        <th class="px-8 py-5 text-center">Status</th>
+                                        <th class="px-8 py-5">Date</th>
+                                        <th class="px-8 py-5 text-right">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-50">
+                                    <?php $__empty_1 = true; $__currentLoopData = $leads->take(5); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $lead): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                        <tr class="hover:bg-gray-50/50 transition-colors">
+                                            <td class="px-8 py-5 font-bold text-gray-700 text-sm"><?php echo e($lead->name); ?></td>
+                                            <td class="px-8 py-5 text-gray-500 text-sm">
+                                                <?php echo e($lead->interested_location ?: 'N/A'); ?></td>
+                                            <td class="px-8 py-5 text-gray-400 text-[11px] font-bold uppercase">
+                                                <?php echo e($lead->type); ?></td>
+                                            <td class="px-8 py-5">
+                                                <span
+                                                    class="text-sm font-semibold <?php echo e($lead->user_id == auth()->id() ? 'text-[#008060]' : 'text-indigo-600'); ?>">
+                                                    <?php echo e($lead->user_id == auth()->id() ? 'Direct' : $lead->user->name); ?>
 
-                            </span>
-                        </td>
-                        <td class="px-8 py-5 text-center">
-                            <?php
-                                $statusStyle = match($lead->status) {
-                                    \App\Models\Lead::STATUS_PENDING => 'bg-emerald-50 text-emerald-600 border-emerald-100',
-                                    \App\Models\Lead::STATUS_COMPLETED => 'bg-amber-50 text-amber-700 border-amber-100',
-                                    default => 'bg-indigo-50 text-indigo-600 border-indigo-100',
-                                };
-                            ?>
-                            <span class="<?php echo e($statusStyle); ?> px-3 py-1 rounded-full text-[10px] font-bold border uppercase tracking-tighter">
-                                <?php echo e($lead->status_label); ?>
+                                                </span>
+                                            </td>
+                                            <td class="px-8 py-5 text-center">
+                                                <?php
+                                                    $statusStyle = match ($lead->status) {
+                                                        \App\Models\Lead::STATUS_PENDING => 'bg-emerald-50 text-emerald-600 border-emerald-100',
+                                                        \App\Models\Lead::STATUS_COMPLETED => 'bg-amber-50 text-amber-700 border-amber-100',
+                                                        default => 'bg-indigo-50 text-indigo-600 border-indigo-100',
+                                                    };
+                                                ?>
+                                                <span
+                                                    class="<?php echo e($statusStyle); ?> px-3 py-1 rounded-full text-[10px] font-bold border uppercase tracking-tighter">
+                                                    <?php echo e($lead->status_label); ?>
 
-                            </span>
-                        </td>
-                        <td class="px-8 py-5 text-gray-400 text-sm"><?php echo e($lead->created_at->format('M d, Y')); ?></td>
-                        <td class="px-8 py-5 text-right">
-                            <i class="fas fa-chevron-right text-gray-200"></i>
-                        </td>
-                    </tr>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-                    <tr><td colspan="7" class="px-8 py-10 text-center text-gray-400 italic">No recent leads found.</td></tr>
-                <?php endif; ?>
-            </tbody>
-        </table>
-    </div>
+                                                </span>
+                                            </td>
+                                            <td class="px-8 py-5 text-gray-400 text-sm">
+                                                <?php echo e($lead->created_at->format('M d, Y')); ?></td>
+                                            <td class="px-8 py-5 text-right">
+                                                <i class="fas fa-chevron-right text-gray-200"></i>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                                        <tr>
+                                            <td colspan="7" class="px-8 py-10 text-center text-gray-400 italic">No recent leads
+                                                found.</td>
+                                        </tr>
+                                    <?php endif; ?>
+                                </tbody>
+                            </table>
+                        </div>
 
-    <!-- Mobile View (Visible on Mobile only) -->
-    <div class="md:hidden divide-y divide-gray-100">
-        <?php $__empty_1 = true; $__currentLoopData = $leads->take(5); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $lead): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-            <div class="p-4 space-y-3">
-                <div class="flex justify-between items-start">
-                    <div class="flex flex-col">
-                        <span class="font-bold text-gray-800 text-base leading-tight"><?php echo e($lead->name); ?></span>
-                        <span class="text-[10px] text-gray-400 font-medium uppercase tracking-wider mt-1"><?php echo e($lead->created_at->format('M d, Y')); ?></span>
+                        <!-- Mobile View (Visible on Mobile only) -->
+                        <div class="md:hidden divide-y divide-gray-100">
+                            <?php $__empty_1 = true; $__currentLoopData = $leads->take(5); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $lead): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                <div class="p-4 space-y-3">
+                                    <div class="flex justify-between items-start">
+                                        <div class="flex flex-col">
+                                            <span
+                                                class="font-bold text-gray-800 text-base leading-tight"><?php echo e($lead->name); ?></span>
+                                            <span
+                                                class="text-[10px] text-gray-400 font-medium uppercase tracking-wider mt-1"><?php echo e($lead->created_at->format('M d, Y')); ?></span>
+                                        </div>
+                                        <?php
+                                            $statusStyle = match ($lead->status) {
+                                                \App\Models\Lead::STATUS_PENDING => 'bg-emerald-50 text-emerald-600 border-emerald-100',
+                                                \App\Models\Lead::STATUS_COMPLETED => 'bg-amber-50 text-amber-700 border-amber-100',
+                                                default => 'bg-indigo-50 text-indigo-600 border-indigo-100',
+                                            };
+                                        ?>
+                                        <span
+                                            class="<?php echo e($statusStyle); ?> px-2.5 py-0.5 rounded-full text-[9px] font-bold border uppercase">
+                                            <?php echo e($lead->status_label); ?>
+
+                                        </span>
+                                    </div>
+
+                                    <div class="grid grid-cols-2 gap-4 pt-2 border-t border-gray-50">
+                                        <div class="flex flex-col">
+                                            <span
+                                                class="text-[9px] text-gray-400 font-black uppercase tracking-tighter">Project</span>
+                                            <span
+                                                class="text-xs font-bold text-gray-600 truncate"><?php echo e($lead->interested_location ?: 'N/A'); ?></span>
+                                        </div>
+                                        <div class="flex flex-col text-right">
+                                            <span class="text-[9px] text-gray-400 font-black uppercase tracking-tighter">Team
+                                                Info</span>
+                                            <span
+                                                class="text-xs font-bold <?php echo e($lead->user_id == auth()->id() ? 'text-[#008060]' : 'text-indigo-600'); ?>">
+                                                <?php echo e($lead->user_id == auth()->id() ? 'Direct' : $lead->user->name); ?>
+
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                                <div class="p-8 text-center text-gray-400 italic">No recent leads found.</div>
+                            <?php endif; ?>
+                        </div>
                     </div>
-                    <?php
-                        $statusStyle = match($lead->status) {
-                            \App\Models\Lead::STATUS_PENDING => 'bg-emerald-50 text-emerald-600 border-emerald-100',
-                            \App\Models\Lead::STATUS_COMPLETED => 'bg-amber-50 text-amber-700 border-amber-100',
-                            default => 'bg-indigo-50 text-indigo-600 border-indigo-100',
-                        };
-                    ?>
-                    <span class="<?php echo e($statusStyle); ?> px-2.5 py-0.5 rounded-full text-[9px] font-bold border uppercase">
-                        <?php echo e($lead->status_label); ?>
-
-                    </span>
-                </div>
-
-                <div class="grid grid-cols-2 gap-4 pt-2 border-t border-gray-50">
-                    <div class="flex flex-col">
-                        <span class="text-[9px] text-gray-400 font-black uppercase tracking-tighter">Project</span>
-                        <span class="text-xs font-bold text-gray-600 truncate"><?php echo e($lead->interested_location ?: 'N/A'); ?></span>
-                    </div>
-                    <div class="flex flex-col text-right">
-                        <span class="text-[9px] text-gray-400 font-black uppercase tracking-tighter">Team Info</span>
-                        <span class="text-xs font-bold <?php echo e($lead->user_id == auth()->id() ? 'text-[#008060]' : 'text-indigo-600'); ?>">
-                            <?php echo e($lead->user_id == auth()->id() ? 'Direct' : $lead->user->name); ?>
-
-                        </span>
-                    </div>
-                </div>
-            </div>
-        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-            <div class="p-8 text-center text-gray-400 italic">No recent leads found.</div>
-        <?php endif; ?>
-    </div>
-</div>
                 </div>
                 <div x-show="activeTab === 'profile'" class="" x-transition>
                     <h2 class="text-xl font-bold text-gray-800 mb-6 uppercase border-b pb-2">Profile Settings</h2>
@@ -827,12 +847,12 @@ unset($__errorArgs, $__bag); ?>
 
                     <nav class="flex flex-col overflow-y-auto pt-2">
                         <template x-for="item in [
-                                            { id: 'dashboard', label: 'Dashboard', icon: 'fa-chart-column' },
-                                            { id: 'profile', label: 'Personal Info', icon: 'fa-user-circle' },
-                                            { id: 'leads', label: 'My Leads', icon: 'fa-users-rectangle' },
-                                            { id: 'team', label: 'Team', icon: 'fa-arrows-down-to-people' },
-                                            { id: 'coupons', label: 'Available Coupons', icon: 'fa-ticket-simple' }
-                                        ]">
+                                                { id: 'dashboard', label: 'Dashboard', icon: 'fa-chart-column' },
+                                                { id: 'profile', label: 'Personal Info', icon: 'fa-user-circle' },
+                                                { id: 'leads', label: 'My Leads', icon: 'fa-users-rectangle' },
+                                                { id: 'team', label: 'Team', icon: 'fa-arrows-down-to-people' },
+                                                { id: 'coupons', label: 'Available Coupons', icon: 'fa-ticket-simple' }
+                                            ]">
                             <button @click="activeTab = item.id; accountDrawer = false"
                                 :class="activeTab === item.id ? 'bg-[#003B7A] text-white' : 'text-gray-700 hover:bg-gray-50'"
                                 class="flex items-center gap-3 px-6 py-4 border-b border-gray-50 text-left transition-colors">

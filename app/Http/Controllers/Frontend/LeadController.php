@@ -30,24 +30,41 @@ class LeadController extends Controller
             'phone.min'   => 'ফোন নাম্বারটি অন্তত ৭ ডিজিটের হতে হবে।',
         ]);
 
-        // ২. ডুপ্লিকেট লিড চেক
-        if (Lead::where('phone', $request->phone)->whereIn('status', [1, 2, 3, 4])->exists()) {
-            return back()->with('error', 'এই নম্বরটি দিয়ে ইতিমধ্যে একটি লিড প্রক্রিয়াধীন আছে।')->withInput();
+        $duplicateQuery = Lead::whereIn('status', [1, 2, 3, 4])
+            ->where(function ($q) use ($request) {
+                $q->where('phone', $request->phone);
+                if ($request->filled('email')) {
+                    $q->orWhere('email', $request->email);
+                }
+            })->first();
+
+        if ($duplicateQuery) {
+            $errorMsg = $duplicateQuery->phone == $request->phone
+                ? 'এই ফোন নম্বরটি দিয়ে ইতিমধ্যে একটি লিড আছে।'
+                : 'এই ইমেলটি দিয়ে ইতিমধ্যে একটি লিড আছে।';
+
+            return back()
+                ->withErrors([
+                    'phone' => ($duplicateQuery->phone == $request->phone) ? $errorMsg : null,
+                    'email' => ($duplicateQuery->email == $request->email) ? $errorMsg : null,
+                ])
+                ->withInput()
+                ->with([
+                    'active_tab' => 'leads',
+                    'lead_view'  => 'form'
+                ]);
         }
 
         $ownerId = null;
         $validCoupon = null;
-        $type = 'refer_link';
+        $type = 'manual';
 
-        // ৩. ওনার খোঁজার প্রথম ধাপ: রেফারেল লিঙ্ক বা কুকি চেক
         $refCode = $request->input('ref') ?? ($request->query('ref') ?? $request->cookie('referred_by'));
 
-        // যদি কোনো মেম্বার লগইন করে তার ড্যাশবোর্ড থেকে ম্যানুয়ালি অ্যাড করে
         if (auth()->check() && $request->input('type') === 'manual') {
             $ownerId = auth()->id();
             $type = 'manual';
         }
-        // যদি বাইরে থেকে কেউ রেফারেল লিঙ্কে আসে
         elseif ($refCode && $refCode !== 'null') {
             $foundUser = User::where('referral_code', $refCode)->first();
             if ($foundUser) {
@@ -56,25 +73,21 @@ class LeadController extends Controller
             }
         }
 
-        // ৪. ওনার খোঁজার দ্বিতীয় ধাপ: কুপন কোড চেক
         if ($request->filled('coupon_code')) {
             $couponInput = \Illuminate\Support\Str::slug(trim($request->coupon_code));
             $coupon = Content::where('module', 'coupons')->where('slug', $couponInput)->first();
 
             if ($coupon) {
-                // মডেলের মেথড দিয়ে ভ্যালিডেশন চেক (Casts ও মেথড মডেলে থাকতে হবে)
                 $validity = $coupon->isCouponValid();
 
                 if ($validity['status'] && !$coupon->isUserLimitReached($request->phone)) {
                     $validCoupon = $coupon->slug;
 
-                    // যদি লিঙ্ক থেকে ওনার না পাওয়া যায়, তবে কুপন নির্মাতাই ওনার হবে
                     if (!$ownerId) {
                         $ownerId = $coupon->user_id;
-                        $type = 'refer_link';
+                        $type = 'coupon';
                     }
 
-                    // কুপন ব্যবহারের কাউন্ট আপডেট
                     $extra = $coupon->extra ?? [];
                     $extra['used_count'] = (int)($extra['used_count'] ?? 0) + 1;
                     $coupon->extra = $extra; // ১. সরাসরি প্রপার্টিতে এসাইন করুন
@@ -109,28 +122,41 @@ class LeadController extends Controller
             'status'              => Lead::STATUS_PENDING,
             'type'                => $type,
         ]);
+        $previousUrl = url()->previous();
 
-        return back()->with([
+// ২. ইউআরএল থেকে কুয়েরি স্ট্রিং (? এর পরের অংশ) বাদ দেওয়া
+$cleanUrl = strtok($previousUrl, '?');
+
+
+        return redirect($cleanUrl)->with([
             'success'    => 'আপনার তথ্য সফলভাবে জমা হয়েছে।',
             'active_tab' => 'leads',
             'lead_view'  => 'list'
-        ]);
+        ])->withCookie(cookie()->forget('referred_by'));
     }
     public function updateLead(Request $request, Lead $lead)
     {
-        if ($lead->user_id !== auth()->id()) abort(403);
+        if ((int) $lead->user_id !== (int) auth()->id()) {
+            abort(403, 'Unauthorized.');
+        }
 
         $request->validate([
             'name'  => 'required|string|max:255',
             'email' => 'nullable|email|max:255',
-            'phone' => 'nullable|string|max:20',
-            'interested_location' => 'nullable|string|max:255',
-            'budget' => 'nullable|numeric|min:0', // এখানেও min:0 যোগ করে দিন
+            'phone' => [
+                'nullable',
+                'string',
+                'min:7',
+                'max:20',
+                'regex:/^\+?[0-9]+$/',
+            ],
+            'budget' => 'nullable|numeric|min:0',
+        ], [
+            'phone.regex' => 'সঠিক ফোন নাম্বার দিন ।',
+            'phone.min'   => 'ফোন নাম্বারটি অন্তত ৭ ডিজিটের হতে হবে।',
         ]);
 
-        $lead->update($request->all());
-
-        // --- এই অংশটি পরিবর্তন করুন ---
+        $lead->update($request->only(['name', 'email', 'phone', 'interested_location', 'budget']));
         return back()->with([
             'success' => 'Lead updated successfully!',
             'active_tab' => 'leads' // এই সিগন্যালটি ট্যাব ধরে রাখবে
