@@ -112,7 +112,7 @@ class FrontendAuthController extends Controller
 
         if ($request->filled('new_password')) {
             if (!Hash::check($request->current_password, $user->password)) {
-                return back()->withErrors(['current_password' => 'বর্তমান পাসওয়ার্ডটি সঠিক নয়।']) ->with('active_tab', 'profile'); 
+                return back()->withErrors(['current_password' => 'বর্তমান পাসওয়ার্ডটি সঠিক নয়।'])->with('active_tab', 'profile');
             }
             $newHash = Hash::make($request->new_password);
             $user->password = $newHash;
@@ -163,19 +163,30 @@ class FrontendAuthController extends Controller
         ]);
 
         try {
-            $remoteUserId = DB::connection('asset_db')->table('users')->insertGetId([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => $hashedPassword,
-                'status' => 'active',
-
-                'email_verified_at' => $verifiedAt,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+            $remoteUser = DB::connection('asset_db')->table('users')->where('email', $request->email)->first();
+            if (!$remoteUser) {
+                $remoteUserId = DB::connection('asset_db')->table('users')->insertGetId([
+                    'name'              => $request->name,
+                    'email'             => $request->email,
+                    'password'          => $hashedPassword,
+                    'status'            => 'active',
+                    'email_verified_at' => $verifiedAt,
+                    'created_at'        => now(),
+                    'updated_at'        => now(),
+                ]);
+            } else {
+                $remoteUserId = $remoteUser->id;
+                DB::connection('asset_db')->table('users')->where('id', $remoteUserId)->update([
+                    'password'   => $hashedPassword,
+                    'updated_at' => now(),
+                ]);
+            }
             $role = DB::connection('asset_db')->table('roles')->where('name', 'frontend_user')->first();
             if ($role) {
-                DB::connection('asset_db')->table('user_roles')->insert(['user_id' => $remoteUserId, 'role_id' => $role->id]);
+                DB::connection('asset_db')->table('user_roles')->updateOrInsert(
+                    ['user_id' => $remoteUserId, 'role_id' => $role->id],
+                    ['user_id' => $remoteUserId, 'role_id' => $role->id]
+                );
             }
         } catch (\Exception $e) {
             Log::error("Remote Sync Failed: " . $e->getMessage());
@@ -213,7 +224,7 @@ class FrontendAuthController extends Controller
         ]);
 
         $this->sendOtp($user->email, $otp, 'reset_password');
-        session(['verify_email' => $user->email , 'otp_purpose' => 'reset_password']);
+        session(['verify_email' => $user->email, 'otp_purpose' => 'reset_password']);
 
         return redirect()->route('verify.otp')->with('success', 'ওটিপি কোড পাঠানো হয়েছে।');
     }
@@ -286,7 +297,7 @@ class FrontendAuthController extends Controller
             'otp_expires_at' => now()->addMinutes(10)
         ]);
 
-        $this->sendOtp($email, $otp , $user->name, session('otp_purpose'));
+        $this->sendOtp($email, $otp, $user->name, session('otp_purpose'));
 
         return back()->with('success', 'নতুন কোড পাঠানো হয়েছে।');
     }
