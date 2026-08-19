@@ -13,7 +13,7 @@ class LeadController extends Controller
 {
     public function storeLead(Request $request)
     {
-
+        // ১. ভ্যালিডেশন
         $request->validate([
             'name'  => 'required|string|max:255',
             'email' => 'nullable|email|max:255',
@@ -30,47 +30,73 @@ class LeadController extends Controller
             'phone.min'   => 'ফোন নাম্বারটি অন্তত ৭ ডিজিটের হতে হবে।',
         ]);
 
-
+        // ২. ডুপ্লিকেট লিড চেক
         if (Lead::where('phone', $request->phone)->whereIn('status', [1, 2, 3, 4])->exists()) {
             return back()->with('error', 'এই নম্বরটি দিয়ে ইতিমধ্যে একটি লিড প্রক্রিয়াধীন আছে।')->withInput();
         }
 
-        $type = $request->input('type', 'refer_link');
         $ownerId = null;
+        $validCoupon = null;
+        $type = 'refer_link';
 
+        // ৩. ওনার খোঁজার প্রথম ধাপ: রেফারেল লিঙ্ক বা কুকি চেক
         $refCode = $request->input('ref') ?? ($request->query('ref') ?? $request->cookie('referred_by'));
-        $ownerId = null;
 
+        // যদি কোনো মেম্বার লগইন করে তার ড্যাশবোর্ড থেকে ম্যানুয়ালি অ্যাড করে
         if (auth()->check() && $request->input('type') === 'manual') {
             $ownerId = auth()->id();
-        } elseif ($refCode) {
+            $type = 'manual';
+        }
+        // যদি বাইরে থেকে কেউ রেফারেল লিঙ্কে আসে
+        elseif ($refCode && $refCode !== 'null') {
             $foundUser = User::where('referral_code', $refCode)->first();
             if ($foundUser) {
                 $ownerId = $foundUser->id;
+                $type = 'refer_link';
             }
         }
 
-        if (!$ownerId) {
-            return back()->with('error', 'সঠিক রেফারেল কোড পাওয়া যায়নি। মেইন লিঙ্কে ক্লিক করুন।');
-        }
-
-        $ownerUser = User::find($ownerId);
-        $leaderId = $ownerUser ? $ownerUser->parent_id : null;
-
-        $validCoupon = null;
+        // ৪. ওনার খোঁজার দ্বিতীয় ধাপ: কুপন কোড চেক
         if ($request->filled('coupon_code')) {
             $couponInput = \Illuminate\Support\Str::slug(trim($request->coupon_code));
             $coupon = Content::where('module', 'coupons')->where('slug', $couponInput)->first();
-            if ($coupon && $coupon->isCouponValid()['status'] && !$coupon->isUserLimitReached($request->phone)) {
-                $validCoupon = $coupon->slug;
-                // কাউন্ট বাড়ানো
-                $extra = $coupon->extra ?? [];
-                $extra['used_count'] = ($extra['used_count'] ?? 0) + 1;
-                $coupon->update(['extra' => $extra]);
+
+            if ($coupon) {
+                // মডেলের মেথড দিয়ে ভ্যালিডেশন চেক (Casts ও মেথড মডেলে থাকতে হবে)
+                $validity = $coupon->isCouponValid();
+
+                if ($validity['status'] && !$coupon->isUserLimitReached($request->phone)) {
+                    $validCoupon = $coupon->slug;
+
+                    // যদি লিঙ্ক থেকে ওনার না পাওয়া যায়, তবে কুপন নির্মাতাই ওনার হবে
+                    if (!$ownerId) {
+                        $ownerId = $coupon->user_id;
+                        $type = 'refer_link';
+                    }
+
+                    // কুপন ব্যবহারের কাউন্ট আপডেট
+                    $extra = $coupon->extra ?? [];
+                    $extra['used_count'] = (int)($extra['used_count'] ?? 0) + 1;
+                    $coupon->extra = $extra; // ১. সরাসরি প্রপার্টিতে এসাইন করুন
+                    $coupon->save();
+                } else {
+                    return back()->with('error', $validity['message'] ?? 'কুপনটি সঠিক নয় অথবা মেয়াদ শেষ।')->withInput();
+                }
+            } else {
+                return back()->with('error', 'কুপন কোডটি আমাদের সিস্টেমে পাওয়া যায়নি।')->withInput();
             }
         }
 
-        // ৭. লিড সেভ
+        // ৫. বাধ্যতামূলক চেক: ওনার না থাকলে ডাটা সেভ হবে না (No Default Admin)
+        if (!$ownerId) {
+            return back()->with('error', 'তথ্য জমা দেওয়ার জন্য একটি সঠিক রেফারেল লিঙ্ক অথবা বৈধ কুপন কোড প্রয়োজন।')->withInput();
+        }
+
+        // ৬. লিডার (Leader) আইডি বের করা
+        $ownerUser = User::find($ownerId);
+        $leaderId = $ownerUser ? $ownerUser->parent_id : null;
+
+        // ৭. ডাটা সেভ করা
         Lead::create([
             'user_id'             => $ownerId,
             'referrer_id'         => $leaderId,
@@ -85,9 +111,9 @@ class LeadController extends Controller
         ]);
 
         return back()->with([
-            'success' => 'আপনার তথ্য সফলভাবে জমা হয়েছে।',
+            'success'    => 'আপনার তথ্য সফলভাবে জমা হয়েছে।',
             'active_tab' => 'leads',
-            'lead_view' => 'list'
+            'lead_view'  => 'list'
         ]);
     }
     public function updateLead(Request $request, Lead $lead)

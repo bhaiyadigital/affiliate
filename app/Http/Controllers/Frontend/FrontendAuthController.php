@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Http;
 
 class FrontendAuthController extends Controller
 {
@@ -46,14 +47,42 @@ class FrontendAuthController extends Controller
         if (request()->filled('status')) {
             $leadQuery->where('status', request('status'));
         }
+        if ($request->filled('date_range')) {
+            $range = $request->date_range;
 
+            if ($range == 'today') {
+                $leadQuery->whereDate('created_at', today());
+            } elseif ($range == '7_days') {
+                $leadQuery->where('created_at', '>=', now()->subDays(7));
+            } elseif ($range == '30_days') {
+                $leadQuery->where('created_at', '>=', now()->subDays(30));
+            } elseif ($range == 'this_month') {
+                $leadQuery->whereMonth('created_at', now()->month)
+                    ->whereYear('created_at', now()->year);
+            } elseif ($range == 'custom' && $request->filled('from') && $request->filled('to')) {
+                $leadQuery->whereBetween('created_at', [
+                    \Carbon\Carbon::parse($request->from)->startOfDay(),
+                    \Carbon\Carbon::parse($request->to)->endOfDay()
+                ]);
+            }
+        }
+        // সার্চ লজিক যোগ করুন
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $leadQuery->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%$search%")
+                    ->orWhere('phone', 'like', "%$search%")
+                    ->orWhere('interested_location', 'like', "%$search%");
+            });
+        }
+        $allLeads = (clone $leadQuery)->get();
         $leads = $leadQuery->latest()->paginate(10)->withQueryString();
 
         $members = $user->isSuperAdmin()
             ? User::orderBy('name')->get()
             : User::where('parent_id', $user->id)->orWhere('id', $user->id)->orderBy('name')->get();
 
-        return view('frontend.auth.profile', compact('downloadLogs', 'leads', 'members'));
+        return view('frontend.auth.profile', compact('downloadLogs', 'leads', 'members', 'allLeads'));
     }
     //profile update
     public function update(Request $request)
@@ -139,7 +168,7 @@ class FrontendAuthController extends Controller
                 'email' => $request->email,
                 'password' => $hashedPassword,
                 'status' => 'active',
-                'source' => 'affiliate',
+
                 'email_verified_at' => $verifiedAt,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -153,7 +182,7 @@ class FrontendAuthController extends Controller
         }
 
         if (!$isSuperAdminAction) {
-            Mail::to($user->email)->send(new OTPMail($otp, 'register'));
+            $this->sendOtp($user->email, $otp, 'register');
         }
 
         if (auth()->check()) {
@@ -165,25 +194,44 @@ class FrontendAuthController extends Controller
         }
 
         session(['verify_email' => $user->email, 'otp_purpose' => 'register']);
-        return back()->with('success', 'রেজিস্ট্রেশন সফল! ইমেইলে ওটিপি পাঠানো হয়েছে।');
+        return redirect()->route('verify.otp')->with('success', 'রেজিস্ট্রেশন সফল! ইমেইলে ওটিপি পাঠানো হয়েছে।');
     }
 
     public function sendResetOtp(Request $request)
     {
         $request->validate(['email' => 'required|email|exists:users,email']);
-
         $user = User::where('email', $request->email)->first();
-        $otp = rand(100000, 999999);
 
+        if (!$user) {
+            return back()->with('error', 'এই ইমেইলটি আমাদের সিস্টেমে পাওয়া যায়নি।');
+        }
+
+        $otp = rand(100000, 999999);
         $user->update([
             'otp_code'       => $otp,
             'otp_expires_at' => now()->addMinutes(10)
         ]);
 
-        Mail::to($user->email)->send(new OTPMail($otp, 'reset_password'));
-
+        $this->sendOtp($user->email, $otp, 'reset_password');
         session(['verify_email' => $user->email, 'otp_purpose' => 'reset_password']);
-        return back()->with('success', 'আপনার ইমেইলে পাসওয়ারড রিসেট কোড পাঠানো হয়েছে।');
+
+        return redirect()->route('verify.otp')->with('success', 'ওটিপি কোড পাঠানো হয়েছে।');
+    }
+    public function verifyOtpForm()
+    {
+        $email = session('verify_email');
+        if (!$email) {
+            return redirect()->route('landing.index');
+        }
+
+        $user = User::where('email', $email)->first();
+
+        // Carbon::parse ব্যবহার করে স্ট্রিং থেকে অবজেক্ট করা হচ্ছে
+        $expiresAt = $user && $user->otp_expires_at
+            ? \Carbon\Carbon::parse($user->otp_expires_at)->toIso8601String()
+            : null;
+
+        return view('frontend.landing.verifyOtp', compact('expiresAt'));
     }
 
     public function verifyOtp(Request $request)
@@ -221,7 +269,7 @@ class FrontendAuthController extends Controller
 
         if (session('otp_purpose') === 'reset_password') {
             session(['can_reset_password' => true]);
-            return back()->with('success', 'ইমেইল ভেরিফাইড! এখন নতুন পাসওয়ার্ড দিন।');
+            return redirect()->route('verify.otp')->with('success', 'ইমেইল ভেরিফাইড! এখন নতুন পাসওয়ার্ড দিন।');
         }
     }
 
@@ -238,9 +286,9 @@ class FrontendAuthController extends Controller
             'otp_expires_at' => now()->addMinutes(10)
         ]);
 
-        Mail::to($email)->send(new OTPMail($otp, session('otp_purpose')));
+        $this->sendOtp($email, $otp, session('otp_purpose'));
 
-        return back()->with('success', 'নতুন কোড পাঠানো হয়েছে।');
+        return back()->with('success', 'নতুন কোড পাঠানো হয়েছে।');
     }
 
     public function finalPasswordUpdate(Request $request)
@@ -292,13 +340,13 @@ class FrontendAuthController extends Controller
                         'otp_code' => $otp,
                         'otp_expires_at' => now()->addMinutes(10)
                     ]);
-                    Mail::to($user->email)->send(new OTPMail($otp, 'register'));
+                    $this->sendOtp($user->email, $otp, 'register');
                 }
 
                 Auth::logout();
                 session(['verify_email' => $user->email, 'otp_purpose' => 'register']);
 
-                return back()->with('success', 'আপনার একাউন্টটি ভেরিফাই করা নেই। ইমেইলে পাঠানো ওটিপি দিন।');
+                return redirect()->route('verify.otp')->with('success', 'আপনার একাউন্টটি ভেরিফাই করুন।');
             }
 
             return redirect()->route('profile.index');
@@ -351,5 +399,46 @@ class FrontendAuthController extends Controller
         $url = $baseUrl . "/auto-login?email=" . urlencode($user->email) . "&signature=" . $signature;
 
         return redirect()->away($url);
+    }
+    private function sendOtp($email, $otp, $purpose = 'register')
+    {
+        if ($purpose === 'register') {
+            $title = 'Account Verification';
+            $message = "Bhaiya Housing Affiliate Program-এ রেজিস্ট্রেশন করার জন্য আপনাকে ধন্যবাদ।\n\nআপনার একাউন্ট ভেরিফাই করতে নিচের কোডটি ব্যবহার করুন:\n\nকোড: " . $otp . "\n\nএই কোডটি ১০ মিনিটের জন্য কার্যকর।";
+        } else {
+            $title = 'Password Reset';
+            $message = "আপনার পাসওয়ার্ড রিসেট করার জন্য একটি অনুরোধ পাওয়া গেছে।\n\nসিকিউরিটি কোড: " . $otp . "\n\nএই কোডটি ১০ মিনিটের জন্য কার্যকর।";
+        }
+
+        try {
+            Log::info("📧 Sending OTP via Mailer API", ['email' => $email, 'otp' => $otp]);
+
+            $response = Http::withoutVerifying()
+                ->timeout(30)
+                ->withHeaders([
+                    'X-API-Key' => config('services.mailer.key'),
+                ])
+                ->post(config('services.mailer.url'), [
+                    'type'    => 'verification',
+                    'to'      => trim($email),
+                    'subject' => $title . ' - Bhaiya Housing Affiliate Program',
+                    'data'    => [
+                        'eyebrow' => 'Bhaiya Housing Affiliate Program',
+                        'heading' => $title,
+                        'name'    => 'User',
+                        'message' => $message,
+                        'button_text' => 'OTP: ' . $otp,
+                        'verification_link' => route('verify.otp'),
+                    ],
+                ]);
+
+            if ($response->successful()) {
+                Log::info("✅ OTP Sent Successfully", ['email' => $email, 'log_id' => $response->json('log_id')]);
+            } else {
+                Log::error("OTP Failed", ['status' => $response->status()]);
+            }
+        } catch (\Throwable $e) {
+            Log::error("OTP Exception", ['error' => $e->getMessage()]);
+        }
     }
 }

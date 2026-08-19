@@ -332,32 +332,37 @@
                                 </div>
                             @endif
                         </div>
-
                         <form action="{{ route('lead.store') }}" method="POST" class="flex flex-col gap-4">
                             @csrf
 
-                            {{-- ১. রেফারেল কোড চেক: প্রথমে URL থেকে, না থাকলে কুকি থেকে --}}
+                            {{-- ১. রেফারেল কোড চেক: URL অথবা Cookie থেকে --}}
                             @php
                                 $referralCode = request()->query('ref') ?? request()->cookie('referred_by');
                             @endphp
 
-                            {{-- রেফারেল কোড থাকলে তা হিডেন ইনপুটে পাঠিয়ে দিন যাতে ট্র্যাক করা যায় --}}
+                            {{-- হিডেন ইনপুটগুলো --}}
                             <input type="hidden" name="ref" value="{{ $referralCode }}">
                             <input type="hidden" name="interested_location" value="{{ $project->title }}">
-                            <input type="hidden" name="type" value="refer_link">
 
+                            {{-- লজিক: রেফারেল থাকলে 'refer_link', না থাকলে 'manual' --}}
+                            <input type="hidden" name="type" value="{{ $referralCode ? 'refer_link' : 'manual' }}">
+
+                            {{-- নাম ইনপুট --}}
                             <input type="text" name="name" placeholder="Name (required)" required
                                 class="w-full bg-white px-5 py-3.5 text-sm outline-none border border-transparent placeholder:text-gray-400 shadow-sm focus:ring-2 focus:ring-[#2c4294]/20 transition-all"
                                 value="{{ old('name') }}" />
 
+                            {{-- ফোন ইনপুট --}}
                             <input type="tel" name="phone" placeholder="Phone Number (required)" required
                                 class="w-full bg-white px-5 py-3.5 text-sm outline-none border border-transparent placeholder:text-gray-400 shadow-sm focus:ring-2 focus:ring-[#2c4294]/20 transition-all"
                                 value="{{ old('phone') }}" />
 
+                            {{-- বাজেট ইনপুট --}}
                             <input type="number" name="budget" placeholder="Your Budget (optional)"
                                 class="w-full bg-white px-5 py-3.5 text-sm outline-none border border-transparent placeholder:text-gray-400 shadow-sm focus:ring-2 focus:ring-[#2c4294]/20 transition-all"
                                 value="{{ old('budget') }}" />
 
+                            {{-- ২. কুপন কোড লজিক: যদি রেফারেল কোড না থাকে ($referralCode যদি খালি হয়) --}}
                             @if(!$referralCode)
                                 <input type="text" name="coupon_code" placeholder="Coupon Code (optional)"
                                     class="w-full bg-white px-5 py-3.5 text-sm outline-none border border-transparent placeholder:text-gray-400 shadow-sm focus:ring-2 focus:ring-[#2c4294]/20 transition-all"
@@ -370,7 +375,6 @@
                                 Submit Interest
                             </button>
                         </form>
-
                     </div>
                 </div>
             </div>
@@ -552,7 +556,7 @@
                                     @foreach ($tabGroups as $id => $group)
                                         <button onclick="toggleDescriptionTab('{{ $id }}')" id="desc-btn-{{ $id }}"
                                             class="desc-tab-btn px-6 py-2.5 rounded-md font-bold text-sm uppercase transition-all duration-300
-                                                    {{ $loop->first ? 'bg-[#224194] text-white shadow-md' : 'bg-white border border-[#224194] text-gray-600' }}">
+                                                                {{ $loop->first ? 'bg-[#224194] text-white shadow-md' : 'bg-white border border-[#224194] text-gray-600' }}">
                                             {{ $group['label'] }}
                                         </button>
                                     @endforeach

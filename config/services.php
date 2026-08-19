@@ -34,5 +34,9 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+    'mailer' => [
+        'url' => env('MAILER_API_URL'),
+        'key' => env('MAILER_API_KEY'),
+    ],
 
 ];

@@ -49,7 +49,7 @@ class ContentController extends Controller
     public function create(string $module)
     {
         $modules = view()->shared('modules');
-        abort_unless(isset($modules[$module]), 404);
+        abort_unless(isset($modules[$module]), 401);
 
         $config = $modules[$module];
         return view('contents.create', compact('module', 'config'));
