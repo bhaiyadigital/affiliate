@@ -145,7 +145,9 @@
                         $sContacted = $statsLeads->where('status', \App\Models\Lead::STATUS_CONTACTED)->count();
                         $sQualified = $statsLeads->where('status', \App\Models\Lead::STATUS_VISIT)->count();
                         $sConverted = $statsLeads->where('status', \App\Models\Lead::STATUS_COMPLETED)->count();
+
                     ?>
+
 
                     <!-- ── HEADER ── -->
                     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -251,13 +253,13 @@
                         <!-- কার্ড মেকার ফাংশন স্টাইল -->
                         <?php
                             $cards = [
-                                ['label' => 'Total Leads', 'value' => number_format($total), 'icon' => 'fas fa-users', 'color' => 'bg-emerald-50 text-emerald-600', 'trend' => '+12% vs last month'],
-                                ['label' => 'Direct Leads', 'value' => number_format($manual), 'icon' => 'fas fa-hand-pointer', 'color' => 'bg-indigo-50 text-indigo-600', 'trend' => '+5% vs last month'],
-                                ['label' => 'Refer Link Leads', 'value' => number_format($link), 'icon' => 'fas fa-link', 'color' => 'bg-rose-50 text-rose-600', 'trend' => '+8% vs last month'],
-                                ['label' => 'Refer Code Leads', 'value' => number_format($coupon), 'icon' => 'fas fa-hashtag', 'color' => 'bg-amber-50 text-amber-600', 'trend' => '+15% vs last month'],
-                                ['label' => 'Team Leads', 'value' => number_format($teamLeadsCount), 'icon' => 'fas fa-users-cog', 'color' => 'bg-purple-50 text-purple-600', 'trend' => '+8% vs last month'],
-                                ['label' => 'Converted Leads', 'value' => number_format($conv), 'icon' => 'fas fa-check-circle', 'color' => 'bg-green-50 text-green-600', 'trend' => '+15% vs last month'],
-                                ['label' => 'Conversion Rate', 'value' => $rate . '%', 'icon' => 'fas fa-chart-pie', 'color' => 'bg-orange-50 text-orange-600', 'trend' => '+2% vs last month'],
+                                ['label' => 'Total Leads', 'value' => number_format($total), 'icon' => 'fas fa-users', 'color' => 'bg-emerald-50 text-emerald-600'],
+                                ['label' => 'Direct Leads', 'value' => number_format($manual), 'icon' => 'fas fa-hand-pointer', 'color' => 'bg-indigo-50 text-indigo-600'],
+                                ['label' => 'Refer Link Leads', 'value' => number_format($link), 'icon' => 'fas fa-link', 'color' => 'bg-rose-50 text-rose-600'],
+                                ['label' => 'Refer Code Leads', 'value' => number_format($coupon), 'icon' => 'fas fa-hashtag', 'color' => 'bg-amber-50 text-amber-600'],
+                                ['label' => 'Team Leads', 'value' => number_format($teamLeadsCount), 'icon' => 'fas fa-users-cog', 'color' => 'bg-purple-50 text-purple-600'],
+                                ['label' => 'Converted Leads', 'value' => number_format($conv), 'icon' => 'fas fa-check-circle', 'color' => 'bg-green-50 text-green-600'],
+                                ['label' => 'Conversion Rate', 'value' => $rate . '%', 'icon' => 'fas fa-chart-pie', 'color' => 'bg-orange-50 text-orange-600'],
                             ];
                         ?>
 
@@ -267,13 +269,7 @@
                                 <div class="space-y-2">
                                     <p class="text-xs font-bold text-gray-600 uppercase tracking-wider"><?php echo e($card['label']); ?></p>
                                     <h3 class="text-3xl lg:text-5xl font-bold text-gray-800"><?php echo e($card['value']); ?></h3>
-                                    <p class="text-sm text-[#2d8368] font-bold flex items-center gap-1">
-                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-                                        </svg> <?php echo e($card['trend']); ?>
 
-                                    </p>
                                 </div>
                                 <div
                                     class="w-12 h-12 <?php echo e($card['color']); ?> rounded-full flex items-center justify-center shadow-sm">
@@ -293,14 +289,7 @@
                                 <!-- অ্যামাউন্ট: ডিপ গ্রিন (#006D44) -->
                                 <h3 class="text-4xl font-black text-[#006D44]">৳<?php echo e(number_format($conv * 15000)); ?></h3>
 
-                                <!-- ট্রেন্ড: ডিপ গ্রিন -->
-                                <p class="text-[11px] text-[#006D44] font-bold flex items-center gap-1.5 mt-2">
-                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-                                    </svg>
-                                    +10% <span class="text-[#2d8368] ml-1 uppercase">vs last month</span>
-                                </p>
+
                             </div>
 
                             <!-- আইকন: ডিপ গ্রিন গোল ব্যাকগ্রাউন্ড এবং সাদা আইকন -->
