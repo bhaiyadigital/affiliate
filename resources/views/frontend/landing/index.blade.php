@@ -2,242 +2,233 @@
 
 @section('content')
 
-    <section class="hero">
-        <div class="wrap hero-grid">
-            <div>
-                <div class="eyebrow">BHAIYA REFER PROGRAM</div>
-                <h1 class="headline">আপনার চেনা মানুষটাই<br>হতে পারে আমাদের <em>পরবর্তী গ্রাহক</em></h1>
-                <p class="lede">আপনার আশেপাশে কেউ ফ্ল্যাট বা বাড়ি কিনতে চাইছেন? তাকে Bhaiya Housing-এর সাথে পরিচয়
-                    করিয়ে দিন। ক্রয় সম্পন্ন হলে আপনি পাবেন সর্বোচ্চ <strong
-                        style="color:var(--gold-light)">৳৩,০০,০০০</strong> পর্যন্ত রেফার কমিশন — কোনো ঝামেলা ছাড়াই।</p>
-                <div class="cta-row">
-                    <a href="#refer" class="btn-primary">রেফার করা শুরু করুন</a>
-                    <a href="tel:01922030303" class="btn-ghost">
-                        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"
-                            stroke-linejoin="round">
-                            <path
-                                d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.3 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.3 1.1L6.6 10.8Z" />
-                        </svg>
-                        01922-030303
-                    </a>
+
+    <section class="custom-hero">
+        <div class="c-wrap">
+            <!-- বাম পাশের লেখা -->
+            <div class="hero-left">
+                <div class="c-badge"><span></span> Bhaiya Referral Program</div>
+                <h1 class="c-title">আপনার পরিচিতজনই হতে পারে আমাদের <b>পরবর্তী সন্তুষ্ট গ্রাহক</b></h1>
+                <p class="c-desc">
+                    কাউকে ফ্ল্যাট বা জমি কেনার জন্য পরিচয় করিয়ে দিন। চুক্তি সম্পন্ন হলে সর্বোচ্চ
+                    <mark>৳৩,০০,০০০</mark> পর্যন্ত রেফার কমিশন পান সরাসরি আপনার অ্যাকাউন্টে।
+                </p>
+                <div class="c-btn-group">
+                    <a href="#refer" class="btn-green">রেফার শুরু করুন <i class="fas fa-arrow-right"></i></a>
+                    <a href="tel:01922030303" class="btn-white"><i class="fas fa-phone"></i> ০১৯২২-০৩০৩০৩</a>
                 </div>
-                <div class="stat-row">
-                    <div class="stat"><b>১২+</b><span>বছরের অভিজ্ঞতা</span></div>
-                    <div class="stat"><b>৳৩,০০,০০০</b><span>সর্বোচ্চ কমিশন</span></div>
-                    <div class="stat"><b>৫টি</b><span>চলমান প্রজেক্ট</span></div>
+                <div class="c-stats">
+                    <div class="s-item"><b>১২+ বছর</b><span>বিশ্বস্ত অভিজ্ঞতা</span></div>
+                    <div class="s-item"><b>৳৩,০০,০০০</b><span>সর্বোচ্চ বোনাস</span></div>
+                    <div class="s-item"><b>৫টি</b><span>সক্রিয় প্রজেক্ট</span></div>
                 </div>
             </div>
 
-            <div class="hero-visual">
-                <svg viewBox="0 0 480 460" width="100%" role="img"
-                    aria-label="রেফার করুন, বাড়ি কিনুন, কমিশন পান — সাইকেল ডায়াগ্রাম">
-                    <!-- connecting flow paths -->
-                    <path class="flow-line" d="M110 130 C 180 90, 280 90, 350 150" stroke="#E7C766" stroke-width="2"
-                        fill="none" opacity="0.75" />
-                    <path class="flow-line" d="M360 190 C 380 260, 340 320, 260 350" stroke="#E7C766" stroke-width="2"
-                        fill="none" opacity="0.75" />
-                    <path class="flow-line" d="M190 355 C 120 330, 90 250, 100 175" stroke="#E7C766" stroke-width="2"
-                        fill="none" opacity="0.75" />
+            <!-- ডান পাশের ছবি/কার্ড -->
+            <div class="c-visual-card">
+                <div
+                    style="display:flex; justify-content: space-between; margin-bottom: 30px; font-weight: 700; font-size: 14px;">
+                    <span><i class="fas fa-circle" style="color:#10B981; font-size:8px;"></i> লাইভ রেফারেল প্রবাহ</span>
+                    <span style="color:#047857; text-transform: uppercase; font-size: 11px;">স্বচ্ছ ও নিরাপদ</span>
+                </div>
+                <div class="green-box">
+                    <p
+                        style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; margin-bottom: 10px;">
+                        সর্বোচ্চ কমিশন সুবিধা</p>
+                    <h2 style="font-size: 52px; font-weight: 900; margin: 0; font-family: serif;">৳৩,০০,০০০</h2>
+                    <p style="font-size: 13px; opacity: 0.7; margin-top: 10px;">প্রতিটি সফল অ্যাপার্টমেন্ট রেফারেলের
+                        ক্ষেত্রে</p>
+                </div>
 
-                    <!-- node: You -->
-                    <g transform="translate(95,115)">
-                        <circle class="pulse-ring" r="46" fill="none" stroke="#C9A227" stroke-width="1.5" />
-                        <circle r="40" fill="#16413A" stroke="#C9A227" stroke-width="1.5" />
-                        <g transform="translate(-13,-16)" stroke="#E7C766" stroke-width="1.8" fill="none"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="13" cy="8" r="7" />
-                            <path d="M1 30c1-9 8-14 12-14s11 5 12 14" />
-                        </g>
-                        <text x="0" y="58" text-anchor="middle" fill="#9FBDB2" font-size="12"
-                            font-family="Hind Siliguri, sans-serif">আপনি</text>
-                    </g>
-
-                    <!-- node: House -->
-                    <g transform="translate(360,170)">
-                        <circle class="pulse-ring" r="50" fill="none" stroke="#C9A227" stroke-width="1.5" />
-                        <circle r="44" fill="#16413A" stroke="#C9A227" stroke-width="1.5" />
-                        <g transform="translate(-17,-15)" stroke="#E7C766" stroke-width="1.8" fill="none"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M0 16 L17 2 L34 16" />
-                            <path d="M5 14 V32 H29 V14" />
-                            <rect x="14" y="20" width="7" height="12" />
-                        </g>
-                        <text x="0" y="66" text-anchor="middle" fill="#9FBDB2" font-size="12"
-                            font-family="Hind Siliguri, sans-serif">ক্রয় সম্পন্ন</text>
-                    </g>
-
-                    <!-- node: Wallet / commission -->
-                    <g transform="translate(220,368)">
-                        <circle class="pulse-ring" r="48" fill="none" stroke="#C9A227" stroke-width="1.5" />
-                        <circle r="42" fill="#16413A" stroke="#C9A227" stroke-width="1.5" />
-                        <g transform="translate(-16,-13)" stroke="#E7C766" stroke-width="1.8" fill="none"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="0" y="4" width="32" height="22" rx="3" />
-                            <path d="M0 10 H32" />
-                            <circle cx="24" cy="17" r="2.6" fill="#E7C766" stroke="none" />
-                        </g>
-                        <text x="0" y="62" text-anchor="middle" fill="#9FBDB2" font-size="12"
-                            font-family="Hind Siliguri, sans-serif">কমিশন</text>
-                    </g>
-
-                    <!-- floating taka symbols -->
-                    <text class="float-coin" x="300" y="70" fill="#E7C766" font-size="20"
-                        font-family="Noto Serif Bengali, serif" opacity="0.85">৳</text>
-                    <text class="float-coin d2" x="60" y="260" fill="#E7C766" font-size="16"
-                        font-family="Noto Serif Bengali, serif" opacity="0.7">৳</text>
-                    <text class="float-coin d3" x="410" y="330" fill="#E7C766" font-size="18"
-                        font-family="Noto Serif Bengali, serif" opacity="0.75">৳</text>
-
-                    <text x="240" y="440" text-anchor="middle" fill="#E7C766" font-size="16" font-weight="700"
-                        font-family="Noto Serif Bengali, serif">সর্বোচ্চ ৳৩,০০,০০০ পর্যন্ত</text>
-                </svg>
+                <p style="text-align:center; font-weight: 800; font-size: 15px; color: #1E293B;">কমিশন প্রাপ্তি</p>
             </div>
         </div>
     </section>
 
-    <section class="methods" id="methods">
-        <div class="wrap">
-            <div class="section-head">
-                <div class="eyebrow">রেফার করার পদ্ধতি</div>
-                <h2>২টি সহজ উপায়ে রেফার করুন</h2>
-                <p>যেভাবে আপনার জন্য সুবিধাজনক, সেভাবেই শুরু করুন — দুটো পদ্ধতিই সমান কার্যকর।</p>
+    <!-- নিচের ৪টি ট্রাস্ট বক্স -->
+    <section class="trust-section">
+        <div class="trust-grid">
+            <div class="trust-box"><i class="fas fa-shield-alt"></i>
+                <div><b style="display:block;">১০০% নিরাপদ</b><span
+                        style="font-size:12px; color:#697383; font-weight: 400;">স্বচ্ছ পেআউট
+                        চুক্তি</span></div>
             </div>
-            <div class="method-grid">
-                <div class="method-card">
-                    <div class="method-badge">০১</div>
-                    <svg viewBox="0 0 24 24" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11Z" />
-                        <circle cx="12" cy="10" r="2.6" />
-                    </svg>
-                    <h3>সরাসরি পরিচয় করিয়ে দিন</h3>
-                    <p>আপনার পরিচিত কারো নাম ও নম্বর সরাসরি আমাদের ফর্মে জমা দিন। আমাদের টিম নিজে থেকে তার সাথে যোগাযোগ
-                        করে নেবে।</p>
-                    <a href="#refer-direct" class="method-link">ফর্ম পূরণ করুন
-                        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M5 12h14M13 6l6 6-6 6" />
-                        </svg>
-                    </a>
-                </div>
-                <div class="method-card">
-                    <div class="method-badge">০২</div>
-                    <svg viewBox="0 0 24 24" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M9 15 15 9M8 12l-2.5 2.5a3.5 3.5 0 0 0 5 5L13 17M16 12l2.5-2.5a3.5 3.5 0 0 0-5-5L11 7" />
-                    </svg>
-                    <h3>আপনার রেফারেল লিংক শেয়ার করুন</h3>
-                    <p>আপনার নিজের ইউনিক লিংক জেনারেট করুন এবং প্রজেক্টের লিংক তাকে পাঠান। তিনি লিংকে গিয়ে নিজেই তার
-                        তথ্য জমা দেবেন — এরপর আমরা যোগাযোগ করবো।</p>
-                    <a href="#refer-link" class="method-link">লিংক জেনারেট করুন
-                        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M5 12h14M13 6l6 6-6 6" />
-                        </svg>
-                    </a>
-                </div>
+            <div class="trust-box"><i class="fas fa-bolt"></i>
+                <div><b style="display:block;">দ্রুততম পেমেন্ট</b><span
+                        style="font-size:12px; color:#697383; font-weight: 400;">বুকিং
+                        রেজিস্ট্রেশনের পরই</span></div>
+            </div>
+            <div class="trust-box"><i class="fas fa-headset"></i>
+                <div><b style="display:block;">ডেডিকেটেড সাপোর্ট</b><span
+                        style="font-size:12px; color:#697383; font-weight: 400;">সম্পূর্ণ
+                        গাইডলাইন</span></div>
+            </div>
+            <div class="trust-box"><i class="fas fa-map-marker-alt"></i>
+                <div><b style="display:block;">প্রিমিয়াম লোকেশন</b><span
+                        style="font-size:12px; color:#697383; font-weight: 400;">ঢাকার সেরা
+                        প্রজেক্টসমূহ</span></div>
             </div>
         </div>
     </section>
 
-    <section class="steps" id="how">
-        <div class="wrap">
-            <div class="section-head">
-                <div class="eyebrow">কিভাবে কাজ করে</div>
-                <h2>৪টি সহজ ধাপে আয় শুরু</h2>
-                <p>রেফার করা থেকে কমিশন হাতে পাওয়া পর্যন্ত পুরো প্রক্রিয়াটি সহজ এবং স্বচ্ছ।</p>
+
+    <section class="features-section" id="features">
+        <div class="container">
+            <div class="line-divider"></div>
+            <!-- Section Header -->
+            <div class="section-intro reveal">
+                <div class="orange-label">
+                    <span class="line"></span> প্রক্রিয়া
+                </div>
+                <h2 class="main-heading">কিভাবে কাজ করে?</h2>
+                <p class="sub-text">মাত্র ৪টি সহজ ধাপে আপনার রেফারেল কমিশন নিশ্চিত করুন।</p>
             </div>
-            <div class="step-track">
-                <div class="step-card">
-                    <div class="step-num">
-                        <svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="6" cy="12" r="3" />
-                            <circle cx="18" cy="6" r="3" />
-                            <circle cx="18" cy="18" r="3" />
-                            <path d="M8.6 10.6 15.4 7.4M8.6 13.4l6.8 3.2" />
-                        </svg>
+
+            <!-- Steps Timeline -->
+            <div class="steps-wrapper reveal d-1">
+                <div class="connecting-line"></div>
+
+                <div class="steps-grid">
+                    <!-- Step 1 -->
+                    <div class="step-item">
+                        <div class="icon-box-wrapper">
+                            <div class="icon-circle">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                                    <circle cx="9" cy="7" r="4" />
+                                    <path d="M19 8v6M22 11h-6" />
+                                </svg>
+                            </div>
+                            <span class="step-badge">01</span>
+                        </div>
+                        <h4>রেজিস্টার করুন</h4>
+                        <p>ফ্রি অ্যাকাউন্ট তৈরি করুন এবং আপনার ইউনিক রেফারেল লিঙ্ক পান।</p>
                     </div>
-                    <div class="step-tag">ধাপ ০১</div>
-                    <h3>পরিচয় করিয়ে দিন</h3>
-                    <p>আপনার পরিচিত কেউ যদি ফ্ল্যাট বা বাড়ি কিনতে আগ্রহী হন, তার নাম ও নম্বর আমাদের জানান।</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-num">
-                        <svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11Z" />
-                            <circle cx="12" cy="10" r="2.6" />
-                        </svg>
+
+                    <!-- Step 2 -->
+                    <div class="step-item">
+                        <div class="icon-box-wrapper">
+                            <div class="icon-circle">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path
+                                        d="M4 4h16c1.1 0 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                    <polyline points="22,6 12,13 2,6" />
+                                </svg>
+                            </div>
+                            <span class="step-badge">02</span>
+                        </div>
+                        <h4>কাস্টমার রেফার করুন</h4>
+                        <p>তথ্য ফর্মে জমা দিন অথবা রেফারেল লিঙ্ক শেয়ার করুন।</p>
                     </div>
-                    <div class="step-tag">ধাপ ০২</div>
-                    <h3>সাইট ভিজিট</h3>
-                    <p>আমাদের সেলস টিম যোগাযোগ করে প্রজেক্ট ভিজিট ও প্রয়োজনীয় তথ্য দেবে।</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-num">
-                        <svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M4 12.5 9.5 18 20 6" />
-                        </svg>
+
+                    <!-- Step 3 -->
+                    <div class="step-item">
+                        <div class="icon-box-wrapper">
+                            <div class="icon-circle">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M3 21h18M6 21V9l6-5 6 5v12M9 21v-6h6v6" />
+                                </svg>
+                            </div>
+                            <span class="step-badge">03</span>
+                        </div>
+                        <h4>সাইট ভিজিট</h4>
+                        <p>সেলস টিম কাস্টমারকে সাইট ভিজিটের ব্যবস্থা করবে।</p>
                     </div>
-                    <div class="step-tag">ধাপ ০৩</div>
-                    <h3>বুকিং সম্পন্ন</h3>
-                    <p>তিনি পছন্দের ইউনিট বুকিং ও রেজিস্ট্রেশন সম্পন্ন করলেই আপনি কমিশনের জন্য যোগ্য হয়ে যান।</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-num">
-                        <svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="6" width="18" height="13" rx="2" />
-                            <path d="M3 10h18" />
-                            <circle cx="16" cy="14" r="1.4" fill="currentColor" stroke="none" />
-                        </svg>
+
+                    <!-- Step 4 -->
+                    <div class="step-item">
+                        <div class="icon-box-wrapper">
+                            <div class="icon-circle">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="2" y="5" width="20" height="14" rx="2" />
+                                    <line x1="2" y1="10" x2="22" y2="10" />
+                                </svg>
+                            </div>
+                            <span class="step-badge">04</span>
+                        </div>
+                        <h4>কমিশন পান</h4>
+                        <p>বুকিং সম্পন্ন হলে সরাসরি ব্যাংকে পেমেন্ট পাবেন।</p>
                     </div>
-                    <div class="step-tag">ধাপ ০৪</div>
-                    <h3>কমিশন পান</h3>
-                    <p>রেজিস্ট্রেশনের পর নির্ধারিত সময়ে সরাসরি আপনার একাউন্টে কমিশন পৌঁছে যাবে।</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="commission" id="commission">
-        <div class="wrap comm-grid">
-            <div class="comm-figure">
-                <div class="label">সর্বোচ্চ কমিশন</div>
-                <div class="amount" id="countAmount">৳০</div>
-                <div class="per">প্রতিটি সফল রেফারেলে</div>
-            </div>
-            <div>
-                <div class="eyebrow">কমিশন স্ট্রাকচার</div>
-                <h2 style="font-family:var(--serif); font-size:clamp(24px,3vw,32px); margin-bottom:14px;">ইউনিট
-                    অনুযায়ী কমিশন — একটি উদাহরণ</h2>
-                <p style="color:var(--muted); font-size:15px;">প্রজেক্ট ও ইউনিটের ধরন অনুযায়ী কমিশনের পরিমাণ নির্ধারিত
-                    হয়। নিচের টেবিলটি একটি সাধারণ ধারণা দেয়ার জন্য।</p>
-                <table class="comm-table">
-                    <thead>
-                        <tr>
-                            <th>ইউনিট ধরন</th>
-                            <th>আনুমানিক আকার</th>
-                            <th>কমিশন রেঞ্জ</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>কমপ্যাক্ট ইউনিট</td>
-                            <td>৮০০–১২০০ বর্গফুট</td>
-                            <td>৳৫০,০০০–১,০০,০০০</td>
-                        </tr>
-                        <tr>
-                            <td>স্ট্যান্ডার্ড ইউনিট</td>
-                            <td>১২০০–১৮০০ বর্গফুট</td>
-                            <td>৳১,০০,০০০–২,০০,০০০</td>
-                        </tr>
-                        <tr>
-                            <td>প্রিমিয়াম / কমার্শিয়াল</td>
-                            <td>১৮০০+ বর্গফুট</td>
-                            <td>৳২,০০,০০০–৩,০০,০০০</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <p class="comm-note">*চূড়ান্ত কমিশন প্রজেক্ট, ইউনিট মূল্য ও শর্তাবলীর উপর নির্ভরশীল। বিস্তারিত জানতে
-                    আমাদের টিমের সাথে যোগাযোগ করুন।</p>
+<!-- কেন ভাইয়া হাউজিং-এ রেফার করবেন? (Centered Design) -->
+<section class="feature-hub-section" id="why-bhaiya">
+    <div class="wrap">
+        <!-- Section Header (Centered) -->
+        <div class="section-head-hub reveal">
+            <div class="top-badge">ফিউচারিস্টিক শোটাইম</div>
+            <h2 class="hub-main-title">কেন ভাইয়া হাউজিং-এ রেফার করবেন?</h2>
+            <p class="hub-sub-title">ক্লিক বা হোভার করে আমাদের ৪টি প্রধান সুবিধার লাইভ ফিচার ডেমো দেখুন:</p>
+        </div>
+
+        <!-- Main Interactive Container -->
+        <div class="hub-outer-card reveal">
+            <div class="hub-grid">
+                <!-- Left Sidebar -->
+                <div class="hub-sidebar">
+                    <div class="hub-nav-card active" onclick="updateHub(0, this)">
+                        <div class="nav-icon-box"><i class="fas fa-shield-alt"></i></div>
+                        <div class="nav-texts">
+                            <h4>১. ১২+ বছরের শতভাগ সুনাম</h4>
+                            <p>২০১২ থেকে ঢাকায় আবাসন নিশ্চিত করে আসছি।</p>
+                        </div>
+                    </div>
+
+                    <div class="hub-nav-card" onclick="updateHub(1, this)">
+                        <div class="nav-icon-box"><i class="fas fa-clock"></i></div>
+                        <div class="nav-texts">
+                            <h4>২. দ্রুততম ব্যাংক পেআউট</h4>
+                            <p>বুকিং রেজিস্ট্রেশন সম্পন্নের সাথে সাথে পেমেন্ট।</p>
+                        </div>
+                    </div>
+
+                    <div class="hub-nav-card" onclick="updateHub(2, this)">
+                        <div class="nav-icon-box"><i class="fas fa-home"></i></div>
+                        <div class="nav-texts">
+                            <h4>৩. ঢাকার সেরা প্রাইম স্পটসমূহ</h4>
+                            <p>বারিধারা, উত্তরা, মিরপুর ও ধানমন্ডি সংলগ্ন প্রজেক্ট।</p>
+                        </div>
+                    </div>
+
+                    <div class="hub-nav-card" onclick="updateHub(3, this)">
+                        <div class="nav-icon-box"><i class="fas fa-users"></i></div>
+                        <div class="nav-texts">
+                            <h4>৪. নিজস্ব সেলস ও সাইট সাপোর্ট</h4>
+                            <p>আপনার কাস্টমারকে প্রজেক্ট ঘুরে দেখানো ও গাইডেন্স।</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Display Screen -->
+                <div class="hub-display-screen">
+                    <div class="screen-content active" id="content-0">
+                        <span class="screen-mini-tag">বিশ্বস্ততা ও অভিজ্ঞতা</span>
+                        <h3 class="screen-big-title">১২+ বছরের অটুট সুনাম ও শতভাগ গ্রাহক আস্থা</h3>
+                        <p class="screen-description">Bhaiya Housing নির্দিষ্ট সময়ের মধ্যে আন্তর্জাতিক স্ট্যান্ডার্ডের ফ্ল্যাট হস্তান্তর করার জন্য দীর্ঘ এক দশক ধরে পরিচিত।</p>
+                    </div>
+                    <div class="screen-content" id="content-1">
+                        <span class="screen-mini-tag">ইনস্ট্যান্ট পেমেন্ট</span>
+                        <h3 class="screen-big-title">বুকিং রেজিস্ট্রেশন হতেই সরাসরি ব্যাংক ট্রান্সফার</h3>
+                        <p class="screen-description">প্রতিটি সফল অ্যাপার্টমেন্ট রেফারেলের ক্ষেত্রে কমিশন সরাসরি গ্রাহকের ব্যাংক একাউন্টে জমা হয়।</p>
+                    </div>
+                    <div class="screen-content" id="content-2">
+                        <span class="screen-mini-tag">আকর্ষণীয় স্থানসমূহ</span>
+                        <h3 class="screen-big-title">ঢাকার সেরা প্রজেক্ট লোকেশনসমূহ</h3>
+                        <p class="screen-description">কাস্টমারদের জন্য বেছে নেওয়ার সুবিধার্থে একাধিক ঢাকার গুরুত্বপূর্ণ পয়েন্টে প্রজেক্ট বিদ্যমান।</p>
+                    </div>
+                    <div class="screen-content" id="content-3">
+                        <span class="screen-mini-tag">প্রফেশনাল গাইডেন্স</span>
+                        <h3 class="screen-big-title">নিজস্ব সেলস ও সাইট সাপোর্ট টিম</h3>
+                        <p class="screen-description">আপনার কাস্টমারকে নিয়ে সাইট ঘুরে দেখানো এবং ক্লায়েন্ট হ্যান্ডলিং সম্পন্ন করে আমাদের এক্সপার্ট সেলস টিম।</p>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <section class="why">
         <div class="wrap">
@@ -627,3 +618,16 @@
     </section>
 
 @endsection
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.reveal, .steps-timeline').forEach(r => observer.observe(r));
+    });
+</script>

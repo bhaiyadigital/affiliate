@@ -1,1 +1,0 @@
-<?php /**PATH C:\laragon\www\affiliate-project\resources\views/frontend/partials/footer.blade.php ENDPATH**/ ?>
