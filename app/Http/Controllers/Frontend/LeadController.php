@@ -64,8 +64,7 @@ class LeadController extends Controller
         if (auth()->check() && $request->input('type') === 'manual') {
             $ownerId = auth()->id();
             $type = 'manual';
-        }
-        elseif ($refCode && $refCode !== 'null') {
+        } elseif ($refCode && $refCode !== 'null') {
             $foundUser = User::where('referral_code', $refCode)->first();
             if ($foundUser) {
                 $ownerId = $foundUser->id;
@@ -124,8 +123,8 @@ class LeadController extends Controller
         ]);
         $previousUrl = url()->previous();
 
-// ২. ইউআরএল থেকে কুয়েরি স্ট্রিং (? এর পরের অংশ) বাদ দেওয়া
-$cleanUrl = strtok($previousUrl, '?');
+        // ২. ইউআরএল থেকে কুয়েরি স্ট্রিং (? এর পরের অংশ) বাদ দেওয়া
+        $cleanUrl = strtok($previousUrl, '?');
 
 
         return redirect($cleanUrl)->with([
