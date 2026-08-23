@@ -1,10 +1,9 @@
-<!-- HEADER BADGE -->
-<div
-    style="position:fixed;top:0;left:0;right:0;z-index:9999;background:var(--primary-gradient);color:#FFFFFF;text-align:center;font-size:12px;font-weight:800;letter-spacing:1.5px;padding:7px;text-transform:uppercase;">
+<div class="header-top-badge">
     ✨ RECREATED AIWAVE CTA &amp; SERVICE CARD CONCEPT · DESIGN REVIEW
 </div>
 
-<header class="nav" id="mainNav" style="margin-top:30px;">
+<!-- ২. হেডার থেকে ইনলাইন margin-top:30px সরিয়ে দিন -->
+<header class="nav" id="mainNav">
     <div class="wrap nav-inner">
 
         <!-- 🏠 Left: Brand (Dynamic Home Link) -->
@@ -21,8 +20,7 @@
         </a>
         <!-- শুধু এই বাটনটি brand লিঙ্কের নিচে অ্যাড করুন -->
         <button id="menuToggle" style="display:none; font-size:24px; color:#059669; order:2;" aria-label="মেনু টগল করুন"
-    aria-expanded="false"
-    aria-controls="mainMenu">
+            aria-expanded="false" aria-controls="mainMenu">
             <i class="fa-solid fa-bars"></i>
         </button>
 
@@ -36,7 +34,7 @@
             <?php if(auth()->guard()->check()): ?>
                 
                 <a href="#refer-section" class="nav-item">রেফার জমা</a>
-                <?php else: ?>
+            <?php else: ?>
                 
                 <a href="#features" class="nav-item">প্রক্রিয়া</a>
                 <a href="#why-bhaiya" class="nav-item">কেন আমরা</a>
@@ -73,7 +71,7 @@
 <style>
     /* ══════ রেসপনসিভ ফিক্স ══════ */
     @media (max-width: 991px) {
-        .nav-inner{
+        .nav-inner {
             margin-top: 40px;
         }
 
@@ -151,7 +149,8 @@
         .hero-title {
             font-size: 28px !important;
         }
-        .nav-inner{
+
+        .nav-inner {
             margin-top: 50px;
         }
     }

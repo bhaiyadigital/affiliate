@@ -199,20 +199,44 @@
         /* ══════════════════════════════════════════════
        HEADER
     ══════════════════════════════════════════════ */
-        header.nav {
-            position: sticky;
+        /* ব্যাজের জন্য নির্দিষ্ট স্টাইল */
+        .header-top-badge {
+            position: fixed;
             top: 0;
-            z-index: 100;
-            background: rgba(246, 249, 253, 0.88);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-            transition: var(--transition);
+            left: 0;
+            right: 0;
+            height: 32px;
+            /* ৩২ পিক্সেল উচ্চতা */
+            background: var(--primary-gradient);
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            z-index: 10001;
+            /* হেডারের চেয়ে বেশি */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-transform: uppercase;
         }
 
+        /* হেডারের জন্য স্টিকি ফিক্স */
+        header.nav {
+            position: sticky !important;
+            top: 32px;
+            /* ব্যাজের উচ্চতা ৩২ পিক্সেল, তাই টপ ৩২ হবে */
+            z-index: 10000;
+            background: rgba(246, 249, 253, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* স্ক্রল করলে হেডারের ব্যাকগ্রাউন্ড সাদা হবে */
         header.nav.scrolled {
-            background: rgba(255, 255, 255, 0.96);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            background: #FFFFFF;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
 
         .nav-inner {
@@ -302,6 +326,7 @@
             color: var(--cream);
             line-height: 1.65;
             overflow-x: hidden;
+            padding-top: 32px;
         }
 
         a {
@@ -357,6 +382,58 @@
 
         .delay-100 {
             transition-delay: 0.2s;
+        }
+
+        /* ══════ রেসপনসিভ ফিক্স ══════ */
+        @media (max-width: 991px) {
+            .nav-inner {
+                margin-top: 0 !important;
+                /* এখানে ৪০পিএক্স ছিল, সেটি ০ করে দিন */
+                height: 70px;
+                /* হেডারের উচ্চতা ঠিক রাখার জন্য */
+            }
+
+            #menuToggle {
+                display: block !important;
+            }
+
+            .nav-btns {
+                display: none;
+            }
+
+            /* মোবাইলে মেনু পজিশন ঠিক করা */
+            .nav-menu {
+                position: absolute;
+                top: 70px;
+                /* হেডারের হাইট অনুযায়ী */
+                left: 0;
+                width: 100%;
+                background: #fff;
+                display: none;
+                flex-direction: column;
+                padding: 20px;
+                border-bottom: 2px solid #059669;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .nav-inner {
+                margin-top: 0 !important;
+                /* এখানে ৫০পিএক্স ছিল, সেটি ০ করে দিন */
+            }
+
+            /* উপরের ব্যাজটি মোবাইলে ২ লাইন হয়ে গেলে যাতে হেডার নিচে না নামে */
+            .header-top-badge {
+                font-size: 10px;
+                /* লেখা ছোট করা হলো */
+                height: auto;
+                padding: 5px;
+            }
+
+            body {
+                padding-top: 40px;
+                /* ব্যাজের উচ্চতা অনুযায়ী অ্যাডজাস্ট */
+            }
         }
 
         /* ৩. ফ্লোটিং অ্যানিমেশন (ডান পাশের কার্ডের জন্য) */
@@ -505,19 +582,24 @@
         }
 
         .s-item b {
-            display: block;
+            display: inline-block;
+            /* block এর বদলে inline-block */
             font-size: 30px;
             font-weight: 900;
             color: #101828;
             line-height: 1.1;
+            vertical-align: baseline;
+            /* লেখাগুলোকে সমান সমান্তরালে রাখবে */
         }
 
         .s-item span {
+            display: block;
             font-size: 13px;
             color: #475569;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
+            margin-top: 5px;
         }
 
         /* নিচের ট্রাস্ট বার */
@@ -2130,15 +2212,17 @@
             padding-bottom: 20px;
             margin-bottom: 30px;
         }
+
         .stat-number {
-    display: inline-block;
-    min-width: 20px; /* যাতে সংখ্যা বাড়লে অন্য লেখা ধাক্কা না দেয় */
-}
+            display: inline-block;
+            min-width: 20px;
+            /* যাতে সংখ্যা বাড়লে অন্য লেখা ধাক্কা না দেয় */
+        }
 
         .status-left {
             font-size: 13px;
-            font-weight: 700;
-            color: #B45309;
+            font-weight: 500;
+            color: #fff;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -2146,7 +2230,7 @@
 
         .status-right {
             font-size: 11px;
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.616);
             font-weight: 700;
             text-transform: uppercase;
         }
