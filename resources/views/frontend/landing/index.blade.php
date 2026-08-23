@@ -364,7 +364,7 @@
                             টিম বাকি সব প্রক্রিয়া সহজ করে দেবে।
                         </p>
 
-                        <a href="#" class="cta-button">
+                        <a href="{{ route('affiliated.register.page') }}" class="cta-button">
                             এখনই রেফার শুরু করুন &nbsp; →
                         </a>
                     </div>
@@ -576,7 +576,7 @@
 
                 <div class="cta-btn-wrapper">
                     <!-- White Button to pop against Green background -->
-                    <a href="#refer-direct" class="cta-white-btn">
+                    <a href="{{route('affiliated.login.page')}}" class="cta-white-btn">
                         <span>এখনই রেফার জমা দিন</span>
                         <i class="fas fa-arrow-right"></i>
                     </a>

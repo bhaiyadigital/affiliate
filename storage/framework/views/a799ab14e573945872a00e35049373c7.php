@@ -109,31 +109,34 @@
         <div class="auth-shell">
             <div style="text-align: center; margin-bottom: 25px;">
                 <h3 style="font-family: var(--serif); font-size: 22px; color: var(--gold-light); margin-bottom: 10px;">
-                    {{ session('can_reset_password') ? 'নতুন পাসওয়ার্ড' : 'ভেরিফিকেশন' }}
+                    <?php echo e(session('can_reset_password') ? 'নতুন পাসওয়ার্ড' : 'ভেরিফিকেশন'); ?>
+
                 </h3>
                 <p style="font-size: 13px; color: var(--muted);">
-                    <b>{{ session('verify_email') }}</b> ঠিকানায় কোড পাঠানো হয়েছে।
+                    <b><?php echo e(session('verify_email')); ?></b> ঠিকানায় কোড পাঠানো হয়েছে।
                 </p>
             </div>
 
-            @if(session('success'))
+            <?php if(session('success')): ?>
                 <div
                     style="background:rgba(143,224,166,0.1); border:1px solid #8FE0A6; color:#8FE0A6; padding:10px; border-radius:8px; margin-bottom:15px; font-size:13px; text-align:center;">
-                    {{ session('success') }}
-                </div>
-            @endif
+                    <?php echo e(session('success')); ?>
 
-            @if(session('error'))
+                </div>
+            <?php endif; ?>
+
+            <?php if(session('error')): ?>
                 <div
                     style="background:rgba(255,132,132,0.1); border:1px solid #ff8484; color:#ff8484; padding:10px; border-radius:8px; margin-bottom:15px; font-size:13px; text-align:center;">
-                    {{ session('error') }}
-                </div>
-            @endif
+                    <?php echo e(session('error')); ?>
 
-            @if(session('can_reset_password'))
-                {{-- পাসওয়ার্ড রিসেট ফর্ম --}}
-                <form action="{{ route('password.update.final') }}" method="POST">
-                    @csrf
+                </div>
+            <?php endif; ?>
+
+            <?php if(session('can_reset_password')): ?>
+                
+                <form action="<?php echo e(route('password.update.final')); ?>" method="POST">
+                    <?php echo csrf_field(); ?>
                     <div class="auth-field" style="margin-bottom:15px;">
                         <label style="font-size:12px; color:var(--muted); display:block; margin-bottom:5px;">নতুন
                             পাসওয়ার্ড</label>
@@ -150,16 +153,16 @@
                         style="width:100%; background: var(--gold); border:none; padding:14px; border-radius:9px; font-weight:700; cursor:pointer; color:#17281f;">পাসওয়ার্ড
                         আপডেট করুন</button>
                 </form>
-            @else
-                {{-- ওটিপি ভেরিফাই ফর্ম --}}
-                <form action="{{ route('otp.verify.submit') }}" method="POST">
-                    @csrf
+            <?php else: ?>
+                
+                <form action="<?php echo e(route('otp.verify.submit')); ?>" method="POST">
+                    <?php echo csrf_field(); ?>
                     <div class="auth-field" style="margin-bottom:15px;">
                         <input name="otp" type="text" placeholder="------" maxlength="6" required autofocus
                             style="text-align:center; letter-spacing:10px; font-size:32px; font-weight:900; background:var(--bg-alt); color:var(--gold-light); border:1px solid var(--line); width:100%; padding:15px; border-radius:9px; outline:none;">
                     </div>
 
-                    {{-- টাইমার ডিஸ்ப্লে --}}
+                    
                     <div id="otp-timer-container"
                         style="text-align: center; margin-bottom: 20px; font-size: 14px; color: var(--gold-light);">
                         কোডটির মেয়াদ আছে: <span id="countdown"
@@ -171,20 +174,20 @@
                         করুন</button>
 
                     <div style="display: flex; justify-content: space-between; margin-top: 20px;">
-                        <a href="{{ route('otp.resend') }}"
+                        <a href="<?php echo e(route('otp.resend')); ?>"
                             style="font-size: 13px; color: var(--muted); text-decoration: none;">আবার পাঠান</a>
-                        <a href="{{ route('otp.cancel') }}"
+                        <a href="<?php echo e(route('otp.cancel')); ?>"
                             style="font-size: 13px; color: #ff8484; text-decoration: none;">বাতিল করুন</a>
                     </div>
                 </form>
-            @endif
+            <?php endif; ?>
         </div>
     </div>
 
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const expiresAtStr = "{{ $expiresAt }}";
+            const expiresAtStr = "<?php echo e($expiresAt); ?>";
             if (!expiresAtStr || document.getElementById('countdown') === null) return;
 
             const countdownElement = document.getElementById('countdown');
@@ -221,3 +224,4 @@
 </body>
 
 </html>
+<?php /**PATH C:\laragon\www\affiliate-project\resources\views/frontend/landing/verifyOtp.blade.php ENDPATH**/ ?>

@@ -2,7 +2,7 @@
 <section class="dashboard-section" style="padding: 60px 0; background-color: #F6F9FD;">
     <div class="wrap">
         <div class="auth-shell" style="margin: 0 auto; background: #fff; border-radius: 35px; padding: 40px; box-shadow: 0 30px 60px rgba(0,0,0,0.05); max-width: 500px;">
-            <h2 style="text-align: center; font-family: 'Noto Serif Bengali', serif; margin-bottom: 10px; color: #052e24;">রেজিস্ট্রেশন</h2>
+            <h2 style="text-align: center;  margin-bottom: 10px; color: #052e24;">রেজিস্ট্রেশন</h2>
             <p style="text-align: center; color: #64748B; font-size: 14px; margin-bottom: 30px;">ভাইয়া হাউজিং অ্যাফিলিয়েট প্রোগ্রামে যোগ দিন</p>
 
             <form action="<?php echo e(route('affiliated.register')); ?>" method="POST">
