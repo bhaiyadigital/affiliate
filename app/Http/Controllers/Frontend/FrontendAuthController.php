@@ -439,7 +439,6 @@ class FrontendAuthController extends Controller
                         'name' => $name,
                         'message' => $message,
                         'button_text' => 'OTP: ' . $otp,
-                        'verification_link' => route('verify.otp'),
                     ],
                 ]);
 
