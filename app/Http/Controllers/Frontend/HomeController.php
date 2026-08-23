@@ -14,6 +14,15 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
+    public function showLoginForm()
+    {
+        return view('frontend.auth.login');
+    }
+
+    public function showRegisterForm()
+    {
+        return view('frontend.auth.register');
+    }
     public function landing()
     {
         $projects = Content::where('module', 'project')
@@ -39,10 +48,10 @@ class HomeController extends Controller
         $concerns = Content::where('module', 'concern')->where('status', 1)->get();
 
         $projects = Content::where('module', 'project')
-        ->where('status', 1)
-        ->select('id', 'title', 'slug', 'img_path', 'parent_id', 'destination_id', 'location')
-        ->orderBy('title')
-        ->get();
+            ->where('status', 1)
+            ->select('id', 'title', 'slug', 'img_path', 'parent_id', 'destination_id', 'location')
+            ->orderBy('title')
+            ->get();
 
         $assetTypes = AssetType::select('id', 'name')
             ->orderBy('name')
@@ -171,12 +180,12 @@ class HomeController extends Controller
     public function brand()
     {
         $projects = Content::where('module', 'project')
-        ->where('status', 1)
-        ->with('parent')
-        ->get()
-        ->groupBy(function($item) {
-            return $item->parent->title ?? 'Other';
-        });
+            ->where('status', 1)
+            ->with('parent')
+            ->get()
+            ->groupBy(function ($item) {
+                return $item->parent->title ?? 'Other';
+            });
         return view('frontend.brandAsset', compact('projects'));
     }
 }
