@@ -16,9 +16,18 @@
                     <a href="tel:01922030303" class="btn-white"><i class="fas fa-phone"></i> ০১৯২২-০৩০৩০৩</a>
                 </div>
                 <div class="c-stats">
-                    <div class="s-item"><b>১২+ বছর</b><span>বিশ্বস্ত অভিজ্ঞতা</span></div>
-                    <div class="s-item"><b>৳৩,০০,০০০</b><span>সর্বোচ্চ বোনাস</span></div>
-                    <div class="s-item"><b>৫টি</b><span>সক্রিয় প্রজেক্ট</span></div>
+                    <div class="s-item">
+                        <b class="stat-number" data-target="12">০</b><b>+ বছর</b>
+                        <span>বিশ্বস্ত অভিজ্ঞতা</span>
+                    </div>
+                    <div class="s-item">
+                        <b>৳</b><b class="stat-number" data-target="300000">০</b>
+                        <span>সর্বোচ্চ বোনাস</span>
+                    </div>
+                    <div class="s-item">
+                        <b class="stat-number" data-target="5">০</b><b>টি</b>
+                        <span>সক্রিয় প্রজেক্ট</span>
+                    </div>
                 </div>
             </div>
 
@@ -26,19 +35,21 @@
             <div class="c-visual-card">
                 <div
                     style="display:flex; justify-content: space-between; margin-bottom: 30px; font-weight: 700; font-size: 14px;">
-                    <span><i class="fas fa-circle" style="color:#10B981; font-size:8px;"></i> লাইভ রেফারেল প্রবাহ</span>
+                    <span><i class="fas fa-circle" style="color:#10B981; font-size:8px;"></i> লাইভ রেফারেল
+                        প্রবাহ</span>
                     <span style="color:#047857; text-transform: uppercase; font-size: 11px;">স্বচ্ছ ও নিরাপদ</span>
                 </div>
                 <div class="green-box">
                     <p
                         style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; margin-bottom: 10px;">
                         সর্বোচ্চ কমিশন সুবিধা</p>
-                    <h2 style="font-size: 52px; font-weight: 900; margin: 0; font-family: serif;">৳৩,০০,০০০</h2>
+                    <h2 style="font-size: 52px; font-weight: 900; margin: 0; ">৳৩,০০,০০০</h2>
                     <p style="font-size: 13px; opacity: 0.7; margin-top: 10px;">প্রতিটি সফল অ্যাপার্টমেন্ট রেফারেলের
                         ক্ষেত্রে</p>
                 </div>
 
-                <p style="text-align:center; font-weight: 800; font-size: 15px; color: #1E293B;">কমিশন প্রাপ্তি</p>
+                <p style="text-align:center; font-weight: 800; font-size: 15px; color: #1E293B; margin-top:30px;">কমিশন
+                    প্রাপ্তি</p>
             </div>
         </div>
     </section>
@@ -68,570 +79,618 @@
             </div>
         </div>
     </section>
-
-
-    <section class="features-section" id="features">
+    <!-- HOW IT WORKS SECTION - IMAGE PERFECT VERSION -->
+    <section class="how-it-works-final" id="features">
         <div class="container">
-            <div class="line-divider"></div>
-            <!-- Section Header -->
-            <div class="section-intro reveal">
-                <div class="orange-label">
-                    <span class="line"></span> প্রক্রিয়া
+            <!-- Header Part -->
+            <div class="header-area">
+                <div class="label-box">
+                    <span class="orange-bar"></span> প্রক্রিয়া
                 </div>
-                <h2 class="main-heading">কিভাবে কাজ করে?</h2>
-                <p class="sub-text">মাত্র ৪টি সহজ ধাপে আপনার রেফারেল কমিশন নিশ্চিত করুন।</p>
+                <h2 class="main-heading"><span class="bg-highlight">কিভাবে</span> কাজ করে?</h2>
+                <p class="sub-heading">মাত্র ৪টি সহজ ধাপে আপনার রেফারেল কমিশন নিশ্চিত করুন।</p>
             </div>
 
-            <!-- Steps Timeline -->
-            <div class="steps-wrapper reveal d-1">
-                <div class="connecting-line"></div>
+            <!-- Steps Timeline Part -->
+            <div class="steps-wrapper">
+                <!-- The Horizontal Green Line -->
+                <div class="horizontal-line"></div>
 
                 <div class="steps-grid">
-                    <!-- Step 1 -->
+                    <!-- Step 01 -->
                     <div class="step-item">
-                        <div class="icon-box-wrapper">
+                        <div class="icon-box-outer">
                             <div class="icon-circle">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                    <circle cx="9" cy="7" r="4" />
-                                    <path d="M19 8v6M22 11h-6" />
+                                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                    <circle cx="8.5" cy="7" r="4" />
+                                    <line x1="20" y1="8" x2="20" y2="14" />
+                                    <line x1="23" y1="11" x2="17" y2="11" />
                                 </svg>
                             </div>
-                            <span class="step-badge">01</span>
+                            <span class="number-badge">01</span>
                         </div>
-                        <h4>রেজিস্টার করুন</h4>
-                        <p>ফ্রি অ্যাকাউন্ট তৈরি করুন এবং আপনার ইউনিক রেফারেল লিঙ্ক পান।</p>
+                        <h3>রেজিস্টার করুন</h3>
+                        <p>ফ্রি অ্যাকাউন্ট তৈরি করুন এবং আপনার ইউনিক রেফারেল লিংক পান।</p>
                     </div>
 
-                    <!-- Step 2 -->
+                    <!-- Step 02 -->
                     <div class="step-item">
-                        <div class="icon-box-wrapper">
+                        <div class="icon-box-outer">
                             <div class="icon-circle">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path
-                                        d="M4 4h16c1.1 0 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                                     <polyline points="22,6 12,13 2,6" />
                                 </svg>
                             </div>
-                            <span class="step-badge">02</span>
+                            <span class="number-badge">02</span>
                         </div>
-                        <h4>কাস্টমার রেফার করুন</h4>
-                        <p>তথ্য ফর্মে জমা দিন অথবা রেফারেল লিঙ্ক শেয়ার করুন।</p>
+                        <h3>কাস্টমার রেফার করুন</h3>
+                        <p>তথ্য ফর্মে জমা দিন অথবা রেফারেল লিংক শেয়ার করুন।</p>
                     </div>
 
-                    <!-- Step 3 -->
+                    <!-- Step 03 -->
                     <div class="step-item">
-                        <div class="icon-box-wrapper">
+                        <div class="icon-box-outer">
                             <div class="icon-circle">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M3 21h18M6 21V9l6-5 6 5v12M9 21v-6h6v6" />
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                    <polyline points="9 22 9 12 15 12 15 22" />
                                 </svg>
                             </div>
-                            <span class="step-badge">03</span>
+                            <span class="number-badge">03</span>
                         </div>
-                        <h4>সাইট ভিজিট</h4>
+                        <h3>সাইট ভিজিট</h3>
                         <p>সেলস টিম কাস্টমারকে সাইট ভিজিটের ব্যবস্থা করবে।</p>
                     </div>
 
-                    <!-- Step 4 -->
+                    <!-- Step 04 -->
                     <div class="step-item">
-                        <div class="icon-box-wrapper">
+                        <div class="icon-box-outer">
                             <div class="icon-circle">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                                     <rect x="2" y="5" width="20" height="14" rx="2" />
                                     <line x1="2" y1="10" x2="22" y2="10" />
                                 </svg>
                             </div>
-                            <span class="step-badge">04</span>
+                            <span class="number-badge">04</span>
                         </div>
-                        <h4>কমিশন পান</h4>
+                        <h3>কমিশন পান</h3>
                         <p>বুকিং সম্পন্ন হলে সরাসরি ব্যাংকে পেমেন্ট পাবেন।</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <!-- কেন ভাইয়া হাউজিং-এ রেফার করবেন? (Centered Design) -->
+    <section class="feature-hub-section" id="why-bhaiya">
+        <div class="wrap">
+            <!-- Section Header (Centered) -->
+            <div class="section-head-hub reveal">
+                <div class="top-badge">ফিউচারিস্টিক শোটাইম</div>
+                <h2 class="hub-main-title">কেন ভাইয়া হাউজিং-এ রেফার করবেন?</h2>
+                <p class="hub-sub-title">ক্লিক বা হোভার করে আমাদের ৪টি প্রধান সুবিধার লাইভ ফিচার ডেমো দেখুন:</p>
+            </div>
 
-<!-- কেন ভাইয়া হাউজিং-এ রেফার করবেন? (Centered Design) -->
-<section class="feature-hub-section" id="why-bhaiya">
-    <div class="wrap">
-        <!-- Section Header (Centered) -->
-        <div class="section-head-hub reveal">
-            <div class="top-badge">ফিউচারিস্টিক শোটাইম</div>
-            <h2 class="hub-main-title">কেন ভাইয়া হাউজিং-এ রেফার করবেন?</h2>
-            <p class="hub-sub-title">ক্লিক বা হোভার করে আমাদের ৪টি প্রধান সুবিধার লাইভ ফিচার ডেমো দেখুন:</p>
-        </div>
+            <!-- Main Interactive Container -->
+            <div class="hub-outer-card reveal">
+                <div class="hub-grid">
+                    <!-- Left Sidebar -->
+                    <div class="hub-sidebar">
+                        <div class="hub-nav-card active" onclick="updateHub(0, this)">
+                            <div class="nav-icon-box"><i class="fas fa-shield-alt"></i></div>
+                            <div class="nav-texts">
+                                <h4>১. ১২+ বছরের শতভাগ সুনাম</h4>
+                                <p>২০১২ থেকে ঢাকায় আবাসন নিশ্চিত করে আসছি।</p>
+                            </div>
+                        </div>
 
-        <!-- Main Interactive Container -->
-        <div class="hub-outer-card reveal">
-            <div class="hub-grid">
-                <!-- Left Sidebar -->
-                <div class="hub-sidebar">
-                    <div class="hub-nav-card active" onclick="updateHub(0, this)">
-                        <div class="nav-icon-box"><i class="fas fa-shield-alt"></i></div>
-                        <div class="nav-texts">
-                            <h4>১. ১২+ বছরের শতভাগ সুনাম</h4>
-                            <p>২০১২ থেকে ঢাকায় আবাসন নিশ্চিত করে আসছি।</p>
+                        <div class="hub-nav-card" onclick="updateHub(1, this)">
+                            <div class="nav-icon-box"><i class="fas fa-clock"></i></div>
+                            <div class="nav-texts">
+                                <h4>২. দ্রুততম ব্যাংক পেআউট</h4>
+                                <p>বুকিং রেজিস্ট্রেশন সম্পন্নের সাথে সাথে পেমেন্ট।</p>
+                            </div>
+                        </div>
+
+                        <div class="hub-nav-card" onclick="updateHub(2, this)">
+                            <div class="nav-icon-box"><i class="fas fa-home"></i></div>
+                            <div class="nav-texts">
+                                <h4>৩. ঢাকার সেরা প্রাইম স্পটসমূহ</h4>
+                                <p>বারিধারা, উত্তরা, মিরপুর ও ধানমন্ডি সংলগ্ন প্রজেক্ট।</p>
+                            </div>
+                        </div>
+
+                        <div class="hub-nav-card" onclick="updateHub(3, this)">
+                            <div class="nav-icon-box"><i class="fas fa-users"></i></div>
+                            <div class="nav-texts">
+                                <h4>৪. নিজস্ব সেলস ও সাইট সাপোর্ট</h4>
+                                <p>আপনার কাস্টমারকে প্রজেক্ট ঘুরে দেখানো ও গাইডেন্স।</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="hub-nav-card" onclick="updateHub(1, this)">
-                        <div class="nav-icon-box"><i class="fas fa-clock"></i></div>
-                        <div class="nav-texts">
-                            <h4>২. দ্রুততম ব্যাংক পেআউট</h4>
-                            <p>বুকিং রেজিস্ট্রেশন সম্পন্নের সাথে সাথে পেমেন্ট।</p>
+                    <!-- Right Display Screen -->
+                    <div class="hub-display-screen">
+                        <div class="screen-content active" id="content-0">
+                            <span class="screen-mini-tag">বিশ্বস্ততা ও অভিজ্ঞতা</span>
+                            <h3 class="screen-big-title">১২+ বছরের অটুট সুনাম ও শতভাগ গ্রাহক আস্থা</h3>
+                            <p class="screen-description">Bhaiya Housing নির্দিষ্ট সময়ের মধ্যে আন্তর্জাতিক
+                                স্ট্যান্ডার্ডের
+                                ফ্ল্যাট হস্তান্তর করার জন্য দীর্ঘ এক দশক ধরে পরিচিত।</p>
                         </div>
-                    </div>
-
-                    <div class="hub-nav-card" onclick="updateHub(2, this)">
-                        <div class="nav-icon-box"><i class="fas fa-home"></i></div>
-                        <div class="nav-texts">
-                            <h4>৩. ঢাকার সেরা প্রাইম স্পটসমূহ</h4>
-                            <p>বারিধারা, উত্তরা, মিরপুর ও ধানমন্ডি সংলগ্ন প্রজেক্ট।</p>
+                        <div class="screen-content" id="content-1">
+                            <span class="screen-mini-tag">ইনস্ট্যান্ট পেমেন্ট</span>
+                            <h3 class="screen-big-title">বুকিং রেজিস্ট্রেশন হতেই সরাসরি ব্যাংক ট্রান্সফার</h3>
+                            <p class="screen-description">প্রতিটি সফল অ্যাপার্টমেন্ট রেফারেলের ক্ষেত্রে কমিশন সরাসরি
+                                গ্রাহকের ব্যাংক একাউন্টে জমা হয়।</p>
                         </div>
-                    </div>
-
-                    <div class="hub-nav-card" onclick="updateHub(3, this)">
-                        <div class="nav-icon-box"><i class="fas fa-users"></i></div>
-                        <div class="nav-texts">
-                            <h4>৪. নিজস্ব সেলস ও সাইট সাপোর্ট</h4>
-                            <p>আপনার কাস্টমারকে প্রজেক্ট ঘুরে দেখানো ও গাইডেন্স।</p>
+                        <div class="screen-content" id="content-2">
+                            <span class="screen-mini-tag">আকর্ষণীয় স্থানসমূহ</span>
+                            <h3 class="screen-big-title">ঢাকার সেরা প্রজেক্ট লোকেশনসমূহ</h3>
+                            <p class="screen-description">কাস্টমারদের জন্য বেছে নেওয়ার সুবিধার্থে একাধিক ঢাকার
+                                গুরুত্বপূর্ণ
+                                পয়েন্টে প্রজেক্ট বিদ্যমান।</p>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Right Display Screen -->
-                <div class="hub-display-screen">
-                    <div class="screen-content active" id="content-0">
-                        <span class="screen-mini-tag">বিশ্বস্ততা ও অভিজ্ঞতা</span>
-                        <h3 class="screen-big-title">১২+ বছরের অটুট সুনাম ও শতভাগ গ্রাহক আস্থা</h3>
-                        <p class="screen-description">Bhaiya Housing নির্দিষ্ট সময়ের মধ্যে আন্তর্জাতিক স্ট্যান্ডার্ডের ফ্ল্যাট হস্তান্তর করার জন্য দীর্ঘ এক দশক ধরে পরিচিত।</p>
-                    </div>
-                    <div class="screen-content" id="content-1">
-                        <span class="screen-mini-tag">ইনস্ট্যান্ট পেমেন্ট</span>
-                        <h3 class="screen-big-title">বুকিং রেজিস্ট্রেশন হতেই সরাসরি ব্যাংক ট্রান্সফার</h3>
-                        <p class="screen-description">প্রতিটি সফল অ্যাপার্টমেন্ট রেফারেলের ক্ষেত্রে কমিশন সরাসরি গ্রাহকের ব্যাংক একাউন্টে জমা হয়।</p>
-                    </div>
-                    <div class="screen-content" id="content-2">
-                        <span class="screen-mini-tag">আকর্ষণীয় স্থানসমূহ</span>
-                        <h3 class="screen-big-title">ঢাকার সেরা প্রজেক্ট লোকেশনসমূহ</h3>
-                        <p class="screen-description">কাস্টমারদের জন্য বেছে নেওয়ার সুবিধার্থে একাধিক ঢাকার গুরুত্বপূর্ণ পয়েন্টে প্রজেক্ট বিদ্যমান।</p>
-                    </div>
-                    <div class="screen-content" id="content-3">
-                        <span class="screen-mini-tag">প্রফেশনাল গাইডেন্স</span>
-                        <h3 class="screen-big-title">নিজস্ব সেলস ও সাইট সাপোর্ট টিম</h3>
-                        <p class="screen-description">আপনার কাস্টমারকে নিয়ে সাইট ঘুরে দেখানো এবং ক্লায়েন্ট হ্যান্ডলিং সম্পন্ন করে আমাদের এক্সপার্ট সেলস টিম।</p>
+                        <div class="screen-content" id="content-3">
+                            <span class="screen-mini-tag">প্রফেশনাল গাইডেন্স</span>
+                            <h3 class="screen-big-title">নিজস্ব সেলস ও সাইট সাপোর্ট টিম</h3>
+                            <p class="screen-description">আপনার কাস্টমারকে নিয়ে সাইট ঘুরে দেখানো এবং ক্লায়েন্ট
+                                হ্যান্ডলিং
+                                সম্পন্ন করে আমাদের এক্সপার্ট সেলস টিম।</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-    <section class="why">
+    <section class="dashboard-section" id="dashboard-section">
         <div class="wrap">
+
             <div class="section-head">
-                <div class="eyebrow">কেন Bhaiya Housing</div>
-                <h2>বিশ্বাসের সাথে আয় করুন</h2>
+                <h2>স্বাগতম<?php if(auth()->guard()->check()): ?> ,<?php echo e(Auth::user()->name); ?><?php endif; ?></h2>
+                <p>আপনার রেফারেল এবং কমিশনের সর্বশেষ অবস্থা নিচে দেখুন।</p>
             </div>
-            <div class="why-grid">
-                <div class="why-card">
-                    <svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 3 4 7v5c0 5 3.4 8.5 8 9 4.6-.5 8-4 8-9V7l-8-4Z" />
-                        <path d="m9 12 2 2 4-4" />
-                    </svg>
-                    <h3>১২+ বছরের ট্র্যাক রেকর্ড</h3>
-                    <p>২০১২ সাল থেকে মানসম্মত নির্মাণ ও সময়মতো হস্তান্তরের অঙ্গীকার নিয়ে কাজ করছে Bhaiya Housing।</p>
-                </div>
-                <div class="why-card">
-                    <svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 22s8-4.5 8-11V5l-8-3-8 3v6c0 6.5 8 11 8 11Z" />
-                    </svg>
-                    <h3>স্বচ্ছ প্রক্রিয়া</h3>
-                    <p>প্রতিটি রেফারেল ট্র্যাক করা হয় এবং কমিশন প্রদানের শর্ত স্পষ্টভাবে জানানো হয়।</p>
-                </div>
-                <div class="why-card">
-                    <svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M3 21h18M6 21V9l6-5 6 5v12M9 21v-6h6v6" />
-                    </svg>
-                    <h3>একাধিক প্রজেক্ট</h3>
-                    <p>ঢাকার বিভিন্ন লোকেশনে চলমান প্রজেক্ট, তাই রেফার করার সুযোগও বেশি।</p>
-                </div>
-            </div>
-            <div class="projects-strip">
-                <?php $__empty_1 = true; $__currentLoopData = $projects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                    <div class="chip">
-                        <b><?php echo e($project->title); ?></b>
-                        <?php if($project->destination): ?>
-                            — <?php echo e($project->destination->title); ?>
 
-                        <?php endif; ?>
-                    </div>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-                    <div class="chip text-gray-400 italic">No projects available</div>
-                <?php endif; ?>
-            </div>
-        </div>
-    </section>
+            <div id="dashPanel" class="dash-panel active" style="display: block;">
+                <form id="logout-form" action="<?php echo e(route('frontend.logout')); ?>" method="POST" style="display: none;">
+                    <?php echo csrf_field(); ?>
+                </form>
+                <?php if(auth()->guard()->check()): ?>
 
-    <section class="faq" id="faq">
-        <div class="wrap">
-            <div class="section-head">
-                <div class="eyebrow">প্রশ্ন-উত্তর</div>
-                <h2>সচরাচর জিজ্ঞাসা</h2>
-            </div>
-            <div class="faq-list">
-                <div class="faq-item open">
-                    <button class="faq-q">কে রেফার করতে পারবে?
-                        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round">
-                            <path d="M12 5v14M5 12h14" />
-                        </svg>
-                    </button>
-                    <div class="faq-a">
-                        <div class="faq-a-inner">বাংলাদেশের যেকোনো প্রাপ্তবয়স্ক ব্যক্তি এই রেফার প্রোগ্রামে অংশ নিতে
-                            পারবেন। কোনো বিশেষ যোগ্যতার প্রয়োজন নেই।</div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-q">কমিশন কখন পাবো?
-                        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round">
-                            <path d="M12 5v14M5 12h14" />
-                        </svg>
-                    </button>
-                    <div class="faq-a">
-                        <div class="faq-a-inner">রেফার করা গ্রাহকের বুকিং ও রেজিস্ট্রেশন সম্পন্ন হওয়ার পর নির্ধারিত
-                            সময়ের মধ্যে কমিশন প্রদান করা হয়।</div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-q">কতজনকে রেফার করা যাবে?
-                        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round">
-                            <path d="M12 5v14M5 12h14" />
-                        </svg>
-                    </button>
-                    <div class="faq-a">
-                        <div class="faq-a-inner">যত খুশি ততজনকে রেফার করতে পারবেন। প্রতিটি সফল ক্রয়ের জন্য আলাদাভাবে
-                            কমিশন প্রযোজ্য।</div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-q">রেফারেলের অবস্থা কীভাবে জানবো?
-                        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round">
-                            <path d="M12 5v14M5 12h14" />
-                        </svg>
-                    </button>
-                    <div class="faq-a">
-                        <div class="faq-a-inner">ফোন বা ইমেইলের মাধ্যমে আমাদের টিমের সাথে যোগাযোগ রেখে আপনার রেফারেলের
-                            সর্বশেষ অবস্থা জানতে পারবেন।</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="cta-final" id="refer">
-        <div class="wrap">
-            <?php if(session('success')): ?>
-                <div id="form-alert"
-                    style="background: rgba(143, 224, 166, 0.15); border: 1px solid #8FE0A6; color: #8FE0A6; padding: 16px; border-radius: 12px; margin-bottom: 25px; text-align: center; font-weight: 600; font-size: 15px;">
-                    <i class="fas fa-check-circle" style="margin-right: 8px;"></i> <?php echo e(session('success')); ?>
-
-                </div>
-                <script>
-                    document.getElementById('form-alert').scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'center'
-                    });
-                    setTimeout(() => {
-                        document.getElementById('form-alert').style.transition = 'opacity 0.5s ease';
-                        document.getElementById('form-alert').style.opacity = '0';
-                        setTimeout(() => document.getElementById('form-alert').remove(), 500);
-                    }, 5000);
-                </script>
-            <?php endif; ?>
-            <?php if(auth()->guard()->check()): ?>
-                <h2>আজই রেফার করা শুরু করুন</h2>
-                <div class="refer-tabs">
-                    <button class="refer-tab-btn active" data-tab="link">লিংক শেয়ার করুন</button>
-                    <button class="refer-tab-btn" data-tab="direct">সরাসরি জমা দিন</button>
-                </div>
-
-                <div class="refer-pane active" id="refer-link" data-pane="link">
-                    <div class="refer-form">
-                        <p style="margin-bottom: 12px; font-size: 14px; color: var(--gold-light);">প্রজেক্ট সিলেক্ট করে
-                            লিঙ্ক জেনারেট করুন:</p>
-
-                        <div style="margin-bottom: 20px;">
-                            <select id="projectSelect"
-                                style="width: 100%; background: var(--bg-alt); color: var(--cream); padding: 12px; border: 1px solid var(--line); border-radius: 9px; margin-bottom: 10px;">
-                                <option value="">-- প্রজেক্ট নির্বাচন করুন --</option>
-                                <?php $__currentLoopData = $projects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($project->slug); ?>"><?php echo e($project->title); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </select>
-                            <button type="button" class="auth-submit" onclick="generateProjectLink()">লিঙ্ক তৈরি
-                                করুন</button>
-                        </div>
-
-                        <div id="linkContainer" class="link-list">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ম্যানুয়াল লিড সাবমিট ট্যাব -->
-                <div class="refer-pane" id="refer-direct" data-pane="direct">
-                    <form class="refer-form" action="<?php echo e(route('lead.store')); ?>" method="POST">
-                        <?php echo csrf_field(); ?>
-                        <input type="hidden" name="type" value="manual">
-                        <div class="row">
-                            <div><label>নাম</label><input name="name" type="text" required></div>
-                            <div><label>নম্বর</label><input name="phone" type="tel" required></div>
-                            <div>
-                                <label>ইমেইল (ঐচ্ছিক)</label>
-                                <input name="email" type="email" placeholder="example@mail.com">
-                            </div>
-                            <div><label>পছন্দের স্থান</label>
-                                <select name="interested_location"
-                                    style="width: 100%; background: var(--bg-alt); color: var(--cream); padding: 12px; border: 1px solid var(--line); border-radius: 9px;">
-                                    <option value="">-- প্রজেক্ট নির্বাচন করুন --</option>
-                                    <?php $__currentLoopData = $projects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <option value="<?php echo e($project->title); ?>"><?php echo e($project->title); ?></option>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                </select>
-                            </div>
-                            <div><label>বাজেট</label><input name="budget" type="number" step="any"></div>
-                        </div>
-                        <button type="submit" class="auth-submit">সাবমিট করুন</button>
-                    </form>
-                </div>
-            <?php else: ?>
-                <?php
-                    $refId = request()->query('ref') ?? request()->cookie('referred_by');
-                ?>
-
-                <?php if($refId): ?>
-                    <form class="refer-form" action="<?php echo e(route('lead.store')); ?>" method="POST">
-                        <?php echo csrf_field(); ?>
-                        <!-- টাইপ অবশ্যই refer_link যাবে -->
-                        <input type="hidden" name="type" value="refer_link">
-
-                        <div class="row">
-                            <div><label>আপনার নাম</label><input name="name" type="text" required></div>
-                            <div><label>আপনার নম্বর</label><input name="phone" type="tel" required></div>
-
-                            <div>
-                                <label>ইমেইল (ঐচ্ছিক)</label>
-                                <input name="email" type="email" placeholder="example@mail.com">
-                            </div>
-                            <div><label>পছন্দের স্থান</label>
-                                <select name="interested_location"
-                                    style="width: 100%; background: var(--bg-alt); color: var(--cream); padding: 12px; border: 1px solid var(--line); border-radius: 9px;">
-                                    <option value="">-- প্রজেক্ট নির্বাচন করুন --</option>
-                                    <?php $__currentLoopData = $projects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <option value="<?php echo e($project->title); ?>"><?php echo e($project->title); ?></option>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                </select>
-                            </div>
-                            <div><label>বাজেট</label><input name="budget" type="number" step="any"></div>
-                        </div>
-                        <button type="submit" class="auth-submit">তথ্য জমা দিন</button>
-                    </form>
-                <?php else: ?>
-                    <a href="#dashboard" class="btn-primary">লগইন করে রেফার করুন</a>
-                <?php endif; ?>
-            <?php endif; ?>
-        </div>
-    </section>
-    <section class="dashboard-section" id="dashboard">
-        <div class="wrap">
-            <?php if(auth()->guard()->guest()): ?>
-                <div class="section-head">
-                    <div class="eyebrow">অ্যাফিলিয়েট মেম্বার</div>
-                    <h2>লগইন করে আপনার রেফারেলের স্ট্যাটাস দেখুন</h2>
-                    <p>রেজিস্ট্রেশন করে একবার লগইন করলেই আপনার প্রতিটি রেফারেল কোন স্টেজে আছে তা দেখতে পাবেন।</p>
-                </div>
-
-                <div id="authView">
-                    <div class="auth-shell">
-
-                        <!-- ── সাধারণ লগইন ও রেজিস্ট্রেশন ট্যাব ── -->
-                        <div class="auth-tabs" id="tabHeader">
-                            <button
-                                class="auth-tab-btn <?php echo e($errors->hasAny(['name', 'email', 'phone', 'password']) ? '' : 'active'); ?>"
-                                onclick="showAuth('login')">লগইন</button>
-                            <button
-                                class="auth-tab-btn <?php echo e($errors->hasAny(['name', 'email', 'phone', 'password']) ? 'active' : ''); ?>"
-                                onclick="showAuth('register')">রেজিস্ট্রেশন</button>
-                        </div>
-
-                        <!-- ১. লগইন ফর্ম (শুধু ইমেইল ও পাসওয়ার্ড) -->
-                        <div id="loginSection"
-                            style="<?php echo e($errors->hasAny(['name', 'email', 'phone', 'password']) ? 'display: none;' : 'display: block;'); ?>">
-                            <form action="<?php echo e(route('affiliated.login')); ?>" method="POST">
-                                <?php echo csrf_field(); ?>
-                                <?php if($errors->any()): ?>
-                                    <div
-                                        style="background: rgba(255, 132, 132, 0.15); border: 1px solid #ff8484; color: #ff8484; padding: 10px; border-radius: 8px; margin-bottom: 15px; font-size: 13px; text-align: center;">
-                                        <i class="fas fa-exclamation-circle" style="margin-right: 5px;"></i>
-                                        <?php echo e($errors->first()); ?>
-
-                                    </div>
-                                <?php endif; ?>
-                                <div class="auth-field">
-                                    <label>ইমেইল এড্রেস</label>
-                                    <input name="email" type="email" placeholder="example@mail.com" required>
-                                </div>
-                                <div class="auth-field">
-                                    <label>পাসওয়ার্ড</label>
-                                    <input name="password" type="password" placeholder="••••••••" required>
-                                </div>
-                                <button type="submit" class="auth-submit">লগইন করুন</button>
-                                <p onclick="showAuth('forgot')"
-                                    style="text-align:center; cursor:pointer; font-size:12px; margin-top:15px; color:var(--gold-light);">
-                                    পাসওয়ার্ড ভুলে গেছেন?</p>
-                            </form>
-                        </div>
-
-                        <!-- ২. রেজিস্ট্রেশন ফর্ম (ইমেইল ও ফোন নম্বর দুটিই) -->
-                        <div id="registerSection"
-                            style="<?php echo e($errors->hasAny(['name', 'email', 'phone', 'password']) ? 'display: block;' : 'display: none;'); ?>">
-                            <form action="<?php echo e(route('affiliated.register')); ?>" method="POST">
-                                <?php echo csrf_field(); ?>
-                                <?php if($errors->any() && $errors->hasAny(['name', 'email', 'phone', 'password'])): ?>
-                                    <div
-                                        style="background: rgba(255, 132, 132, 0.15); border: 1px solid #ff8484; color: #ff8484; padding: 10px; border-radius: 8px; margin-bottom: 15px; font-size: 13px; text-align: center;">
-                                        <?php echo e($errors->first()); ?>
-
-                                    </div>
-                                <?php endif; ?>
-                                <div class="auth-field"><label>পূর্ণ নাম</label><input name="name" type="text" required>
-                                </div>
-                                <div class="auth-field"><label>ইমেইল এড্রেস</label><input name="email" type="email" required>
-                                </div>
-                                <div class="auth-field"><label>মোবাইল নম্বর</label><input name="phone" type="tel" required>
-                                </div>
-                                <div class="auth-field"><label>পাসওয়ার্ড</label><input name="password" type="password"
-                                        placeholder="সর্বনিম্ন ৬ ডিজিট" required></div>
-                                <button type="submit" class="auth-submit">অ্যাকাউন্ট তৈরি করুন</button>
-                            </form>
-                        </div>
-
-                        <!-- ৩. ফরগট পাসওয়ার্ড ফর্ম (ইমেইল দিয়ে) -->
-                        <div id="forgotSection" style="display: none;">
-                            <h3 style="text-align:center; margin-bottom:20px; color:var(--gold-light); font-size:18px;">
-                                পাসওয়ার্ড রিসেট</h3>
-                            <form action="<?php echo e(route('password.sendOtp')); ?>" method="POST">
-                                <?php echo csrf_field(); ?>
-                                <div class="auth-field"><label>রেজিস্টার্ড ইমেইল এড্রেস</label><input name="email" type="email"
-                                        required></div>
-                                <button type="submit" class="auth-submit">ওটিপি পাঠান</button>
-                                <p onclick="showAuth('login')"
-                                    style="text-align:center; cursor:pointer; font-size:12px; margin-top:15px; color:var(--muted);">
-                                    ← লগইন-এ ফিরে যান</p>
-                            </form>
-                        </div>
-
-                    </div>
-                </div>
-            <?php endif; ?>
-            <?php if(auth()->guard()->check()): ?>
-
-                <div class="section-head">
-                    <div class="eyebrow">অ্যাফিলিয়েট ড্যাশবোর্ড</div>
-                    <h2>স্বাগতম, <?php echo e(Auth::user()->name); ?></h2>
-                    <p>আপনার রেফারেল এবং কমিশনের সর্বশেষ অবস্থা নিচে দেখুন।</p>
-                </div>
-
-                <div id="dashPanel" class="dash-panel active" style="display: block;">
-                    <form id="logout-form" action="<?php echo e(route('frontend.logout')); ?>" method="POST" style="display: none;">
-                        <?php echo csrf_field(); ?>
-                    </form>
                     <button class="dash-logout"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         ← লগআউট করুন
                     </button>
-                    <div class="dash-summary">
-                        <div class="dash-stat"><b>৮</b><span>মোট রেফারেল</span></div>
-                        <div class="dash-stat"><b>৩</b><span>প্রক্রিয়াধীন</span></div>
-                        <div class="dash-stat"><b>২</b><span>বুকিং সম্পন্ন</span></div>
-                        <div class="dash-stat"><b>৳৪,৫০,০০০</b><span>মোট কমিশন (অর্জিত)</span></div>
-                    </div>
-                    <div class="dash-table-wrap">
-                        <table class="dash-table">
-                            <thead>
-                                <tr>
-                                    <th>নাম</th>
-                                    <th>প্রজেক্ট</th>
-                                    <th>রেফার তারিখ</th>
-                                    <th>স্টেজ</th>
-                                    <th>কমিশন</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>রাকিব হাসান</td>
-                                    <td>Gulf Panorama</td>
-                                    <td>০২ জুন ২০২৬</td>
-                                    <td><span class="stage-pill stage-5">কমিশন প্রদত্ত</span></td>
-                                    <td>৳২,৫০,০০০</td>
-                                </tr>
-                                <tr>
-                                    <td>শিরিন আক্তার</td>
-                                    <td>Daisy Dell</td>
-                                    <td>১৮ জুন ২০২৬</td>
-                                    <td><span class="stage-pill stage-5">কমিশন প্রদত্ত</span></td>
-                                    <td>৳২,০০,০০০</td>
-                                </tr>
-                                <tr>
-                                    <td>ইমরান খান</td>
-                                    <td>Olivia</td>
-                                    <td>০৫ জুলাই ২০২৬</td>
-                                    <td><span class="stage-pill stage-4">বুকিং সম্পন্ন</span></td>
-                                    <td>প্রক্রিয়াধীন</td>
-                                </tr>
-                                <tr>
-                                    <td>নাজমুল হক</td>
-                                    <td>Park Oasis</td>
-                                    <td>০৯ জুলাই ২০২৬</td>
-                                    <td><span class="stage-pill stage-3">সাইট ভিজিট</span></td>
-                                    <td>—</td>
-                                </tr>
-                                <tr>
-                                    <td>ফারহানা ইসলাম</td>
-                                    <td>Sheuly's Garden</td>
-                                    <td>১১ জুলাই ২০২৬</td>
-                                    <td><span class="stage-pill stage-2">যোগাযোগ করা হয়েছে</span></td>
-                                    <td>—</td>
-                                </tr>
-                                <tr>
-                                    <td>তানভীর আহমেদ</td>
-                                    <td>Gulf Panorama</td>
-                                    <td>১৩ জুলাই ২০২৬</td>
-                                    <td><span class="stage-pill stage-1">রেফার করা হয়েছে</span></td>
-                                    <td>—</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <p class="link-gen-note">ডেমো ডেটা — বাস্তব ব্যবহারে এই তালিকা আপনার প্রকৃত রেফারেল অনুযায়ী
-                        স্বয়ংক্রিয়ভাবে আপডেট হবে।</p>
+                <?php endif; ?>
+                <div class="dash-summary">
+                    <div class="dash-stat"><b>৮</b><span>মোট রেফারেল</span></div>
+                    <div class="dash-stat"><b>৩</b><span>প্রক্রিয়াধীন</span></div>
+                    <div class="dash-stat"><b>২</b><span>বুকিং সম্পন্ন</span></div>
+                    <div class="dash-stat"><b>৳৪,৫০,০০০</b><span>মোট কমিশন (অর্জিত)</span></div>
                 </div>
-            <?php endif; ?>
+                <div class="dash-table-wrap">
+                    <table class="dash-table">
+                        <thead>
+                            <tr>
+                                <th>নাম</th>
+                                <th>প্রজেক্ট</th>
+                                <th>রেফার তারিখ</th>
+                                <th>স্টেজ</th>
+                                <th>কমিশন</th>
+                            </tr>
+                        </thead>
+                        <tbody style="color: #f4efe2;">
+                            <tr>
+                                <td data-label="নাম">রাকিব হাসান</td>
+                                <td data-label="প্রজেক্ট">Gulf Panorama</td>
+                                <td data-label="রেফার তারিখ">০২ জুন ২০২৬</td>
+                                <td data-label="স্টেজ"><span class="stage-pill stage-5">কমিশন প্রদত্ত</span></td>
+                                <td data-label="কমিশন">৳২,৫০,০০০</td>
+                            </tr>
+                            <tr>
+                                <td data-label="নাম">শিরিন আক্তার</td>
+                                <td data-label="প্রজেক্ট">Daisy Dell</td>
+                                <td data-label="রেফার তারিখ">১৮ জুন ২০২৬</td>
+                                <td data-label="স্টেজ"><span class="stage-pill stage-5">কমিশন প্রদত্ত</span></td>
+                                <td data-label="কমিশন">৳২,০০,০০০</td>
+                            </tr>
+                            <tr>
+                                <td data-label="নাম">ইমরান খান</td>
+                                <td data-label="প্রজেক্ট">Olivia</td>
+                                <td data-label="রেফার তারিখ">০৫ জুলাই ২০২৬</td>
+                                <td data-label="স্টেজ"><span class="stage-pill stage-4">বুকিং সম্পন্ন</span></td>
+                                <td data-label="কমিশন">প্রক্রিয়াধীন</td>
+                            </tr>
+                            <tr>
+                                <td data-label="নাম">নাজমুল হক</td>
+                                <td data-label="প্রজেক্ট">Park Oasis</td>
+                                <td data-label="রেফার তারিখ">০৯ জুলাই ২০২৬</td>
+                                <td data-label="স্টেজ"><span class="stage-pill stage-3">সাইট ভিজিট</span></td>
+                                <td data-label="কমিশন">—</td>
+                            </tr>
+                            <tr>
+                                <td data-label="নাম">ফারহানা ইসলাম</td>
+                                <td data-label="প্রজেক্ট">Sheuly's Garden</td>
+                                <td data-label="রেফার তারিখ">১১ জুলাই ২০২৬</td>
+                                <td data-label="স্টেজ"><span class="stage-pill stage-2">যোগাযোগ করা হয়েছে</span></td>
+                                <td data-label="কমিশন">—</td>
+                            </tr>
+                            <tr>
+                                <td data-label="নাম">তানভীর আহমেদ</td>
+                                <td data-label="প্রজেক্ট">Gulf Panorama</td>
+                                <td data-label="রেফার তারিখ">১৩ জুলাই ২০২৬</td>
+                                <td data-label="স্টেজ"><span class="stage-pill stage-1">রেফার করা হয়েছে</span></td>
+                                <td data-label="কমিশন">—</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="link-gen-note" style="color:darkgray">ডেমো ডেটা — বাস্তব ব্যবহারে এই তালিকা আপনার প্রকৃত
+                    রেফারেল
+                    অনুযায়ী
+                    স্বয়ংক্রিয়ভাবে আপডেট হবে।</p>
+            </div>
         </div>
     </section>
 
-<?php $__env->stopSection(); ?>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    e.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.15 });
+    <!-- Bhaiya Housing Hero Section -->
+    <section class="refer-hero-section">
+        <div class="container mx-auto px-4 md:px-12">
 
-        document.querySelectorAll('.reveal, .steps-timeline').forEach(r => observer.observe(r));
-    });
+            <!-- Main Dark Green Container -->
+            <div class="main-green-box">
+
+                <!-- Side Glow Effect (ইমেজের মতো ডান পাশের আভা) -->
+                <div class="glow-overlay"></div>
+
+                <div class="content-grid">
+
+                    <!-- Left: Info -->
+                    <div class="left-content">
+                        <div class="top-badge">
+                            GET STARTED WITH BHAIYA HOUSING
+                        </div>
+
+                        <h1 class="hero-title">
+                            ডিজিটাল রেফারেল প্ল্যাটফর্মে নতুন অভিজ্ঞতা নিন
+                        </h1>
+
+                        <p class="hero-desc">
+                            অনলাইনে সরাসরি তথ্য সাবমিট করুন বা ইউনিক লিঙ্ক বানিয়ে কাস্টমারদের জানান। আমাদের বিশ্বস্ত
+                            টিম বাকি সব প্রক্রিয়া সহজ করে দেবে।
+                        </p>
+
+                        <a href="#" class="cta-button">
+                            এখনই রেফার শুরু করুন &nbsp; →
+                        </a>
+                    </div>
+
+                    <!-- Right: Tracker Card (Glassmorphism) -->
+                    <div class="right-visual">
+                        <div class="glass-tracker-card">
+                            <div class="card-header">
+                                <div class="status-left">
+                                    <i class="fa-solid fa-bolt text-amber-400"></i>
+                                    লাইভ ড্যাশবোর্ড ট্র্যাকার
+                                </div>
+                                <div class="status-right">১০০% নিরাপদ</div>
+                            </div>
+
+                            <div class="card-amount">
+                                ৳৩,০০,০০০
+                            </div>
+
+                            <div class="card-footer">
+                                প্রতি চুক্তিতে নিশ্চিত বোনাস। কোনো প্রকার গোপন শর্ত ছাড়া সরাসরি ব্যাংক অ্যাকাউন্টে
+                                জমা।
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <?php if(auth()->guard()->check()): ?>
+        <!-- Form Section Header -->
+        <div class="container" style="text-align: center; margin-top: 80px; margin-bottom: 40px;">
+            <div style="color: #F59E0B; font-weight: 700; font-size: 14px; margin-bottom: 10px;">
+                <span
+                    style="width: 30px; height: 2px; background: #F59E0B; display: inline-block; vertical-align: middle; margin-right: 10px;"></span>
+                রেফার জমা দিন
+            </div>
+            <h2 style="font-size: 42px; font-weight: 900; color: #101B37;">
+                আপনার ক্লায়েন্টের তথ্য জমা দিন</h2>
+        </div>
+        <!-- Main Form Card -->
+        <section class="referral-form-container" id="refer-section">
+            <div class="form-card-main">
+                <!-- Left Side (Dark Section) -->
+                <div class="form-dark-side">
+                    <h3 class="side-title">রেফার করুন, উপার্জন নিশ্চিত করুন</h3>
+                    <p class="side-desc">আপনার পরিচিত কাউকে ফ্ল্যাট বা জমি কিনতে পাঠান। বুকিং হলেই কমিশন সরাসরি আপনার
+                        ব্যাংকে।</p>
+
+                    <ul class="benefit-list">
+                        <li><span class="icon-circle"><i class="fas fa-check"></i></span> সরাসরি ব্যাংক ট্রান্সফার</li>
+                        <li><span class="icon-circle"><i class="fas fa-check"></i></span> ফ্রি সাইট ভিজিট ব্যবস্থা</li>
+                        <li><span class="icon-circle"><i class="fas fa-check"></i></span> শতভাগ তথ্য গোপনীয়তা</li>
+                        <li><span class="icon-circle"><i class="fas fa-check"></i></span> সর্বোচ্চ ৩,০০,০০০ কমিশন</li>
+                    </ul>
+                </div>
+
+                <!-- Right Side (Form Section) -->
+                <div class="form-white-side">
+                    <h3 class="form-input-title">কাস্টমারের তথ্য</h3>
+                    <?php if(session('success')): ?>
+                        <div
+                            style="background: #D1FAE5; color: #065F46; padding: 15px; border-radius: 10px; margin-bottom: 20px; font-weight: 600;">
+                            <?php echo e(session('success')); ?>
+
+                        </div>
+                    <?php endif; ?>
+
+                    <!-- সাধারণ এরর মেসেজ প্রদর্শন (যেমন: কুপন ভুল বা রেফার লিংক নেই) -->
+                    <?php if(session('error')): ?>
+                        <div
+                            style="background: #FEE2E2; color: #B91C1C; padding: 15px; border-radius: 10px; margin-bottom: 20px; font-weight: 600;">
+                            <?php echo e(session('error')); ?>
+
+                        </div>
+                    <?php endif; ?>
+
+                    <form action="<?php echo e(route('lead.store')); ?>" method="POST">
+                        <?php echo csrf_field(); ?>
+                        <!-- ওনার আইডি ধরার জন্য ম্যানুয়াল টাইপ পাঠানো হচ্ছে -->
+                        <input type="hidden" name="type" value="manual">
+
+                        <div class="input-grid">
+                            <!-- কাস্টমারের নাম -->
+                            <div class="input-item">
+                                <label>কাস্টমারের নাম <span style="color:red">*</span></label>
+                                <input type="text" name="name" value="<?php echo e(old('name')); ?>" placeholder="পূর্ণ নাম" required
+                                    style="<?php $__errorArgs = ['name'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> border-color: #EF4444; <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>">
+                                <?php $__errorArgs = ['name'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> <span
+                                    style="color: #EF4444; font-size: 11px; margin-top: 5px; font-weight: 600;"><?php echo e($message); ?></span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                            </div>
+
+                            <!-- ফোন নম্বর -->
+                            <div class="input-item">
+                                <label>ফোন নম্বর <span style="color:red">*</span></label>
+                                <input type="tel" name="phone" value="<?php echo e(old('phone')); ?>" placeholder="017XXXXXXXX" required
+                                    style="<?php $__errorArgs = ['phone'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> border-color: #EF4444; <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>">
+                                <?php $__errorArgs = ['phone'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> <span
+                                    style="color: #EF4444; font-size: 11px; margin-top: 5px; font-weight: 600;"><?php echo e($message); ?></span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                            </div>
+
+                            <!-- ইমেল (নতুন যুক্ত করা হয়েছে) -->
+                            <div class="input-item">
+                                <label>ইমেল (ঐচ্ছিক)</label>
+                                <input type="email" name="email" value="<?php echo e(old('email')); ?>" placeholder="example@mail.com"
+                                    style="<?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> border-color: #EF4444; <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>">
+                                <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> <span
+                                    style="color: #EF4444; font-size: 11px; margin-top: 5px; font-weight: 600;"><?php echo e($message); ?></span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                            </div>
+
+                            <!-- পছন্দের প্রজেক্ট -->
+                            <div class="input-item">
+                                <label>পছন্দের প্রজেক্ট</label>
+                                <select name="interested_location">
+                                    <option value="">— নির্বাচন করুন —</option>
+                                    <?php $__currentLoopData = $projects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($project->title); ?>" <?php echo e(old('interested_location') == $project->title ? 'selected' : ''); ?>>
+                                            <?php echo e($project->title); ?>
+
+                                        </option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </select>
+                            </div>
+
+                            <!-- বাজেট -->
+                            <div class="input-item">
+                                <label>বাজেট (টাকা)</label>
+                                <input type="number" name="budget" value="<?php echo e(old('budget')); ?>" placeholder="আনুমানিক বাজেট"
+                                    style="<?php $__errorArgs = ['budget'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> border-color: #EF4444; <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>">
+                                <?php $__errorArgs = ['budget'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> <span
+                                    style="color: #EF4444; font-size: 11px; margin-top: 5px; font-weight: 600;"><?php echo e($message); ?></span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="form-submit-btn">
+                            তথ্য সাবমিট করুন &nbsp; →
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    <?php endif; ?>
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <!-- Section Header -->
+            <div class="faq-header">
+                <div class="faq-label">
+                    <span class="orange-line"></span> সচরাচর জিজ্ঞাসা
+                </div>
+                <h2 class="faq-main-title">কিছু সাধারণ প্রশ্নোত্তর</h2>
+            </div>
+
+            <!-- FAQ List -->
+            <div class="faq-wrapper">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        রেফারেল কমিশন কত?
+                        <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>প্রজেক্ট ও ইউনিটের সাইজ ভেদে সর্বনিম্ন ৳৫০,০০০ থেকে সর্বোচ্চ ৳৩,০০,০০০ পর্যন্ত কমিশন
+                            পাওয়া যায়।</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        কমিশন কবে পাবো?
+                        <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>রেফারকৃত কাস্টমারের বুকিং মানি জমা হওয়ার পর চুক্তি অনুযায়ী নির্ধারিত সময়ের মধ্যে
+                            ব্যাংক ট্রান্সফার করা হয়।</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        কোন কোন প্রজেক্টে রেফার করা যাবে?
+                        <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>বারিধারা, মিরপুর, উত্তরা, আফতাবনগর ও মোহাম্মদপুরের চলমান সকল প্রজেক্টে রেফারেল
+                            গ্রহণযোগ্য।</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        আমার তথ্য কি নিরাপদ?
+                        <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>হ্যাঁ, আপনার এবং আপনার ক্লায়েন্টের সমস্ত তথ্য এনক্রিপ্টেড এবং শতভাগ গোপনীয়।</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="referral-cta-section">
+        <div class="container">
+            <!-- Main Card with Theme Green Background -->
+            <div class="cta-theme-card">
+                <h2 class="cta-title">আজই শুরু করুন আপনার রেফারেল যাত্রা</h2>
+                <p class="cta-subtitle">একটি সফল রেফারেলই আপনার উপার্জন হতে পারে সর্বোচ্চ ৩ লাখ টাকা।</p>
+
+                <div class="cta-btn-wrapper">
+                    <!-- White Button to pop against Green background -->
+                    <a href="#refer-direct" class="cta-white-btn">
+                        <span>এখনই রেফার জমা দিন</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+<?php $__env->stopSection(); ?>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // ১. যদি ফরমের কোনো ভ্যালিডেশন এরর থাকে (যেমন: ফোন নাম্বার ভুল বা ডুপ্লিকেট)
+        <?php if($errors->any()): ?>
+            // সব লজিক বাদ দিয়ে সরাসরি ফরম সেকশনে নিয়ে যাবে
+            setTimeout(() => {
+                const referSection = document.getElementById('refer-section');
+                if (referSection) {
+                    if (typeof lenis !== 'undefined') {
+                        // Lenis থাকলে স্মুথ স্ক্রল
+                        lenis.scrollTo('#refer-section', { offset: -100 });
+                    } else {
+                        // সাধারণ ব্রাউজার স্ক্রল
+                        referSection.scrollIntoView({ behavior: 'auto', block: 'center' });
+                    }
+                }
+            }, 300); // ৩০০ মিলিসেকেন্ড সময় দেওয়া হলো যাতে পেজ পুরোপুরি লোড হয়
+        <?php endif; ?>
+
+        // ২. যদি কন্ট্রোলার থেকে ম্যানুয়ালি কোনো এরর পাঠানো হয় (যেমন: সেশন এরর)
+        <?php if(session('error')): ?>
+            setTimeout(() => {
+                const referSection = document.getElementById('refer-section');
+                if (referSection) {
+                    if (typeof lenis !== 'undefined') {
+                        lenis.scrollTo('#refer-section', { offset: -100 });
+                    } else {
+                        referSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }
+            }, 300);
+        <?php endif; ?>
+
+        // ৩. শুধুমাত্র সফলভাবে জমা হলে ড্যাশবোর্ডে যাবে (Landing Page Dashboard)
+        <?php if(session('success')): ?>
+            setTimeout(() => {
+                const dashSection = document.getElementById('dashboard-section');
+                if (dashSection) {
+                    if (typeof lenis !== 'undefined') {
+                        lenis.scrollTo('#dashboard-section');
+                    } else {
+                        dashSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            }, 300);
+        <?php endif; ?>
+});
 </script>
 
 <?php echo $__env->make('frontend.layouts.landingFront', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\laragon\www\affiliate-project\resources\views/frontend/landing/index.blade.php ENDPATH**/ ?>

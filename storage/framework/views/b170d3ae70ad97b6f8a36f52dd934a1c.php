@@ -33,6 +33,10 @@
             overflow: hidden;
         }
 
+        .lenis.lenis-scrolling iframe {
+            pointer-events: none;
+        }
+
         *,
         *::before,
         *::after {
@@ -48,10 +52,10 @@
         body {
             background-color: #F6F9FD;
             color: #1E293B;
-            font-family: 'Hind Siliguri', 'Inter', system-ui, sans-serif;
             line-height: 1.65;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            font-family: 'Hind Siliguri', sans-serif;
         }
 
         a {
@@ -66,7 +70,6 @@
         }
 
         button {
-            font-family: inherit;
             cursor: pointer;
             border: none;
             background: none;
@@ -78,10 +81,6 @@
             padding: 0 24px;
         }
 
-        section {
-            position: relative;
-            z-index: 1;
-        }
 
         ::selection {
             background: #E0F2FE;
@@ -99,8 +98,8 @@
         :root {
             --primary: #059669;
             --primary-dark: #064E3B;
-            --primary-gradient: linear-gradient(90deg, #059669 0%, #10B981 50%, #D97706 100%);
-            --rainbow-gradient: linear-gradient(90deg, #FF5B26 0%, #F59E0B 50%, #10B981 100%);
+            --primary-gradient: linear-gradient(90deg, #059669 0%, #10B981 50%, #B45309 100%);
+            --rainbow-gradient: linear-gradient(90deg, #FF5B26 0%, #B45309 50%, #10B981 100%);
 
             --card-bg: #FFFFFF;
             --card-border: #E2E8F0;
@@ -259,7 +258,7 @@
         .brand-subtitle {
             font-size: 11px;
             font-weight: 800;
-            color: #D97706;
+            color: #B45309;
             letter-spacing: 2px;
             text-transform: uppercase;
         }
@@ -301,7 +300,6 @@
         body {
             background: var(--bg);
             color: var(--cream);
-            font-family: var(--sans);
             line-height: 1.65;
             overflow-x: hidden;
         }
@@ -345,16 +343,6 @@
         }
 
 
-
-        section {
-            position: relative;
-            z-index: 1;
-        }
-
-        .font-serif {
-            font-family: 'Noto Serif Bengali', serif;
-        }
-
         /* ২. অ্যানিমেশন ইফেক্ট */
         .reveal {
             opacity: 0;
@@ -390,7 +378,6 @@
 
         .custom-hero {
             background-color: #F8FAFC;
-            font-family: 'Hind Siliguri', sans-serif;
             padding: 80px 0;
             overflow: hidden;
         }
@@ -430,7 +417,6 @@
         }
 
         .c-title {
-            font-family: 'Noto Serif Bengali', serif;
             font-size: 54px;
             font-weight: 900;
             line-height: 1.2;
@@ -528,7 +514,7 @@
 
         .s-item span {
             font-size: 13px;
-            color: #94A3B8;
+            color: #475569;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -628,6 +614,7 @@
             max-width: 640px;
             margin: 0 auto 52px;
             text-align: center;
+            color: #f4efe2;
         }
 
         .section-head .eyebrow {
@@ -639,10 +626,9 @@
         }
 
         .section-head h2 {
-            font-family: var(--serif);
             font-weight: 700;
             font-size: clamp(26px, 3.4vw, 38px);
-            color: var(--cream);
+            color: #f4efe2;
         }
 
         .section-head p {
@@ -701,7 +687,6 @@
         }
 
         .step-tag {
-            font-family: var(--sans);
             font-weight: 700;
             color: var(--gold-light);
             font-size: 12.5px;
@@ -710,7 +695,6 @@
         }
 
         .step-card h3 {
-            font-family: var(--serif);
             font-size: 20px;
             font-weight: 700;
             margin: 8px 0 10px;
@@ -722,12 +706,6 @@
             color: var(--muted);
         }
 
-        /* Container & Basics */
-        .features-section {
-            padding: 10px 0;
-            background-color: #fff;
-            font-family: 'Hind Siliguri', sans-serif;
-        }
 
         .container {
             max-width: 1200px;
@@ -735,172 +713,223 @@
             padding: 0 20px;
         }
 
-        /* Header Style */
-        .section-intro {
-            margin-bottom: 20px;
+        /* --- How It Works: Exact Image Match Style --- */
+        .how-it-works-final {
             padding: 50px 0;
+            background-color: #ffffff;
         }
 
-        .orange-label {
+        /* Header Area */
+        .how-it-works-final .header-area {
+            margin-bottom: 70px;
+            text-align: left;
+        }
+
+        .how-it-works-final .label-box {
             display: flex;
             align-items: center;
             gap: 10px;
-            color: #F59E0B;
+            color: #B45309;
+            /* Orange label */
             font-weight: 700;
             font-size: 14px;
             text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .how-it-works-final .orange-bar {
+            width: 30px;
+            height: 2px;
+            background-color: #B45309;
+        }
+
+        .how-it-works-final .main-heading {
+            font-size: 48px;
+            font-weight: 900;
+            color: #101B37;
             margin-bottom: 15px;
         }
 
-        .orange-label .line {
-            width: 30px;
-            height: 3px;
-            background-color: #F59E0B;
+        /* Green Background Highlight for "কিভাবে" */
+        .how-it-works-final .bg-highlight {
+            background-color: #E6F7F1;
+            /* Light mint green */
+            padding: 0 12px;
+            border-radius: 6px;
+            color: #007D4F;
+            /* Deep green text */
             display: inline-block;
         }
 
-        .main-heading {
-            font-family: 'Noto Serif Bengali', serif;
-            font-size: 48px;
-            font-weight: 900;
-            color: #0B1120;
-            margin-bottom: 20px;
-        }
-
-        .sub-text {
+        .how-it-works-final .sub-heading {
             color: #64748B;
             font-size: 16px;
         }
 
-        /* Timeline Logic */
-        .steps-wrapper {
+        /* Steps Layout and Line */
+        .how-it-works-final .steps-wrapper {
             position: relative;
-            padding: 20px 0;
+            margin-top: 50px;
         }
 
-        /* Green Horizontal Line */
-        .connecting-line {
+        .how-it-works-final .horizontal-line {
             position: absolute;
-            top: 50px;
-            /* আইকন সার্কেলের মাঝ বরাবর */
-            left: 50px;
-            right: 50px;
+            top: 55px;
+            /* Centers the line with the icon circles */
+            left: 10%;
+            right: 10%;
             height: 2px;
             background-color: #10B981;
             z-index: 1;
         }
 
-        .steps-grid {
+        .how-it-works-final .steps-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             position: relative;
             z-index: 2;
         }
 
-        .step-item {
+        .how-it-works-final .step-item {
             text-align: center;
-            padding: 0 10px;
         }
 
-        /* Icon Circle */
-        .icon-box-wrapper {
+        /* Icon Box and Number Badge */
+        .how-it-works-final .icon-box-outer {
             position: relative;
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 30px;
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 25px;
         }
 
-        .icon-circle {
+        .how-it-works-final .icon-circle {
             width: 100%;
             height: 100%;
-            background-color: #fff;
-            /* লাইনের ওপর সাদা ব্যাকগ্রাউন্ড */
-            border: 2px solid #E2E8F0;
+            background-color: #ffffff;
+            border: 1px solid #E2E8F0;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
+            color: #768191;
+            /* Icon stroke color */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
         }
 
-        .icon-circle svg {
-            width: 35px;
-            height: 35px;
-            color: #64748B;
+        .how-it-works-final .icon-circle svg {
+            width: 38px;
+            height: 38px;
         }
 
-        /* Top-Right Number Badge */
-        .step-badge {
+        .how-it-works-final .number-badge {
             position: absolute;
-            top: 0;
-            right: 0;
-            background-color: #0B1120;
-            color: #fff;
-            width: 28px;
-            height: 28px;
+            top: 6px;
+            right: 6px;
+            background-color: #0F172A;
+            /* Dark Navy/Black */
+            color: #ffffff;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
-            font-size: 12px;
-            font-weight: 700;
+            font-size: 11px;
+            font-weight: 800;
             display: flex;
             align-items: center;
             justify-content: center;
+            border: 3px solid #ffffff;
+            /* Thick white border around badge */
         }
 
-        /* Step Text */
-        .step-item h4 {
-            font-size: 18px;
+        /* Text Content below Icons */
+        .how-it-works-final .step-item h3 {
+            font-size: 19px;
             font-weight: 800;
-            color: #0B1120;
-            margin-bottom: 12px;
+            color: #101B37;
+            margin-bottom: 10px;
         }
 
-        .step-item p {
-            font-size: 12px;
+        .how-it-works-final .step-item p {
+            font-size: 13.5px;
             color: #64748B;
-            line-height: 1.6;
-            max-width: 220px;
+            line-height: 1.7;
+            max-width: 210px;
             margin: 0 auto;
         }
 
-        /* Hover Effect */
-        .step-item:hover .icon-circle {
-            border-color: #10B981;
-            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.15);
-            transform: translateY(-5px);
-        }
-
-        .step-item:hover .icon-circle svg {
-            color: #10B981;
-        }
-
-        /* Responsive Support */
+        /* --- Optimized Responsive Adjustments --- */
         @media (max-width: 991px) {
-            .steps-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 50px 0;
+            .how-it-works-final {
+                padding: 40px 0;
+                /* প্যাডিং কমানো হয়েছে */
             }
 
-            .connecting-line {
+            .how-it-works-final .header-area {
+                margin-bottom: 30px;
+                /* মার্জিন অনেক কমানো হয়েছে */
+                text-align: center;
+                /* মোবাইলে সেন্টারে বেশি ভালো লাগে */
+            }
+
+            .how-it-works-final .label-box {
+                justify-content: center;
+            }
+
+            .how-it-works-final .main-heading {
+                font-size: 32px;
+                /* ফন্ট সাইজ কমানো হয়েছে */
+            }
+
+            .how-it-works-final .horizontal-line {
                 display: none;
-                /* মোবাইলে লাইন হাইড করা ভালো */
+            }
+
+            .how-it-works-final .steps-wrapper {
+                margin-top: 20px;
+                /* গ্যাপ কমানো হয়েছে */
+            }
+
+            .how-it-works-final .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px 10px;
+                /* ভার্টিক্যাল গ্যাপ ৩০px */
+            }
+
+            .how-it-works-final .icon-box-outer {
+                width: 90px;
+                /* আইকন বক্স একটু ছোট করা হয়েছে */
+                height: 90px;
+                margin-bottom: 15px;
+            }
+
+            .how-it-works-final .icon-circle svg {
+                width: 30px;
+                height: 30px;
             }
         }
 
         @media (max-width: 600px) {
-            .steps-grid {
+            .how-it-works-final .steps-grid {
                 grid-template-columns: 1fr;
+                /* একদম ছোট ফোনে ১ কলাম */
+                gap: 40px;
             }
 
-            .main-heading {
-                font-size: 32px;
+            .how-it-works-final .main-heading {
+                font-size: 28px;
+            }
+
+            .how-it-works-final .step-item p {
+                max-width: 280px;
+                /* টেক্সট যাতে খুব বেশি সরু না হয়ে যায় */
             }
         }
 
         /* --- Feature Hub Exact Design CSS --- */
-        .feature-hub-section{
+        .feature-hub-section {
             background: white;
             padding: 50px 0;
         }
+
         .section-head-hub {
             text-align: center;
             margin-bottom: 50px;
@@ -918,7 +947,6 @@
         }
 
         .hub-main-title {
-            font-family: 'Noto Serif Bengali', serif;
             font-size: 40px;
             font-weight: 800;
             color: #101B37 !important;
@@ -1012,7 +1040,6 @@
         }
 
         .screen-big-title {
-            font-family: 'Noto Serif Bengali', serif;
             font-size: 38px;
             font-weight: 800;
             margin-bottom: 25px;
@@ -1028,75 +1055,91 @@
             animation: fadeIn 0.5s ease;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
+        /* ══════════════════════════════════════════════
+   FEATURE HUB RESPONSIVE (WHY BHAIYA SECTION)
+══════════════════════════════════════════════ */
+
+        @media (max-width: 991px) {
+            .feature-hub-section {
+                padding: 40px 0;
             }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            .hub-main-title {
+                font-size: 30px;
+                /* মোবাইলে শিরোনাম একটু ছোট */
+            }
+
+            .hub-outer-card {
+                padding: 20px;
+                /* বাইরের কার্ডের প্যাডিং কমানো হয়েছে */
+                border-radius: 30px;
+            }
+
+            .hub-grid {
+                grid-template-columns: 1fr;
+                /* ২ কলাম থেকে ১ কলামে পরিবর্তন */
+                gap: 30px;
+            }
+
+            .hub-sidebar {
+                order: 1;
+                /* বাটনগুলো উপরে থাকবে */
+            }
+
+            .hub-display-screen {
+                order: 2;
+                /* সবুজ কন্টেন্ট বক্স নিচে থাকবে */
+                min-height: auto;
+                /* হাইট অটো করা হয়েছে যাতে কন্টেন্ট অনুযায়ী বাড়ে */
+                padding: 40px 30px;
+                border-radius: 25px;
+            }
+
+            .screen-big-title {
+                font-size: 28px;
             }
         }
 
-        /* ---------------- FAQ ---------------- */
-        .faq {
-            padding: 90px 0 100px;
-            border-top: 1px solid var(--line);
-        }
+        @media (max-width: 600px) {
+            .hub-nav-card {
+                padding: 15px;
+                gap: 12px;
+                border-radius: 15px;
+            }
 
-        .faq-list {
-            max-width: 760px;
-            margin: 0 auto;
-        }
+            .nav-icon-box {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+                flex-shrink: 0;
+                /* আইকন যাতে ছোট হয়ে চ্যাপ্টা না হয়ে যায় */
+            }
 
-        .faq-item {
-            border-bottom: 1px solid var(--line);
-        }
+            .hub-nav-card h4 {
+                font-size: 15px;
+                line-height: 1.4;
+            }
 
-        .faq-q {
-            width: 100%;
-            text-align: left;
-            background: none;
-            border: none;
-            color: var(--cream);
-            font-family: var(--sans);
-            font-size: 16.5px;
-            font-weight: 600;
-            padding: 22px 4px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-        }
+            .hub-nav-card p {
+                font-size: 12px;
+                display: none;
+                /* খুব ছোট ফোনে বর্ণনা হাইড করে শুধু শিরোনাম রাখা হয়েছে ক্লিনিংয়ের জন্য */
+            }
 
-        .faq-q svg {
-            width: 18px;
-            height: 18px;
-            stroke: var(--gold-light);
-            flex-shrink: 0;
-            transition: transform .25s ease;
-        }
+            .hub-nav-card.active p {
+                display: block;
+                /* শুধুমাত্র একটিভ কার্ডের বর্ণনা দেখাবে */
+                margin-top: 5px;
+            }
 
-        .faq-item.open .faq-q svg {
-            transform: rotate(45deg);
-        }
+            .screen-big-title {
+                font-size: 24px;
+                margin-bottom: 15px;
+            }
 
-        .faq-a {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height .3s ease;
-            font-size: 14.5px;
-            color: var(--muted);
-        }
-
-        .faq-a-inner {
-            padding: 0 4px 22px;
-        }
-
-        .faq-item.open .faq-a {
-            max-height: 220px;
+            .screen-description {
+                font-size: 14px;
+            }
         }
 
         /* ---------------- FINAL CTA / FOOTER ---------------- */
@@ -1108,7 +1151,6 @@
         }
 
         .cta-final h2 {
-            font-family: var(--serif);
             font-weight: 700;
             font-size: clamp(26px, 3.6vw, 40px);
             max-width: 620px;
@@ -1155,7 +1197,6 @@
             border-radius: 9px;
             padding: 12px 14px;
             color: var(--cream);
-            font-family: var(--sans);
             font-size: 14.5px;
         }
 
@@ -1197,7 +1238,6 @@
         }
 
         footer .foot-brand {
-            font-family: var(--serif);
             color: var(--cream);
             font-size: 17px;
             margin-bottom: 10px;
@@ -1209,6 +1249,113 @@
             gap: 18px;
             justify-content: center;
             flex-wrap: wrap;
+        }
+
+        /* FAQ Section Styles */
+        .faq-section {
+            padding: 50px 0;
+            background-color: #fff;
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .faq-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: #B45309;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .orange-line {
+            width: 25px;
+            height: 2px;
+            background-color: #B45309;
+        }
+
+        .faq-main-title {
+            font-size: 42px;
+            font-weight: 900;
+            color: #101B37;
+        }
+
+        .faq-wrapper {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #EDF2F7;
+        }
+
+        .faq-question {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 0;
+            background: none;
+            border: none;
+            font-size: 18px;
+            font-weight: 700;
+            color: #101B37;
+            cursor: pointer;
+            text-align: left;
+            transition: 0.3s;
+        }
+
+        .faq-icon {
+            width: 32px;
+            height: 32px;
+            background-color: #F1F5F9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #64748B;
+            transition: all 0.3s ease;
+        }
+
+        /* Open State Styling */
+        .faq-item.active .faq-question {
+            color: #101B37;
+        }
+
+        .faq-item.active .faq-icon {
+            background-color: #0B1120;
+            /* Dark Navy from image */
+            color: #fff;
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+        }
+
+        .faq-answer p {
+            padding-bottom: 30px;
+            color: #64748B;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        /* Hover effect */
+        .faq-question:hover .faq-icon {
+            background-color: #E2E8F0;
         }
 
         /* ---------------- signature SVG animations ---------------- */
@@ -1304,7 +1451,6 @@
             font-size: 13px;
             padding: 6px 14px;
             border-radius: 999px;
-            font-family: var(--sans);
         }
 
         .method-card svg {
@@ -1316,7 +1462,6 @@
         }
 
         .method-card h3 {
-            font-family: var(--serif);
             font-size: 20px;
             margin-bottom: 10px;
         }
@@ -1361,7 +1506,6 @@
             border: none;
             background: none;
             color: var(--muted);
-            font-family: var(--sans);
             font-weight: 600;
             font-size: 14px;
             padding: 11px 10px;
@@ -1420,7 +1564,6 @@
         .link-row .lurl {
             font-size: 12.5px;
             color: var(--muted);
-            font-family: 'Inter', monospace;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -1452,241 +1595,749 @@
             text-align: center;
         }
 
-        /* ---------------- DASHBOARD ---------------- */
+        /* --- Dashboard & Auth Dark Theme CSS --- */
         .dashboard-section {
-            padding: 90px 0 100px;
-            border-top: 1px solid var(--line);
+            padding: 100px 0;
+            background-color: #162e24;
         }
 
-        .auth-shell {
-            max-width: 420px;
-            margin: 0 auto;
-            background: var(--surface);
-            border: 1px solid var(--line);
-            border-radius: 18px;
-            padding: 30px;
-            box-shadow: var(--shadow);
+        /* Dashboard Dark Panel */
+        .dash-dark-container {
+            background: #064E3B;
+            /* স্ক্রিনশটের মতো ডার্ক গ্রিন */
+            border-radius: 40px;
+            padding: 60px 40px;
+            color: #fff;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.2);
         }
 
-        .auth-tabs {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid var(--line);
-        }
-
-        .auth-tab-btn {
-            flex: 1;
+        .dash-logout {
             background: none;
             border: none;
-            padding: 10px;
-            color: var(--muted);
-            font-family: var(--sans);
-            font-weight: 600;
+            color: rgba(255, 255, 255, 0.6);
             font-size: 14px;
             cursor: pointer;
-            border-bottom: 2px solid transparent;
-        }
-
-        .auth-tab-btn.active {
-            color: var(--gold-light);
-            border-color: var(--gold-light);
-        }
-
-        .auth-field {
-            margin-bottom: 14px;
-        }
-
-        .auth-field label {
-            font-size: 12.5px;
-            color: var(--muted);
-            display: block;
-            margin-bottom: 6px;
-        }
-
-        .auth-field input {
-            width: 100%;
-            background: var(--bg-alt);
-            border: 1px solid var(--line);
-            border-radius: 9px;
-            padding: 12px 14px;
-            color: var(--cream);
-            font-family: var(--sans);
-            font-size: 14.5px;
-        }
-
-        .auth-field input:focus {
-            border-color: var(--gold-light);
-        }
-
-        .auth-submit {
-            width: 100%;
-            background: var(--gold);
-            color: #17281f;
-            border: none;
-            border-radius: 9px;
-            padding: 13px;
-            font-weight: 700;
-            font-size: 15px;
-            cursor: pointer;
-            margin-top: 4px;
-        }
-
-        .auth-demo-note {
-            font-size: 12px;
-            color: var(--muted);
-            text-align: center;
-            margin-top: 14px;
-        }
-
-        .dash-panel {
-            display: none;
-        }
-
-        .dash-panel.active {
-            display: block;
+            text-decoration: underline;
+            margin-bottom: 30px;
         }
 
         .dash-summary {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 18px;
-            margin-bottom: 30px;
+            gap: 20px;
+            margin-bottom: 40px;
         }
 
         .dash-stat {
-            background: var(--surface);
-            border: 1px solid var(--line);
-            border-radius: 14px;
-            padding: 22px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: left;
         }
 
         .dash-stat b {
             display: block;
-            font-family: var(--serif);
-            font-size: 24px;
-            color: var(--gold-light);
+            font-size: 32px;
+            font-weight: 800;
+            color: #e5c566;
+            margin-bottom: 5px;
         }
 
         .dash-stat span {
-            font-size: 12.5px;
-            color: var(--muted);
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 500;
         }
 
         .dash-table-wrap {
-            background: var(--surface);
-            border: 1px solid var(--line);
-            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
             overflow: hidden;
         }
 
         .dash-table {
             width: 100%;
             border-collapse: collapse;
-        }
-
-        .dash-table th,
-        .dash-table td {
-            padding: 14px 16px;
             text-align: left;
-            font-size: 13.5px;
-            border-bottom: 1px solid var(--line);
         }
 
         .dash-table th {
-            color: var(--muted);
-            font-weight: 600;
-            font-size: 11.5px;
-            letter-spacing: 0.8px;
+            padding: 20px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
             text-transform: uppercase;
-            background: var(--bg-alt);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .dash-table tr:last-child td {
-            border-bottom: none;
+        .dash-table td {
+            padding: 20px;
+            font-size: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .stage-pill {
-            display: inline-block;
-            padding: 5px 12px;
-            border-radius: 999px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .stage-1 {
-            background: rgba(159, 189, 178, 0.15);
-            color: #9FBDB2;
-        }
-
-        .stage-2 {
-            background: rgba(201, 162, 39, 0.15);
-            color: #E7C766;
-        }
-
-        .stage-3 {
-            background: rgba(230, 175, 90, 0.18);
-            color: #F0B860;
-        }
-
-        .stage-4 {
-            background: rgba(120, 190, 140, 0.18);
-            color: #8FE0A6;
-        }
-
-        .stage-5 {
-            background: rgba(120, 190, 140, 0.28);
-            color: #8FE0A6;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 11px;
             font-weight: 700;
         }
 
-        .dash-logout {
-            font-size: 13px;
-            color: var(--muted);
-            text-decoration: underline;
-            cursor: pointer;
-            background: none;
-            border: none;
-            margin-bottom: 24px;
+        .stage-5 {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10B981;
         }
 
+        .stage-4 {
+            background: rgba(245, 158, 11, 0.2);
+            color: #B45309;
+        }
 
+        .stage-3 {
+            background: rgba(59, 130, 246, 0.2);
+            color: #60A5FA;
+        }
 
-        @media (max-width:560px) {
-            .step-track {
-                grid-template-columns: 1fr;
-            }
+        /* Guest Auth Shell */
+        .auth-shell {
+            max-width: 450px;
+            margin: 40px auto 0;
+            background: #fff;
+            border-radius: 35px;
+            padding: 40px;
+            border: 1px solid #E9F0F8;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.05);
+        }
 
-            .refer-form .row {
-                grid-template-columns: 1fr;
-            }
+        .auth-tabs {
+            display: flex;
+            border-bottom: 2px solid #F1F5F9;
+            margin-bottom: 30px;
+        }
 
-            .nav-inner {
-                padding: 14px 18px;
-            }
+        .auth-tab-btn {
+            flex: 1;
+            padding: 15px;
+            font-weight: 700;
+            color: #697383;
+            cursor: pointer;
+            text-align: center;
+        }
 
-            .wrap {
-                padding: 0 18px;
-            }
+        .auth-tab-btn.active {
+            color: #007D4F;
+            border-bottom: 3px solid #007D4F;
+        }
 
-            .stat-row {
-                gap: 22px;
-            }
+        .auth-field {
+            margin-bottom: 20px;
+        }
 
-            .link-gen-intro {
-                grid-template-columns: 1fr;
-            }
+        .auth-field label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            color: #101B37;
+            margin-bottom: 8px;
+        }
 
+        .auth-field input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: 1px solid #E9F0F8;
+            background: #F8FBFF;
+        }
+
+        .auth-submit {
+            width: 100%;
+            padding: 16px;
+            background: #007D4F !important;
+            color: #fff;
+            border-radius: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            border: none;
+        }
+
+        @media (max-width: 991px) {
             .dash-summary {
                 grid-template-columns: 1fr 1fr;
             }
 
-            .link-row {
-                flex-wrap: wrap;
+            .dash-dark-container {
+                padding: 30px 20px;
+            }
+        }
+
+        /* Container styling */
+        .referral-form-container {
+            padding: 20px 0 100px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .form-card-main {
+            width: 100%;
+            max-width: 1100px;
+            background: #fff;
+            border-radius: 40px;
+            display: flex;
+            overflow: hidden;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f0f4f8;
+        }
+
+        /* Left Dark Side */
+        .form-dark-side {
+            flex: 0 0 42%;
+            background: #06523e;
+            /* Deep Dark Blue/Black */
+            padding: 60px 50px;
+            color: #fff;
+        }
+
+        .side-title {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+
+        .side-desc {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .benefit-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .benefit-list li {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            font-weight: 500;
+            font-size: 15px;
+        }
+
+        .icon-circle {
+            width: 26px;
+            height: 26px;
+            background: #10B981;
+            /* Green color */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        /* Right White Side */
+        .form-white-side {
+            flex: 1;
+            padding: 60px 50px;
+            background: #fff;
+        }
+
+        .form-input-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: #101B37;
+            margin-bottom: 35px;
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .input-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-item label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #768191;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .input-item input,
+        .input-item select {
+            width: 100%;
+            padding: 16px 20px;
+            background: #F8FBFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            font-size: 15px;
+            color: #334155;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-item input:focus,
+        .input-item select:focus {
+            border-color: #10B981;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.05);
+        }
+
+        /* Submit Button */
+        .form-submit-btn {
+            width: 100%;
+            margin-top: 40px;
+            background: #06523e;
+            /* Matching left side */
+            color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            font-weight: 800;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .form-submit-btn:hover {
+            background: #10B981;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 991px) {
+            .form-card-main {
+                flex-direction: column;
+            }
+
+            .form-dark-side {
+                padding: 40px 30px;
+            }
+
+            .form-white-side {
+                padding: 40px 30px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .input-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .side-title {
+                font-size: 26px;
+            }
+        }
+
+        /* Referral CTA Section Styles - Theme Version */
+        .referral-cta-section {
+            padding: 60px 0 50px;
+            background-color: #f8fafc;
+        }
+
+        .cta-theme-card {
+            background-color: #005a3c;
+            /* Bhaiya Housing Theme Green */
+            border-radius: 40px;
+            padding: 80px 40px;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 90, 60, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-title {
+            font-size: 48px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .cta-subtitle {
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 45px;
+        }
+
+        .cta-btn-wrapper {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* White Button with Green Text and Cut-Corner */
+        .cta-white-btn {
+            background-color: #ffffff;
+            color: #005a3c;
+            text-decoration: none;
+            padding: 10px 45px;
+            font-size: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            /* Top-right corner cut effect as per image */
+            border-radius: 8px;
+        }
+
+        .cta-white-btn span {
+            font-size: 16px;
+        }
+
+
+
+        .cta-white-btn:hover {
+            background-color: #f0fdf4;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 991px) {
+            .cta-title {
+                font-size: 36px;
+            }
+
+            .cta-theme-card {
+                padding: 60px 20px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .cta-title {
+                font-size: 28px;
+            }
+
+            .cta-white-btn {
+                width: 100%;
+                padding: 18px 30px;
+            }
+        }
+
+        .refer-hero-section {
+            padding: 100px 0;
+            background-color: #f8fafc;
+
+        }
+
+        /* ২. বড় গ্রিন বক্স */
+        .main-green-box {
+            position: relative;
+            background-color: #005a3c;
+            /* হুবহু ইমেজের গ্রিন কালার */
+            border-radius: 60px;
+            /* পিল শেপড রাউন্ডেড কোণা */
+            padding: 80px 60px;
+            overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0, 77, 51, 0.2);
+        }
+
+        /* ৩. ডান পাশের আভা (Glow) */
+        .glow-overlay {
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* ৪. গ্রিড লেআউট */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 50px;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* ৫. টেক্সট স্টাইল */
+        .top-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fcd34d;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            padding: 8px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+        }
+
+        .hero-title {
+            color: #ffffff;
+            font-size: 54px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-desc {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 40px;
+            max-width: 500px;
+        }
+
+        /* ৬. বাটন */
+        .cta-button {
+            display: inline-block;
+            background: #ffffff;
+            color: #005a3c;
+            padding: 18px 40px;
+            border-radius: 100px;
+            font-weight: 800;
+            font-size: 18px;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+        }
+
+        /* ৭. গ্লাস কার্ড (Glassmorphism) */
+        .glass-tracker-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 40px;
+            padding: 40px;
+            color: #ffffff;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .stat-number {
+    display: inline-block;
+    min-width: 20px; /* যাতে সংখ্যা বাড়লে অন্য লেখা ধাক্কা না দেয় */
+}
+
+        .status-left {
+            font-size: 13px;
+            font-weight: 700;
+            color: #B45309;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-right {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .card-amount {
+            font-size: 58px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .card-footer {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+        }
+
+        /* ৮. মোবাইল রেসপনসিভনেস (যাতে হিজিবিজি না হয়) */
+        @media (max-width: 1024px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-title {
+                font-size: 40px;
+            }
+
+            .hero-desc {
+                margin: 0 auto 30px;
+            }
+
+            .main-green-box {
+                padding: 60px 30px;
+            }
+
+            .card-amount {
+                font-size: 45px;
+            }
+        }
+
+        /* ══════════════════════════════════════════════
+   DASHBOARD SECTION RESPONSIVE FIX
+══════════════════════════════════════════════ */
+
+        @media (max-width: 991px) {
+            .dashboard-section {
+                padding: 60px 0;
+                /* প্যাডিং কমানো হয়েছে */
+            }
+
+            .section-head h2 {
+                font-size: 28px !important;
+                text-align: center;
+            }
+
+            .section-head p {
+                text-align: center;
+                font-size: 14px;
+            }
+
+            /* ড্যাশবোর্ড কার্ডের ২ কলাম লেআউট */
+            .dash-summary {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 15px;
+            }
+
+            .dash-stat {
+                padding: 20px 15px;
+            }
+
+            .dash-stat b {
+                font-size: 24px;
+                /* নম্বর একটু ছোট করা হয়েছে */
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            /* টেবিল রেসপনসিভ ফিক্স */
+            .dash-table-wrap {
+                overflow-x: auto;
+                /* মোবাইলে টেবিলটি ডানে-বামে স্ক্রল করা যাবে */
+                -webkit-overflow-scrolling: touch;
+                border-radius: 15px;
             }
 
             .dash-table {
-                font-size: 12px;
+                min-width: 700px;
+                /* টেবিল যাতে খুব বেশি চ্যাপ্টা না হয় */
+            }
+
+            .dash-table th,
+            .dash-table td {
+                padding: 15px 12px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dash-summary {
+                grid-template-columns: 1fr !important;
+                /* একদম ছোট ফোনে ১ কলাম */
+            }
+
+            .dash-logout {
+                display: block;
+                margin: 0 auto 20px;
+                text-align: center;
+            }
+
+            .section-head h2 {
+                font-size: 24px !important;
+            }
+        }
+
+        /* ══════════════════════════════════════════════
+   DASHBOARD TABLE - MOBILE VIEW FIX (Final)
+══════════════════════════════════════════════ */
+
+        @media screen and (max-width: 768px) {
+
+            /* আগের দেওয়া কোনো min-width থাকলে তা বাতিল করা */
+            .dash-table {
+                min-width: 100% !important;
+                display: block !important;
+            }
+
+            /* টেবিল হেডার (Desktop Header) পুরোপুরি হাইড করা */
+            .dash-table thead {
+                display: none !important;
+            }
+
+            .dash-table tbody,
+            .dash-table tr {
+                display: block !important;
+                width: 100% !important;
+            }
+
+            /* প্রতিটি রো (Row) এখন একটি কার্ডের মতো দেখাবে */
+            .dash-table tr {
+                background: rgba(255, 255, 255, 0.05) !important;
+                border: 1px solid rgba(255, 255, 255, 0.1) !important;
+                margin-bottom: 15px !important;
+                border-radius: 12px !important;
+                padding: 10px !important;
+            }
+
+            /* প্রতিটি সেল (Cell) সেটিংস */
+            .dash-table td {
+                display: flex !important;
+                justify-content: space-between !important;
+                /* লেবেল বামে, ডেটা ডানে */
+                align-items: center !important;
+                padding: 10px 5px !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+                text-align: right !important;
+                width: 100% !important;
+                color: #FFFFFF !important;
+                font-size: 14px !important;
+            }
+
+            .dash-table td:last-child {
+                border-bottom: none !important;
+            }
+
+            /* বাম পাশে গোল্ডেন লেবেল দেখানোর জন্য (এটি data-label অ্যাট্রিবিউট থেকে আসে) */
+            .dash-table td::before {
+                content: attr(data-label) !important;
+                font-weight: 700 !important;
+                color: #e5c566 !important;
+                font-size: 12px !important;
+                text-transform: uppercase;
+                text-align: left !important;
+                flex: 1;
+                /* লেবেলকে জায়গা দেওয়া */
+            }
+
+            /* কমিশনের টাকার অঙ্ক বা স্ট্যাটাস টেক্সটকে ডানে রাখা */
+            .dash-table td>span,
+            .dash-table td {
+                flex: 1;
+            }
+
+            /* স্টেজ পিল মোবাইলে অ্যাডজাস্টমেন্ট */
+            .stage-pill {
+                display: inline-block !important;
+                font-size: 10px !important;
+                padding: 4px 10px !important;
+                margin-left: auto;
+                /* ডানে পুশ করা */
             }
         }
     </style>
@@ -1697,129 +2348,80 @@
     <?php echo $__env->make('frontend.landing.front.landingNav', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
     <main>
         <?php echo $__env->yieldContent('content'); ?>
+
     </main>
     <?php echo $__env->make('frontend.landing.front.landingFooter', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
-
     <script>
-        // FAQ accordion
-        document.querySelectorAll('.faq-item').forEach(item => {
-            item.querySelector('.faq-q').addEventListener('click', () => {
-                const isOpen = item.classList.contains('open');
-                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-                if (!isOpen) item.classList.add('open');
-            });
-        });
-
-        // Bangladeshi-style comma count-up for commission figure
-        function bnFormat(num) {
-            let s = String(num);
-            let last3 = s.slice(-3);
-            let rest = s.slice(0, -3);
-            if (rest !== '') last3 = ',' + last3;
-            rest = rest.replace(/\B(?=(\d{2})+(?!\d))/g, ',');
-            const digits = '০১২৩৪৫৬৭৮৯';
-            return (rest + last3).replace(/\d/g, d => digits[d]);
-        }
-        const amountEl = document.getElementById('countAmount');
-        let animated = false;
-
-        function runCount() {
-            if (animated) return;
-            animated = true;
-            const target = 300000,
-                dur = 1400,
-                start = performance.now();
-
-            function tick(now) {
-                const p = Math.min(1, (now - start) / dur);
-                const val = Math.floor(p * target / 1000) * 1000;
-                amountEl.textContent = '৳' + bnFormat(val);
-                if (p < 1) requestAnimationFrame(tick);
-                else amountEl.textContent = '৳' + bnFormat(target);
-            }
-            requestAnimationFrame(tick);
-        }
-        // Refer method tabs (direct vs link)
-        document.querySelectorAll('.refer-tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.refer-tab-btn').forEach(b => b.classList.remove('active'));
-                document.querySelectorAll('.refer-pane').forEach(p => p.classList.remove('active'));
-                btn.classList.add('active');
-                document.querySelector('.refer-pane[data-pane="' + btn.dataset.tab + '"]').classList.add(
-                    'active');
-            });
-        });
-        // deep-link support: #refer-link jumps straight to link tab
-        if (location.hash === '#refer-link') {
-            document.querySelector('.refer-tab-btn[data-tab="link"]').click();
-        }
-
-        // Auth tabs (login vs register)
-        function showAuth(mode) {
-            const loginSec = document.getElementById('loginSection');
-            const registerSec = document.getElementById('registerSection');
-            const forgotSec = document.getElementById('forgotSection');
-            const tabHeader = document.getElementById('tabHeader');
-            const tabs = document.querySelectorAll('.auth-tab-btn');
-
-            // সব হাইড করা
-            loginSec.style.display = 'none';
-            registerSec.style.display = 'none';
-            forgotSec.style.display = 'none';
-            tabs.forEach(t => t.classList.remove('active'));
-
-            if (mode === 'login') {
-                loginSec.style.display = 'block';
-                tabHeader.style.display = 'flex';
-                tabs[0].classList.add('active');
-            } else if (mode === 'register') {
-                registerSec.style.display = 'block';
-                tabHeader.style.display = 'flex';
-                tabs[1].classList.add('active');
-            } else if (mode === 'forgot') {
-                forgotSec.style.display = 'block';
-                tabHeader.style.display = 'none'; // পাসওয়ার্ড রিসেট করার সময় ট্যাব লুকিয়ে রাখা
-            }
-        }
-
-        function showDashboard() {
-            document.getElementById('authView').style.display = 'none';
-            document.getElementById('dashPanel').classList.add('active');
-            document.getElementById('dashPanel').scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-
-        function hideDashboard() {
-            document.getElementById('dashPanel').classList.remove('active');
-            document.getElementById('authView').style.display = 'block';
-        }
-
         document.addEventListener('DOMContentLoaded', function () {
-            if ("<?php echo e(Auth::check()); ?>") {
-                generateDynamicLinks();
-            }
-        });
+            // ১. অ্যানিমেশন অবজারভার (Reveal effect)
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        e.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.15 });
 
+            document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+
+            // ২. রেফার মেথড ট্যাব (যদি ট্যাব ইন্টারফেস ব্যবহার করেন)
+            document.querySelectorAll('.refer-tab-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.refer-tab-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('.refer-pane').forEach(p => p.classList.remove('active'));
+                    btn.classList.add('active');
+                    const targetPane = document.querySelector(`.refer-pane[data-pane="${btn.dataset.tab}"]`);
+                    if (targetPane) targetPane.classList.add('active');
+                });
+            });
+
+            // ৩. লারাভেল এরর থাকলে অটো স্ক্রল করা
+            <?php if($errors->any()): ?>
+                const element = document.getElementById('dashboard-section');
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            <?php endif; ?>
+});
+
+        // ৪. FAQ টগল ফাংশন
+        function toggleFaq(button) {
+            const item = button.parentElement;
+            const isOpen = item.classList.contains('active');
+            document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
+            if (!isOpen) item.classList.add('active');
+        }
+
+        // ৫. "কেন ভাইয়া" হাব আপডেট ফাংশন
+        function updateHub(index, element) {
+            document.querySelectorAll('.hub-nav-card').forEach(card => card.classList.remove('active'));
+            element.classList.add('active');
+            document.querySelectorAll('.screen-content').forEach(content => content.classList.remove('active'));
+            document.getElementById('content-' + index).classList.add('active');
+        }
+
+        // ৬. লিংক জেনারেট এবং কপি করার ফাংশন (Auth থাকলে কাজ করবে)
         function generateProjectLink() {
             const select = document.getElementById('projectSelect');
+            if (!select) return;
             const slug = select.value;
             const projectName = select.options[select.selectedIndex].text;
-
             const refCode = "<?php echo e(auth()->check() ? auth()->user()->referral_code : ''); ?>";
 
             if (!slug) { alert('প্রজেক্ট সিলেক্ট করুন'); return; }
 
             const baseUrl = window.location.origin + '/project/' + slug + '?ref=' + refCode;
 
-            document.getElementById('linkContainer').innerHTML = `
-        <div class="link-row" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 15px; background: var(--bg-alt); border-radius: 10px; border: 1px solid var(--line); margin-top: 15px;">
-            <span class="lname" style="flex: 0 0 100px; color: var(--cream); font-size: 13px;">${projectName}</span>
-            <span class="lurl" id="generated-link-text" style="flex: 1; color: var(--muted); font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 0 10px;">${baseUrl}</span>
-            <button type="button" class="copy-btn" style="flex: 0 0 70px; background: var(--gold); border-radius: 6px; padding: 5px; font-size: 12px; cursor: pointer;" onclick="copySpecificLink('generated-link-text', this)">কপি</button>
-        </div>
-    `;
+            const container = document.getElementById('linkContainer');
+            if (container) {
+                container.innerHTML = `
+            <div class="link-row" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 15px; background: #F8FBFF; border-radius: 10px; border: 1px solid #E2E8F0; margin-top: 15px;">
+                <span class="lname" style="flex: 0 0 100px; color: #1E293B; font-size: 13px;">${projectName}</span>
+                <span class="lurl" id="generated-link-text" style="flex: 1; color: #64748B; font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 0 10px;">${baseUrl}</span>
+                <button type="button" class="copy-btn" style="flex: 0 0 70px; background: #059669; color: white; border-radius: 6px; padding: 5px; font-size: 12px; cursor: pointer;" onclick="copySpecificLink('generated-link-text', this)">কপি</button>
+            </div>
+        `;
+            }
         }
 
         function copySpecificLink(id, btn) {
@@ -1827,38 +2429,64 @@
             navigator.clipboard.writeText(text).then(() => {
                 const originalText = btn.textContent;
                 btn.textContent = 'কপি হয়েছে ✓';
-                btn.style.color = '#fff';
-                btn.style.background = 'var(--gold)';
                 setTimeout(() => {
                     btn.textContent = originalText;
-                    btn.style.color = 'var(--gold-light)';
-                    btn.style.background = 'none';
                 }, 1500);
             });
         }
-    </script>
-    <script>
         document.addEventListener('DOMContentLoaded', function () {
-            <?php if($errors->any()): ?>
-                const element = document.getElementById('dashboard');
-                if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
+            // ১. ইংরেজি সংখ্যাকে বাংলায় রূপান্তর এবং ফরম্যাট করার ফাংশন
+            function formatBengali(number) {
+                const digits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+
+                // কমা ফরম্যাটিং (যেমন: 3,00,000)
+                let formatted = number.toLocaleString('en-IN');
+
+                // ইংরেজি ডিজিটকে বাংলা ডিজিটে রূপান্তর
+                return formatted.replace(/\d/g, (d) => digits[d]);
+            }
+
+            // ২. কাউন্টার অ্যানিমেশন ফাংশন
+            function startCounter(el) {
+                const target = parseInt(el.getAttribute('data-target'));
+                const duration = 3000; // ২ সেকেন্ড সময় নিবে
+                const start = 0;
+                const startTime = performance.now();
+
+                function update(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+
+                    // সংখ্যা গণনা
+                    const currentCount = Math.floor(progress * target);
+                    el.innerText = formatBengali(currentCount);
+
+                    if (progress < 1) {
+                        requestAnimationFrame(update);
+                    } else {
+                        el.innerText = formatBengali(target); // নিশ্চিত করতে যে টার্গেট সংখ্যায় পৌঁছেছে
+                    }
                 }
-            <?php endif; ?>
-    });
-    </script>
-    <script>
-        // Reveal Observer
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
-        function updateHub(index, element) {
-            document.querySelectorAll('.hub-nav-card').forEach(card => card.classList.remove('active'));
-            element.classList.add('active');
-            document.querySelectorAll('.screen-content').forEach(content => content.classList.remove('active'));
-            document.getElementById('content-' + index).classList.add('active');
-        }
+                requestAnimationFrame(update);
+            }
+
+            // ৩. স্ক্রল করলে অ্যানিমেশন শুরু করার জন্য Observer
+            const counterObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const numbers = entry.target.querySelectorAll('.stat-number');
+                        numbers.forEach(num => startCounter(num));
+                        counterObserver.unobserve(entry.target); // একবার অ্যানিমেশন হয়ে গেলে আর হবে না
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            // সেকশনটি ট্র্যাক করা শুরু করুন
+            const statsSection = document.querySelector('.c-stats');
+            if (statsSection) {
+                counterObserver.observe(statsSection);
+            }
+        });
     </script>
 </body>
 

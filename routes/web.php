@@ -178,7 +178,8 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 });
 Route::prefix('')->group(function () {
 
-    // Guest only
+    Route::get('/affiliated/login', [HomeController::class, 'showLoginForm'])->name('affiliated.login.page');
+    Route::get('/affiliated/register', [HomeController::class, 'showRegisterForm'])->name('affiliated.register.page');
     Route::get('/', [HomeController::class, 'landing'])->name('landing.index');
     Route::get('/register', [FrontendAuthController::class, 'showSignin'])->name('signin');
     Route::post('/register', [FrontendAuthController::class, 'register'])->name('affiliated.register');

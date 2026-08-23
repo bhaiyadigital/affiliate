@@ -1,6 +1,31 @@
 import './bootstrap';
 import Alpine from 'alpinejs';
 import ApexCharts from 'apexcharts';
+import Lenis from 'lenis'
+
+// Lenis Initialize
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // standard easing
+  direction: 'vertical',
+  gestureDirection: 'vertical',
+  smooth: true,
+  mouseMultiplier: 1,
+  smoothTouch: false,
+  touchMultiplier: 2,
+  infinite: false,
+})
+
+// নিচের ফাংশনটি স্ক্রল অ্যানিমেশন রিকোয়েস্ট করবে
+function raf(time) {
+  lenis.raf(time)
+  requestAnimationFrame(raf)
+}
+
+requestAnimationFrame(raf)
+
+// আপনার যদি GSAP থাকে তবে নিচেরটি দিন (ঐচ্ছিক)
+// lenis.on('scroll', ScrollTrigger.update)
 
 // flatpickr
 
