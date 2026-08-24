@@ -19,7 +19,7 @@
             </div>
         </a>
         <!-- শুধু এই বাটনটি brand লিঙ্কের নিচে অ্যাড করুন -->
-        <button id="menuToggle" style="display:none; font-size:24px; color:#059669; order:2;" aria-label="মেনু টগল করুন"
+        <button id="menuToggle" style="display:none; font-size:24px; color:#175b05; order:2;" aria-label="মেনু টগল করুন"
             aria-expanded="false" aria-controls="mainMenu">
             <i class="fa-solid fa-bars"></i>
         </button>
@@ -94,7 +94,7 @@
             flex-direction: column;
             padding: 20px;
             display: none;
-            border-bottom: 2px solid #059669;
+            border-bottom: 2px solid #175b05;
             border-radius: 0 !important;
         }
 

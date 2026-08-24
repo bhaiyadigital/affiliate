@@ -84,7 +84,7 @@
 
 
         :focus-visible {
-            outline: 2px solid #059669;
+            outline: 2px solid #175b05;
             outline-offset: 3px;
         }
 
@@ -359,7 +359,7 @@
         }
 
         .nav-item:hover {
-            color: #059669;
+            color: #175b05;
             background: #ECFDF5;
         }
 
@@ -460,7 +460,7 @@
                 display: none;
                 flex-direction: column;
                 padding: 20px;
-                border-bottom: 2px solid #059669;
+                border-bottom: 2px solid #175b05;
             }
         }
 
@@ -536,7 +536,7 @@
         .c-badge span {
             width: 8px;
             height: 8px;
-            background: #10B981;
+            background: #175b05;
             border-radius: 50%;
             display: inline-block;
         }
@@ -1214,7 +1214,7 @@
             gap: 10px;
             color: #B45309;
             font-weight: 700;
-            font-size: 13px;
+            font-size: 16px;
             text-transform: uppercase;
             margin-bottom: 15px;
         }
@@ -2308,7 +2308,7 @@
             <div class="link-row" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 15px; background: #F8FBFF; border-radius: 10px; border: 1px solid #E2E8F0; margin-top: 15px;">
                 <span class="lname" style="flex: 0 0 100px; color: #1E293B; font-size: 13px;">${projectName}</span>
                 <span class="lurl" id="generated-link-text" style="flex: 1; color: #64748B; font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 0 10px;">${baseUrl}</span>
-                <button type="button" class="copy-btn" style="flex: 0 0 70px; background: #059669; color: white; border-radius: 6px; padding: 5px; font-size: 12px; cursor: pointer;" onclick="copySpecificLink('generated-link-text', this)">কপি</button>
+                <button type="button" class="copy-btn" style="flex: 0 0 70px; background: #175b05; color: white; border-radius: 6px; padding: 5px; font-size: 12px; cursor: pointer;" onclick="copySpecificLink('generated-link-text', this)">কপি</button>
             </div>
         `;
             }

@@ -33,19 +33,16 @@
                 </div>
             </div>
 
-            <!-- ডান পাশের ছবি/কার্ড -->
-            <!-- কার্ডের মেইন প্যারেন্ট -->
             <div class="visual-parent anim-float">
 
-                <!-- আপনার ব্যাকগ্রাউন্ড ইমেজ (যেমন: ডট বা কোনো শেপ) -->
                 <img src="{{asset('./images/hero/dot.avif')}}" class="card-bg-img" alt="background">
 
                 <!-- আপনার আসল কার্ড -->
                 <div class="c-visual-card">
                     <div
                         style="display:flex; justify-content: space-between; margin-bottom: 30px; font-weight: 700; font-size: 14px;">
-                        <span><i class="fas fa-circle" style="color:#10B981; font-size:8px;"></i> লাইভ রেফারেল প্রবাহ</span>
-                        <span style="color:#047857; text-transform: uppercase; font-size: 11px;">স্বচ্ছ ও নিরাপদ</span>
+                        <span  style="color:#175b05;"><i class="fas fa-circle" style="color:#175b05; font-size:8px;"></i> লাইভ রেফারেল প্রবাহ</span>
+                        <span style="color:#175b05; text-transform: uppercase; font-size: 11px;">স্বচ্ছ ও নিরাপদ</span>
                     </div>
                     <div class="green-box">
                         <p

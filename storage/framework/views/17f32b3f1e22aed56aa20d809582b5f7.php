@@ -2,7 +2,7 @@
 <section class="register-section" style="padding: 80px 0; background-color: #F6F9FD;">
     <div class="wrap">
         <div class="section-head" style="text-align: center; margin-bottom: 30px;">
-            <div class="eyebrow" style="color: #059669; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px;">অ্যাফিলিয়েট মেম্বার</div>
+            <div class="eyebrow" style="color: #175b05; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px;">অ্যাফিলিয়েট মেম্বার</div>
             <h2 style="font-size: 32px; font-weight: 900; color: #101B37;">নতুন অ্যাকাউন্ট তৈরি করুন</h2>
         </div>
 
@@ -99,11 +99,11 @@ endif;
 unset($__errorArgs, $__bag); ?>
                 </div>
 
-                <button type="submit" class="auth-submit" style="width: 100%; padding: 16px; background: #007D4F; color: #fff; border-radius: 12px; font-weight: 800; cursor: pointer; border: none; font-size: 16px;">অ্যাকাউন্ট তৈরি করুন</button>
+                <button type="submit" class="auth-submit" style="width: 100%; padding: 16px; background: #175b05; color: #fff; border-radius: 12px; font-weight: 800; cursor: pointer; border: none; font-size: 16px;">অ্যাকাউন্ট তৈরি করুন</button>
             </form>
 
             <div style="text-align: center; margin-top: 25px; font-size: 14px; color: #64748B;">
-                ইতিমধ্যে অ্যাকাউন্ট আছে? <a href="<?php echo e(route('affiliated.login.page')); ?>" style="color: #007D4F; font-weight: 700; text-decoration: none;">লগইন করুন</a>
+                ইতিমধ্যে অ্যাকাউন্ট আছে? <a href="<?php echo e(route('affiliated.login.page')); ?>" style="color: #175b05; font-weight: 700; text-decoration: none;">লগইন করুন</a>
             </div>
         </div>
     </div>
