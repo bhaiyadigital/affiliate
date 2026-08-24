@@ -210,7 +210,7 @@ Route::prefix('')->group(function () {
             ->name('assets.edit-content');
         Route::get('/drive/media/{media}/base64', [FileController::class, 'base64Image'])
             ->name('drive.media.base64');
-        Route::get('/home', [HomeController::class, 'index'])->name('home.index');
+        Route::get('/', [HomeController::class, 'index'])->name('home.index');
         Route::get('/campaign/{slug}', [HomeController::class, 'campaignDetails'])->name('campaign.details');
         Route::get('/asset/{slug}', [HomeController::class, 'assetdetails'])->name('asset.details');
         Route::get('/assets', [HomeController::class, 'filter'])->name('home.filter');
