@@ -180,7 +180,7 @@ Route::prefix('')->group(function () {
 
     Route::get('/affiliated/login', [HomeController::class, 'showLoginForm'])->name('affiliated.login.page');
     Route::get('/affiliated/register', [HomeController::class, 'showRegisterForm'])->name('affiliated.register.page');
-    
+    Route::get('/', [HomeController::class, 'landing'])->name('landing.index');
     Route::get('/register', [FrontendAuthController::class, 'showSignin'])->name('signin');
     Route::post('/register', [FrontendAuthController::class, 'register'])->name('affiliated.register');
     Route::get('/forgot-password', [FrontendAuthController::class, 'sendReset'])->name('password.request');
@@ -210,7 +210,12 @@ Route::prefix('')->group(function () {
             ->name('assets.edit-content');
         Route::get('/drive/media/{media}/base64', [FileController::class, 'base64Image'])
             ->name('drive.media.base64');
-        Route::get('/', [HomeController::class, 'index'])->name('home.index');
+
+            
+        Route::get('/home', [HomeController::class, 'landing'])->name('home.index');
+    
+
+
         Route::get('/campaign/{slug}', [HomeController::class, 'campaignDetails'])->name('campaign.details');
         Route::get('/asset/{slug}', [HomeController::class, 'assetdetails'])->name('asset.details');
         Route::get('/assets', [HomeController::class, 'filter'])->name('home.filter');
@@ -259,5 +264,5 @@ Route::prefix('')->group(function () {
         ->middleware('auth');
 });
 Route::fallback(function () {
-    return redirect()->route('home.index');
+    return redirect()->route('landing.index');
 });
