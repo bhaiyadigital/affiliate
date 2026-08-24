@@ -28,7 +28,7 @@
                         fill="" />
                 </svg>
             </button>
-               <a href="/home" class=" text-gray-500">
+               <a href="/" class=" text-gray-500">
                 View Site
             </a>
 

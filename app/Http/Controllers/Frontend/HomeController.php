@@ -31,7 +31,7 @@ class HomeController extends Controller
             ->get();
 
         $leads = auth()->check() ? Lead::where('user_id', auth()->id())->get() : collect([]);
-        return view('frontend.home.index', compact('projects', 'leads'));
+        return view('frontend.landing.index', compact('projects', 'leads'));
     }
     public function index()
     {
