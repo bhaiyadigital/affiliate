@@ -125,7 +125,7 @@
             <!-- app header start -->
             @include('layouts.app-header')
             <!-- app header end -->
-            <div class=" mx-auto   ">
+            <div class=" mx-auto container  ">
                 @yield('content')
             </div>
         </div>
