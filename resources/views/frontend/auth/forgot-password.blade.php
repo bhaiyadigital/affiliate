@@ -1,7 +1,7 @@
 @extends('frontend.layouts.landingFront')
 
 @section('content')
-<section class="dashboard-section" style="padding: 100px 0; background-color: #F6F9FD;">
+<section class="forgot-section" style="padding: 100px 0; background-color: #F6F9FD;">
     <div class="wrap">
         <div class="section-head" style="text-align: center; margin-bottom: 30px;">
             <div class="eyebrow" style="color: #059669; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px;">অ্যাকাউন্ট রিকভারি</div>
