@@ -32,25 +32,33 @@
             </div>
 
             <!-- ডান পাশের ছবি/কার্ড -->
-            <div class="c-visual-card">
-                <div
-                    style="display:flex; justify-content: space-between; margin-bottom: 30px; font-weight: 700; font-size: 14px;">
-                    <span><i class="fas fa-circle" style="color:#10B981; font-size:8px;"></i> লাইভ রেফারেল
-                        প্রবাহ</span>
-                    <span style="color:#047857; text-transform: uppercase; font-size: 11px;">স্বচ্ছ ও নিরাপদ</span>
-                </div>
-                <div class="green-box">
-                    <p
-                        style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; margin-bottom: 10px;">
-                        সর্বোচ্চ কমিশন সুবিধা</p>
-                    <h2 style="font-size: 52px; font-weight: 900; margin: 0; ">৳৩,০০,০০০</h2>
-                    <p style="font-size: 13px; opacity: 0.7; margin-top: 10px;">প্রতিটি সফল অ্যাপার্টমেন্ট রেফারেলের
-                        ক্ষেত্রে</p>
+            <!-- কার্ডের মেইন প্যারেন্ট -->
+            <div class="visual-parent anim-float">
+
+                <!-- আপনার ব্যাকগ্রাউন্ড ইমেজ (যেমন: ডট বা কোনো শেপ) -->
+                <img src="<?php echo e(asset('./images/hero/dot.avif')); ?>" class="card-bg-img" alt="background">
+
+                <!-- আপনার আসল কার্ড -->
+                <div class="c-visual-card">
+                    <div
+                        style="display:flex; justify-content: space-between; margin-bottom: 30px; font-weight: 700; font-size: 14px;">
+                        <span><i class="fas fa-circle" style="color:#10B981; font-size:8px;"></i> লাইভ রেফারেল প্রবাহ</span>
+                        <span style="color:#047857; text-transform: uppercase; font-size: 11px;">স্বচ্ছ ও নিরাপদ</span>
+                    </div>
+                    <div class="green-box">
+                        <p
+                            style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; margin-bottom: 10px;">
+                            সর্বোচ্চ কমিশন সুবিধা</p>
+                        <h2 style="font-size: 52px; font-weight: 900; margin: 0; ">৳৩,০০,০০০</h2>
+                        <p style="font-size: 13px; opacity: 0.7; margin-top: 10px;">প্রতিটি সফল অ্যাপার্টমেন্ট রেফারেলের
+                            ক্ষেত্রে</p>
+                    </div>
+                    <p style="text-align:center; font-weight: 800; font-size: 15px; color: #1E293B; margin-top:30px;">কমিশন
+                        প্রাপ্তি</p>
                 </div>
 
-                <p style="text-align:center; font-weight: 800; font-size: 15px; color: #1E293B; margin-top:30px;">কমিশন
-                    প্রাপ্তি</p>
             </div>
+
         </div>
     </section>
 
@@ -80,88 +88,349 @@
         </div>
     </section>
     <!-- HOW IT WORKS SECTION - IMAGE PERFECT VERSION -->
-    <section class="how-it-works-final" id="features">
-        <div class="container">
-            <!-- Header Part -->
-            <div class="header-area">
-                <div class="label-box">
-                    <span class="orange-bar"></span> প্রক্রিয়া
+    <div class="container">
+        <div class="header">
+            <h1>কিভাবে কাজ করে?</h1>
+            <p>মাত্র ৪টি সহজ ধাপে আপনার রেফারেল কমিশন নিশ্চিত করুন।</p>
+        </div>
+
+        <div class="steps-wrapper">
+            <div class="progress-line"></div>
+            <div class="progress-fill" id="progressFill"></div>
+            <div class="animated-dot" id="animatedDot"></div>
+
+            <div class="steps-grid">
+                <div class="step-item" id="step1">
+                    <div class="icon-circle">01</div>
+                    <h3>রেজিস্টার করুন</h3>
+                    <p>ফ্রি অ্যাকাউন্ট তৈরি করুন এবং আপনার ইউনিক রেফারেল লিংক পান।</p>
                 </div>
-                <h2 class="main-heading"><span class="bg-highlight">কিভাবে</span> কাজ করে?</h2>
-                <p class="sub-heading">মাত্র ৪টি সহজ ধাপে আপনার রেফারেল কমিশন নিশ্চিত করুন।</p>
-            </div>
 
-            <!-- Steps Timeline Part -->
-            <div class="steps-wrapper">
-                <!-- The Horizontal Green Line -->
-                <div class="horizontal-line"></div>
+                <div class="step-item" id="step2">
+                    <div class="icon-circle">02</div>
+                    <h3>কাস্টমার রেফার করুন</h3>
+                    <p>তথ্য ফর্মে জমা দিন অথবা রেফারেল লিংক শেয়ার করুন।</p>
+                </div>
 
-                <div class="steps-grid">
-                    <!-- Step 01 -->
-                    <div class="step-item">
-                        <div class="icon-box-outer">
-                            <div class="icon-circle">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                                    <circle cx="8.5" cy="7" r="4" />
-                                    <line x1="20" y1="8" x2="20" y2="14" />
-                                    <line x1="23" y1="11" x2="17" y2="11" />
-                                </svg>
-                            </div>
-                            <span class="number-badge">01</span>
-                        </div>
-                        <h3>রেজিস্টার করুন</h3>
-                        <p>ফ্রি অ্যাকাউন্ট তৈরি করুন এবং আপনার ইউনিক রেফারেল লিংক পান।</p>
-                    </div>
+                <div class="step-item" id="step3">
+                    <div class="icon-circle">03</div>
+                    <h3>সাইট ভিজিট</h3>
+                    <p>সেলস টিম কাস্টমারকে সাইট ভিজিটের ব্যবস্থা করবে।</p>
+                </div>
 
-                    <!-- Step 02 -->
-                    <div class="step-item">
-                        <div class="icon-box-outer">
-                            <div class="icon-circle">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                                    <polyline points="22,6 12,13 2,6" />
-                                </svg>
-                            </div>
-                            <span class="number-badge">02</span>
-                        </div>
-                        <h3>কাস্টমার রেফার করুন</h3>
-                        <p>তথ্য ফর্মে জমা দিন অথবা রেফারেল লিংক শেয়ার করুন।</p>
-                    </div>
-
-                    <!-- Step 03 -->
-                    <div class="step-item">
-                        <div class="icon-box-outer">
-                            <div class="icon-circle">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                                    <polyline points="9 22 9 12 15 12 15 22" />
-                                </svg>
-                            </div>
-                            <span class="number-badge">03</span>
-                        </div>
-                        <h3>সাইট ভিজিট</h3>
-                        <p>সেলস টিম কাস্টমারকে সাইট ভিজিটের ব্যবস্থা করবে।</p>
-                    </div>
-
-                    <!-- Step 04 -->
-                    <div class="step-item">
-                        <div class="icon-box-outer">
-                            <div class="icon-circle">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <rect x="2" y="5" width="20" height="14" rx="2" />
-                                    <line x1="2" y1="10" x2="22" y2="10" />
-                                </svg>
-                            </div>
-                            <span class="number-badge">04</span>
-                        </div>
-                        <h3>কমিশন পান</h3>
-                        <p>বুকিং সম্পন্ন হলে সরাসরি ব্যাংকে পেমেন্ট পাবেন।</p>
-                    </div>
+                <div class="step-item" id="step4">
+                    <div class="icon-circle">04</div>
+                    <h3>কমিশন পান</h3>
+                    <p>বুকিং সম্পন্ন হলে সরাসরি ব্যাংকে পেমেন্ট পাবেন।</p>
                 </div>
             </div>
         </div>
-    </section>
+
+
+    </div>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--text-primary, #000);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 14px;
+            color: var(--text-secondary, #666);
+        }
+
+        .steps-wrapper {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .progress-line {
+            position: absolute;
+            top: 24px;
+            left: 60px;
+            right: 60px;
+            height: 2px;
+            background: #e5e7eb;
+            z-index: 1;
+        }
+
+        .progress-fill {
+            position: absolute;
+            top: 24px;
+            left: 60px;
+            height: 2px;
+            background: #10b981;
+            z-index: 2;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        .steps-grid {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            z-index: 3;
+        }
+
+        .step-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .icon-circle {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            border: 2px solid #d1d5db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-secondary, #999);
+            background: white;
+            transition: all 0.1s ease;
+            position: relative;
+        }
+
+        .step-item.active .icon-circle {
+            border-color: #175b05;
+            color: white;
+            background: #009d0a;
+        }
+
+        .step-item.completed .icon-circle {
+            border-color: #009d0a;
+            background: #009d0a;
+            color: white;
+        }
+
+        .step-item h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary, #000);
+            margin-bottom: 8px;
+        }
+
+        .step-item p {
+            font-size: 13px;
+            color: #175b05;
+            line-height: 1.5;
+            max-width: 140px;
+            margin: 0 auto;
+        }
+
+        .animated-dot {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #175b05;
+            border-radius: 50%;
+            top: 18px;
+            left: 60px;
+            animation: moveDot 8s linear infinite;
+            z-index: 4;
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+        }
+
+        @keyframes moveDot {
+            0% {
+                left: 60px;
+            }
+
+            25% {
+                left: calc(25% + 30px);
+            }
+
+            50% {
+                left: calc(50% + 30px);
+            }
+
+            75% {
+                left: calc(75% + 30px);
+            }
+
+            100% {
+                left: calc(100% - 66px);
+            }
+        }
+
+        /* 📱 মোবাইল ভার্সন ফিক্স - ডট এবং লাইন পজিশন সঠিক করা */
+        @media (max-width: 768px) {
+            .steps-wrapper {
+                padding-left: 0px;
+                /* প্যাডিং ক্লিন করা হলো */
+                margin-top: 20px;
+            }
+
+            /* লাইনটিকে আইকনের ঠিক মাঝখানে রাখা (Left: 47px) */
+            .progress-line,
+            .progress-fill {
+                left: 47px;
+                width: 2px;
+                right: auto;
+                top: 20px;
+                bottom: 20px;
+                height: auto;
+                position: absolute;
+            }
+
+            .progress-fill {
+                height: 0%;
+                /* JS দিয়ে কন্ট্রোল হবে */
+            }
+
+            /* ডটটিকে লাইনের ওপর সেন্টার করা (Left: 42px) */
+            /* ক্যালকুলেশন: লাইন ৪৭px + (২px লাইন / ২) - (১২px ডট / ২) = ৪২px */
+            .animated-dot {
+                left: 42px !important;
+                top: 20px;
+                width: 12px;
+                height: 12px;
+                position: absolute;
+                animation: moveDotVertical 8s linear infinite;
+            }
+
+            .steps-grid {
+                flex-direction: column;
+                gap: 40px;
+                align-items: flex-start;
+                padding-left: 25px;
+                /* আইকনগুলোর বাম পাশের গ্যাপ */
+                position: relative;
+            }
+
+            .step-item {
+                text-align: left;
+                display: flex;
+                gap: 20px;
+                align-items: center;
+                width: 100%;
+                position: relative;
+                z-index: 5;
+            }
+
+            .icon-circle {
+                margin: 0;
+                flex-shrink: 0;
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+                background: white;
+            }
+
+            /* ভার্টিক্যাল মুভমেন্ট এনিমেশন */
+            @keyframes moveDotVertical {
+                0% {
+                    top: 20px;
+                }
+
+                100% {
+                    top: calc(100% - 25px);
+                }
+            }
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 10px 24px;
+            border: 0.5px solid var(--border, #d0d0d0);
+            border-radius: 6px;
+            background: var(--fill-secondary, #f0f0f0);
+            cursor: pointer;
+            font-size: 14px;
+            color: var(--text-primary, #000);
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        button:hover {
+            background: var(--fill-ghost-hover, #e5e5e5);
+        }
+    </style>
+
+    <script>
+        const step1 = document.getElementById('step1');
+        const step2 = document.getElementById('step2');
+        const step3 = document.getElementById('step3');
+        const step4 = document.getElementById('step4');
+        const progressFill = document.getElementById('progressFill');
+
+        function updateSteps(progress) {
+            // আগের সব রিমুভ লজিক ঠিক থাকবে...
+            step1.classList.remove('active', 'completed');
+            step2.classList.remove('active', 'completed');
+            step3.classList.remove('active', 'completed');
+            step4.classList.remove('active', 'completed');
+
+            // ডেক্সটপে প্রস্থ (Width) এবং মোবাইলে উচ্চতা (Height) আপডেট করবে
+            progressFill.style.width = window.innerWidth > 768 ? progress + '%' : '2px';
+            progressFill.style.height = window.innerWidth <= 768 ? progress + '%' : '2px';
+
+            // বাকি স্টেপ কন্ডিশনগুলো (if-else) আগের মতোই থাকবে...
+            if (progress >= 0 && progress < 25) { step1.classList.add('active'); }
+            else if (progress >= 25) { step1.classList.add('completed'); }
+
+            if (progress >= 25 && progress < 50) { step2.classList.add('active'); }
+            else if (progress >= 50) { step2.classList.add('completed'); }
+
+            if (progress >= 50 && progress < 75) { step3.classList.add('active'); }
+            else if (progress >= 75) { step3.classList.add('completed'); }
+
+            if (progress >= 75) { step4.classList.add('active'); }
+        }
+
+        let animationRunning = true;
+
+        function animateProgress() {
+            let progress = 0;
+            const startTime = Date.now();
+            const duration = 8000; // 8 seconds
+
+            const animate = () => {
+                if (!animationRunning) return;
+
+                const elapsed = (Date.now() - startTime) % duration;
+                progress = (elapsed / duration) * 100;
+
+                updateSteps(progress);
+
+                requestAnimationFrame(animate);
+            };
+
+            animate();
+        }
+
+        function resetAnimation() {
+            updateSteps(0);
+        }
+
+        // Start animation on load
+        animateProgress();
+    </script>
     <!-- কেন ভাইয়া হাউজিং-এ রেফার করবেন? (Centered Design) -->
     <section class="feature-hub-section" id="why-bhaiya">
         <div class="wrap">
@@ -337,7 +606,7 @@
 
     <!-- Bhaiya Housing Hero Section -->
     <section class="refer-hero-section">
-        <div class="container mx-auto px-4 md:px-12">
+        <div class="container mx-auto">
 
             <!-- Main Dark Green Container -->
             <div class="main-green-box">

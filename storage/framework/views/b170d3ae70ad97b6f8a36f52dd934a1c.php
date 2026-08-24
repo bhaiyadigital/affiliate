@@ -50,7 +50,6 @@
         }
 
         body {
-            background-color: #F6F9FD;
             color: #1E293B;
             line-height: 1.65;
             overflow-x: hidden;
@@ -82,34 +81,87 @@
         }
 
 
-        ::selection {
-            background: #E0F2FE;
-            color: #0369A1;
-        }
+
 
         :focus-visible {
             outline: 2px solid #059669;
             outline-offset: 3px;
         }
 
-        /* ══════════════════════════════════════════════
-       AIWAVE LIGHT THEME TOKENS
-    ══════════════════════════════════════════════ */
         :root {
-            --primary: #059669;
-            --primary-dark: #064E3B;
-            --primary-gradient: linear-gradient(90deg, #059669 0%, #10B981 50%, #B45309 100%);
-            --rainbow-gradient: linear-gradient(90deg, #FF5B26 0%, #B45309 50%, #10B981 100%);
+            --primary: #175b05;
+            /* Deep Green */
+            --primary-light: #009d0a;
+            /* Light Green */
+            --primary-dark: #0a3102;
+
+            --primary-gradient: linear-gradient(135deg, #175b05 0%, #009d0a 100%);
+            --rainbow-gradient: linear-gradient(90deg, #175b05 0%, #009d0a 50%, #175b05 100%);
 
             --card-bg: #FFFFFF;
             --card-border: #E2E8F0;
-
-            --shadow-aiwave: 0 20px 40px -10px rgba(15, 23, 42, 0.08);
-            --shadow-glow: 0 20px 40px -10px rgba(5, 150, 105, 0.25);
-
+            --shadow-glow: 0 20px 40px -10px rgba(23, 91, 5, 0.25);
             --radius-card: 28px;
             --radius-pill: 9999px;
             --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* ১. বাটন এবং বড় বক্সগুলোর ব্যাকগ্রাউন্ড */
+        .btn-green,
+        .green-box,
+        .main-green-box,
+        .hub-display-screen,
+        .cta-theme-card,
+        .form-dark-side,
+        .form-submit-btn {
+            background: var(--primary-gradient) !important;
+        }
+
+        /* ২. টেক্সট কালার (Heading highlights) */
+        .c-title b,
+        .brand-title,
+        .hub-nav-card.active .nav-texts h4,
+        .status-left i {
+            color: #175b05 !important;
+        }
+
+        /* ৩. আইকন এবং ছোট ব্যাজ */
+        .trust-box i,
+        .brand-icon,
+        .nav-icon-box {
+            background: var(--primary-gradient);
+            color: #fff !important;
+        }
+
+        /* ৪. হোভার এবং বর্ডার */
+        .trust-box:hover,
+        .hub-nav-card.active {
+            border-color: #009d0a !important;
+        }
+
+        .hub-nav-card.active::before {
+            background: #009d0a !important;
+        }
+
+
+
+        /* ৬. ইনপুট ফোকাস */
+        .input-item input:focus,
+        .input-item select:focus {
+            border-color: #009d0a !important;
+            box-shadow: 0 0 0 4px rgba(0, 157, 10, 0.05);
+        }
+
+        .header-top-badge {
+            background: var(--primary-gradient) !important;
+        }
+
+        #menuToggle {
+            color: #175b05 !important;
+        }
+
+        .nav-menu.active {
+            border-bottom: 2px solid #175b05 !important;
         }
 
         .reveal {
@@ -345,10 +397,6 @@
             padding: 0 28px;
         }
 
-        ::selection {
-            background: var(--gold);
-            color: #12241f;
-        }
 
         :focus-visible {
             outline: 2px solid var(--gold-light);
@@ -562,6 +610,26 @@
             box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.05);
             position: relative;
             animation: floatAnim 5s ease-in-out infinite;
+            z-index: 2;
+            /* ইমেজের ওপরে থাকবে */
+        }
+
+        .visual-parent {
+            position: relative;
+            padding: 50px;
+            display: inline-block;
+        }
+
+        .card-bg-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            z-index: 1;
+            opacity: 0.1;
+            pointer-events: none;
         }
 
         .green-box {
@@ -604,7 +672,6 @@
 
         /* নিচের ট্রাস্ট বার */
         .trust-section {
-            background: white;
             padding: 50px 0;
         }
 
@@ -641,18 +708,25 @@
             transform: translateY(-3px);
         }
 
-        .trust-box i {
-            width: 50px;
-            height: 50px;
-            background: white;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #047857;
-            font-size: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.04);
-        }
+.trust-box i {
+    width: 50px;
+    height: 50px;
+    background: #ecfdf5 !important; /* হালকা গ্রিন ব্যাকগ্রাউন্ড */
+    border-radius: 12px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    color: #175b05 !important; /* আপনার দেওয়া ডিপ গ্রিন কালার */
+    font-size: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.04);
+
+    /* ⚠️ এই ৩টি লাইন আইকন শো করার জন্য সবচেয়ে জরুরি */
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important;
+    font-style: normal !important;
+
+    flex-shrink: 0;
+}
 
         /* রেসপনসিভ */
         @media (max-width: 991px) {
@@ -795,217 +869,6 @@
             padding: 0 20px;
         }
 
-        /* --- How It Works: Exact Image Match Style --- */
-        .how-it-works-final {
-            padding: 50px 0;
-            background-color: #ffffff;
-        }
-
-        /* Header Area */
-        .how-it-works-final .header-area {
-            margin-bottom: 70px;
-            text-align: left;
-        }
-
-        .how-it-works-final .label-box {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #B45309;
-            /* Orange label */
-            font-weight: 700;
-            font-size: 14px;
-            text-transform: uppercase;
-            margin-bottom: 12px;
-        }
-
-        .how-it-works-final .orange-bar {
-            width: 30px;
-            height: 2px;
-            background-color: #B45309;
-        }
-
-        .how-it-works-final .main-heading {
-            font-size: 48px;
-            font-weight: 900;
-            color: #101B37;
-            margin-bottom: 15px;
-        }
-
-        /* Green Background Highlight for "কিভাবে" */
-        .how-it-works-final .bg-highlight {
-            background-color: #E6F7F1;
-            /* Light mint green */
-            padding: 0 12px;
-            border-radius: 6px;
-            color: #007D4F;
-            /* Deep green text */
-            display: inline-block;
-        }
-
-        .how-it-works-final .sub-heading {
-            color: #64748B;
-            font-size: 16px;
-        }
-
-        /* Steps Layout and Line */
-        .how-it-works-final .steps-wrapper {
-            position: relative;
-            margin-top: 50px;
-        }
-
-        .how-it-works-final .horizontal-line {
-            position: absolute;
-            top: 55px;
-            /* Centers the line with the icon circles */
-            left: 10%;
-            right: 10%;
-            height: 2px;
-            background-color: #10B981;
-            z-index: 1;
-        }
-
-        .how-it-works-final .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            position: relative;
-            z-index: 2;
-        }
-
-        .how-it-works-final .step-item {
-            text-align: center;
-        }
-
-        /* Icon Box and Number Badge */
-        .how-it-works-final .icon-box-outer {
-            position: relative;
-            width: 110px;
-            height: 110px;
-            margin: 0 auto 25px;
-        }
-
-        .how-it-works-final .icon-circle {
-            width: 100%;
-            height: 100%;
-            background-color: #ffffff;
-            border: 1px solid #E2E8F0;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #768191;
-            /* Icon stroke color */
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
-        }
-
-        .how-it-works-final .icon-circle svg {
-            width: 38px;
-            height: 38px;
-        }
-
-        .how-it-works-final .number-badge {
-            position: absolute;
-            top: 6px;
-            right: 6px;
-            background-color: #0F172A;
-            /* Dark Navy/Black */
-            color: #ffffff;
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            font-size: 11px;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 3px solid #ffffff;
-            /* Thick white border around badge */
-        }
-
-        /* Text Content below Icons */
-        .how-it-works-final .step-item h3 {
-            font-size: 19px;
-            font-weight: 800;
-            color: #101B37;
-            margin-bottom: 10px;
-        }
-
-        .how-it-works-final .step-item p {
-            font-size: 13.5px;
-            color: #64748B;
-            line-height: 1.7;
-            max-width: 210px;
-            margin: 0 auto;
-        }
-
-        /* --- Optimized Responsive Adjustments --- */
-        @media (max-width: 991px) {
-            .how-it-works-final {
-                padding: 40px 0;
-                /* প্যাডিং কমানো হয়েছে */
-            }
-
-            .how-it-works-final .header-area {
-                margin-bottom: 30px;
-                /* মার্জিন অনেক কমানো হয়েছে */
-                text-align: center;
-                /* মোবাইলে সেন্টারে বেশি ভালো লাগে */
-            }
-
-            .how-it-works-final .label-box {
-                justify-content: center;
-            }
-
-            .how-it-works-final .main-heading {
-                font-size: 32px;
-                /* ফন্ট সাইজ কমানো হয়েছে */
-            }
-
-            .how-it-works-final .horizontal-line {
-                display: none;
-            }
-
-            .how-it-works-final .steps-wrapper {
-                margin-top: 20px;
-                /* গ্যাপ কমানো হয়েছে */
-            }
-
-            .how-it-works-final .steps-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 30px 10px;
-                /* ভার্টিক্যাল গ্যাপ ৩০px */
-            }
-
-            .how-it-works-final .icon-box-outer {
-                width: 90px;
-                /* আইকন বক্স একটু ছোট করা হয়েছে */
-                height: 90px;
-                margin-bottom: 15px;
-            }
-
-            .how-it-works-final .icon-circle svg {
-                width: 30px;
-                height: 30px;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .how-it-works-final .steps-grid {
-                grid-template-columns: 1fr;
-                /* একদম ছোট ফোনে ১ কলাম */
-                gap: 40px;
-            }
-
-            .how-it-works-final .main-heading {
-                font-size: 28px;
-            }
-
-            .how-it-works-final .step-item p {
-                max-width: 280px;
-                /* টেক্সট যাতে খুব বেশি সরু না হয়ে যায় */
-            }
-        }
-
         /* --- Feature Hub Exact Design CSS --- */
         .feature-hub-section {
             background: white;
@@ -1020,7 +883,7 @@
         .top-badge {
             display: inline-block;
             background: #E8F7F0 !important;
-            color: #007D4F !important;
+            color: #175b05 !important;
             font-size: 12px;
             font-weight: 800;
             padding: 6px 18px;
@@ -1036,7 +899,7 @@
         }
 
         .hub-sub-title {
-            color: #697383;
+            color: #374151 !important;
             margin: 0 auto;
         }
 
@@ -1056,7 +919,7 @@
 
         .hub-nav-card {
             background: #fff !important;
-            border: 1px solid #F1F5F9;
+            border: 1px solid #e2e8f0;
             border-radius: 20px;
             padding: 22px;
             margin-bottom: 16px;
@@ -1102,7 +965,7 @@
         }
 
         .hub-display-screen {
-            background: #007D4F !important;
+            background: linear-gradient(135deg, #175b05 0%, #009d0a 100%) !important;
             border-radius: 35px;
             padding: 60px 50px;
             min-height: 480px;
@@ -1680,7 +1543,7 @@
         /* --- Dashboard & Auth Dark Theme CSS --- */
         .dashboard-section {
             padding: 100px 0;
-            background-color: #162e24;
+             background: linear-gradient(145deg, #175b05 0%, #052e02 100%) !important;
         }
 
         /* Dashboard Dark Panel */
@@ -1722,7 +1585,7 @@
             display: block;
             font-size: 32px;
             font-weight: 800;
-            color: #e5c566;
+            color: #fff;
             margin-bottom: 5px;
         }
 
@@ -1747,8 +1610,8 @@
 
         .dash-table th {
             padding: 20px;
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.4);
+            font-size: 16px;
+            color: #fff;
             text-transform: uppercase;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -1768,80 +1631,19 @@
 
         .stage-5 {
             background: rgba(16, 185, 129, 0.2);
-            color: #10B981;
+            color: #fff;
         }
 
         .stage-4 {
             background: rgba(245, 158, 11, 0.2);
-            color: #B45309;
+            color: #fff;
         }
 
         .stage-3 {
             background: rgba(59, 130, 246, 0.2);
-            color: #60A5FA;
-        }
-
-        /* Guest Auth Shell */
-        .auth-shell {
-            max-width: 450px;
-            margin: 40px auto 0;
-            background: #fff;
-            border-radius: 35px;
-            padding: 40px;
-            border: 1px solid #E9F0F8;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.05);
-        }
-
-        .auth-tabs {
-            display: flex;
-            border-bottom: 2px solid #F1F5F9;
-            margin-bottom: 30px;
-        }
-
-        .auth-tab-btn {
-            flex: 1;
-            padding: 15px;
-            font-weight: 700;
-            color: #697383;
-            cursor: pointer;
-            text-align: center;
-        }
-
-        .auth-tab-btn.active {
-            color: #007D4F;
-            border-bottom: 3px solid #007D4F;
-        }
-
-        .auth-field {
-            margin-bottom: 20px;
-        }
-
-        .auth-field label {
-            display: block;
-            font-size: 13px;
-            font-weight: 700;
-            color: #101B37;
-            margin-bottom: 8px;
-        }
-
-        .auth-field input {
-            width: 100%;
-            padding: 14px;
-            border-radius: 12px;
-            border: 1px solid #E9F0F8;
-            background: #F8FBFF;
-        }
-
-        .auth-submit {
-            width: 100%;
-            padding: 16px;
-            background: #007D4F !important;
             color: #fff;
-            border-radius: 12px;
-            font-weight: 800;
-            cursor: pointer;
-            border: none;
         }
+
 
         @media (max-width: 991px) {
             .dash-summary {
@@ -2113,28 +1915,32 @@
 
         }
 
-        /* ২. বড় গ্রিন বক্স */
         .main-green-box {
-            position: relative;
-            background-color: #005a3c;
-            /* হুবহু ইমেজের গ্রিন কালার */
-            border-radius: 60px;
-            /* পিল শেপড রাউন্ডেড কোণা */
-            padding: 80px 60px;
-            overflow: hidden;
-            box-shadow: 0 40px 80px rgba(0, 77, 51, 0.2);
-        }
+    position: relative;
 
-        /* ৩. ডান পাশের আভা (Glow) */
-        .glow-overlay {
-            position: absolute;
-            top: -20%;
-            right: -10%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, transparent 70%);
-            pointer-events: none;
-        }
+    /* বামে গাঢ় (#175b05), মাঝখানে হালকা (#009d0a), ডানে গাঢ় (#175b05) */
+    background: linear-gradient(to right, #175b05 0%, #009d0a 50%, #175b05 100%) !important;
+
+    border-radius: 60px; /* পিল শেপড রাউন্ডেড কোণা */
+    padding: 80px 60px;
+    overflow: hidden;
+
+    /* আপনার নতুন গ্রিন অনুযায়ী শ্যাডো অ্যাডজাস্টমেন্ট */
+    box-shadow: 0 40px 80px rgba(23, 91, 5, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* শাইন ইফেক্ট আরও ফুটিয়ে তোলার জন্য ওভারলে অ্যাডজাস্টমেন্ট (ঐচ্ছিক) */
+.glow-overlay {
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+}
 
         /* ৪. গ্রিড লেআউট */
         .content-grid {
