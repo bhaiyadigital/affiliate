@@ -114,7 +114,7 @@
                             <span class="text-base font-medium">Marketing Assets</span>
                         </a>
 
-                        </a><a href="{{ route('landing.index') }}"
+                        </a><a href="{{ route('home.index') }}"
                             class="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 transition-all border-b border-gray-50">
                             <i class="fa-brands fa-affiliatetheme w-5"></i>
                             <span class="text-base font-medium">Home</span>
@@ -840,7 +840,7 @@
                             <span class="text-sm font-medium">Marketing Assets</span>
                         </a>
 
-                        <a href="{{ route('landing.index') }}"
+                        <a href="{{ route('home.index') }}"
                             class="flex items-center gap-3 px-6 py-4 border-b border-gray-50 text-gray-700 hover:bg-gray-50 transition-colors">
                             <i class="fa-brands fa-affiliatetheme w-5 text-center"></i>
                             <span class="text-sm font-medium">Home</span>

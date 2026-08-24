@@ -20,7 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->web(append: [
             TrackReferral::class,
         ]);
-        $middleware->redirectTo(fn () => route('landing.index'));
+        $middleware->redirectTo(fn () => route('home.index'));
         $middleware->alias([
             'permission' => CheckPermission::class,
             'frontend.auth' => FrontendAuth::class,

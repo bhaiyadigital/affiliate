@@ -236,7 +236,7 @@ class FrontendAuthController extends Controller
     {
         $email = session('verify_email');
         if (!$email) {
-            return redirect()->route('landing.index');
+            return redirect()->route('home.index');
         }
 
         $user = User::where('email', $email)->first();
@@ -329,7 +329,7 @@ class FrontendAuthController extends Controller
         }
 
         session()->forget(['verify_email', 'otp_purpose', 'can_reset_password']);
-        return redirect()->route('landing.index')->with('success', 'পাসওয়ার্ড সফলভাবে পরিবর্তন হয়েছে। লগইন করুন।');
+        return redirect()->route('home.index')->with('success', 'পাসওয়ার্ড সফলভাবে পরিবর্তন হয়েছে। লগইন করুন।');
     }
 
     public function cancelAuth()
@@ -374,7 +374,7 @@ class FrontendAuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('landing.index');
+        return redirect()->route('home.index');
     }
     public function updateMember(Request $request, $id)
     {

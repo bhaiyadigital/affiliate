@@ -7,7 +7,7 @@
     <div class="container mx-auto px-4 lg:px-6 flex justify-between items-center py-2">
         <!-- ── LOGO ── -->
         <div class="flex items-center gap-3 shrink-0">
-            <a href="{{ route('landing.index') }}" class=" px-2 py-2 flex items-center">
+            <a href="{{ route('home.index') }}" class=" px-2 py-2 flex items-center">
                 <img src="{{ $siteSetting->logo_url }}" alt="Bhaiya Asset" class="w-auto lg:h-[60px] h-[45px] block" />
             </a>
 

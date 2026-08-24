@@ -7,7 +7,7 @@
     <div class="wrap nav-inner">
 
         <!-- 🏠 Left: Brand (Dynamic Home Link) -->
-        <a href="<?php echo e(route('landing.index')); ?>" class="brand">
+        <a href="<?php echo e(route('home.index')); ?>" class="brand">
             <div class="brand-icon">
                 <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M3 21h18M6 21V9l6-5 6 5v12M9 21v-6h6v6" />

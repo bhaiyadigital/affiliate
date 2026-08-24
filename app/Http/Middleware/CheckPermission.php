@@ -10,11 +10,11 @@ class CheckPermission
     public function handle(Request $request, Closure $next, string $permission)
     {
         if (!auth()->check()) {
-            return redirect()->route('landing.index');
+            return redirect()->route('home.index');
         }
 
         if (!auth()->user()->hasPermission($permission)) {
-        return redirect()->route('landing.index')->with('error', 'আপনার অনুমতি নেই।');
+        return redirect()->route('home.index')->with('error', 'আপনার অনুমতি নেই।');
     }
         return $next($request);
     }
