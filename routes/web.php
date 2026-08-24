@@ -183,7 +183,8 @@ Route::prefix('')->group(function () {
     Route::get('/', [HomeController::class, 'landing'])->name('landing.index');
     Route::get('/register', [FrontendAuthController::class, 'showSignin'])->name('signin');
     Route::post('/register', [FrontendAuthController::class, 'register'])->name('affiliated.register');
-    Route::post('/forgot-password-otp', [FrontendAuthController::class, 'sendResetOtp'])->name('password.sendOtp');
+    Route::get('/forgot-password', [FrontendAuthController::class, 'sendReset'])->name('password.request');
+    Route::post('/forgot-password', [FrontendAuthController::class, 'sendResetOtp'])->name('password.sendOtp');
     Route::get('/resend-otp', [FrontendAuthController::class, 'resendOtp'])->name('otp.resend');
     Route::get('/cancel-auth', [FrontendAuthController::class, 'cancelAuth'])->name('otp.cancel');
     Route::get('/verify-otp', [FrontendAuthController::class, 'verifyOtpForm'])->name('verify.otp');

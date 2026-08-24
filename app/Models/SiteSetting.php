@@ -12,7 +12,7 @@ class SiteSetting extends Model
     public static function get(): self
     {
         return static::firstOrCreate([], [
-            'site_name' => 'My App',
+            'site_name' => 'Bhaiya Housing Affiliate Program',
             'slogan'    => '',
         ]);
     }

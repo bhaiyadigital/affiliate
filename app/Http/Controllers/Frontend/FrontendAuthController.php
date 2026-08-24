@@ -138,7 +138,7 @@ class FrontendAuthController extends Controller
         $request->validate([
             'name'     => ['required', 'string', 'max:255'],
             'email'    => 'required|email|unique:users,email',
-            'phone'    => ['required', 'string', 'unique:users,phone', 'regex:/^\+?[0-9]+$/'],
+            'phone'    => ['required', 'string', 'unique:users,phone', 'regex:/^\+?[0-9]+(?:-[0-9]+)*$/'],
             'password' => ['required', 'min:6'],
         ]);
 
@@ -207,6 +207,10 @@ class FrontendAuthController extends Controller
         session(['verify_email' => $user->email, 'otp_purpose' => 'register']);
         return redirect()->route('verify.otp')->with('success', 'রেজিস্ট্রেশন সফল! ইমেইলে ওটিপি পাঠানো হয়েছে।');
     }
+    public function sendReset(Request $request)
+    {
+        return view('frontend.auth.forgot-password');
+    }
 
     public function sendResetOtp(Request $request)
     {
@@ -224,7 +228,7 @@ class FrontendAuthController extends Controller
         ]);
 
         $this->sendOtp($user->email, $otp, 'reset_password');
-        session(['verify_email' => $user->email, 'otp_purpose' => 'reset_password']);
+        session(['verify_email' => $user->email, $user->name, 'otp_purpose' => 'reset_password']);
 
         return redirect()->route('verify.otp')->with('success', 'ওটিপি কোড পাঠানো হয়েছে।');
     }
@@ -435,11 +439,16 @@ class FrontendAuthController extends Controller
                     'subject' => $title . ' - Bhaiya Housing Affiliate Program',
                     'data'    => [
                         'eyebrow' => 'Bhaiya Housing Affiliate Program',
+                        'site_name' => 'Bhaiya Housing Affiliate Program',
+                        'site_logo' => 'https://asset.bhaiyahousing.com/storage/settings/2043f208-bd04-4331-8894-0f6f1fc83d14.png',
                         'heading' => $title,
                         'name' => $name,
                         'message' => $message,
-                        'button_text' => 'OTP: ' . $otp,
+                        'otp_code'  => $otp,
+                        'otp_expiry' => '10 minutes',
+
                     ],
+
                 ]);
 
             if ($response->successful()) {
