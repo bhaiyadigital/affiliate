@@ -1,38 +1,37 @@
-@extends('layouts.app')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
     <div class="p-4 mx-auto max-w-screen-xl md:p-6">
-        {{-- Header & Filters --}}
+        
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
             <div>
                 <h1 class="text-2xl font-semibold text-gray-800 dark:text-white/90">Lead Management</h1>
                 <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Track and manage all customer referrals</p>
             </div>
 
-            {{-- Filter Form --}}
-            <form method="GET" action="{{ route('admin.leads.index') }}" class="flex flex-wrap items-center gap-3">
+            
+            <form method="GET" action="<?php echo e(route('admin.leads.index')); ?>" class="flex flex-wrap items-center gap-3">
                 <div class="relative">
-                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search name or phone..."
+                    <input type="text" name="search" value="<?php echo e(request('search')); ?>" placeholder="Search name or phone..."
                         class="h-10 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm focus:border-blue-500 focus:outline-none dark:bg-gray-900 dark:border-gray-700 dark:text-white" />
                 </div>
 
                 <select name="status"
                     class="h-10 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:outline-none dark:bg-gray-900 dark:border-gray-700 dark:text-white">
                     <option value="">All Status</option>
-                    @foreach ($statusLabels as $value => $label)
-                        <option value="{{ $value }}" {{ request('status') == $value ? 'selected' : '' }}>
-                            {{ ucfirst($label) }}
+                    <?php $__currentLoopData = $statusLabels; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value => $label): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <option value="<?php echo e($value); ?>" <?php echo e(request('status') == $value ? 'selected' : ''); ?>>
+                            <?php echo e(ucfirst($label)); ?>
+
                         </option>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </select>
                 <select name="type"
                     class="h-10 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:outline-none dark:bg-gray-900 dark:border-gray-700 dark:text-white">
                     <option value="">All Types</option>
-                    <option value="manual" {{ request('type') == 'manual' ? 'selected' : '' }}>Manual Entry</option>
-                    <option value="refer_link" {{ request('type') == 'refer_link' ? 'selected' : '' }}>Referral Link
+                    <option value="manual" <?php echo e(request('type') == 'manual' ? 'selected' : ''); ?>>Manual Entry</option>
+                    <option value="refer_link" <?php echo e(request('type') == 'refer_link' ? 'selected' : ''); ?>>Referral Link
                     </option>
                 </select>
-                <div x-data="{ range: '{{ request('date_range') }}' }" class="flex flex-wrap items-center gap-2">
+                <div x-data="{ range: '<?php echo e(request('date_range')); ?>' }" class="flex flex-wrap items-center gap-2">
                     <select name="date_range" x-model="range"
                         class="h-10 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:outline-none dark:bg-gray-900 dark:border-gray-700 dark:text-white">
                         <option value="">All Time</option>
@@ -43,11 +42,11 @@
                         <option value="custom">Custom Range</option>
                     </select>
 
-                    {{-- Custom Date Inputs - Only shows if 'custom' is selected --}}
+                    
                     <div x-show="range == 'custom'" class="flex items-center gap-2" x-cloak>
-                        <input type="date" name="start_date" value="{{ request('start_date') }}"
+                        <input type="date" name="start_date" value="<?php echo e(request('start_date')); ?>"
                             class="h-10 rounded-lg border border-gray-300 bg-white px-2 py-1 text-xs dark:bg-gray-900 dark:border-gray-700 dark:text-white">
-                        <input type="date" name="end_date" value="{{ request('end_date') }}"
+                        <input type="date" name="end_date" value="<?php echo e(request('end_date')); ?>"
                             class="h-10 rounded-lg border border-gray-300 bg-white px-2 py-1 text-xs dark:bg-gray-900 dark:border-gray-700 dark:text-white">
                     </div>
                 </div>
@@ -57,13 +56,13 @@
                     Filter
                 </button>
 
-                @if (request()->has('search') || request()->has('status'))
-                    <a href="{{ route('admin.leads.index') }}" class="text-sm text-red-500 hover:underline">Clear</a>
-                @endif
+                <?php if(request()->has('search') || request()->has('status')): ?>
+                    <a href="<?php echo e(route('admin.leads.index')); ?>" class="text-sm text-red-500 hover:underline">Clear</a>
+                <?php endif; ?>
             </form>
         </div>
 
-        {{-- Leads Table --}}
+        
         <div
             class="rounded-xl border border-gray-100 bg-white dark:border-gray-800 dark:bg-white/[0.03] overflow-hidden shadow-sm">
             <div class="overflow-x-auto">
@@ -83,62 +82,64 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-                        @forelse($leads as $lead)
+                        <?php $__empty_1 = true; $__currentLoopData = $leads; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $lead): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                             <tr class="hover:bg-gray-50/50 dark:hover:bg-white/[0.02] transition-colors">
-                                {{-- Customer Info --}}
+                                
                                 <td class="px-5 py-4 whitespace-nowrap">
                                     <div class="flex flex-col">
-                                        <span class="text-sm font-bold text-gray-900 dark:text-white">{{ $lead->name }}</span>
-                                        <span class="text-xs text-gray-500 font-mono">{{ $lead->phone }}</span>
+                                        <span class="text-sm font-bold text-gray-900 dark:text-white"><?php echo e($lead->name); ?></span>
+                                        <span class="text-xs text-gray-500 font-mono"><?php echo e($lead->phone); ?></span>
                                     </div>
                                 </td>
 
-                                {{-- Location --}}
+                                
                                 <td class="px-5 py-4">
                                     <span
-                                        class="text-sm text-gray-700 dark:text-gray-300">{{ $lead->interested_location ?? 'N/A' }}</span>
+                                        class="text-sm text-gray-700 dark:text-gray-300"><?php echo e($lead->interested_location ?? 'N/A'); ?></span>
                                 </td>
 
-                                {{-- Referral Member --}}
+                                
                                 <td class="px-5 py-4">
                                     <div class="flex items-center gap-2">
                                         <div
                                             class="w-7 h-7 rounded-full bg-blue-100 flex items-center justify-center text-[10px] font-bold text-blue-600 uppercase">
-                                            {{ substr($lead->user->name ?? 'A', 0, 2) }}
+                                            <?php echo e(substr($lead->user->name ?? 'A', 0, 2)); ?>
+
                                         </div>
                                         <span
-                                            class="text-xs font-medium text-gray-600 dark:text-gray-400">{{ $lead->user->name ?? 'Admin' }}</span>
+                                            class="text-xs font-medium text-gray-600 dark:text-gray-400"><?php echo e($lead->user->name ?? 'Admin'); ?></span>
                                     </div>
                                 </td>
                                 <td class="px-5 py-4">
-                                    @if ($lead->type == 'refer_link')
+                                    <?php if($lead->type == 'refer_link'): ?>
                                         <span
                                             class="flex items-center gap-1 text-purple-600 bg-purple-50 px-2 py-1 rounded-sm text-[10px] font-bold border border-purple-100 w-fit">
                                             <i class="fas fa-link"></i> REFER LINK
                                         </span>
-                                    @else
+                                    <?php else: ?>
                                         <span
                                             class="flex items-center gap-1 text-gray-600 bg-gray-50 px-2 py-1 rounded-sm text-[10px] font-bold border border-gray-200 w-fit">
                                             <i class="fas fa-hand-pointer"></i> MANUAL
                                         </span>
-                                    @endif
+                                    <?php endif; ?>
                                 </td>
-                                {{-- Budget --}}
+                                
                                 <td class="px-5 py-4">
                                     <span class="text-sm font-semibold text-gray-900 dark:text-white">
-                                        {{ $lead->budget ? '৳' . number_format($lead->budget) : '—' }}
+                                        <?php echo e($lead->budget ? '৳' . number_format($lead->budget) : '—'); ?>
+
                                     </span>
                                 </td>
                                 <td class="px-5 py-4 whitespace-nowrap">
                                     <div class="flex flex-col">
                                         <span
-                                            class="text-sm text-gray-700 dark:text-gray-300">{{ $lead->created_at->format('d M, Y') }}</span>
-                                        <span class="text-[10px] text-gray-400">{{ $lead->created_at->format('h:i A') }}</span>
+                                            class="text-sm text-gray-700 dark:text-gray-300"><?php echo e($lead->created_at->format('d M, Y')); ?></span>
+                                        <span class="text-[10px] text-gray-400"><?php echo e($lead->created_at->format('h:i A')); ?></span>
                                     </div>
                                 </td>
-                                {{-- Status Badge --}}
+                                
                                 <td class="px-5 py-4">
-                                    @php
+                                    <?php
                                         $colors = [
                                             1 => 'bg-gray-100 text-gray-600', // Pending
                                             2 => 'bg-blue-100 text-blue-700', // Contacted
@@ -147,18 +148,19 @@
                                             5 => 'bg-green-100 text-green-700', // Completed
                                         ];
                                         $colorClass = $colors[$lead->status] ?? 'bg-gray-100 text-gray-600';
-                                    @endphp
-                                    <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase {{ $colorClass }}">
-                                        {{ $lead->status_label }}
+                                    ?>
+                                    <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase <?php echo e($colorClass); ?>">
+                                        <?php echo e($lead->status_label); ?>
+
                                     </span>
                                 </td>
 
 
-                                {{-- Actions --}}
+                                
                                 <td class="px-5 py-4 whitespace-nowrap text-end text-sm font-medium">
                                     <div class="flex items-center justify-end gap-2">
-                                        {{-- Edit --}}
-                                        <a href="{{ route('admin.leads.edit', $lead->id) }}"
+                                        
+                                        <a href="<?php echo e(route('admin.leads.edit', $lead->id)); ?>"
                                             class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-gray-500 hover:bg-blue-50 hover:text-blue-600 dark:hover:bg-blue-900/20 transition-colors">
                                             <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
                                                 <path
@@ -166,10 +168,10 @@
                                             </svg>
                                         </a>
 
-                                        {{-- Delete --}}
+                                        
                                         <button type="button" @click="$dispatch('open-delete-modal', {
-                                                url: '{{ route('admin.leads.destroy', $lead->id) }}',
-                                                title: 'Lead: {{ addslashes($lead->name) }}'
+                                                url: '<?php echo e(route('admin.leads.destroy', $lead->id)); ?>',
+                                                title: 'Lead: <?php echo e(addslashes($lead->name)); ?>'
                                             })"
                                             class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-gray-500 hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-900/20 transition-colors">
                                             <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
@@ -180,21 +182,23 @@
                                     </div>
                                 </td>
                             </tr>
-                        @empty
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                             <tr>
                                 <td colspan="6" class="px-5 py-12 text-center text-sm text-gray-500 dark:text-gray-400">
                                     No leads found matching your criteria.
                                 </td>
                             </tr>
-                        @endforelse
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </div>
 
-            {{-- Pagination --}}
+            
             <div class="px-5 py-4 border-t border-gray-100 dark:border-gray-800">
-                @include('partials.pagination', ['items' => $leads])
+                <?php echo $__env->make('partials.pagination', ['items' => $leads], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
             </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\laragon\www\affiliate-project\resources\views/leads/index.blade.php ENDPATH**/ ?>

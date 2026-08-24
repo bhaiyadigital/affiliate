@@ -11,7 +11,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700;900&family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
     <style>
         /* ══════════════════════════════════════════════
        LENIS & BASE RESET
@@ -2290,12 +2290,12 @@
 
 <body>
 
-    @include('frontend.landing.front.landingNav')
+    <?php echo $__env->make('frontend.landing.front.landingNav', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
     <main>
-        @yield('content')
+        <?php echo $__env->yieldContent('content'); ?>
 
     </main>
-    @include('frontend.landing.front.landingFooter')
+    <?php echo $__env->make('frontend.landing.front.landingFooter', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // ১. অ্যানিমেশন অবজারভার (Reveal effect)
@@ -2321,12 +2321,12 @@
             });
 
             // ৩. লারাভেল এরর থাকলে অটো স্ক্রল করা
-            @if($errors->any())
+            <?php if($errors->any()): ?>
                 const element = document.getElementById('dashboard-section');
                 if (element) {
                     element.scrollIntoView({ behavior: 'smooth' });
                 }
-            @endif
+            <?php endif; ?>
 });
 
         // ৪. FAQ টগল ফাংশন
@@ -2351,7 +2351,7 @@
             if (!select) return;
             const slug = select.value;
             const projectName = select.options[select.selectedIndex].text;
-            const refCode = "{{ auth()->check() ? auth()->user()->referral_code : '' }}";
+            const refCode = "<?php echo e(auth()->check() ? auth()->user()->referral_code : ''); ?>";
 
             if (!slug) { alert('প্রজেক্ট সিলেক্ট করুন'); return; }
 
@@ -2436,3 +2436,4 @@
 </body>
 
 </html>
+<?php /**PATH C:\laragon\www\affiliate-project\resources\views/frontend/layouts/landingFront.blade.php ENDPATH**/ ?>

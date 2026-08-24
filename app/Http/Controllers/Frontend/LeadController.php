@@ -198,6 +198,26 @@ class LeadController extends Controller
         if ($request->filled('search')) {
             $query->where('name', 'like', '%' . $request->search . '%');
         }
+        // তারিখ ফিল্টার লজিক (Updated)
+        if ($request->filled('date_range')) {
+            $range = $request->date_range;
+
+            if ($range == 'today') {
+                $query->whereDate('created_at', today());
+            } elseif ($range == '7_days') {
+                $query->where('created_at', '>=', now()->subDays(7));
+            } elseif ($range == '30_days') {
+                $query->where('created_at', '>=', now()->subDays(30));
+            } elseif ($range == 'this_month') {
+                $query->whereMonth('created_at', now()->month)
+                    ->whereYear('created_at', now()->year);
+            } elseif ($range == 'custom' && $request->filled('start_date') && $request->filled('end_date')) {
+                $query->whereBetween('created_at', [
+                    \Carbon\Carbon::parse($request->start_date)->startOfDay(),
+                    \Carbon\Carbon::parse($request->end_date)->endOfDay()
+                ]);
+            }
+        }
 
         $leads = $query->latest()
             ->paginate(10)
