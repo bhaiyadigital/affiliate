@@ -1,6 +1,6 @@
-<div class="header-top-badge">
+<!-- <div class="header-top-badge">
     ✨ RECREATED AIWAVE CTA &amp; SERVICE CARD CONCEPT · DESIGN REVIEW
-</div>
+</div> -->
 
 <!-- ২. হেডার থেকে ইনলাইন margin-top:30px সরিয়ে দিন -->
 <header class="nav" id="mainNav">
@@ -8,14 +8,9 @@
 
         <!-- 🏠 Left: Brand (Dynamic Home Link) -->
         <a href="{{ route('home.index') }}" class="brand">
-            <div class="brand-icon">
-                <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M3 21h18M6 21V9l6-5 6 5v12M9 21v-6h6v6" />
-                </svg>
-            </div>
+            
             <div>
-                <div class="brand-title">Bhaiya Housing</div>
-                <div class="brand-subtitle">Refer &amp; Earn</div>
+                <img src="{{asset('/')}}Bhaiya-referral-program-logo.png" width="180px" alt="">
             </div>
         </a>
         <!-- শুধু এই বাটনটি brand লিঙ্কের নিচে অ্যাড করুন -->

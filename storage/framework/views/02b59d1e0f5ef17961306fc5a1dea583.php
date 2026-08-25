@@ -1,12 +1,21 @@
 <?php $__env->startSection('content'); ?>
 
-
+    <style>
+        @media(max-width: 400px) {
+             .c-title {
+    font-size: 32px !important;
+  }
+            .hero-ft {
+                margin-top: 28px;
+            }
+        }
+    </style>
     <section class="custom-hero">
         <div class="c-wrap">
             <!-- বাম পাশের লেখা -->
             <div class="hero-left">
                 <div class="c-badge"><span></span> Bhaiya Referral Program</div>
-                <h1 class="c-title hind-siliguri">   রেফার করে আয় করুন <br> সর্বোচ্চ  ৩ লক্ষ টাকা </h1>
+                <h1 class="c-title hind-siliguri">  <span class="hero-ft"> রেফার করে আয় করুন</span> <br> সর্বোচ্চ  ৩ লক্ষ টাকা </h1>
                 <p class="c-desc">
                     আপনার পরিচিতজনকে ফ্ল্যাট বা জমি কেনার জন্য পরিচয় করিয়ে দিন। চুক্তি সম্পন্ন হলে সর্বোচ্চ
                     <mark class="kohinoor-bangla">৳৩,০০,০০০</mark> পর্যন্ত রেফার কমিশন পান সরাসরি আপনার অ্যাকাউন্টে।
@@ -31,12 +40,12 @@
                 </div> -->
             </div>
 
-            <div class="visual-parent anim-float">
+            <div class="visual-parent anim-float hidden lg:block">
 
                 <img src="<?php echo e(asset('./images/hero/dot.avif')); ?>" class="card-bg-img" alt="background">
 
                 <!-- আপনার আসল কার্ড -->
-                <div class="c-visual-card hidden lg:block">
+                <div class="c-visual-card ">
                     <div
                         style="display:flex; justify-content: space-between; margin-bottom: 30px; font-weight: 700; font-size: 14px;">
 
@@ -546,7 +555,7 @@
                     </div>
 
                     <!-- Right: Tracker Card (Glassmorphism) -->
-                    <div class="right-visual">
+                    <div class="right-visual ">
                         <div class="glass-tracker-card">
                             <div class="card-header">
                                 <div class="status-left">

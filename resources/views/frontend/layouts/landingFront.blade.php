@@ -338,7 +338,7 @@
         /* হেডারের জন্য স্টিকি ফিক্স */
         header.nav {
             position: sticky !important;
-            top: 32px;
+            top: 0;
             /* ব্যাজের উচ্চতা ৩২ পিক্সেল, তাই টপ ৩২ হবে */
             z-index: 10000;
             background: rgba(246, 249, 253, 0.95);
@@ -440,7 +440,7 @@
             color: var(--cream);
             line-height: 1.65;
             overflow-x: hidden;
-            padding-top: 32px;
+            
         }
 
         a {
@@ -539,11 +539,7 @@
                 height: auto;
                 padding: 5px;
             }
-
-            body {
-                padding-top: 40px;
-                /* ব্যাজের উচ্চতা অনুযায়ী অ্যাডজাস্ট */
-            }
+ 
         }
 
         /* ৩. ফ্লোটিং অ্যানিমেশন (ডান পাশের কার্ডের জন্য) */
@@ -857,6 +853,9 @@
         }
 
         @media (max-width: 600px) {
+            .visual-parent,.right-visual {
+                display:none !important;
+            }
             .nav-inner {
                 margin-top: 0 !important;
             }
@@ -867,9 +866,7 @@
                 padding: 5px;
             }
 
-            body {
-                padding-top: 40px;
-            }
+            
 
             /* ছোট ফোনে ৩ লাখ টাকা লেখাটি অ্যাডজাস্টমেন্ট */
             .green-box h2 {
