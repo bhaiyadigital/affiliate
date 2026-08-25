@@ -4,7 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bhaiya Housing — Refer &amp; Earn</title>
+
+
+
+   <title>Bhaiya Referral Program — Refer & Earn</title>
+    <meta name="author" content="Bhaiya Digital">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <meta name="title" content="Bhaiya Referral Program — Refer & Earn">
+
+    <meta name="keywords" content="Bhaiya Referral Program, Referral Program, Flat Referral, Land Referral, Real Estate Referral, Referral Commission, Referral Income, Real Estate Income, Flat Commission, Land Commission">
+
+    <meta name="description" content="Join the Bhaiya Referral Program and refer your acquaintances to buy a flat or land. Upon successful completion of the agreement, receive a referral commission of up to 300,000 BDT directly into your account.">
+    <link rel="shortcut icon" href="{{ asset('favicon.png') }}" type="image/x-icon">
+
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
