@@ -856,6 +856,9 @@
             .visual-parent,.right-visual {
                 display:none !important;
             }
+            .custom-hero{
+                padding-bottom:40px !important
+            }
             .nav-inner {
                 margin-top: 0 !important;
             }
