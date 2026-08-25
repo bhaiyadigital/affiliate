@@ -22,7 +22,7 @@ class LeadController extends Controller
                 'string',
                 'min:7',
                 'max:20',
-                'regex:/^\+?[0-9]+$/',
+                 'phone'    => ['required', 'string', 'unique:users,phone', 'regex:/^\+?[0-9]+(?:-[0-9]+)*$/'],
             ],
             'budget' => 'nullable|numeric|min:0',
         ], [
