@@ -8,29 +8,29 @@
             <!-- বাম পাশের লেখা -->
             <div class="hero-left">
                 <div class="c-badge"><span></span> Bhaiya Referral Program</div>
-                <h1 class="c-title">আপনার পরিচিতজনকে দিন আকর্ষণীয় ছাড় আপনিও নিন <b>৩ লক্ষ টাকা পর্যন্ত</b> রেফারেল রিওয়ার্ড। </h1>
+                <h1 class="c-title hind-siliguri">   রেফার করে আয় করুন <br> সর্বোচ্চ  ৩ লক্ষ টাকা </h1>
                 <p class="c-desc">
                     আপনার পরিচিতজনকে ফ্ল্যাট বা জমি কেনার জন্য পরিচয় করিয়ে দিন। চুক্তি সম্পন্ন হলে সর্বোচ্চ
-                    <mark>৳৩,০০,০০০</mark> পর্যন্ত রেফার কমিশন পান সরাসরি আপনার অ্যাকাউন্টে।
+                    <mark class="kohinoor-bangla">৳৩,০০,০০০</mark> পর্যন্ত রেফার কমিশন পান সরাসরি আপনার অ্যাকাউন্টে।
                 </p>
-                <div class="c-btn-group">
-                    <a href="#refer" class="btn-green">রেফার শুরু করুন <i class="fas fa-arrow-right"></i></a>
-                    <a href="tel:01922030303" class="btn-white"><i class="fas fa-phone"></i> ০১৯২২-০৩০৩০৩</a>
+                <div class="c-btn-group kohinoor-bangla">
+                    <a href="#refer" class="btn-green flex-1"> <span>রেফার   করুন</span> <i class="fas fa-arrow-right"></i></a>
+                    <a href="tel:01922030303" class="btn-white flex-1"><i class="fas fa-phone"></i> <span>০১৯২২-০৩০৩০৩</span> </a>
                 </div>
-                <div class="c-stats">
+                <!-- <div class="c-stats ">
                     <div class="s-item">
-                        <b class="stat-number" data-target="12">০</b><b>+ বছর</b>
+                        <b class="stat-number kohinoor-bangla" data-target="12">০</b><b>+ বছর</b>
                         <span>বিশ্বস্ত অভিজ্ঞতা</span>
                     </div>
                     <div class="s-item">
-                        <b>৳</b><b class="stat-number" data-target="300000">০</b>
+                        <b>৳</b><b class="stat-number kohinoor-bangla" data-target="300000">০</b>
                         <span>সর্বোচ্চ বোনাস</span>
                     </div>
                     <div class="s-item">
-                        <b class="stat-number" data-target="5">০</b><b>টি</b>
+                        <b class="stat-number kohinoor-bangla" data-target="5">০</b><b>টি</b>
                         <span>সক্রিয় প্রজেক্ট</span>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <div class="visual-parent anim-float">
@@ -38,7 +38,7 @@
                 <img src="{{asset('./images/hero/dot.avif')}}" class="card-bg-img" alt="background">
 
                 <!-- আপনার আসল কার্ড -->
-                <div class="c-visual-card">
+                <div class="c-visual-card hidden lg:block">
                     <div
                         style="display:flex; justify-content: space-between; margin-bottom: 30px; font-weight: 700; font-size: 14px;">
 
@@ -47,9 +47,8 @@
                         <p
                             style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; margin-bottom: 10px;">
                             সর্বোচ্চ কমিশন সুবিধা</p>
-                        <h2 style="font-size: 52px; font-weight: 900; margin: 0; ">৳৩,০০,০০০</h2>
-                        <p style="font-size: 13px; opacity: 0.7; margin-top: 10px;">প্রতিটি সফল অ্যাপার্টমেন্ট রেফারেলের
-                            ক্ষেত্রে</p>
+                        <h2 class="kohinoor-bangla" style="font-size: 52px; font-weight: 900; margin: 0; ">৳৩,০০,০০০</h2>
+                        <p style="font-size: 13px; opacity: 0.7; margin-top: 10px;">প্রতিটি সফল অ্যাপার্টমেন্ট রেফারেলের ক্ষেত্রে</p>
                     </div>
                 </div>
 
@@ -76,10 +75,9 @@
                         style="font-size:12px; color:#697383; font-weight: 400;">সম্পূর্ণ
                         গাইডলাইন</span></div>
             </div>
-            <div class="trust-box"><i class="fas fa-map-marker-alt"></i>
-                <div><b style="display:block;">প্রিমিয়াম লোকেশন</b><span
-                        style="font-size:12px; color:#697383; font-weight: 400;">ঢাকার সেরা
-                        প্রজেক্টসমূহ</span></div>
+            <div class="trust-box"><i class="fas fa-image"></i>
+                <div><b style="display:block;">মার্কেটিং কনটেন্ট</b><span
+                        style="font-size:12px; color:#697383; font-weight: 400;">ডাউনলোড করুন</span></div>
             </div>
         </div>
     </section>
@@ -366,6 +364,9 @@
         button:hover {
             background: var(--fill-ghost-hover, #e5e5e5);
         }
+        .screen-big-title{
+            line-height: 1.3 !important;
+        }
     </style>
 
     <script>
@@ -431,10 +432,12 @@
     <section class="feature-hub-section" id="why-bhaiya">
         <div class="wrap">
             <!-- Section Header (Centered) -->
-            <div class="section-head-hub reveal">
-                <div class="top-badge">ফিউচারিস্টিক শোটাইম</div>
-                <h2 class="hub-main-title">কেন ভাইয়া হাউজিং-এ রেফার করবেন?</h2>
-                <p class="hub-sub-title">ক্লিক বা হোভার করে আমাদের ৪টি প্রধান সুবিধার লাইভ ফিচার ডেমো দেখুন:</p>
+        
+
+            <div class="header">
+                  <div class="top-badge">সুবিধা</div>
+                <h2 class="text-[28px] md:text-[36px]">কেন ভাইয়া হাউজিং-এ রেফার করবেন?</h2>
+                <p>ক্লিক বা হোভার করে আমাদের ৪টি প্রধান সুবিধার লাইভ ফিচার ডেমো দেখুন:</p>
             </div>
 
             <!-- Main Interactive Container -->
@@ -445,7 +448,7 @@
                         <div class="hub-nav-card active" onclick="updateHub(0, this)">
                             <div class="nav-icon-box"><i class="fas fa-shield-alt"></i></div>
                             <div class="nav-texts">
-                                <h3>১৯৭২ সালে প্রতিষ্ঠিত ভাইয়া গ্রুপের অঙ্গ প্রতিষ্ঠান ভাইয়া হাউজিং ও হোটেলস</h3>
+                                <h3><span class="kohinoor-bangla">১৯৭২</span> সালে প্রতিষ্ঠিত ভাইয়া গ্রুপের অঙ্গ প্রতিষ্ঠান ভাইয়া হাউজিং ও হোটেলস</h3>
                             </div>
                         </div>
 
@@ -614,12 +617,12 @@
 
                     <!-- Left: Info -->
                     <div class="left-content">
-                        <div class="top-badge">
+                        <!-- <div class="top-badge">
                             GET STARTED WITH BHAIYA HOUSING
-                        </div>
+                        </div> -->
 
                         <h2 class="hero-title">
-                            আমাদের ক্রিয়েটিভ দিয়ে অনলাইনে বিজ্ঞাপন দিয়ে পটেনশিয়াল কাস্টমার খুঁজে পান
+                            পটেনশিয়াল কাস্টমার পেতে আমাদের কনটেন্ট ব্যবহার করে অনলাইনে বিজ্ঞাপন দিন।
                         </h2>
 
                         <p class="hero-desc">
@@ -648,8 +651,7 @@
                             </div>
 
                             <div class="card-footer">
-                                প্রতি চুক্তিতে নিশ্চিত বোনাস। কোনো প্রকার গোপন শর্ত ছাড়া সরাসরি ব্যাংক অ্যাকাউন্টে
-                                জমা।
+                                প্রতি চুক্তিতে নিশ্চিত বোনাস।   ছাড়া সরাসরি ব্যাংক অ্যাকাউন্টে। (শর্ত প্রযোজ্য) 
                             </div>
                         </div>
                     </div>
@@ -807,7 +809,7 @@
                     </div>
                 </div>
 
-                <div class="faq-item">
+                <!-- <div class="faq-item">
                     <button class="faq-question" onclick="toggleFaq(this)">
                         কোন কোন প্রজেক্টে রেফার করা যাবে?
                         <span class="faq-icon"><i class="fas fa-plus"></i></span>
@@ -816,7 +818,7 @@
                         <p>বারিধারা, মিরপুর, উত্তরা, আফতাবনগর ও মোহাম্মদপুরের চলমান সকল প্রজেক্টে রেফারেল
                             গ্রহণযোগ্য।</p>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="faq-item">
                     <button class="faq-question" onclick="toggleFaq(this)">

@@ -6,29 +6,29 @@
             <!-- বাম পাশের লেখা -->
             <div class="hero-left">
                 <div class="c-badge"><span></span> Bhaiya Referral Program</div>
-                <h1 class="c-title">আপনার পরিচিতজনই হতে পারে আমাদের <b>পরবর্তী সন্তুষ্ট গ্রাহক</b></h1>
+                <h1 class="c-title hind-siliguri">   রেফার করে আয় করুন <br> সর্বোচ্চ  ৩ লক্ষ টাকা </h1>
                 <p class="c-desc">
-                    কাউকে ফ্ল্যাট বা জমি কেনার জন্য পরিচয় করিয়ে দিন। চুক্তি সম্পন্ন হলে সর্বোচ্চ
-                    <mark>৳৩,০০,০০০</mark> পর্যন্ত রেফার কমিশন পান সরাসরি আপনার অ্যাকাউন্টে।
+                    আপনার পরিচিতজনকে ফ্ল্যাট বা জমি কেনার জন্য পরিচয় করিয়ে দিন। চুক্তি সম্পন্ন হলে সর্বোচ্চ
+                    <mark class="kohinoor-bangla">৳৩,০০,০০০</mark> পর্যন্ত রেফার কমিশন পান সরাসরি আপনার অ্যাকাউন্টে।
                 </p>
-                <div class="c-btn-group">
-                    <a href="#refer" class="btn-green">রেফার শুরু করুন <i class="fas fa-arrow-right"></i></a>
-                    <a href="tel:01922030303" class="btn-white"><i class="fas fa-phone"></i> ০১৯২২-০৩০৩০৩</a>
+                <div class="c-btn-group kohinoor-bangla">
+                    <a href="#refer" class="btn-green flex-1"> <span>রেফার   করুন</span> <i class="fas fa-arrow-right"></i></a>
+                    <a href="tel:01922030303" class="btn-white flex-1"><i class="fas fa-phone"></i> <span>০১৯২২-০৩০৩০৩</span> </a>
                 </div>
-                <div class="c-stats">
+                <!-- <div class="c-stats ">
                     <div class="s-item">
-                        <b class="stat-number" data-target="12">০</b><b>+ বছর</b>
+                        <b class="stat-number kohinoor-bangla" data-target="12">০</b><b>+ বছর</b>
                         <span>বিশ্বস্ত অভিজ্ঞতা</span>
                     </div>
                     <div class="s-item">
-                        <b>৳</b><b class="stat-number" data-target="300000">০</b>
+                        <b>৳</b><b class="stat-number kohinoor-bangla" data-target="300000">০</b>
                         <span>সর্বোচ্চ বোনাস</span>
                     </div>
                     <div class="s-item">
-                        <b class="stat-number" data-target="5">০</b><b>টি</b>
+                        <b class="stat-number kohinoor-bangla" data-target="5">০</b><b>টি</b>
                         <span>সক্রিয় প্রজেক্ট</span>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <div class="visual-parent anim-float">
@@ -36,22 +36,18 @@
                 <img src="<?php echo e(asset('./images/hero/dot.avif')); ?>" class="card-bg-img" alt="background">
 
                 <!-- আপনার আসল কার্ড -->
-                <div class="c-visual-card">
+                <div class="c-visual-card hidden lg:block">
                     <div
                         style="display:flex; justify-content: space-between; margin-bottom: 30px; font-weight: 700; font-size: 14px;">
-                        <span  style="color:#175b05;"><i class="fas fa-circle" style="color:#175b05; font-size:8px;"></i> লাইভ রেফারেল প্রবাহ</span>
-                        <span style="color:#175b05; text-transform: uppercase; font-size: 11px;">স্বচ্ছ ও নিরাপদ</span>
+
                     </div>
                     <div class="green-box">
                         <p
                             style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; margin-bottom: 10px;">
                             সর্বোচ্চ কমিশন সুবিধা</p>
-                        <h2 style="font-size: 52px; font-weight: 900; margin: 0; ">৳৩,০০,০০০</h2>
-                        <p style="font-size: 13px; opacity: 0.7; margin-top: 10px;">প্রতিটি সফল অ্যাপার্টমেন্ট রেফারেলের
-                            ক্ষেত্রে</p>
+                        <h2 class="kohinoor-bangla" style="font-size: 52px; font-weight: 900; margin: 0; ">৳৩,০০,০০০</h2>
+                        <p style="font-size: 13px; opacity: 0.7; margin-top: 10px;">প্রতিটি সফল অ্যাপার্টমেন্ট রেফারেলের ক্ষেত্রে</p>
                     </div>
-                    <p style="text-align:center; font-weight: 800; font-size: 15px; color: #1E293B; margin-top:30px;">কমিশন
-                        প্রাপ্তি</p>
                 </div>
 
             </div>
@@ -77,17 +73,16 @@
                         style="font-size:12px; color:#697383; font-weight: 400;">সম্পূর্ণ
                         গাইডলাইন</span></div>
             </div>
-            <div class="trust-box"><i class="fas fa-map-marker-alt"></i>
-                <div><b style="display:block;">প্রিমিয়াম লোকেশন</b><span
-                        style="font-size:12px; color:#697383; font-weight: 400;">ঢাকার সেরা
-                        প্রজেক্টসমূহ</span></div>
+            <div class="trust-box"><i class="fas fa-image"></i>
+                <div><b style="display:block;">মার্কেটিং কনটেন্ট</b><span
+                        style="font-size:12px; color:#697383; font-weight: 400;">ডাউনলোড করুন</span></div>
             </div>
         </div>
     </section>
     <!-- HOW IT WORKS SECTION - IMAGE PERFECT VERSION -->
     <div class="container">
         <div class="header">
-            <h1>কিভাবে কাজ করে?</h1>
+            <h2 class="text-[28px] md:text-[36px]">কিভাবে কাজ করে?</h2>
             <p>মাত্র ৪টি সহজ ধাপে আপনার রেফারেল কমিশন নিশ্চিত করুন।</p>
         </div>
 
@@ -170,9 +165,9 @@
         .progress-fill {
             position: absolute;
             top: 24px;
-            left: 60px;
+            left: 57px;
             height: 2px;
-            background: #10b981;
+            background: #065e43;
             z-index: 2;
             width: 0%;
             transition: width 0.1s linear;
@@ -194,28 +189,28 @@
             width: 58px;
             height: 58px;
             border-radius: 50%;
-            border: 2px solid #d1d5db;
+            border: 2px solid #001c15;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 20px;
+
             font-size: 24px;
             font-weight: 600;
-            color: var(--text-secondary, #999);
+            color: var(--primary-light);
             background: white;
             transition: all 0.1s ease;
             position: relative;
         }
 
         .step-item.active .icon-circle {
-            border-color: #175b05;
+            border-color: #065e43;
             color: white;
-            background: #009d0a;
+            background: #065e43;
         }
 
         .step-item.completed .icon-circle {
-            border-color: #009d0a;
-            background: #009d0a;
+            border-color: #065e43;
+            background: #065e43;
             color: white;
         }
 
@@ -228,7 +223,7 @@
 
         .step-item p {
             font-size: 13px;
-            color: #175b05;
+            color: #065e43;
             line-height: 1.5;
             max-width: 140px;
             margin: 0 auto;
@@ -238,7 +233,7 @@
             position: absolute;
             width: 12px;
             height: 12px;
-            background: #175b05;
+            background: #065e43;
             border-radius: 50%;
             top: 18px;
             left: 60px;
@@ -367,6 +362,9 @@
         button:hover {
             background: var(--fill-ghost-hover, #e5e5e5);
         }
+        .screen-big-title{
+            line-height: 1.3 !important;
+        }
     </style>
 
     <script>
@@ -432,10 +430,12 @@
     <section class="feature-hub-section" id="why-bhaiya">
         <div class="wrap">
             <!-- Section Header (Centered) -->
-            <div class="section-head-hub reveal">
-                <div class="top-badge">ফিউচারিস্টিক শোটাইম</div>
-                <h2 class="hub-main-title">কেন ভাইয়া হাউজিং-এ রেফার করবেন?</h2>
-                <p class="hub-sub-title">ক্লিক বা হোভার করে আমাদের ৪টি প্রধান সুবিধার লাইভ ফিচার ডেমো দেখুন:</p>
+        
+
+            <div class="header">
+                  <div class="top-badge">সুবিধা</div>
+                <h2 class="text-[28px] md:text-[36px]">কেন ভাইয়া হাউজিং-এ রেফার করবেন?</h2>
+                <p>ক্লিক বা হোভার করে আমাদের ৪টি প্রধান সুবিধার লাইভ ফিচার ডেমো দেখুন:</p>
             </div>
 
             <!-- Main Interactive Container -->
@@ -446,8 +446,7 @@
                         <div class="hub-nav-card active" onclick="updateHub(0, this)">
                             <div class="nav-icon-box"><i class="fas fa-shield-alt"></i></div>
                             <div class="nav-texts">
-                                <h4>১. ১২+ বছরের শতভাগ সুনাম</h4>
-                                <p>২০১২ থেকে ঢাকায় আবাসন নিশ্চিত করে আসছি।</p>
+                                <h3><span class="kohinoor-bangla">১৯৭২</span> সালে প্রতিষ্ঠিত ভাইয়া গ্রুপের অঙ্গ প্রতিষ্ঠান ভাইয়া হাউজিং ও হোটেলস</h3>
                             </div>
                         </div>
 
@@ -462,9 +461,10 @@
                         <div class="hub-nav-card" onclick="updateHub(2, this)">
                             <div class="nav-icon-box"><i class="fas fa-home"></i></div>
                             <div class="nav-texts">
-                                <h4>৩. ঢাকার সেরা প্রাইম স্পটসমূহ</h4>
-                                <p>বারিধারা, উত্তরা, মিরপুর ও ধানমন্ডি সংলগ্ন প্রজেক্ট।</p>
+                                <h4>৩.ঢাকার সেরা প্রাইম স্পটসমূহে এ্যাপার্ট্মেন্ট প্রজেক্টসহ</h4>
+                                <p>পাইন সিটি, বীরতারা,আধুনিক সিটি সহ পাঁচ তারকা হোটেল</p>
                             </div>
+
                         </div>
 
                         <div class="hub-nav-card" onclick="updateHub(3, this)">
@@ -480,10 +480,10 @@
                     <div class="hub-display-screen">
                         <div class="screen-content active" id="content-0">
                             <span class="screen-mini-tag">বিশ্বস্ততা ও অভিজ্ঞতা</span>
-                            <h3 class="screen-big-title">১২+ বছরের অটুট সুনাম ও শতভাগ গ্রাহক আস্থা</h3>
-                            <p class="screen-description">Bhaiya Housing নির্দিষ্ট সময়ের মধ্যে আন্তর্জাতিক
-                                স্ট্যান্ডার্ডের
-                                ফ্ল্যাট হস্তান্তর করার জন্য দীর্ঘ এক দশক ধরে পরিচিত।</p>
+                            <h3 class="screen-big-title">৫৪ বছরের অটুট সুনাম ও শতভাগ গ্রাহক আস্থা</h3>
+                            <p class="screen-description">ভাইয়া হোটেলস এন্ড ভাইয়া হাউজিং <br>
+                                দেশের ঐতিহ্যবাহী ও সুপ্রতিষ্ঠিত ভাইয়া গ্রুপের গর্বিত অঙ্গ প্রতিষ্ঠান।
+                                দীর্ঘদিনের সুনাম, অভিজ্ঞতা ও বিশ্বস্ততার কারণে আপনার বিনিয়োগে থাকছে আস্থা ও নিরাপত্তার নিশ্চয়তা।</p>
                         </div>
                         <div class="screen-content" id="content-1">
                             <span class="screen-mini-tag">ইনস্ট্যান্ট পেমেন্ট</span>
@@ -511,95 +511,7 @@
         </div>
     </section>
 
-    <section class="dashboard-section" id="dashboard-section">
-        <div class="wrap">
-
-            <div class="section-head">
-                <h2>স্বাগতম<?php if(auth()->guard()->check()): ?> ,<?php echo e(Auth::user()->name); ?><?php endif; ?></h2>
-                <p>আপনার রেফারেল এবং কমিশনের সর্বশেষ অবস্থা নিচে দেখুন।</p>
-            </div>
-
-            <div id="dashPanel" class="dash-panel active" style="display: block;">
-                <form id="logout-form" action="<?php echo e(route('frontend.logout')); ?>" method="POST" style="display: none;">
-                    <?php echo csrf_field(); ?>
-                </form>
-                <?php if(auth()->guard()->check()): ?>
-
-                    <button class="dash-logout"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        ← লগআউট করুন
-                    </button>
-                <?php endif; ?>
-                <div class="dash-summary">
-                    <div class="dash-stat"><b>৮</b><span>মোট রেফারেল</span></div>
-                    <div class="dash-stat"><b>৩</b><span>প্রক্রিয়াধীন</span></div>
-                    <div class="dash-stat"><b>২</b><span>বুকিং সম্পন্ন</span></div>
-                    <div class="dash-stat"><b>৳৪,৫০,০০০</b><span>মোট কমিশন (অর্জিত)</span></div>
-                </div>
-                <div class="dash-table-wrap">
-                    <table class="dash-table">
-                        <thead>
-                            <tr>
-                                <th>নাম</th>
-                                <th>প্রজেক্ট</th>
-                                <th>রেফার তারিখ</th>
-                                <th>স্টেজ</th>
-                                <th>কমিশন</th>
-                            </tr>
-                        </thead>
-                        <tbody style="color: #f4efe2;">
-                            <tr>
-                                <td data-label="নাম">রাকিব হাসান</td>
-                                <td data-label="প্রজেক্ট">Gulf Panorama</td>
-                                <td data-label="রেফার তারিখ">০২ জুন ২০২৬</td>
-                                <td data-label="স্টেজ"><span class="stage-pill stage-5">কমিশন প্রদত্ত</span></td>
-                                <td data-label="কমিশন">৳২,৫০,০০০</td>
-                            </tr>
-                            <tr>
-                                <td data-label="নাম">শিরিন আক্তার</td>
-                                <td data-label="প্রজেক্ট">Daisy Dell</td>
-                                <td data-label="রেফার তারিখ">১৮ জুন ২০২৬</td>
-                                <td data-label="স্টেজ"><span class="stage-pill stage-5">কমিশন প্রদত্ত</span></td>
-                                <td data-label="কমিশন">৳২,০০,০০০</td>
-                            </tr>
-                            <tr>
-                                <td data-label="নাম">ইমরান খান</td>
-                                <td data-label="প্রজেক্ট">Olivia</td>
-                                <td data-label="রেফার তারিখ">০৫ জুলাই ২০২৬</td>
-                                <td data-label="স্টেজ"><span class="stage-pill stage-4">বুকিং সম্পন্ন</span></td>
-                                <td data-label="কমিশন">প্রক্রিয়াধীন</td>
-                            </tr>
-                            <tr>
-                                <td data-label="নাম">নাজমুল হক</td>
-                                <td data-label="প্রজেক্ট">Park Oasis</td>
-                                <td data-label="রেফার তারিখ">০৯ জুলাই ২০২৬</td>
-                                <td data-label="স্টেজ"><span class="stage-pill stage-3">সাইট ভিজিট</span></td>
-                                <td data-label="কমিশন">—</td>
-                            </tr>
-                            <tr>
-                                <td data-label="নাম">ফারহানা ইসলাম</td>
-                                <td data-label="প্রজেক্ট">Sheuly's Garden</td>
-                                <td data-label="রেফার তারিখ">১১ জুলাই ২০২৬</td>
-                                <td data-label="স্টেজ"><span class="stage-pill stage-2">যোগাযোগ করা হয়েছে</span></td>
-                                <td data-label="কমিশন">—</td>
-                            </tr>
-                            <tr>
-                                <td data-label="নাম">তানভীর আহমেদ</td>
-                                <td data-label="প্রজেক্ট">Gulf Panorama</td>
-                                <td data-label="রেফার তারিখ">১৩ জুলাই ২০২৬</td>
-                                <td data-label="স্টেজ"><span class="stage-pill stage-1">রেফার করা হয়েছে</span></td>
-                                <td data-label="কমিশন">—</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <p class="link-gen-note" style="color:darkgray">ডেমো ডেটা — বাস্তব ব্যবহারে এই তালিকা আপনার প্রকৃত
-                    রেফারেল
-                    অনুযায়ী
-                    স্বয়ংক্রিয়ভাবে আপডেট হবে।</p>
-            </div>
-        </div>
-    </section>
+    
 
     <!-- Bhaiya Housing Hero Section -->
     <section class="refer-hero-section">
@@ -615,13 +527,13 @@
 
                     <!-- Left: Info -->
                     <div class="left-content">
-                        <div class="top-badge">
+                        <!-- <div class="top-badge">
                             GET STARTED WITH BHAIYA HOUSING
-                        </div>
+                        </div> -->
 
-                        <h1 class="hero-title">
-                            ডিজিটাল রেফারেল প্ল্যাটফর্মে নতুন অভিজ্ঞতা নিন
-                        </h1>
+                        <h2 class="hero-title">
+                            পটেনশিয়াল কাস্টমার পেতে আমাদের কনটেন্ট ব্যবহার করে অনলাইনে বিজ্ঞাপন দিন।
+                        </h2>
 
                         <p class="hero-desc">
                             অনলাইনে সরাসরি তথ্য সাবমিট করুন বা ইউনিক লিঙ্ক বানিয়ে কাস্টমারদের জানান। আমাদের বিশ্বস্ত
@@ -649,8 +561,7 @@
                             </div>
 
                             <div class="card-footer">
-                                প্রতি চুক্তিতে নিশ্চিত বোনাস। কোনো প্রকার গোপন শর্ত ছাড়া সরাসরি ব্যাংক অ্যাকাউন্টে
-                                জমা।
+                                প্রতি চুক্তিতে নিশ্চিত বোনাস।   ছাড়া সরাসরি ব্যাংক অ্যাকাউন্টে। (শর্ত প্রযোজ্য) 
                             </div>
                         </div>
                     </div>
@@ -867,7 +778,7 @@ unset($__errorArgs, $__bag); ?>
                     </div>
                 </div>
 
-                <div class="faq-item">
+                <!-- <div class="faq-item">
                     <button class="faq-question" onclick="toggleFaq(this)">
                         কোন কোন প্রজেক্টে রেফার করা যাবে?
                         <span class="faq-icon"><i class="fas fa-plus"></i></span>
@@ -876,7 +787,7 @@ unset($__errorArgs, $__bag); ?>
                         <p>বারিধারা, মিরপুর, উত্তরা, আফতাবনগর ও মোহাম্মদপুরের চলমান সকল প্রজেক্টে রেফারেল
                             গ্রহণযোগ্য।</p>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="faq-item">
                     <button class="faq-question" onclick="toggleFaq(this)">

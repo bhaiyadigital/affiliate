@@ -91,8 +91,14 @@
         td {
             /* প্রথমে Kohinoor Bangla দিন, তারপর Hind Siliguri */
             /* ব্রাউজার টেক্সটের ভেতর সংখ্যা পেলে কোহিনূর নিবে, আর অক্ষর পেলে হিন্দ শিলিগুড়ি নিবে */
-            font-family: 'Kohinoor Bangla', 'Hind Siliguri', sans-serif !important;
+           font-family: 'Hind Siliguri', sans-serif !important;
             line-height: 1.65;
+        }
+        .kohinoor-bangla {
+            font-family: 'Kohinoor Bangla', sans-serif !important;
+        }
+        .hind-siliguri {
+            font-family: 'Hind Siliguri', sans-serif !important;
         }
 
         /* ৩. সংখ্যাগুলো যাতে সবসময় সোজা এবং সুন্দর দেখায় */
@@ -598,7 +604,7 @@
         }
 
         .c-title {
-            font-size: 42px;
+            font-size: 62px;
             font-weight: 700;
             line-height: 1.3;
             color: #101828;
@@ -631,6 +637,16 @@
             gap: 15px;
             flex-wrap: wrap;
             margin-bottom: 40px;
+        }
+        @media(max-width: 600px) {
+            .c-btn-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .c-btn-group span {
+                font-size:17px !important;
+                font-family: 'kohinoor-bangla', sans-serif !important;
+            }
         }
 
         .btn-green {
@@ -800,7 +816,7 @@
             }
 
             .c-visual-card {
-                display: block !important;
+              
                 padding: 30px 20px !important;
             }
 
@@ -2122,7 +2138,7 @@
         .hero-title {
             color: #ffffff;
             font-size: 42px;
-            font-weight: 700;
+           
             line-height: 1.2;
             margin-bottom: 20px;
         }
