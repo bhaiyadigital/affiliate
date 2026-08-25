@@ -49,13 +49,65 @@
             font-size: 16px;
         }
 
+        /* ১. কোহিনূর বাংলা রেজিস্টার (শুধু ০-৯ এবং চিহ্নের জন্য রেঞ্জ সেট করা) */
+        @font-face {
+            font-family: 'Kohinoor Bangla';
+            src: url("{{ asset('font/KohinoorBangla/KohinoorBangla-Regular.otf') }}") format('opentype');
+            font-weight: 400;
+            font-style: normal;
+            /* এই রেঞ্জটি বাংলা ও ইংরেজি সংখ্যা এবং +, . , ৳ কভার করবে */
+            unicode-range: U+09E6-09EF, U+0030-0039, U+002B, U+002E, U+002C, U+09F3;
+        }
+
+        @font-face {
+            font-family: 'Kohinoor Bangla';
+            src: url("{{ asset('font/KohinoorBangla/KohinoorBangla-Semibold.otf') }}") format('opentype');
+            font-weight: 600;
+            font-style: normal;
+            unicode-range: U+09E6-09EF, U+0030-0039, U+002B, U+002E, U+002C, U+09F3;
+        }
+
+        @font-face {
+            font-family: 'Kohinoor Bangla';
+            src: url("{{ asset('font/KohinoorBangla/KohinoorBangla-Bold.otf') }}") format('opentype');
+            font-weight: 700;
+            font-style: normal;
+            unicode-range: U+09E6-09EF, U+0030-0039, U+002B, U+002E, U+002C, U+09F3;
+        }
+
+        /* ২. গ্লোবাল ফন্ট রুল */
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        p,
+        a,
+        span,
+        button,
+        input,
+        select,
+        label,
+        td {
+            /* প্রথমে Kohinoor Bangla দিন, তারপর Hind Siliguri */
+            /* ব্রাউজার টেক্সটের ভেতর সংখ্যা পেলে কোহিনূর নিবে, আর অক্ষর পেলে হিন্দ শিলিগুড়ি নিবে */
+            font-family: 'Kohinoor Bangla', 'Hind Siliguri', sans-serif !important;
+            line-height: 1.65;
+        }
+
+        /* ৩. সংখ্যাগুলো যাতে সবসময় সোজা এবং সুন্দর দেখায় */
+        * {
+            font-variant-numeric: tabular-nums;
+        }
+
         body {
             color: #1E293B;
             line-height: 1.65;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            font-family: 'Hind Siliguri', sans-serif;
         }
+
+
 
         a {
             color: inherit;
@@ -108,6 +160,7 @@
             --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
+
         /* ১. বাটন এবং বড় বক্সগুলোর ব্যাকগ্রাউন্ড */
         .btn-green,
         .green-box,
@@ -117,6 +170,7 @@
         .form-dark-side,
         .form-submit-btn {
             background: var(--primary-gradient) !important;
+            color: white;
         }
 
         /* ২. টেক্সট কালার (Heading highlights) */
@@ -124,7 +178,7 @@
         .brand-title,
         .hub-nav-card.active .nav-texts h4,
         .status-left i {
-            color: #012d20 !important;
+            color: [var(--primary-light)] !important;
         }
 
         /* ৩. আইকন এবং ছোট ব্যাজ */
@@ -544,9 +598,9 @@
         }
 
         .c-title {
-            font-size: 54px;
-            font-weight: 900;
-            line-height: 1.2;
+            font-size: 42px;
+            font-weight: 700;
+            line-height: 1.3;
             color: #101828;
             margin-bottom: 20px;
         }
@@ -580,8 +634,6 @@
         }
 
         .btn-green {
-            background: #047857;
-            color: white;
             padding: 16px 32px;
             border-radius: 12px;
             font-weight: 700;
@@ -635,11 +687,10 @@
         }
 
         .green-box {
-            background: #047857;
             border-radius: 28px;
             padding: 45px 20px;
             text-align: center;
-            color: white;
+
             box-shadow: 0 20px 40px rgba(4, 120, 87, 0.25);
         }
 
@@ -736,17 +787,16 @@
         @media (max-width: 991px) {
             .c-wrap {
                 grid-template-columns: 1fr !important;
-                /* কলাম একটি হয়ে যাবে */
                 text-align: center;
-                gap: 40px;
+                gap: 30px;
             }
 
-            /* ফ্লোটিং কার্ড এখন দৃশ্যমান হবে */
             .visual-parent {
-                display: block !important;
-                margin: 0 auto !important;
-                max-width: 450px;
-                padding: 20px;
+                width: 100% !important;
+                max-width: 100% !important;
+                padding: 0 !important;
+                /* ডট ইমেজ বা গ্যাপের জন্য প্যাডিং কমানো হলো */
+                margin-top: 20px;
             }
 
             .c-visual-card {
@@ -796,7 +846,7 @@
             }
 
             .header-top-badge {
-                font-size: 10px;
+
                 height: auto;
                 padding: 5px;
             }
@@ -809,6 +859,19 @@
             .green-box h2 {
                 font-size: 32px !important;
                 white-space: nowrap;
+            }
+
+            .btn-green {
+                font-size: 12px;
+                font-weight: 600;
+                gap: 5px;
+
+            }
+
+            .btn-white {
+                font-size: 12px;
+                font-weight: 600;
+                gap: 5px;
             }
         }
 
@@ -1738,6 +1801,11 @@
             .dash-dark-container {
                 padding: 30px 20px;
             }
+
+            .faq-main-title {
+                font-size: 28px;
+
+            }
         }
 
         /* Container styling */
@@ -2053,8 +2121,8 @@
 
         .hero-title {
             color: #ffffff;
-            font-size: 54px;
-            font-weight: 900;
+            font-size: 42px;
+            font-weight: 700;
             line-height: 1.2;
             margin-bottom: 20px;
         }
@@ -2064,7 +2132,7 @@
             font-size: 18px;
             line-height: 1.7;
             margin-bottom: 40px;
-            max-width: 500px;
+            max-width: 600px;
         }
 
         /* ৬. বাটন */
