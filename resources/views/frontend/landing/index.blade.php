@@ -41,8 +41,8 @@
                 <div class="c-visual-card">
                     <div
                         style="display:flex; justify-content: space-between; margin-bottom: 30px; font-weight: 700; font-size: 14px;">
-                        <span  style="color:#175b05;"><i class="fas fa-circle" style="color:#175b05; font-size:8px;"></i> লাইভ রেফারেল প্রবাহ</span>
-                        <span style="color:#175b05; text-transform: uppercase; font-size: 11px;">স্বচ্ছ ও নিরাপদ</span>
+                        <span  style="color:#065e43;"><i class="fas fa-circle" style="color:#065e43; font-size:8px;"></i> লাইভ রেফারেল প্রবাহ</span>
+                        <span style="color:#065e43; text-transform: uppercase; font-size: 11px;">স্বচ্ছ ও নিরাপদ</span>
                     </div>
                     <div class="green-box">
                         <p
@@ -52,7 +52,7 @@
                         <p style="font-size: 13px; opacity: 0.7; margin-top: 10px;">প্রতিটি সফল অ্যাপার্টমেন্ট রেফারেলের
                             ক্ষেত্রে</p>
                     </div>
-                    <p style="text-align:center; font-weight: 800; font-size: 15px; color: #1E293B; margin-top:30px;">কমিশন
+                    <p style="text-align:center; font-weight: 800; font-size: 15px; color: #065e43; margin-top:30px;">কমিশন
                         প্রাপ্তি</p>
                 </div>
 
@@ -210,7 +210,7 @@
         }
 
         .step-item.active .icon-circle {
-            border-color: #175b05;
+            border-color: #065e43;
             color: white;
             background: #065e43;
         }
@@ -230,7 +230,7 @@
 
         .step-item p {
             font-size: 13px;
-            color: #175b05;
+            color: #065e43;
             line-height: 1.5;
             max-width: 140px;
             margin: 0 auto;
@@ -240,7 +240,7 @@
             position: absolute;
             width: 12px;
             height: 12px;
-            background: #175b05;
+            background: #065e43;
             border-radius: 50%;
             top: 18px;
             left: 60px;

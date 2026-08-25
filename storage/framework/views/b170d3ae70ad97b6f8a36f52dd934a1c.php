@@ -710,102 +710,107 @@
             transform: translateY(-3px);
         }
 
-.trust-box i {
-    width: 50px;
-    height: 50px;
-    background: #ecfdf5 !important; /* হালকা গ্রিন ব্যাকগ্রাউন্ড */
-    border-radius: 12px;
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    color: #012d20 !important; /* আপনার দেওয়া ডিপ গ্রিন কালার */
-    font-size: 20px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.04);
+        .trust-box i {
+            width: 50px;
+            height: 50px;
+            background: #ecfdf5 !important;
+            /* হালকা গ্রিন ব্যাকগ্রাউন্ড */
+            border-radius: 12px;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            color: #012d20 !important;
+            /* আপনার দেওয়া ডিপ গ্রিন কালার */
+            font-size: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.04);
 
-    /* ⚠️ এই ৩টি লাইন আইকন শো করার জন্য সবচেয়ে জরুরি */
-    font-family: "Font Awesome 6 Free" !important;
-    font-weight: 900 !important;
-    font-style: normal !important;
+            /* ⚠️ এই ৩টি লাইন আইকন শো করার জন্য সবচেয়ে জরুরি */
+            font-family: "Font Awesome 6 Free" !important;
+            font-weight: 900 !important;
+            font-style: normal !important;
 
-    flex-shrink: 0;
-}
+            flex-shrink: 0;
+        }
 
-/* ══════ রেসপনসিভ ফিক্স (মোবাইলেও কার্ড দেখাবে) ══════ */
-@media (max-width: 991px) {
-    .c-wrap {
-        grid-template-columns: 1fr !important; /* কলাম একটি হয়ে যাবে */
-        text-align: center;
-        gap: 40px;
-    }
+        /* ══════ রেসপনসিভ ফিক্স (মোবাইলেও কার্ড দেখাবে) ══════ */
+        @media (max-width: 991px) {
+            .c-wrap {
+                grid-template-columns: 1fr !important;
+                /* কলাম একটি হয়ে যাবে */
+                text-align: center;
+                gap: 40px;
+            }
 
-    /* ফ্লোটিং কার্ড এখন দৃশ্যমান হবে */
-    .visual-parent {
-        display: block !important;
-        margin: 0 auto !important;
-        max-width: 450px;
-        padding: 20px;
-    }
+            /* ফ্লোটিং কার্ড এখন দৃশ্যমান হবে */
+            .visual-parent {
+                display: block !important;
+                margin: 0 auto !important;
+                max-width: 450px;
+                padding: 20px;
+            }
 
-    .c-visual-card {
-        display: block !important;
-        padding: 30px 20px !important;
-    }
+            .c-visual-card {
+                display: block !important;
+                padding: 30px 20px !important;
+            }
 
-    .nav-btns {
-        display: none;
-    }
+            .nav-btns {
+                display: none;
+            }
 
-    /* মোবাইলে মেনু পজিশন */
-    .nav-menu {
-        position: absolute;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        background: #fff;
-        display: none;
-        flex-direction: column;
-        padding: 20px;
-        border-bottom: 2px solid #012d20;
-    }
+            /* মোবাইলে মেনু পজিশন */
+            .nav-menu {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: #fff;
+                display: none;
+                flex-direction: column;
+                padding: 20px;
+                border-bottom: 2px solid #012d20;
+            }
 
-    /* স্ট্যাটাস সেকশন এক লাইনে রাখার জন্য */
-    .c-stats {
-        justify-content: center !important;
-        gap: 15px !important;
-        flex-wrap: nowrap !important; /* ভাঙবে না */
-    }
+            /* স্ট্যাটাস সেকশন এক লাইনে রাখার জন্য */
+            .c-stats {
+                justify-content: center !important;
+                gap: 15px !important;
+                flex-wrap: nowrap !important;
+                /* ভাঙবে না */
+            }
 
-    .s-item b {
-        font-size: 16px !important; /* সাইজ কমানো হলো যাতে ১ লাইনে থাকে */
-        white-space: nowrap !important;
-    }
+            .s-item b {
+                font-size: 16px !important;
+                /* সাইজ কমানো হলো যাতে ১ লাইনে থাকে */
+                white-space: nowrap !important;
+            }
 
-    .s-item span {
-        font-size: 10px !important;
-    }
-}
+            .s-item span {
+                font-size: 10px !important;
+            }
+        }
 
-@media (max-width: 600px) {
-    .nav-inner {
-        margin-top: 0 !important;
-    }
+        @media (max-width: 600px) {
+            .nav-inner {
+                margin-top: 0 !important;
+            }
 
-    .header-top-badge {
-        font-size: 10px;
-        height: auto;
-        padding: 5px;
-    }
+            .header-top-badge {
+                font-size: 10px;
+                height: auto;
+                padding: 5px;
+            }
 
-    body {
-        padding-top: 40px;
-    }
+            body {
+                padding-top: 40px;
+            }
 
-    /* ছোট ফোনে ৩ লাখ টাকা লেখাটি অ্যাডজাস্টমেন্ট */
-    .green-box h2 {
-        font-size: 32px !important;
-        white-space: nowrap;
-    }
-}
+            /* ছোট ফোনে ৩ লাখ টাকা লেখাটি অ্যাডজাস্টমেন্ট */
+            .green-box h2 {
+                font-size: 32px !important;
+                white-space: nowrap;
+            }
+        }
 
         @keyframes floatAnim {
 
@@ -1595,10 +1600,35 @@
             text-align: center;
         }
 
-        /* --- Dashboard & Auth Dark Theme CSS --- */
         .dashboard-section {
             padding: 100px 0;
-             background: linear-gradient(145deg, #012d20 0%, #052e02 100%) !important;
+            position: relative;
+            /* আপনার দেওয়া ইমেজটি ব্যাকগ্রাউন্ড হিসেবে */
+            background-image: url("<?php echo e(asset('./images/hero/backgroud.jpeg')); ?>") !important;
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            overflow: hidden;
+        }
+
+        /* আগের সব ::before (টেক্সচার/কালার) বাদ দেওয়া হয়েছে */
+        .dashboard-section::before {
+            display: none !important;
+        }
+
+
+        #dashPanel {
+            position: relative;
+            z-index: 5;
+            background: rgba(255, 255, 255, 0.03) !important;
+            /* খুব হালকা সাদা স্বচ্ছতা */
+            backdrop-filter: blur(15px);
+            /* পেছনের ইমেজ ব্লার করার জন্য */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 40px;
+            padding: 60px 40px;
+            color: #ffffff;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
         }
 
         /* Dashboard Dark Panel */
@@ -1971,31 +2001,32 @@
         }
 
         .main-green-box {
-    position: relative;
+            position: relative;
 
-    /* বামে গাঢ় (#012d20), মাঝখানে হালকা (#065e43), ডানে গাঢ় (#012d20) */
-    background: linear-gradient(to right, #012d20 0%, #065e43 50%, #012d20 100%) !important;
+            /* বামে গাঢ় (#012d20), মাঝখানে হালকা (#065e43), ডানে গাঢ় (#012d20) */
+            background: linear-gradient(to right, #012d20 0%, #065e43 50%, #012d20 100%) !important;
 
-    border-radius: 60px; /* পিল শেপড রাউন্ডেড কোণা */
-    padding: 80px 60px;
-    overflow: hidden;
+            border-radius: 60px;
+            /* পিল শেপড রাউন্ডেড কোণা */
+            padding: 80px 60px;
+            overflow: hidden;
 
-    /* আপনার নতুন গ্রিন অনুযায়ী শ্যাডো অ্যাডজাস্টমেন্ট */
-    box-shadow: 0 40px 80px rgba(23, 91, 5, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
+            /* আপনার নতুন গ্রিন অনুযায়ী শ্যাডো অ্যাডজাস্টমেন্ট */
+            box-shadow: 0 40px 80px rgba(23, 91, 5, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-/* শাইন ইফেক্ট আরও ফুটিয়ে তোলার জন্য ওভারলে অ্যাডজাস্টমেন্ট (ঐচ্ছিক) */
-.glow-overlay {
-    position: absolute;
-    top: -20%;
-    right: -10%;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 1;
-}
+        /* শাইন ইফেক্ট আরও ফুটিয়ে তোলার জন্য ওভারলে অ্যাডজাস্টমেন্ট (ঐচ্ছিক) */
+        .glow-overlay {
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 1;
+        }
 
         /* ৪. গ্রিড লেআউট */
         .content-grid {
