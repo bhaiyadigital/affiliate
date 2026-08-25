@@ -6,9 +6,9 @@
             <!-- বাম পাশের লেখা -->
             <div class="hero-left">
                 <div class="c-badge"><span></span> Bhaiya Referral Program</div>
-                <h1 class="c-title">আপনার পরিচিতজনই হতে পারে আমাদের <b>পরবর্তী সন্তুষ্ট গ্রাহক</b></h1>
+                <h1 class="c-title">আপনার পরিচিতজনকে দিন আকর্ষণীয় ছাড় আপনিও নিন <b>৩ লক্ষ টাকা পর্যন্ত</b> রেফারেল রিওয়ার্ড। </h1>
                 <p class="c-desc">
-                    কাউকে ফ্ল্যাট বা জমি কেনার জন্য পরিচয় করিয়ে দিন। চুক্তি সম্পন্ন হলে সর্বোচ্চ
+                    আপনার পরিচিতজনকে ফ্ল্যাট বা জমি কেনার জন্য পরিচয় করিয়ে দিন। চুক্তি সম্পন্ন হলে সর্বোচ্চ
                     <mark>৳৩,০০,০০০</mark> পর্যন্ত রেফার কমিশন পান সরাসরি আপনার অ্যাকাউন্টে।
                 </p>
                 <div class="c-btn-group">
@@ -39,8 +39,7 @@
                 <div class="c-visual-card">
                     <div
                         style="display:flex; justify-content: space-between; margin-bottom: 30px; font-weight: 700; font-size: 14px;">
-                        <span  style="color:#065e43;"><i class="fas fa-circle" style="color:#065e43; font-size:8px;"></i> লাইভ রেফারেল প্রবাহ</span>
-                        <span style="color:#065e43; text-transform: uppercase; font-size: 11px;">স্বচ্ছ ও নিরাপদ</span>
+
                     </div>
                     <div class="green-box">
                         <p
@@ -50,8 +49,6 @@
                         <p style="font-size: 13px; opacity: 0.7; margin-top: 10px;">প্রতিটি সফল অ্যাপার্টমেন্ট রেফারেলের
                             ক্ষেত্রে</p>
                     </div>
-                    <p style="text-align:center; font-weight: 800; font-size: 15px; color: #065e43; margin-top:30px;">কমিশন
-                        প্রাপ্তি</p>
                 </div>
 
             </div>
@@ -87,7 +84,7 @@
     <!-- HOW IT WORKS SECTION - IMAGE PERFECT VERSION -->
     <div class="container">
         <div class="header">
-            <h1>কিভাবে কাজ করে?</h1>
+            <h2 class="text-[28px] md:text-[36px]">কিভাবে কাজ করে?</h2>
             <p>মাত্র ৪টি সহজ ধাপে আপনার রেফারেল কমিশন নিশ্চিত করুন।</p>
         </div>
 
@@ -170,7 +167,7 @@
         .progress-fill {
             position: absolute;
             top: 24px;
-            left: 60px;
+            left: 57px;
             height: 2px;
             background: #065e43;
             z-index: 2;
@@ -194,14 +191,14 @@
             width: 58px;
             height: 58px;
             border-radius: 50%;
-            border: 2px solid #d1d5db;
+            border: 2px solid #001c15;
             display: flex;
             align-items: center;
             justify-content: center;
 
             font-size: 24px;
             font-weight: 600;
-            color: var(--text-secondary, #999);
+            color: var(--primary-light);
             background: white;
             transition: all 0.1s ease;
             position: relative;
@@ -446,8 +443,7 @@
                         <div class="hub-nav-card active" onclick="updateHub(0, this)">
                             <div class="nav-icon-box"><i class="fas fa-shield-alt"></i></div>
                             <div class="nav-texts">
-                                <h4>১. ১২+ বছরের শতভাগ সুনাম</h4>
-                                <p>২০১২ থেকে ঢাকায় আবাসন নিশ্চিত করে আসছি।</p>
+                                <h3>১৯৭২ সালে প্রতিষ্ঠিত ভাইয়া গ্রুপের অঙ্গ প্রতিষ্ঠান ভাইয়া হাউজিং ও হোটেলস</h3>
                             </div>
                         </div>
 
@@ -462,9 +458,10 @@
                         <div class="hub-nav-card" onclick="updateHub(2, this)">
                             <div class="nav-icon-box"><i class="fas fa-home"></i></div>
                             <div class="nav-texts">
-                                <h4>৩. ঢাকার সেরা প্রাইম স্পটসমূহ</h4>
-                                <p>বারিধারা, উত্তরা, মিরপুর ও ধানমন্ডি সংলগ্ন প্রজেক্ট।</p>
+                                <h4>৩.ঢাকার সেরা প্রাইম স্পটসমূহে এ্যাপার্ট্মেন্ট প্রজেক্টসহ</h4>
+                                <p>পাইন সিটি, বীরতারা,আধুনিক সিটি সহ পাঁচ তারকা হোটেল</p>
                             </div>
+
                         </div>
 
                         <div class="hub-nav-card" onclick="updateHub(3, this)">
@@ -480,10 +477,10 @@
                     <div class="hub-display-screen">
                         <div class="screen-content active" id="content-0">
                             <span class="screen-mini-tag">বিশ্বস্ততা ও অভিজ্ঞতা</span>
-                            <h3 class="screen-big-title">১২+ বছরের অটুট সুনাম ও শতভাগ গ্রাহক আস্থা</h3>
-                            <p class="screen-description">Bhaiya Housing নির্দিষ্ট সময়ের মধ্যে আন্তর্জাতিক
-                                স্ট্যান্ডার্ডের
-                                ফ্ল্যাট হস্তান্তর করার জন্য দীর্ঘ এক দশক ধরে পরিচিত।</p>
+                            <h3 class="screen-big-title">৫৪ বছরের অটুট সুনাম ও শতভাগ গ্রাহক আস্থা</h3>
+                            <p class="screen-description">ভাইয়া হোটেলস এন্ড ভাইয়া হাউজিং <br>
+                                দেশের ঐতিহ্যবাহী ও সুপ্রতিষ্ঠিত ভাইয়া গ্রুপের গর্বিত অঙ্গ প্রতিষ্ঠান।
+                                দীর্ঘদিনের সুনাম, অভিজ্ঞতা ও বিশ্বস্ততার কারণে আপনার বিনিয়োগে থাকছে আস্থা ও নিরাপত্তার নিশ্চয়তা।</p>
                         </div>
                         <div class="screen-content" id="content-1">
                             <span class="screen-mini-tag">ইনস্ট্যান্ট পেমেন্ট</span>
@@ -511,95 +508,7 @@
         </div>
     </section>
 
-    <section class="dashboard-section" id="dashboard-section">
-        <div class="wrap">
-
-            <div class="section-head">
-                <h2>স্বাগতম<?php if(auth()->guard()->check()): ?> ,<?php echo e(Auth::user()->name); ?><?php endif; ?></h2>
-                <p>আপনার রেফারেল এবং কমিশনের সর্বশেষ অবস্থা নিচে দেখুন।</p>
-            </div>
-
-            <div id="dashPanel" class="dash-panel active" style="display: block;">
-                <form id="logout-form" action="<?php echo e(route('frontend.logout')); ?>" method="POST" style="display: none;">
-                    <?php echo csrf_field(); ?>
-                </form>
-                <?php if(auth()->guard()->check()): ?>
-
-                    <button class="dash-logout"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        ← লগআউট করুন
-                    </button>
-                <?php endif; ?>
-                <div class="dash-summary">
-                    <div class="dash-stat"><b>৮</b><span>মোট রেফারেল</span></div>
-                    <div class="dash-stat"><b>৩</b><span>প্রক্রিয়াধীন</span></div>
-                    <div class="dash-stat"><b>২</b><span>বুকিং সম্পন্ন</span></div>
-                    <div class="dash-stat"><b>৳৪,৫০,০০০</b><span>মোট কমিশন (অর্জিত)</span></div>
-                </div>
-                <div class="dash-table-wrap">
-                    <table class="dash-table">
-                        <thead>
-                            <tr>
-                                <th>নাম</th>
-                                <th>প্রজেক্ট</th>
-                                <th>রেফার তারিখ</th>
-                                <th>স্টেজ</th>
-                                <th>কমিশন</th>
-                            </tr>
-                        </thead>
-                        <tbody style="color: #f4efe2;">
-                            <tr>
-                                <td data-label="নাম">রাকিব হাসান</td>
-                                <td data-label="প্রজেক্ট">Gulf Panorama</td>
-                                <td data-label="রেফার তারিখ">০২ জুন ২০২৬</td>
-                                <td data-label="স্টেজ"><span class="stage-pill stage-5">কমিশন প্রদত্ত</span></td>
-                                <td data-label="কমিশন">৳২,৫০,০০০</td>
-                            </tr>
-                            <tr>
-                                <td data-label="নাম">শিরিন আক্তার</td>
-                                <td data-label="প্রজেক্ট">Daisy Dell</td>
-                                <td data-label="রেফার তারিখ">১৮ জুন ২০২৬</td>
-                                <td data-label="স্টেজ"><span class="stage-pill stage-5">কমিশন প্রদত্ত</span></td>
-                                <td data-label="কমিশন">৳২,০০,০০০</td>
-                            </tr>
-                            <tr>
-                                <td data-label="নাম">ইমরান খান</td>
-                                <td data-label="প্রজেক্ট">Olivia</td>
-                                <td data-label="রেফার তারিখ">০৫ জুলাই ২০২৬</td>
-                                <td data-label="স্টেজ"><span class="stage-pill stage-4">বুকিং সম্পন্ন</span></td>
-                                <td data-label="কমিশন">প্রক্রিয়াধীন</td>
-                            </tr>
-                            <tr>
-                                <td data-label="নাম">নাজমুল হক</td>
-                                <td data-label="প্রজেক্ট">Park Oasis</td>
-                                <td data-label="রেফার তারিখ">০৯ জুলাই ২০২৬</td>
-                                <td data-label="স্টেজ"><span class="stage-pill stage-3">সাইট ভিজিট</span></td>
-                                <td data-label="কমিশন">—</td>
-                            </tr>
-                            <tr>
-                                <td data-label="নাম">ফারহানা ইসলাম</td>
-                                <td data-label="প্রজেক্ট">Sheuly's Garden</td>
-                                <td data-label="রেফার তারিখ">১১ জুলাই ২০২৬</td>
-                                <td data-label="স্টেজ"><span class="stage-pill stage-2">যোগাযোগ করা হয়েছে</span></td>
-                                <td data-label="কমিশন">—</td>
-                            </tr>
-                            <tr>
-                                <td data-label="নাম">তানভীর আহমেদ</td>
-                                <td data-label="প্রজেক্ট">Gulf Panorama</td>
-                                <td data-label="রেফার তারিখ">১৩ জুলাই ২০২৬</td>
-                                <td data-label="স্টেজ"><span class="stage-pill stage-1">রেফার করা হয়েছে</span></td>
-                                <td data-label="কমিশন">—</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <p class="link-gen-note" style="color:darkgray">ডেমো ডেটা — বাস্তব ব্যবহারে এই তালিকা আপনার প্রকৃত
-                    রেফারেল
-                    অনুযায়ী
-                    স্বয়ংক্রিয়ভাবে আপডেট হবে।</p>
-            </div>
-        </div>
-    </section>
+    
 
     <!-- Bhaiya Housing Hero Section -->
     <section class="refer-hero-section">
@@ -619,9 +528,9 @@
                             GET STARTED WITH BHAIYA HOUSING
                         </div>
 
-                        <h1 class="hero-title">
-                            ডিজিটাল রেফারেল প্ল্যাটফর্মে নতুন অভিজ্ঞতা নিন
-                        </h1>
+                        <h2 class="hero-title">
+                            আমাদের ক্রিয়েটিভ দিয়ে অনলাইনে বিজ্ঞাপন দিয়ে পটেনশিয়াল কাস্টমার খুঁজে পান
+                        </h2>
 
                         <p class="hero-desc">
                             অনলাইনে সরাসরি তথ্য সাবমিট করুন বা ইউনিক লিঙ্ক বানিয়ে কাস্টমারদের জানান। আমাদের বিশ্বস্ত

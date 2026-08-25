@@ -1,6 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap') layer(base);
 @import "tailwindcss";
 @source "../../resources/views/**/*.blade.php";
+
+
+@font-face {
+    font-family: 'Kohinoor Bangla';
+    src: url('../../public/font/KohinoorBangla/KohinoorBangla-Regular.otf') format('opentype');
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'Kohinoor Bangla';
+    src: url('../../public/font/KohinoorBangla/KohinoorBangla-Semibold.otf') format('opentype');
+    font-weight: 600;
+}
+@font-face {
+    font-family: 'Kohinoor Bangla';
+    src: url('../../public/font/KohinoorBangla/KohinoorBangla-Bold.otf') format('opentype');
+    font-weight: 700;
+}
 body {
     font-family: 'Hind Siliguri', 'Inter', sans-serif;
 }
