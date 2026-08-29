@@ -128,7 +128,7 @@ class LeadController extends Controller
 
 
         return redirect($cleanUrl)->with([
-            'success'    => 'আপনার তথ্য সফলভাবে জমা হয়েছে।',
+            'success'    => 'আপনার তথ্য সফলভাবে গ্রহণ করা হয়েছে। আমাদের টিম শীঘ্রই আপনার সাথে যোগাযোগ করবে।',
             'active_tab' => 'leads',
             'lead_view'  => 'list'
         ])->withCookie(cookie()->forget('referred_by'));

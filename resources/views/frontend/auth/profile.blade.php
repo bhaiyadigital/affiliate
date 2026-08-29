@@ -113,12 +113,7 @@
                             <i class="fa-brands fa-artstation w-5"></i>
                             <span class="text-base font-medium">Marketing Assets</span>
                         </a>
-
-                        </a><a href="{{ route('home.index') }}"
-                            class="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 transition-all border-b border-gray-50">
-                            <i class="fa-brands fa-affiliatetheme w-5"></i>
-                            <span class="text-base font-medium">Home</span>
-                        </a>
+ 
                     </nav>
                 </div>
             </div>

@@ -63,7 +63,7 @@
                 <select name="action" class="rounded-lg border-gray-300 py-1.5 px-3 text-sm focus:ring-blue-500">
                     <option value="activate">Mark Active</option>
                     <option value="deactivate">Mark Inactive</option>
-                    <option value="trash">Move to Trash</option>
+                    <!-- <option value="trash">Move to Trash</option> -->
                     <option value="delete">Permanent Delete</option>
                 </select>
                 <button type="submit"
