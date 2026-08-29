@@ -144,9 +144,10 @@
             <h3 class="auth-title">
                 {{ session('can_reset_password') ? 'নতুন পাসওয়ার্ড' : 'ভেরিফিকেশন' }}
             </h3>
-            <p class="auth-desc">
-                আপনার <b>{{ session('verify_email') }}</b> ঠিকানায় সিকিউরিটি কোড পাঠানো হয়েছে।
-            </p>
+          <p class="auth-desc">
+    আপনার <b>{{ session('verify_email') }}</b> ঠিকানায় সিকিউরিটি কোড পাঠানো হয়েছে। অনুগ্রহ করে ১ মিনিট অপেক্ষা করুন, ১ মিনিটের মধ্যে আপনার ইমেইলে OTP পৌঁছে যাবে।
+</p>
+
 
             @if(session('success'))
                 <div style="background:rgba(255,255,255,0.2); border:1px solid #fff; padding:10px; border-radius:10px; margin-bottom:20px; font-size:13px;">
