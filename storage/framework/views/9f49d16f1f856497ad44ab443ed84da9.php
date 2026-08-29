@@ -1,3 +1,15 @@
+<style>
+    /* Chrome/Edge/Safari - datetime-local এর ভেতরের time অংশ হাইড করা */
+    .date-only-input::-webkit-datetime-edit-hour-field,
+    .date-only-input::-webkit-datetime-edit-minute-field,
+    .date-only-input::-webkit-datetime-edit-second-field,
+    .date-only-input::-webkit-datetime-edit-millisecond-field,
+    .date-only-input::-webkit-datetime-edit-ampm-field,
+    .date-only-input::-webkit-datetime-edit-text:nth-of-type(3),
+    .date-only-input::-webkit-datetime-edit-text:nth-of-type(4) {
+        display: none;
+    }
+</style>
 <?php $__env->startSection('content'); ?>
 <section class="container mx-auto px-4 lg:px-8 py-12" x-data="{
                                                                                     activeTab: '<?php echo e(session('active_tab') ?? (
@@ -206,14 +218,16 @@
 
                                             <div>
                                                 <label class="text-[9px] uppercase font-bold text-gray-600 mb-1 block">From Date</label>
-                                                <input type="datetime-local" name="from" value="<?php echo e(request('from')); ?>"
-                                                    class="w-full text-xs border-gray-200 rounded-lg p-2 outline-none focus:ring-1 focus:ring-[#008060]"
+                                                <input type="datetime-local" name="from" id="fromDate"
+                                                    value="<?php echo e(request('from') ? \Carbon\Carbon::parse(request('from'))->format('Y-m-d\TH:i') : ''); ?>"
+                                                    class="w-full text-xs border-gray-200 rounded-lg p-2 outline-none focus:ring-1 focus:ring-[#008060] date-only-input"
                                                     required>
                                             </div>
                                             <div>
                                                 <label class="text-[9px] uppercase font-bold text-gray-600 mb-1 block">To Date</label>
-                                                <input type="datetime-local" name="to" value="<?php echo e(request('to')); ?>"
-                                                    class="w-full text-xs border-gray-200 rounded-lg p-2 outline-none focus:ring-1 focus:ring-[#008060]"
+                                                <input type="datetime-local" name="to" id="toDate"
+                                                    value="<?php echo e(request('to') ? \Carbon\Carbon::parse(request('to'))->format('Y-m-d\TH:i') : ''); ?>"
+                                                    class="w-full text-xs border-gray-200 rounded-lg p-2 outline-none focus:ring-1 focus:ring-[#008060] date-only-input"
                                                     required>
                                             </div>
 
@@ -949,6 +963,26 @@ unset($__errorArgs, $__bag); ?>
                         display: false
                     }
                 }
+            }
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('form[action*="profile.index"]'); // আপনার ফর্মের সঠিক selector দিন
+        if (!form) return;
+
+        form.addEventListener('submit', function () {
+            const fromInput = document.getElementById('fromDate');
+            const toInput = document.getElementById('toDate');
+
+            if (fromInput.value) {
+                const datePart = fromInput.value.split('T')[0];
+                fromInput.value = datePart + 'T00:00';
+            }
+            if (toInput.value) {
+                const datePart = toInput.value.split('T')[0];
+                toInput.value = datePart + 'T23:59';
             }
         });
     });
