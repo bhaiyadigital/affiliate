@@ -419,7 +419,7 @@ class FrontendAuthController extends Controller
     {
         if ($purpose === 'register') {
             $title = 'Account Verification';
-            $message = "Bhaiya Housing Affiliate Program-এ রেজিস্ট্রেশন করার জন্য আপনাকে ধন্যবাদ।\n\nআপনার একাউন্ট ভেরিফাই করতে নিচের কোডটি ব্যবহার করুন:\n\nকোড: " . $otp . "\n\nএই কোডটি ১০ মিনিটের জন্য কার্যকর।";
+            $message = " Bhaiya Affiliate Program-এ রেজিস্ট্রেশন করার জন্য আপনাকে ধন্যবাদ।\n\nআপনার একাউন্ট ভেরিফাই করতে নিচের কোডটি ব্যবহার করুন:\n\nকোড: " . $otp . "\n\nএই কোডটি ১০ মিনিটের জন্য কার্যকর।";
         } else {
             $title = 'Password Reset';
             $message = "আপনার পাসওয়ার্ড রিসেট করার জন্য একটি অনুরোধ পাওয়া গেছে।\n\nসিকিউরিটি কোড: " . $otp . "\n\nএই কোডটি ১০ মিনিটের জন্য কার্যকর।";
@@ -436,10 +436,10 @@ class FrontendAuthController extends Controller
                 ->post(config('services.mailer.url'), [
                     'type'    => 'verification',
                     'to'      => trim($email),
-                    'subject' => $title . ' - Bhaiya Housing Affiliate Program',
+                    'subject' => $title . ' -  Bhaiya Affiliate Program',
                     'data'    => [
-                        'eyebrow' => 'Bhaiya Housing Affiliate Program',
-                        'site_name' => 'Bhaiya Housing Affiliate Program',
+                        'eyebrow' => ' Bhaiya Affiliate Program',
+                        'site_name' => ' Bhaiya Affiliate Program',
                         'site_logo' => 'https://asset.bhaiyahousing.com/storage/settings/2043f208-bd04-4331-8894-0f6f1fc83d14.png',
                         'heading' => $title,
                         'name' => $name,

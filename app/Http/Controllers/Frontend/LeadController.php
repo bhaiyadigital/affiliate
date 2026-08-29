@@ -257,6 +257,7 @@ class LeadController extends Controller
             ],
             'interested_location' => 'nullable|string|max:255',
             'budget'              => 'nullable|numeric',
+            'remarks'              => 'nullable|',
             'status'              => ['required', Rule::in([1, 2, 3, 4, 5])],
         ], [
             'phone.regex' => 'ফোন নাম্বারে শুধুমাত্র সংখ্যা এবং শুরুতে + চিহ্ন ব্যবহার করা যাবে।',

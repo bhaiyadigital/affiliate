@@ -1,5 +1,4 @@
-@extends('frontend.layouts.landingFront')
-@section('content')
+<?php $__env->startSection('content'); ?>
     <style>
         :root {
             /* আপনার চাহিদা অনুযায়ী নতুন ৩-কালার গ্রেডিয়েন্ট */
@@ -142,28 +141,31 @@
     <div class="auth-page">
         <div class="auth-shell" data-lenis-prevent>
             <h3 class="auth-title">
-                {{ session('can_reset_password') ? 'নতুন পাসওয়ার্ড' : 'ভেরিফিকেশন' }}
+                <?php echo e(session('can_reset_password') ? 'নতুন পাসওয়ার্ড' : 'ভেরিফিকেশন'); ?>
+
             </h3>
             <p class="auth-desc">
-                আপনার <b>{{ session('verify_email') }}</b> ঠিকানায় সিকিউরিটি কোড পাঠানো হয়েছে।
+                আপনার <b><?php echo e(session('verify_email')); ?></b> ঠিকানায় সিকিউরিটি কোড পাঠানো হয়েছে।
             </p>
 
-            @if(session('success'))
+            <?php if(session('success')): ?>
                 <div style="background:rgba(255,255,255,0.2); border:1px solid #fff; padding:10px; border-radius:10px; margin-bottom:20px; font-size:13px;">
-                    {{ session('success') }}
-                </div>
-            @endif
+                    <?php echo e(session('success')); ?>
 
-            @if(session('error'))
+                </div>
+            <?php endif; ?>
+
+            <?php if(session('error')): ?>
                 <div style="background:rgba(255,0,0,0.15); border:1px solid #ff9b9b; padding:10px; border-radius:10px; margin-bottom:20px; font-size:13px;">
-                    {{ session('error') }}
-                </div>
-            @endif
+                    <?php echo e(session('error')); ?>
 
-            @if(session('can_reset_password'))
-                {{-- পাসওয়ার্ড রিসেট ফর্ম --}}
-                <form action="{{ route('password.update.final') }}" method="POST">
-                    @csrf
+                </div>
+            <?php endif; ?>
+
+            <?php if(session('can_reset_password')): ?>
+                
+                <form action="<?php echo e(route('password.update.final')); ?>" method="POST">
+                    <?php echo csrf_field(); ?>
                     <div class="auth-field" style="margin-bottom:15px;">
                         <label>নতুন পাসওয়ার্ড</label>
                         <input name="password" type="password" class="auth-input" placeholder="সর্বনিম্ন ৬ ডিজিট" required autofocus>
@@ -174,10 +176,10 @@
                     </div>
                     <button type="submit" class="auth-submit-btn">পাসওয়ার্ড আপডেট করুন</button>
                 </form>
-            @else
-                {{-- ওটিপি ভেরিফাই ফর্ম --}}
-                <form action="{{ route('otp.verify.submit') }}" method="POST">
-                    @csrf
+            <?php else: ?>
+                
+                <form action="<?php echo e(route('otp.verify.submit')); ?>" method="POST">
+                    <?php echo csrf_field(); ?>
                     <div class="auth-field" style="margin-bottom:20px;">
                         <input name="otp" type="text" class="auth-input otp-input" placeholder="------" maxlength="6" required autofocus autocomplete="one-time-code">
                     </div>
@@ -189,17 +191,17 @@
                     <button type="submit" class="auth-submit-btn">ভেরিফাই করুন &nbsp; →</button>
 
                     <div style="display: flex; justify-content: space-between; margin-top: 25px;">
-                        <a href="{{ route('otp.resend') }}" class="secondary-link">আবার পাঠান</a>
-                        <a href="{{ route('otp.cancel') }}" class="secondary-link">বাতিল করুন</a>
+                        <a href="<?php echo e(route('otp.resend')); ?>" class="secondary-link">আবার পাঠান</a>
+                        <a href="<?php echo e(route('otp.cancel')); ?>" class="secondary-link">বাতিল করুন</a>
                     </div>
                 </form>
-            @endif
+            <?php endif; ?>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const expiresAtStr = "{{ $expiresAt }}";
+            const expiresAtStr = "<?php echo e($expiresAt); ?>";
             if (!expiresAtStr || document.getElementById('countdown') === null) return;
 
             const countdownElement = document.getElementById('countdown');
@@ -231,4 +233,6 @@
             }, 1000);
         });
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('frontend.layouts.landingFront', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\laragon\www\affiliate\resources\views/frontend/landing/verifyOtp.blade.php ENDPATH**/ ?>

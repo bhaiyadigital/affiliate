@@ -266,15 +266,31 @@ class ContentController extends Controller
         $records = Content::module($module)->whereIn('id', $request->ids)->get();
         $modules = view()->shared('modules');
         $config  = $modules[$module] ?? [];
-
         foreach ($records as $record) {
             match ($request->action) {
-                'delete'     => $this->deleteFiles($record, $config) && $record->delete(),
-                'activate'   => $record->update(['status' => Content::STATUS_ACTIVE]),
-                'deactivate' => $record->update(['status' => Content::STATUS_INACTIVE]),
-                'trash'      => $record->update(['status' => Content::STATUS_TRASH, 'trashed_at' => now()]),
+                'delete' => (function () use ($record, $config) {
+                    // Delete associated files
+                    $this->deleteFiles($record, $config);
+
+                    // Delete database record
+                    $record->delete();
+                })(),
+
+                'activate' => $record->update([
+                    'status' => Content::STATUS_ACTIVE
+                ]),
+
+                'deactivate' => $record->update([
+                    'status' => Content::STATUS_INACTIVE
+                ]),
+
+                'trash' => $record->update([
+                    'status' => Content::STATUS_TRASH,
+                    'trashed_at' => now()
+                ]),
             };
         }
+
 
         return back()->with('success', 'Bulk action applied successfully.');
     }
@@ -473,8 +489,7 @@ class ContentController extends Controller
 
             if (in_array($type, ['image', 'video']) && $content->$field) {
                 FileUploadHelper::deleteImage($content->$field);
-            }
-            elseif (in_array($type, ['image_multiple', 'video_multiple'])) {
+            } elseif (in_array($type, ['image_multiple', 'video_multiple'])) {
                 $files = is_array($content->$field) ? $content->$field : [];
                 foreach ($files as $file) {
                     FileUploadHelper::deleteImage($file);

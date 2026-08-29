@@ -26,7 +26,8 @@ class Lead extends Model
         'type',
         'referrer_id',
         'coupon_code',
-        'status'
+        'remarks',
+        'status',
     ];
 
     public static function statusLabels()
