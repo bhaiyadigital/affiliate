@@ -135,6 +135,32 @@ class WebController extends Controller
 
         return view('frontend.landing.projectDetails', compact('project', 'relatedProjects', 'allFeatures'));
     }
+    public function check(Request $request)
+    {
+        $request->validate([
+            'coupon_code' => 'required|string',
+        ]);
+        \Log::info($request);
+        $code = strtoupper(trim($request->coupon_code));
+
+        $coupon = Content::where('module', 'coupons')
+            ->where('slug', $code)
+            ->where('status', 1)
+            ->where('start_date', '<=', now())
+            ->where('end_date', '>=', now())
+            ->first();
+
+        if (!$coupon) {
+            return response()->json(['valid' => false]);
+        }
+
+    
+
+        return response()->json([
+            'valid'    => true,
+            'discount' => $coupon->short,
+        ]);
+    }
     public function store(Request $request)
     {
         $request->validate([
@@ -152,7 +178,7 @@ class WebController extends Controller
             'designation' => $request->designation,
             'category_id' => $request->category_id,
             'message' => $request->message,
-            'phone_code' => '+880', 
+            'phone_code' => '+880',
         ]);
 
         return back()->with('success', 'Thank you! Your interest has been submitted successfully.');

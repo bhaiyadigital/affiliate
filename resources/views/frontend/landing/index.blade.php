@@ -20,7 +20,7 @@
                 <h1 class="c-title hind-siliguri">  <span class="hero-ft"> রেফার করে আয় করুন</span> <br> সর্বোচ্চ  ৩ লক্ষ টাকা </h1>
                 <p class="c-desc">
                     আপনার পরিচিতজনকে ফ্ল্যাট বা জমি কেনার জন্য পরিচয় করিয়ে দিন। চুক্তি সম্পন্ন হলে সর্বোচ্চ
-                    <mark class="kohinoor-bangla">৳৩,০০,০০০</mark> পর্যন্ত রেফার কমিশন পান সরাসরি আপনার অ্যাকাউন্টে।
+                    <mark class="kohinoor-bangla">৳৩,০০,০০০</mark> পর্যন্ত রেফারেল কমিশন পান সরাসরি আপনার অ্যাকাউন্টে।
                 </p>
                 <div class="c-btn-group kohinoor-bangla">
                     <a href="#refer" class="btn-green flex-1"> <span>রেফার   করুন</span> <i class="fas fa-arrow-right"></i></a>
@@ -93,7 +93,7 @@
     <!-- HOW IT WORKS SECTION - IMAGE PERFECT VERSION -->
     <div class="container">
         <div class="header">
-            <h2 class="text-[28px] md:text-[36px]">কিভাবে কাজ করে?</h2>
+            <h2 class="text-[28px] md:text-[36px]">কীভাবে কাজ করে?</h2>
             <p>মাত্র ৪টি সহজ ধাপে আপনার রেফারেল কমিশন নিশ্চিত করুন।</p>
         </div>
 
@@ -124,7 +124,7 @@
                 <div class="step-item" id="step4">
                     <div class="icon-circle">04</div>
                     <h3>কমিশন পান</h3>
-                    <p>বুকিং সম্পন্ন হলে সরাসরি ব্যাংকে পেমেন্ট পাবেন।</p>
+                    <p>বুকিং সম্পন্ন হলে সরাসরি ব্যাংক অ্যাকাউন্টে পেমেন্ট পাবেন।</p>
                 </div>
             </div>
         </div>
@@ -472,8 +472,8 @@
                         <div class="hub-nav-card" onclick="updateHub(2, this)">
                             <div class="nav-icon-box"><i class="fas fa-home"></i></div>
                             <div class="nav-texts">
-                                <h4>৩.ঢাকার সেরা প্রাইম স্পটসমূহে এ্যাপার্ট্মেন্ট প্রজেক্টসহ</h4>
-                                <p>পাইন সিটি, বীরতারা,আধুনিক সিটি সহ পাঁচ তারকা হোটেল</p>
+                                <h4>৩.ঢাকার সেরা প্রাইম স্পটসমূহে অ্যাপার্টমেন্ট প্রজেক্টসহ</h4>
+                                <p>পাইন সিটি, বীরতারা, আধুনিক সিটি সহ পাঁচ তারকা হোটেল</p>
                             </div>
 
                         </div>
@@ -491,14 +491,14 @@
                     <div class="hub-display-screen">
                         <div class="screen-content active" id="content-0">
                             <span class="screen-mini-tag">বিশ্বস্ততা ও অভিজ্ঞতা</span>
-                            <h3 class="screen-big-title">৫৪ বছরের অটুট সুনাম ও শতভাগ গ্রাহক আস্থা</h3>
+                            <h3 class="screen-big-title">৫৪ বছরের অটুট সুনাম ও শতভাগ গ্রাহকের আস্থা</h3>
                             <p class="screen-description">ভাইয়া হোটেলস এন্ড ভাইয়া হাউজিং <br>
                                 দেশের ঐতিহ্যবাহী ও সুপ্রতিষ্ঠিত ভাইয়া গ্রুপের গর্বিত অঙ্গ প্রতিষ্ঠান।
                                 দীর্ঘদিনের সুনাম, অভিজ্ঞতা ও বিশ্বস্ততার কারণে আপনার বিনিয়োগে থাকছে আস্থা ও নিরাপত্তার নিশ্চয়তা।</p>
                         </div>
                         <div class="screen-content" id="content-1">
                             <span class="screen-mini-tag">ইনস্ট্যান্ট পেমেন্ট</span>
-                            <h3 class="screen-big-title">বুকিং রেজিস্ট্রেশন হতেই সরাসরি ব্যাংক ট্রান্সফার</h3>
+                            <h3 class="screen-big-title">বুকিং রেজিস্ট্রেশন সম্পন্ন হলেই সরাসরি ব্যাংক অ্যাকাউন্টে পেমেন্ট</h3>
                             <p class="screen-description">প্রতিটি সফল অ্যাপার্টমেন্ট রেফারেলের ক্ষেত্রে কমিশন সরাসরি
                                 গ্রাহকের ব্যাংক একাউন্টে জমা হয়।</p>
                         </div>
@@ -660,7 +660,7 @@
                             </div>
 
                             <div class="card-footer">
-                                প্রতি চুক্তিতে নিশ্চিত বোনাস।   ছাড়া সরাসরি ব্যাংক অ্যাকাউন্টে। (শর্ত প্রযোজ্য) 
+                                প্রতি চুক্তিতে নিশ্চিত বোনাস। সরাসরি ব্যাংক অ্যাকাউন্টে। (শর্ত প্রযোজ্য) 
                             </div>
                         </div>
                     </div>

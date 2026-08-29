@@ -188,4 +188,5 @@ class HomeController extends Controller
             });
         return view('frontend.brandAsset', compact('projects'));
     }
+
 }

@@ -22,8 +22,8 @@
         <!-- 💊 Center: Pill Menu (Dynamic Routes) -->
         <nav class="nav-menu">
             
-            <a href="<?php echo e(route('affiliated.project')); ?>" class="nav-item">প্রোজেক্ট</a>
-            <a href="#faq" class="nav-item">FAQ</a>
+            <a href="<?php echo e(route('affiliated.project')); ?>" class="nav-item">প্রজেক্ট</a>
+            <a href="#faq" class="nav-item">সাধারণ জিজ্ঞাসা</a>
             <a href="#dashboard-section" class="nav-item">ড্যাশবোর্ড</a>
 
             <?php if(auth()->guard()->check()): ?>

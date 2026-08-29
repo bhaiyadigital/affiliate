@@ -194,6 +194,8 @@ Route::prefix('')->group(function () {
     Route::post('/lead-store', [LeadController::class, 'storeLead'])->name('lead.store');
     Route::get('/projects', [WebController::class, 'project'])->name('affiliated.project');
     Route::get('/project/{slug}', [WebController::class, 'details'])->name('affiliated.project.details');
+    Route::post('/coupon/check', [WebController::class, 'check'])->name('coupon.check');
+
     Route::middleware('auth')->group(function () {
         Route::get('/go-to-portal', [FrontendAuthController::class, 'portalRedirect'])->name('portal.redirect');
         Route::post('/contact-store', [WebController::class, 'contactStore'])->name('contact.store');
@@ -211,9 +213,9 @@ Route::prefix('')->group(function () {
         Route::get('/drive/media/{media}/base64', [FileController::class, 'base64Image'])
             ->name('drive.media.base64');
 
-            
+
         Route::get('/home', [HomeController::class, 'landing'])->name('home.index');
-    
+
 
 
         Route::get('/campaign/{slug}', [HomeController::class, 'campaignDetails'])->name('campaign.details');

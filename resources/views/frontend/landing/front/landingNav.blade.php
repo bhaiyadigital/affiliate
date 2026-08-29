@@ -22,8 +22,8 @@
         <!-- 💊 Center: Pill Menu (Dynamic Routes) -->
         <nav class="nav-menu">
             {{-- সব সময়ের জন্য প্রোজেক্ট লিঙ্ক --}}
-            <a href="{{ route('affiliated.project') }}" class="nav-item">প্রোজেক্ট</a>
-            <a href="#faq" class="nav-item">FAQ</a>
+            <a href="{{ route('affiliated.project') }}" class="nav-item">প্রজেক্ট</a>
+            <a href="#faq" class="nav-item">সাধারণ জিজ্ঞাসা</a>
             <a href="#dashboard-section" class="nav-item">ড্যাশবোর্ড</a>
 
             @auth
