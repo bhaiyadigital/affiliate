@@ -329,7 +329,7 @@ class FrontendAuthController extends Controller
         }
 
         session()->forget(['verify_email', 'otp_purpose', 'can_reset_password']);
-        return redirect()->route('home.index')->with('success', 'পাসওয়ার্ড সফলভাবে পরিবর্তন হয়েছে। লগইন করুন।');
+        return redirect()->route('affiliated.login.page')->with('success', 'পাসওয়ার্ড সফলভাবে পরিবর্তন হয়েছে। লগইন করুন।');
     }
 
     public function cancelAuth()

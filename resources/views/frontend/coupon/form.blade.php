@@ -36,7 +36,7 @@
             <label class="text-sm font-bold text-gray-500 uppercase mb-1.5 block">Coupon Title</label>
             <input type="text" name="title" x-model="editingCoupon.title" @input="if(!editingCoupon.id) {
             editingCoupon.slug = editingCoupon.title.toUpperCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-')
-        }" required placeholder="e.g. Winter Sale"
+        }" required placeholder="e.g.  Sale"
                 class="w-full border border-gray-300 px-4 py-2.5 text-base rounded-lg focus:border-[#003B7A] outline-none">
         </div>
 
@@ -45,7 +45,7 @@
             <label class="text-sm font-bold text-gray-500 uppercase mb-1.5 block">Coupon Code</label>
             <input type="text" name="slug" x-model="editingCoupon.slug"
                 @input="editingCoupon.slug = $event.target.value.toUpperCase().replace(/\s+/g, '-')" required
-                placeholder="e.g. WINTER20"
+                placeholder="e.g. SALE30"
                 class="w-full border border-gray-300 px-4 py-2.5 text-base rounded-lg outline-none  font-bold uppercase">
         </div>
 

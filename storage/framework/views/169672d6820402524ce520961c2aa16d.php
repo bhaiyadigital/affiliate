@@ -10,10 +10,16 @@
 
             
             <?php if($errors->any()): ?>
-                <div style="background: #FEF2F2; color: #DC2626; padding: 14px; border-radius: 12px; margin-bottom: 20px; font-size: 13px; font-weight: 600; border: 1px solid #FEE2E2; text-align: center;">
-                    <?php echo e($errors->first()); ?>
+            <div style="background: #FEF2F2; color: #DC2626; padding: 14px; border-radius: 12px; margin-bottom: 20px; font-size: 13px; font-weight: 600; border: 1px solid #FEE2E2; text-align: center;">
+                <?php echo e($errors->first()); ?>
 
-                </div>
+            </div>
+            <?php endif; ?>
+            <?php if(session('success')): ?>
+            <div style="background: #F0FDF4; color: #16A34A; padding: 14px; border-radius: 12px; margin-bottom: 20px; font-size: 13px; font-weight: 600; border: 1px solid #BBF7D0; text-align: center;">
+                <?php echo e(session('success')); ?>
+
+            </div>
             <?php endif; ?>
 
             <form action="<?php echo e(route('affiliated.login')); ?>" method="POST">
@@ -21,7 +27,7 @@
                 <div class="auth-field" style="margin-bottom: 20px;">
                     <label style="display: block; font-size: 13px; font-weight: 700; color: #101B37; margin-bottom: 8px;">ইমেইল এড্রেস</label>
                     <input name="email" type="email" value="<?php echo e(old('email')); ?>" placeholder="example@mail.com"
-                           style="width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #E2E8F0; background: #F8FBFF;" required>
+                        style="width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #E2E8F0; background: #F8FBFF;" required>
                 </div>
 
                 <div class="auth-field" style="margin-bottom: 25px;">
@@ -30,7 +36,7 @@
                         <a href="<?php echo e(route('password.request')); ?>" style="font-size: 12px; color: #175b05; font-weight: 600; text-decoration: none;">পাসওয়ার্ড ভুলে গেছেন?</a>
                     </div>
                     <input name="password" type="password" placeholder="••••••••"
-                           style="width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #E2E8F0; background: #F8FBFF;" required>
+                        style="width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #E2E8F0; background: #F8FBFF;" required>
                 </div>
 
                 <button type="submit" class="auth-submit" style="width: 100%; padding: 16px; background: #175b05; color: #fff; border-radius: 12px; font-weight: 800; cursor: pointer; border: none; font-size: 16px;">লগইন করুন</button>
@@ -43,5 +49,4 @@
     </div>
 </section>
 <?php $__env->stopSection(); ?>
-
 <?php echo $__env->make('frontend.layouts.landingFront', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\laragon\www\affiliate\resources\views/frontend/auth/login.blade.php ENDPATH**/ ?>

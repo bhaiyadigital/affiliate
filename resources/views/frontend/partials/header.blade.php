@@ -1,5 +1,5 @@
 @php
-    $siteSetting = \App\Models\SiteSetting::first();
+$siteSetting = \App\Models\SiteSetting::first();
 
 @endphp
 
@@ -7,10 +7,15 @@
     <div class="container mx-auto px-4 lg:px-6 flex justify-between items-center py-2">
         <!-- ── LOGO ── -->
         <div class="flex items-center gap-3 shrink-0">
-            <a href="{{ route('home.index') }}" class=" px-2 py-2 flex items-center">
+            @auth
+            <a href="{{ route('profile.index') }}" class="px-2 py-2 flex items-center">
                 <img src="{{ $siteSetting->logo_url }}" alt="Bhaiya Asset" class="w-auto lg:h-[60px] h-[45px] block" />
             </a>
-
+            @else
+            <a href="{{ route('home.index') }}" class="px-2 py-2 flex items-center">
+                <img src="{{ $siteSetting->logo_url }}" alt="Bhaiya Asset" class="w-auto lg:h-[60px] h-[45px] block" />
+            </a>
+            @endauth
         </div>
         <button @click="mobileMenu = !mobileMenu" class="lg:hidden text-2xl p-2 focus:outline-none"
             aria-label="Toggle navigation menu">
@@ -24,40 +29,40 @@
                 <span class="text-sm tracking-wide">Project list</span>
             </a>
             @auth
-                <a href="{{ route('portal.redirect') }}" target="_blank"
-                    class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 border-b-2 {{ request()->routeIs('home.index') ? 'border-white' : 'border-transparent hover:border-white/40' }}">
-                    <i class="fa-brands fa-artstation text-lg"></i>
-                    <span class="text-sm tracking-wide">Marketing Assets</span>
-                </a>
+            <a href="{{ route('portal.redirect') }}" target="_blank"
+                class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 border-b-2 {{ request()->routeIs('home.index') ? 'border-white' : 'border-transparent hover:border-white/40' }}">
+                <i class="fa-brands fa-artstation text-lg"></i>
+                <span class="text-sm tracking-wide">Marketing Assets</span>
+            </a>
 
-                <a href="{{ route('profile.index') }}"
-                    class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white transition-colors border-b-2 {{ request()->routeIs('profile.index') ? 'border-white' : 'border-transparent hover:border-white/40' }} hover:border-white/40">
+            <a href="{{ route('profile.index') }}"
+                class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white transition-colors border-b-2 {{ request()->routeIs('profile.index') ? 'border-white' : 'border-transparent hover:border-white/40' }} hover:border-white/40">
 
 
-                    <img src="{{ Auth::user()->avatar_url ?? asset('./images/user/images.png') }}" alt="Profile"
-                        class="w-6 h-6 rounded-full object-cover border border-white/50">
+                <img src="{{ Auth::user()->avatar_url ?? asset('./images/user/images.png') }}" alt="Profile"
+                    class="w-6 h-6 rounded-full object-cover border border-white/50">
 
-                    <span class="text-sm tracking-wide">{{ Auth::user()->name }}</span>
-                </a>
+                <span class="text-sm tracking-wide">{{ Auth::user()->name }}</span>
+            </a>
 
-                <form id="logout-form" action="{{ route('frontend.logout') }}" method="POST" class="hidden">
-                    @csrf
-                </form>
-                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                    class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-red-400 transition-colors border-b-2 border-transparent hover:border-white/40">
-                    <i class="fas fa-power-off text-lg"></i>
-                    <span class="text-sm tracking-wide">Logout</span>
-                </a>
+            <form id="logout-form" action="{{ route('frontend.logout') }}" method="POST" class="hidden">
+                @csrf
+            </form>
+            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-red-400 transition-colors border-b-2 border-transparent hover:border-white/40">
+                <i class="fas fa-power-off text-lg"></i>
+                <span class="text-sm tracking-wide">Logout</span>
+            </a>
 
 
             @endauth
 
             @if(auth()->user()?->isSuperAdmin())
-                <a href="{{ route('dashboard') }}"
-                    class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white {{ request()->routeIs('dashboard') ? 'border-white' : 'border-transparent hover:border-white/40' }} border-b-2 border-transparent hover:border-white/40">
-                    <i class="fa-solid fa-gauge text-lg"></i>
-                    <span class="text-sm tracking-wide flex items-center gap-1">Admin Dashboard</span>
-                </a>
+            <a href="{{ route('dashboard') }}"
+                class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white {{ request()->routeIs('dashboard') ? 'border-white' : 'border-transparent hover:border-white/40' }} border-b-2 border-transparent hover:border-white/40">
+                <i class="fa-solid fa-gauge text-lg"></i>
+                <span class="text-sm tracking-wide flex items-center gap-1">Admin Dashboard</span>
+            </a>
 
             @endif
         </nav>
@@ -74,11 +79,11 @@
 
                 <div class="flex items-center justify-between mb-8 pb-4 border-b border-white/10">
                     @auth
-                        <a href="{{ route('profile.index') }}" class="flex items-center gap-3">
-                            <img src="{{ Auth::user()->avatar_url ?? asset('./images/user/images.png') }}"
-                                class="w-10 h-10 rounded-full object-cover border border-white/20">
-                            <span class="">{{ Auth::user()->name }}</span>
-                        </a>
+                    <a href="{{ route('profile.index') }}" class="flex items-center gap-3">
+                        <img src="{{ Auth::user()->avatar_url ?? asset('./images/user/images.png') }}"
+                            class="w-10 h-10 rounded-full object-cover border border-white/20">
+                        <span class="">{{ Auth::user()->name }}</span>
+                    </a>
                     @endauth
 
                     <button @click="mobileMenu = false" class="text-white text-3xl leading-none">&times;</button>
@@ -93,17 +98,17 @@
                         <a href="{{ route('bookmark.list') }}" class="flex items-center justify-between">
                             <span><i class="fa-regular fa-bookmark mr-2"></i> Saved Items</span>
                             @if($bookmarkCount > 0) <span
-                            class="bg-red-500 px-2 rounded-full text-xs">{{ $bookmarkCount }}</span> @endif
+                                class="bg-red-500 px-2 rounded-full text-xs">{{ $bookmarkCount }}</span> @endif
                         </a>
 
                         <a href="{{ route('tickets.index') }}" class="flex items-center gap-3"><i
                                 class="fa-regular fa-circle-question"></i> Support Ticket</a>
 
                         @auth
-                            <button onclick="document.getElementById('logout-form').submit();"
-                                class="text-red-400 pt-4 text-left">
-                                <i class="fas fa-power-off mr-2"></i> Logout
-                            </button>
+                        <button onclick="document.getElementById('logout-form').submit();"
+                            class="text-red-400 pt-4 text-left">
+                            <i class="fas fa-power-off mr-2"></i> Logout
+                        </button>
                         @endauth
                     </div>
                 </div>

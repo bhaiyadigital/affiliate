@@ -1,5 +1,5 @@
 <?php
-    $siteSetting = \App\Models\SiteSetting::first();
+$siteSetting = \App\Models\SiteSetting::first();
 
 ?>
 
@@ -7,10 +7,15 @@
     <div class="container mx-auto px-4 lg:px-6 flex justify-between items-center py-2">
         <!-- ── LOGO ── -->
         <div class="flex items-center gap-3 shrink-0">
-            <a href="<?php echo e(route('home.index')); ?>" class=" px-2 py-2 flex items-center">
+            <?php if(auth()->guard()->check()): ?>
+            <a href="<?php echo e(route('profile.index')); ?>" class="px-2 py-2 flex items-center">
                 <img src="<?php echo e($siteSetting->logo_url); ?>" alt="Bhaiya Asset" class="w-auto lg:h-[60px] h-[45px] block" />
             </a>
-
+            <?php else: ?>
+            <a href="<?php echo e(route('home.index')); ?>" class="px-2 py-2 flex items-center">
+                <img src="<?php echo e($siteSetting->logo_url); ?>" alt="Bhaiya Asset" class="w-auto lg:h-[60px] h-[45px] block" />
+            </a>
+            <?php endif; ?>
         </div>
         <button @click="mobileMenu = !mobileMenu" class="lg:hidden text-2xl p-2 focus:outline-none"
             aria-label="Toggle navigation menu">
@@ -24,40 +29,40 @@
                 <span class="text-sm tracking-wide">Project list</span>
             </a>
             <?php if(auth()->guard()->check()): ?>
-                <a href="<?php echo e(route('portal.redirect')); ?>" target="_blank"
-                    class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 border-b-2 <?php echo e(request()->routeIs('home.index') ? 'border-white' : 'border-transparent hover:border-white/40'); ?>">
-                    <i class="fa-brands fa-artstation text-lg"></i>
-                    <span class="text-sm tracking-wide">Marketing Assets</span>
-                </a>
+            <a href="<?php echo e(route('portal.redirect')); ?>" target="_blank"
+                class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 border-b-2 <?php echo e(request()->routeIs('home.index') ? 'border-white' : 'border-transparent hover:border-white/40'); ?>">
+                <i class="fa-brands fa-artstation text-lg"></i>
+                <span class="text-sm tracking-wide">Marketing Assets</span>
+            </a>
 
-                <a href="<?php echo e(route('profile.index')); ?>"
-                    class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white transition-colors border-b-2 <?php echo e(request()->routeIs('profile.index') ? 'border-white' : 'border-transparent hover:border-white/40'); ?> hover:border-white/40">
+            <a href="<?php echo e(route('profile.index')); ?>"
+                class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white transition-colors border-b-2 <?php echo e(request()->routeIs('profile.index') ? 'border-white' : 'border-transparent hover:border-white/40'); ?> hover:border-white/40">
 
 
-                    <img src="<?php echo e(Auth::user()->avatar_url ?? asset('./images/user/images.png')); ?>" alt="Profile"
-                        class="w-6 h-6 rounded-full object-cover border border-white/50">
+                <img src="<?php echo e(Auth::user()->avatar_url ?? asset('./images/user/images.png')); ?>" alt="Profile"
+                    class="w-6 h-6 rounded-full object-cover border border-white/50">
 
-                    <span class="text-sm tracking-wide"><?php echo e(Auth::user()->name); ?></span>
-                </a>
+                <span class="text-sm tracking-wide"><?php echo e(Auth::user()->name); ?></span>
+            </a>
 
-                <form id="logout-form" action="<?php echo e(route('frontend.logout')); ?>" method="POST" class="hidden">
-                    <?php echo csrf_field(); ?>
-                </form>
-                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                    class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-red-400 transition-colors border-b-2 border-transparent hover:border-white/40">
-                    <i class="fas fa-power-off text-lg"></i>
-                    <span class="text-sm tracking-wide">Logout</span>
-                </a>
+            <form id="logout-form" action="<?php echo e(route('frontend.logout')); ?>" method="POST" class="hidden">
+                <?php echo csrf_field(); ?>
+            </form>
+            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-red-400 transition-colors border-b-2 border-transparent hover:border-white/40">
+                <i class="fas fa-power-off text-lg"></i>
+                <span class="text-sm tracking-wide">Logout</span>
+            </a>
 
 
             <?php endif; ?>
 
             <?php if(auth()->user()?->isSuperAdmin()): ?>
-                <a href="<?php echo e(route('dashboard')); ?>"
-                    class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white <?php echo e(request()->routeIs('dashboard') ? 'border-white' : 'border-transparent hover:border-white/40'); ?> border-b-2 border-transparent hover:border-white/40">
-                    <i class="fa-solid fa-gauge text-lg"></i>
-                    <span class="text-sm tracking-wide flex items-center gap-1">Admin Dashboard</span>
-                </a>
+            <a href="<?php echo e(route('dashboard')); ?>"
+                class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white <?php echo e(request()->routeIs('dashboard') ? 'border-white' : 'border-transparent hover:border-white/40'); ?> border-b-2 border-transparent hover:border-white/40">
+                <i class="fa-solid fa-gauge text-lg"></i>
+                <span class="text-sm tracking-wide flex items-center gap-1">Admin Dashboard</span>
+            </a>
 
             <?php endif; ?>
         </nav>
@@ -74,11 +79,11 @@
 
                 <div class="flex items-center justify-between mb-8 pb-4 border-b border-white/10">
                     <?php if(auth()->guard()->check()): ?>
-                        <a href="<?php echo e(route('profile.index')); ?>" class="flex items-center gap-3">
-                            <img src="<?php echo e(Auth::user()->avatar_url ?? asset('./images/user/images.png')); ?>"
-                                class="w-10 h-10 rounded-full object-cover border border-white/20">
-                            <span class=""><?php echo e(Auth::user()->name); ?></span>
-                        </a>
+                    <a href="<?php echo e(route('profile.index')); ?>" class="flex items-center gap-3">
+                        <img src="<?php echo e(Auth::user()->avatar_url ?? asset('./images/user/images.png')); ?>"
+                            class="w-10 h-10 rounded-full object-cover border border-white/20">
+                        <span class=""><?php echo e(Auth::user()->name); ?></span>
+                    </a>
                     <?php endif; ?>
 
                     <button @click="mobileMenu = false" class="text-white text-3xl leading-none">&times;</button>
@@ -93,22 +98,21 @@
                         <a href="<?php echo e(route('bookmark.list')); ?>" class="flex items-center justify-between">
                             <span><i class="fa-regular fa-bookmark mr-2"></i> Saved Items</span>
                             <?php if($bookmarkCount > 0): ?> <span
-                            class="bg-red-500 px-2 rounded-full text-xs"><?php echo e($bookmarkCount); ?></span> <?php endif; ?>
+                                class="bg-red-500 px-2 rounded-full text-xs"><?php echo e($bookmarkCount); ?></span> <?php endif; ?>
                         </a>
 
                         <a href="<?php echo e(route('tickets.index')); ?>" class="flex items-center gap-3"><i
                                 class="fa-regular fa-circle-question"></i> Support Ticket</a>
 
                         <?php if(auth()->guard()->check()): ?>
-                            <button onclick="document.getElementById('logout-form').submit();"
-                                class="text-red-400 pt-4 text-left">
-                                <i class="fas fa-power-off mr-2"></i> Logout
-                            </button>
+                        <button onclick="document.getElementById('logout-form').submit();"
+                            class="text-red-400 pt-4 text-left">
+                            <i class="fas fa-power-off mr-2"></i> Logout
+                        </button>
                         <?php endif; ?>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</header>
-<?php /**PATH C:\laragon\www\affiliate\resources\views/frontend/partials/header.blade.php ENDPATH**/ ?>
+</header><?php /**PATH C:\laragon\www\affiliate\resources\views/frontend/partials/header.blade.php ENDPATH**/ ?>
