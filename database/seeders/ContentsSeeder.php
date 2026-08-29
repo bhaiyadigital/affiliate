@@ -166,7 +166,7 @@ class ContentsSeeder extends Seeder
                 'destination_id' => 4,
                 'user_id' => 1,
                 'name' => 'daisy-dell',
-                'slug' => 'daisy-dell',
+                'slug' => 'daisy-dells',
                 'title' => 'Daisy Dell',
                 'description' => '<div>Discover <b>DAISY DELL </b>by Bhaiya Housing Real Estate, an exquisite residential haven in Bashundhara. Positioned amidst serene landscapes and modern conveniences, DAISY DELL offers an unparalleled blend of tranquility and accessibility.</div><div>This development is not just a place to live but a celebration of refined elegance and contemporary design, inspired by the classic charm of its namesake, a symbol of grace and harmony from literature.</div><div><br></div><div>At <b>DAISY DELL</b>, embrace a lifestyle where every detail is crafted to perfection, and every moment is an experience of unparalleled luxury and comfort. Welcome to a new chapter of living, where the beauty of nature and the sophistication of urban life come together in perfect harmony.</div><div><br></div><div><br></div><div><h5><b>DAISY DELL Features:</b></h5><div>• South Facing</div><div>• 40% Open Space</div><div>• Attractive Landscape</div><div>• High Ceiling Ground Floor</div><div>• Grand Entry</div><div>• Visitor\'s Waiting Lounge</div><div>• Large Parking Area</div><div>• Roof Top Garden</div><div>• Roof Top Walking Loop</div><div>• BBQ Space</div><div>• Community Space</div><div>• Modern Fire Safety System</div><div>• High Speed Lift (8 Passengers)</div><div>• 360° Security</div><div>• Naturally Lighted & Airy</div><div>• Bathrooms & Kitchens have Separate Hot Water Provision</div></div>',
                 'body_2' => null,
