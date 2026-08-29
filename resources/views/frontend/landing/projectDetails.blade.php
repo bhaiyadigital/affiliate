@@ -246,13 +246,12 @@
                     style="aspect-ratio: 16/9.4; margin-top: -1px;">
 
                     @php
-                    $images = $project->galleryUrls;
+                    $displayImage = $project->imageUrl ?? ($project->galleryUrls[0] ?? '');
 
-                    // প্রথম ছবি বের করা
-                    $firstImage = count($images) > 0 ? $images[0] : '';
+
                     @endphp
 
-                    <img src="{{ $firstImage }}" alt="{{ $project->title ?? 'Project Image' }}"
+                    <img src="{{ $displayImage }}" alt="{{ $project->title ?? 'Project Image' }}"
                         class="w-full h-full object-cover">
                 </div>
             </div>
