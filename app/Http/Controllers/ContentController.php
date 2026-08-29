@@ -14,38 +14,34 @@ class ContentController extends Controller
 {
     use HandlesImageUpload;
 
-    public function index(Request $request, string $module)
-    {
-        $modules = view()->shared('modules');
-        abort_unless(isset($modules[$module]), 404, 'Module not found.');
+public function index(Request $request, string $module)
+{
+    $modules = view()->shared('modules');
+    abort_unless(isset($modules[$module]), 404, 'Module not found.');
 
-        $config = $modules[$module];
+    $config = $modules[$module];
+    $status = $request->input('status');
 
-        $status = $request->input('status');
+    $query = Content::module($module)->sorted()->with(['parent', 'destination']);
 
-        $query = Content::module($module)->sorted();
-
-        if ($status == 3) {
-            $query->trashed();
-        } else {
-            $query->notTrashed();
-        }
-
-        if ($search = $request->input('search')) {
-            $query->where(function ($q) use ($search) {
-                $q->where('title', 'like', "%{$search}%");
-            });
-        }
-
-        // Status 3 ছাড়া অন্য status filter
-        if ($status !== null && $status !== '' && $status !== '3') {
-            $query->where('status', $status);
-        }
-
-        $records = $query->orderBy('updated_at', 'desc')->paginate(20)->withQueryString();
-
-        return view('contents.index', compact('module', 'config', 'records'));
+    if ($status === '3') {
+        $query->trashed();
+    } elseif ($status !== null && $status !== '') {
+        $query->notTrashed()->where('status', $status);
+    } else {
+        $query->notTrashed();
     }
+
+    if ($search = $request->input('search')) {
+        $query->where(function ($q) use ($search) {
+            $q->where('title', 'like', "%{$search}%");
+        });
+    }
+
+    $records = $query->orderBy('updated_at', 'desc')->paginate(20)->withQueryString();
+
+    return view('contents.index', compact('module', 'config', 'records'));
+}
     public function create(string $module)
     {
         $modules = view()->shared('modules');

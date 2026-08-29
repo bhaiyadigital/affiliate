@@ -2,6 +2,7 @@
     <div class="p-4 mx-auto w-full md:p-6" x-data="{
         selected: [],
         allChecked: false,
+        confirmModal: { open: false, formId: null, message: '' },
         toggleAll() {
             const checkboxes = document.querySelectorAll('.row-check');
             this.allChecked = !this.allChecked;
@@ -10,6 +11,13 @@
         updateCheckAll() {
             const total = document.querySelectorAll('.row-check').length;
             this.allChecked = this.selected.length === total && total > 0;
+        },
+        askConfirm(formId, message) {
+            this.confirmModal = { open: true, formId, message };
+        },
+        doConfirm() {
+            document.getElementById(this.confirmModal.formId).submit();
+            this.confirmModal.open = false;
         }
     }">
         <nav class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-6">
@@ -34,8 +42,23 @@
                 <form method="GET" action="<?php echo e(route('contents.index', $module)); ?>" class="flex items-center gap-2">
                     <input type="text" name="search" value="<?php echo e(request('search')); ?>" placeholder="Search..."
                         class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white">
+
+                    <select name="status" onchange="this.form.submit()"
+                        class="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white">
+                        <option value="">All Status</option>
+                        <option value="1" <?php echo e(request('status') === '1' ? 'selected' : ''); ?>>Active</option>
+                        <option value="0" <?php echo e(request('status') === '0' ? 'selected' : ''); ?>>Inactive</option>
+                        <option value="2" <?php echo e(request('status') === '2' ? 'selected' : ''); ?>>Scheduled</option>
+                        <option value="3" <?php echo e(request('status') === '3' ? 'selected' : ''); ?>>Trash</option>
+                    </select>
+
                     <button type="submit"
                         class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-200">Filter</button>
+
+                    <?php if(request('search') || request('status')): ?>
+                        <a href="<?php echo e(route('contents.index', $module)); ?>"
+                            class="text-xs text-gray-400 hover:text-gray-600 underline">Reset</a>
+                    <?php endif; ?>
                 </form>
 
                 
@@ -55,16 +78,17 @@
                 <i class="fas fa-check-circle"></i>
                 <span x-text="selected.length + ' selected'"></span>
             </div>
-            <form action="<?php echo e(route('contents.bulk', $module)); ?>" method="POST" class="flex items-center gap-3">
+            <form id="bulk-form" action="<?php echo e(route('contents.bulk', $module)); ?>" method="POST" class="flex items-center gap-3">
                 <?php echo csrf_field(); ?>
                 <template x-for="id in selected"><input type="hidden" name="ids[]" :value="id"></template>
-                <select name="action" class="rounded-lg border-gray-300 py-1.5 px-3 text-sm focus:ring-blue-500">
+                <select name="action" x-model="bulkAction" class="rounded-lg border-gray-300 py-1.5 px-3 text-sm focus:ring-blue-500">
                     <option value="activate">Mark Active</option>
                     <option value="deactivate">Mark Inactive</option>
                     <!-- <option value="trash">Move to Trash</option> -->
                     <option value="delete">Permanent Delete</option>
                 </select>
-                <button type="submit"
+                <button type="button"
+                    @click="askConfirm('bulk-form', 'Apply this action to ' + selected.length + ' selected item(s)?')"
                     class="bg-blue-600 text-white px-4 py-1.5 rounded-lg text-sm font-bold">Apply</button>
             </form>
         </div>
@@ -84,7 +108,7 @@
                             <?php $__currentLoopData = $config; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $field => $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <?php if(!empty($data['show_in_table']) && $field !== 'module_name'): ?>
                                     <th class="px-5 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">
-                                        <?php echo e($data['label']); ?></th>
+                                        <?php echo e($field === 'parent_id' || $field === 'destination_id' ? 'Parent' : $data['label']); ?></th>
                                 <?php endif; ?>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
@@ -146,6 +170,16 @@
                                                 <?php else: ?>
                                                     <span class="text-gray-300 text-[10px] italic">No Video</span>
                                                 <?php endif; ?>
+                                            <?php elseif($field === 'parent_id'): ?>
+                                                <span class="text-sm font-medium text-gray-800 dark:text-white/90">
+                                                    <?php echo e($item->parent->title ?? '—'); ?>
+
+                                                </span>
+                                            <?php elseif($field === 'destination_id'): ?>
+                                                <span class="text-sm font-medium text-gray-800 dark:text-white/90">
+                                                    <?php echo e($item->destination->title ?? '—'); ?>
+
+                                                </span>
                                             <?php elseif($field == 'status'): ?>
                                                 <button type="button"
                                                     class="status-toggle-btn px-3 py-1 rounded-full text-[10px] font-bold uppercase <?php echo e($item->status == 1 ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'); ?>"
@@ -197,6 +231,7 @@
                                             $deleteRoute = $isTrashed
                                                 ? route('contents.destroy', [$module, $item->id])
                                                 : route('contents.trash', [$module, $item->id]);
+                                            $deleteFormId = 'delete-form-' . $item->id;
                                         ?>
 
                                         <?php if($isTrashed): ?>
@@ -212,16 +247,16 @@
                                             </form>
                                         <?php endif; ?>
 
-                                        <form action="<?php echo e($deleteRoute); ?>" method="POST" class="inline"
-                                            onsubmit="return confirm('Are you sure?')">
+                                        <form id="<?php echo e($deleteFormId); ?>" action="<?php echo e($deleteRoute); ?>" method="POST" class="hidden">
                                             <?php echo csrf_field(); ?>
                                             <?php echo method_field($isTrashed ? 'DELETE' : 'PATCH'); ?>
-                                            <button type="submit"
-                                                class="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg"
-                                                title="<?php echo e($isTrashed ? 'Permanent Delete' : 'Move to Trash'); ?>">
-                                                <i class="fas <?php echo e($isTrashed ? 'fa-minus-circle' : 'fa-trash-alt'); ?>"></i>
-                                            </button>
                                         </form>
+                                        <button type="button"
+                                            @click="askConfirm('<?php echo e($deleteFormId); ?>', <?php echo e($isTrashed ? "'Permanently delete this item? This cannot be undone.'" : "'Move this item to trash?'"); ?>)"
+                                            class="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg"
+                                            title="<?php echo e($isTrashed ? 'Permanent Delete' : 'Move to Trash'); ?>">
+                                            <i class="fas <?php echo e($isTrashed ? 'fa-minus-circle' : 'fa-trash-alt'); ?>"></i>
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -235,6 +270,22 @@
                 </table>
             </div>
             <div class="px-5 py-4 border-t bg-gray-50/30"><?php echo e($records->links()); ?></div>
+        </div>
+
+        
+        <div x-show="confirmModal.open" x-cloak
+            class="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+            <div @click.outside="confirmModal.open = false"
+                class="bg-white rounded-xl shadow-lg w-full max-w-sm p-6 dark:bg-gray-800">
+                <h3 class="text-base font-bold text-gray-800 dark:text-white mb-2">Confirm Action</h3>
+                <p class="text-sm text-gray-500 mb-6" x-text="confirmModal.message"></p>
+                <div class="flex justify-end gap-3">
+                    <button @click="confirmModal.open = false"
+                        class="px-4 py-2 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-100">Cancel</button>
+                    <button @click="doConfirm()"
+                        class="px-4 py-2 text-sm font-bold rounded-lg bg-red-600 text-white hover:bg-red-700">Confirm</button>
+                </div>
+            </div>
         </div>
     </div>
 <?php $__env->stopSection(); ?>
@@ -280,5 +331,4 @@
         });
     </script>
 <?php $__env->stopPush(); ?>
-
 <?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\laragon\www\affiliate\resources\views/contents/index.blade.php ENDPATH**/ ?>
