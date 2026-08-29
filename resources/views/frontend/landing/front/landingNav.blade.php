@@ -7,7 +7,7 @@
     <div class="wrap nav-inner">
 
         <!-- 🏠 Left: Brand (Dynamic Home Link) -->
-        <a href="{{ route('home.index') }}" class="brand">
+        <a href="/" class="brand">
             
             <div>
                 <img src="{{asset('/')}}Bhaiya-referral-program-logo.png" width="180px" alt="">
@@ -24,14 +24,14 @@
             {{-- সব সময়ের জন্য প্রোজেক্ট লিঙ্ক --}}
             <a href="{{ route('affiliated.project') }}" class="nav-item">প্রজেক্ট</a>
             <a href="#faq" class="nav-item">সাধারণ জিজ্ঞাসা</a>
-            <a href="#dashboard-section" class="nav-item">ড্যাশবোর্ড</a>
+            <!-- <a href="#dashboard-section" class="nav-item">ড্যাশবোর্ড</a> -->
 
             @auth
                 {{-- লগইন করা থাকলে মেনু --}}
                 <a href="#refer-section" class="nav-item">রেফার জমা</a>
             @else
                 {{-- গেস্ট মোডে মেনু --}}
-                <a href="#features" class="nav-item">প্রক্রিয়া</a>
+                <a href="#process" class="nav-item">প্রক্রিয়া</a>
                 <a href="#why-bhaiya" class="nav-item">কেন আমরা</a>
             @endauth
         </nav>

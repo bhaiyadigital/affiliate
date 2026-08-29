@@ -7,7 +7,7 @@
     <div class="wrap nav-inner">
 
         <!-- 🏠 Left: Brand (Dynamic Home Link) -->
-        <a href="<?php echo e(route('home.index')); ?>" class="brand">
+        <a href="/" class="brand">
             
             <div>
                 <img src="<?php echo e(asset('/')); ?>Bhaiya-referral-program-logo.png" width="180px" alt="">
@@ -24,14 +24,14 @@
             
             <a href="<?php echo e(route('affiliated.project')); ?>" class="nav-item">প্রজেক্ট</a>
             <a href="#faq" class="nav-item">সাধারণ জিজ্ঞাসা</a>
-            <a href="#dashboard-section" class="nav-item">ড্যাশবোর্ড</a>
+            <!-- <a href="#dashboard-section" class="nav-item">ড্যাশবোর্ড</a> -->
 
             <?php if(auth()->guard()->check()): ?>
                 
                 <a href="#refer-section" class="nav-item">রেফার জমা</a>
             <?php else: ?>
                 
-                <a href="#features" class="nav-item">প্রক্রিয়া</a>
+                <a href="#process" class="nav-item">প্রক্রিয়া</a>
                 <a href="#why-bhaiya" class="nav-item">কেন আমরা</a>
             <?php endif; ?>
         </nav>

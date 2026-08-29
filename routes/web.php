@@ -181,6 +181,10 @@ Route::prefix('')->group(function () {
     Route::get('/affiliated/login', [HomeController::class, 'showLoginForm'])->name('affiliated.login.page');
     Route::get('/affiliated/register', [HomeController::class, 'showRegisterForm'])->name('affiliated.register.page');
     Route::get('/', [HomeController::class, 'landing'])->name('landing.index');
+    Route::get('/home', [HomeController::class, 'landing'])->name('home.index');
+
+
+
     Route::get('/register', [FrontendAuthController::class, 'showSignin'])->name('signin');
     Route::post('/register', [FrontendAuthController::class, 'register'])->name('affiliated.register');
     Route::get('/forgot-password', [FrontendAuthController::class, 'sendReset'])->name('password.request');
@@ -214,7 +218,6 @@ Route::prefix('')->group(function () {
             ->name('drive.media.base64');
 
 
-        Route::get('/home', [HomeController::class, 'landing'])->name('home.index');
 
 
 

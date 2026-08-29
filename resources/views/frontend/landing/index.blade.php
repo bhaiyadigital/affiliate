@@ -20,7 +20,7 @@
                 <h1 class="c-title hind-siliguri">  <span class="hero-ft"> রেফার করে আয় করুন</span> <br> সর্বোচ্চ  ৩ লক্ষ টাকা </h1>
                 <p class="c-desc">
                     আপনার পরিচিতজনকে ফ্ল্যাট বা জমি কেনার জন্য পরিচয় করিয়ে দিন। চুক্তি সম্পন্ন হলে সর্বোচ্চ
-                    <mark class="kohinoor-bangla">৳৩,০০,০০০</mark> পর্যন্ত রেফারেল কমিশন পান সরাসরি আপনার অ্যাকাউন্টে।
+                    <mark class="kohinoor-bangla">৳৩,০০,০০০</mark> পর্যন্ত রেফারেল কমিশন পান সরাসরি আপনার ব্যাংক অ্যাকাউন্টে।
                 </p>
                 <div class="c-btn-group kohinoor-bangla">
                     <a href="#refer" class="btn-green flex-1"> <span>রেফার   করুন</span> <i class="fas fa-arrow-right"></i></a>
@@ -71,13 +71,12 @@
         <div class="trust-grid">
             <div class="trust-box"><i class="fas fa-shield-alt"></i>
                 <div><b style="display:block;">১০০% নিরাপদ</b><span
-                        style="font-size:12px; color:#697383; font-weight: 400;">স্বচ্ছ পেআউট
-                        চুক্তি</span></div>
+                        style="font-size:12px; color:#697383; font-weight: 400;">স্বচ্ছ পেআউট প্রক্রিয়া</span></div>
             </div>
             <div class="trust-box"><i class="fas fa-bolt"></i>
                 <div><b style="display:block;">দ্রুততম পেমেন্ট</b><span
-                        style="font-size:12px; color:#697383; font-weight: 400;">বুকিং
-                        রেজিস্ট্রেশনের পরই</span></div>
+                        style="font-size:12px; color:#697383; font-weight: 400;">পরই
+বুকিং ও রেজিস্ট্রেশন সম্পন্ন হওয়ার পরই</span></div>
             </div>
             <div class="trust-box"><i class="fas fa-headset"></i>
                 <div><b style="display:block;">ডেডিকেটেড সাপোর্ট</b><span
@@ -91,7 +90,7 @@
         </div>
     </section>
     <!-- HOW IT WORKS SECTION - IMAGE PERFECT VERSION -->
-    <div class="container">
+    <div class="container" id="process">
         <div class="header">
             <h2 class="text-[28px] md:text-[36px]">কীভাবে কাজ করে?</h2>
             <p>মাত্র ৪টি সহজ ধাপে আপনার রেফারেল কমিশন নিশ্চিত করুন।</p>
@@ -124,7 +123,7 @@
                 <div class="step-item" id="step4">
                     <div class="icon-circle">04</div>
                     <h3>কমিশন পান</h3>
-                    <p>বুকিং সম্পন্ন হলে সরাসরি ব্যাংক অ্যাকাউন্টে পেমেন্ট পাবেন।</p>
+                    <p>বুকিং ও নির্ধারিত প্রক্রিয়া সম্পন্ন হলে সরাসরি ব্যাংক অ্যাকাউন্টে কমিশন পাবেন।</p>
                 </div>
             </div>
         </div>
