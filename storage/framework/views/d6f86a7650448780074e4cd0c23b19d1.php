@@ -24,7 +24,7 @@
             <span x-show="$store.sidebar.isExpanded || $store.sidebar.isHovered || $store.sidebar.isMobileOpen"
                 class="flex items-center gap-2">
 
-                <img src="<?php echo e($siteSetting->logo_url); ?>"
+                <img src="<?php echo e(asset('/')); ?>Bhaiya-referral-program-logo.png"
                     alt="<?php echo e($siteSetting->site_name); ?>"
                     class="h-[50px]" />
 
