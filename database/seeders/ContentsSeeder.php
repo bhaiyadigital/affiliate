@@ -132,7 +132,7 @@ class ContentsSeeder extends Seeder
                 'destination_id' => 4,
                 'user_id' => 1,
                 'name' => 'gulf-panaroma',
-                'slug' => 'gulf-panaroma',
+                'slug' => 'gulf-panaromas',
                 'title' => 'Gulf panaroma',
                 'description' => '<p><span style="color: rgb(31, 31, 31); font-family: "Google Sans", Arial, sans-serif;">Sajek Valley is a popular tourist spot in Bangladesh, situated among the hills of the Kasalong range of mountains in the northern area of the Chittagong Hill Tracts.</span></p>',
                 'body_2' => null,
