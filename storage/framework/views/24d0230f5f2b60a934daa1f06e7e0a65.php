@@ -247,13 +247,13 @@
                     style="aspect-ratio: 16/9.4; margin-top: -1px;">
 
                     <?php
-                    $images = $project->galleryUrls;
+                    $images = $project->image_path;
 
-                    // ২. প্রথম ছবি বের করা
-                    $firstImage = count($images) > 0 ? $images[0] : '';
+
                     ?>
-                    <video controls class="w-full h-full"
-                        src="https://www.shutterstock.com/shutterstock/videos/3807749569/preview/stock-footage-wide-cctv-shot-of-surveillance-camera-observing-group-of-scam-call-center-employees-in-office.mp4"></video>
+
+                    <img src="<?php echo e($project->image_path); ?>" alt="<?php echo e($project->title ?? 'Project Image'); ?>"
+                        class="w-full h-full object-cover">
                 </div>
             </div>
 
