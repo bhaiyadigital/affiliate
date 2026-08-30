@@ -788,6 +788,7 @@
                                             class="flex items-center gap-2 text-blue-600 hover:underline hover:text-blue-800">
                                             <i class="fas fa-eye text-xs"></i>
                                             {{ $project->title }}
+                                            <span class="text-gray-400 text-xs font-medium">({{ $project->parent->title ?? '' }})</span>
                                         </a>
                                     </td>
                                     <td class="px-8 py-5">
@@ -824,6 +825,7 @@
                                 class="flex items-center gap-2 text-blue-600 font-bold text-base leading-tight hover:text-blue-800">
                                 <i class="fas fa-eye text-xs"></i>
                                 {{ $project->title }}
+                                <span class="text-gray-400 text-xs font-normal">({{ $project->parent->title ?? '' }})</span>
                             </a>
                             <div class="flex items-center gap-2">
                                 <input type="text" readonly value="{{ $refLink }}"
@@ -842,8 +844,8 @@
                 </div>
                 @endforeach
             </div>
-            </div>
         </div>
+    </div>
     </div>
 
     <!-- ── ACCOUNT MOBILE LEFT DRAWER ── -->

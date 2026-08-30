@@ -816,6 +816,7 @@ unset($__errorArgs, $__bag); ?>
                                             <i class="fas fa-eye text-xs"></i>
                                             <?php echo e($project->title); ?>
 
+                                            <span class="text-gray-400 text-xs font-medium">(<?php echo e($project->parent->title ?? ''); ?>)</span>
                                         </a>
                                     </td>
                                     <td class="px-8 py-5">
@@ -853,6 +854,7 @@ unset($__errorArgs, $__bag); ?>
                                 <i class="fas fa-eye text-xs"></i>
                                 <?php echo e($project->title); ?>
 
+                                <span class="text-gray-400 text-xs font-normal">(<?php echo e($project->parent->title ?? ''); ?>)</span>
                             </a>
                             <div class="flex items-center gap-2">
                                 <input type="text" readonly value="<?php echo e($refLink); ?>"
@@ -871,8 +873,8 @@ unset($__errorArgs, $__bag); ?>
                 </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
-            </div>
         </div>
+    </div>
     </div>
 
     <!-- ── ACCOUNT MOBILE LEFT DRAWER ── -->
