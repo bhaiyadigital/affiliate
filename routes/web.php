@@ -211,7 +211,9 @@ Route::prefix('')->group(function () {
         Route::delete('/coupons/delete/{slug}', [LeadController::class, 'destroyCoupon'])->name('coupons.destroy');
         Route::put('/team/update/{id}', [FrontendAuthController::class, 'updateMember'])->name('team.member.update');
 
-        Route::get('/profile/{tab?}', [FrontendAuthController::class, 'index'])->where('tab', 'dashboard|profile|leads|team|coupons|history')->name('profile.index');
+        Route::get('/profile/{tab?}', [FrontendAuthController::class, 'index'])
+            ->where('tab', 'dashboard|profile|leads|team|coupons|history|refer_link')
+            ->name('profile.index');
         Route::put('/profile/update', [FrontendAuthController::class, 'update'])->name('profile.update');
         Route::get('/assets/{asset:slug}/edit-content', [AssetController::class, 'editContent'])
             ->name('assets.edit-content');

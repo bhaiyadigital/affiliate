@@ -18,7 +18,7 @@
             <div class=" rounded-xl  flex items-center justify-center">
                   <img src="<?php echo e(asset('/')); ?>Bhaiya Affiliate Program logo_white.png"
                     alt="Bhaiya Referral Program"
-                    class="h-[50px]" />
+                    class="w-[200px]" />
             </div>
         </div>
 

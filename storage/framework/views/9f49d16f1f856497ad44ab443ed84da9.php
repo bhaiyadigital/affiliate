@@ -117,7 +117,12 @@
                         <i class="fa-solid fa-ticket-simple w-5"></i>
                         <span class="text-base font-medium">Coupons</span>
                     </a>
-
+                    <a href="<?php echo e(route('profile.index', 'refer_link')); ?>"
+                        :class="activeTab === 'refer_link' ? 'bg-[#003B7A] text-white' : 'text-gray-700 hover:bg-gray-50'"
+                        class="flex items-center gap-3 px-4 py-3 transition-all border-b border-gray-50 text-left">
+                        <i class="fa-solid fa-share-nodes w-5"></i>
+                        <span class="text-base font-medium">Refer Link</span>
+                    </a>
                     <!-- Marketing Assets External Link -->
                     <a href="<?php echo e(route('portal.redirect')); ?>" target="_blank"
                         class="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 transition-all border-b border-gray-50">
@@ -143,17 +148,17 @@
                 $teamLeadsCount = $statsLeads->where('user_id', '!=', auth()->id())->count();
                 $conv = $statsLeads->where('status', \App\Models\Lead::STATUS_COMPLETED)->count();
                 $rate = $total > 0 ? round(($conv / $total) * 100, 1) : 0;
-           $totalCommission = $statsLeads
-    ->where('status', \App\Models\Lead::STATUS_COMPLETED)
-    ->sum('commission_amount');
+                $totalCommission = $statsLeads
+                ->where('status', \App\Models\Lead::STATUS_COMPLETED)
+                ->sum('commission_amount');
 
                 // ট্রেন্ড চার্ট ডাটা
                 $chartMonths = [];
                 $chartValues = [];
                 for ($i = 5; $i >= 0; $i--) {
-                    $date = now()->subMonths($i);
-                    $chartMonths[] = $date->format('M');
-                    $chartValues[] = $statsLeads->filter(fn($l) => $l->created_at->format('Y-m') == $date->format('Y-m'))->count();
+                $date = now()->subMonths($i);
+                $chartMonths[] = $date->format('M');
+                $chartValues[] = $statsLeads->filter(fn($l) => $l->created_at->format('Y-m') == $date->format('Y-m'))->count();
                 }
 
                 $sNew = $statsLeads->where('status', \App\Models\Lead::STATUS_PENDING)->count();
@@ -257,13 +262,13 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     <?php
                     $cards = [
-                        ['label' => 'Total Leads', 'value' => number_format($total), 'icon' => 'fas fa-users', 'color' => 'bg-emerald-50 text-emerald-600'],
-                        ['label' => 'Direct Leads', 'value' => number_format($manual), 'icon' => 'fas fa-hand-pointer', 'color' => 'bg-indigo-50 text-indigo-600'],
-                        ['label' => 'Refer Link Leads', 'value' => number_format($link), 'icon' => 'fas fa-link', 'color' => 'bg-rose-50 text-rose-600'],
-                        ['label' => 'Refer Code Leads', 'value' => number_format($coupon), 'icon' => 'fas fa-hashtag', 'color' => 'bg-amber-50 text-amber-600'],
-                        ['label' => 'Team Leads', 'value' => number_format($teamLeadsCount), 'icon' => 'fas fa-users-cog', 'color' => 'bg-purple-50 text-purple-600'],
-                        ['label' => 'Converted Leads', 'value' => number_format($conv), 'icon' => 'fas fa-check-circle', 'color' => 'bg-green-50 text-green-600'],
-                        ['label' => 'Conversion Rate', 'value' => $rate . '%', 'icon' => 'fas fa-chart-pie', 'color' => 'bg-orange-50 text-orange-600'],
+                    ['label' => 'Total Leads', 'value' => number_format($total), 'icon' => 'fas fa-users', 'color' => 'bg-emerald-50 text-emerald-600'],
+                    ['label' => 'Direct Leads', 'value' => number_format($manual), 'icon' => 'fas fa-hand-pointer', 'color' => 'bg-indigo-50 text-indigo-600'],
+                    ['label' => 'Refer Link Leads', 'value' => number_format($link), 'icon' => 'fas fa-link', 'color' => 'bg-rose-50 text-rose-600'],
+                    ['label' => 'Refer Code Leads', 'value' => number_format($coupon), 'icon' => 'fas fa-hashtag', 'color' => 'bg-amber-50 text-amber-600'],
+                    ['label' => 'Team Leads', 'value' => number_format($teamLeadsCount), 'icon' => 'fas fa-users-cog', 'color' => 'bg-purple-50 text-purple-600'],
+                    ['label' => 'Converted Leads', 'value' => number_format($conv), 'icon' => 'fas fa-check-circle', 'color' => 'bg-green-50 text-green-600'],
+                    ['label' => 'Conversion Rate', 'value' => $rate . '%', 'icon' => 'fas fa-chart-pie', 'color' => 'bg-orange-50 text-orange-600'],
                     ];
                     ?>
 
@@ -285,7 +290,7 @@
                             <p class="text-[11px] font-bold text-gray-600 uppercase tracking-widest">Total Commission</p>
                             <h3 class="text-4xl font-black text-[#006D44]">৳<?php echo e(number_format($totalCommission)); ?></h3>
                         </div>
-                  
+
                     </div>
                 </div>
 
@@ -422,9 +427,9 @@
                                     <td class="px-8 py-5 text-center">
                                         <?php
                                         $statusStyle = match ($lead->status) {
-                                            \App\Models\Lead::STATUS_PENDING => 'bg-emerald-50 text-emerald-600 border-emerald-100',
-                                            \App\Models\Lead::STATUS_COMPLETED => 'bg-amber-50 text-amber-700 border-amber-100',
-                                            default => 'bg-indigo-50 text-indigo-600 border-indigo-100',
+                                        \App\Models\Lead::STATUS_PENDING => 'bg-emerald-50 text-emerald-600 border-emerald-100',
+                                        \App\Models\Lead::STATUS_COMPLETED => 'bg-amber-50 text-amber-700 border-amber-100',
+                                        default => 'bg-indigo-50 text-indigo-600 border-indigo-100',
                                         };
                                         ?>
                                         <span class="<?php echo e($statusStyle); ?> px-3 py-1 rounded-full text-[10px] font-bold border uppercase tracking-tighter">
@@ -463,9 +468,9 @@
                                 </div>
                                 <?php
                                 $statusStyle = match ($lead->status) {
-                                    \App\Models\Lead::STATUS_PENDING => 'bg-emerald-50 text-emerald-600 border-emerald-100',
-                                    \App\Models\Lead::STATUS_COMPLETED => 'bg-amber-50 text-amber-700 border-amber-100',
-                                    default => 'bg-indigo-50 text-indigo-600 border-indigo-100',
+                                \App\Models\Lead::STATUS_PENDING => 'bg-emerald-50 text-emerald-600 border-emerald-100',
+                                \App\Models\Lead::STATUS_COMPLETED => 'bg-amber-50 text-amber-700 border-amber-100',
+                                default => 'bg-indigo-50 text-indigo-600 border-indigo-100',
                                 };
                                 ?>
                                 <span class="<?php echo e($statusStyle); ?> px-2.5 py-0.5 rounded-full text-[9px] font-bold border uppercase">
@@ -618,8 +623,8 @@ unset($__errorArgs, $__bag); ?>
                             <?php $__empty_1 = true; $__currentLoopData = $downloadLogs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $log): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                             <?php
                             $item = $log->model === 'asset'
-                                ? \App\Models\Asset::find($log->model_id)
-                                : \App\Models\Campaign::find($log->model_id);
+                            ? \App\Models\Asset::find($log->model_id)
+                            : \App\Models\Campaign::find($log->model_id);
                             ?>
                             <tr class="hover:bg-gray-50 transition-colors text-base">
                                 <td class="px-6 py-4">
@@ -764,6 +769,90 @@ unset($__errorArgs, $__bag); ?>
                 
                 <?php echo $__env->make('frontend.coupon.form', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
             </div>
+            <!-- ── REFER LINK TAB ── -->
+            <div x-show="activeTab === 'refer_link'" x-transition style="display: none;">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-bold text-[#003B7A] uppercase tracking-wider">
+                        Refer Link
+                    </h2>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                    <!-- Desktop View -->
+                    <div class="hidden md:block overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead class="bg-gray-50 text-[11px] uppercase font-black text-gray-400 tracking-wider border-b border-gray-100">
+                                <tr>
+                                    <th class="px-8 py-5">Project Name</th>
+                                    <th class="px-8 py-5">Referral Link</th>
+                                    <th class="px-8 py-5 text-right">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-50">
+                                <?php $__empty_1 = true; $__currentLoopData = $projects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                <?php
+                                $refCode = auth()->user()->referral_code ?? 'NULL';
+                                $refLink = route('affiliated.project.details', $project->slug) . '?ref=' . $refCode;
+                                ?>
+                                <tr class="hover:bg-gray-50/50 transition-colors">
+                                    <td class="px-8 py-5 font-bold text-sm">
+                                        <a href="<?php echo e(route('affiliated.project.details', $project->slug)); ?>"
+                                            class="flex items-center gap-2 text-blue-600 hover:underline hover:text-blue-800">
+                                            <i class="fas fa-eye text-xs"></i>
+                                            <?php echo e($project->title); ?>
+
+                                        </a>
+                                    </td>
+                                    <td class="px-8 py-5">
+                                        <input type="text" readonly value="<?php echo e($refLink); ?>"
+                                            id="refLink-<?php echo e($project->id); ?>"
+                                            class="w-full max-w-md border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-500 bg-gray-50 outline-none">
+                                    </td>
+                                    <td class="px-8 py-5 text-right">
+                                        <button type="button" onclick="copyRefLink('refLink-<?php echo e($project->id); ?>', this)"
+                                            class="bg-[#003B7A] hover:bg-blue-900 text-white px-4 py-2 rounded-lg text-xs font-bold transition-all">
+                                            <i class="fas fa-copy mr-1"></i> Copy
+                                        </button>
+                                    </td>
+                                </tr>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                                <tr>
+                                    <td colspan="3" class="px-8 py-10 text-center text-gray-400 italic">No projects found.</td>
+                                </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Mobile View -->
+                    <div class="md:hidden divide-y divide-gray-100">
+                        <?php $__empty_1 = true; $__currentLoopData = $projects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                        <?php
+                        $refLink = route('affiliated.project.details', $project->slug) . '?ref=' . auth()->id();
+                        ?>
+                        <div class="p-4 space-y-3">
+                          <a href="<?php echo e(route('affiliated.project.details', $project->slug)); ?>"
+    class="flex items-center gap-2 text-blue-600 font-bold text-base leading-tight hover:text-blue-800">
+    <i class="fas fa-eye text-xs"></i>
+    <?php echo e($project->title); ?>
+
+</a>
+                            <div class="flex items-center gap-2">
+                                <input type="text" readonly value="<?php echo e($refLink); ?>"
+                                    id="refLinkM-<?php echo e($project->id); ?>"
+                                    class="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-500 bg-gray-50 outline-none">
+                                <button type="button" onclick="copyRefLink('refLinkM-<?php echo e($project->id); ?>', this)"
+                                    class="bg-[#003B7A] text-white px-3 py-2 rounded-lg text-xs font-bold">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                        <div class="p-8 text-center text-gray-400 italic">No projects found.</div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- ── ACCOUNT MOBILE LEFT DRAWER ── -->
@@ -790,13 +879,14 @@ unset($__errorArgs, $__bag); ?>
 
                 <nav class="flex flex-col overflow-y-auto pt-2">
                     <template x-for="item in [
-                        { id: 'dashboard', label: 'Dashboard', icon: 'fa-chart-column' },
-                        { id: 'profile', label: 'Personal Info', icon: 'fa-user-circle' },
-                        { id: 'leads', label: 'My Leads', icon: 'fa-users-rectangle' },
-                        { id: 'team', label: 'Team', icon: 'fa-arrows-down-to-people' },
-                        { id: 'coupons', label: 'Coupons', icon: 'fa-ticket-simple' }
-                    ]">
-                        <a :href="'<?php echo e(url('profile')); ?>/' + item.id"
+    { id: 'dashboard', label: 'Dashboard', icon: 'fa-chart-column' },
+    { id: 'profile', label: 'Personal Info', icon: 'fa-user-circle' },
+    { id: 'leads', label: 'My Leads', icon: 'fa-users-rectangle' },
+    { id: 'team', label: 'Team', icon: 'fa-arrows-down-to-people' },
+    { id: 'coupons', label: 'Coupons', icon: 'fa-ticket-simple' },
+    { id: 'refer_link', label: 'Refer Link', icon: 'fa-share-nodes' }
+]">
+                        <a :href="<?php echo e(Js::from(collect(['dashboard','profile','leads','team','coupons','refer_link'])->mapWithKeys(fn($t) => [$t => route('profile.index', $t)]))); ?>[item.id]"
                             :class="activeTab === item.id ? 'bg-[#003B7A] text-white' : 'text-gray-700 hover:bg-gray-50'"
                             class="flex items-center gap-3 px-6 py-4 border-b border-gray-50 text-left transition-colors">
                             <i class="fa-solid w-5" :class="item.icon"></i>
@@ -823,6 +913,18 @@ unset($__errorArgs, $__bag); ?>
 </section>
 <?php $__env->stopSection(); ?>
 <?php $__env->startPush('scripts'); ?>
+<script>
+    function copyRefLink(inputId, btn) {
+        const input = document.getElementById(inputId);
+        input.select();
+        input.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(input.value).then(() => {
+            const original = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check mr-1"></i> Copied';
+            setTimeout(() => btn.innerHTML = original, 1500);
+        });
+    }
+</script>
 <script>
     function previewAvatar(input) {
         if (input.files && input.files[0]) {
@@ -939,5 +1041,4 @@ unset($__errorArgs, $__bag); ?>
     });
 </script>
 <?php $__env->stopPush(); ?>
-
 <?php echo $__env->make('frontend.layouts.front', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\laragon\www\affiliate\resources\views/frontend/auth/profile.blade.php ENDPATH**/ ?>
