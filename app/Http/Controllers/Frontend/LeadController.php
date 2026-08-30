@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Content;
 use App\Models\Lead;
 use App\Models\User;
+use App\Rules\ValidPhoneNumber;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -22,12 +23,9 @@ class LeadController extends Controller
                 'string',
                 'min:7',
                 'max:20',
-                'phone'    => ['required', 'string', 'unique:users,phone', 'regex:/^\+?[0-9]+(?:-[0-9]+)*$/'],
             ],
+            'phone'      => ['required', 'string', new ValidPhoneNumber(),'unique:users,phone'],
             'budget' => 'nullable|numeric|min:0',
-        ], [
-            'phone.regex' => 'সঠিক ফোন নাম্বার দিন ।',
-            'phone.min'   => 'ফোন নাম্বারটি অন্তত ৭ ডিজিটের হতে হবে।',
         ]);
 
         $duplicateQuery = Lead::whereIn('status', [1, 2, 3, 4])
