@@ -8,6 +8,7 @@ use App\Models\DownloadLog;
 use App\Models\Lead;
 use App\Models\Role;
 use App\Models\User;
+use App\Rules\ValidPhoneNumber;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -91,11 +92,12 @@ class FrontendAuthController extends Controller
 
         $request->validate([
             'name'             => 'required|string|max:255',
-            'phone'            => 'nullable|string|max:255',
+            'phone'            => 'nullable|string|max:255',new ValidPhoneNumber(),
             'avatar'           => 'nullable|image',
             'current_password' => 'nullable|required_with:new_password',
             'new_password'     => 'nullable|min:6|confirmed',
         ]);
+
 
         $successMessage = 'Profile updated successfully.';
 
@@ -138,7 +140,7 @@ class FrontendAuthController extends Controller
         $request->validate([
             'name'     => ['required', 'string', 'max:255'],
             'email'    => 'required|email|unique:users,email',
-            'phone'    => ['required', 'string', 'unique:users,phone', 'regex:/^\+?[0-9]+(?:-[0-9]+)*$/'],
+            'phone'      => ['required', 'string', new ValidPhoneNumber(), 'unique:users,phone'],
             'password' => ['required', 'min:6'],
         ]);
 
