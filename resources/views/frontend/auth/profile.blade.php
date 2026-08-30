@@ -12,57 +12,6 @@
     }
 </style>
 @section('content')
-<<<<<<< HEAD
-    <section class="container mx-auto px-4 lg:px-8 py-12" x-data="{
-                                                                                                activeTab: '{{
-        session('active_tab') ?? (
-            request('active_tab') ?? (
-                $errors->hasAny(['current_password', 'new_password', 'avatar']) ? 'profile' : (
-                    $errors->hasAny(['title', 'slug', 'start_date', 'end_date', 'name', 'views']) ? 'coupons' : (
-                        $errors->hasAny(['email', 'password']) ? 'team' : (
-                            $errors->hasAny(['name', 'phone', 'email', 'budget']) ? 'leads' : 'dashboard'
-                        )
-                    )
-                )
-            ))
-                                                                                                }}',
-
-                                                                                                leadView: '{{ session('lead_view') ?? ($errors->hasAny(['name', 'phone', 'email', 'budget']) ? 'form' : 'list') }}',
-                                                                                                teamView: '{{ $errors->hasAny(['email', 'password']) ? 'form' : (session('team_view') ?? 'list') }}',
-                                                                                                couponView: '{{
-        $errors->hasAny(['title', 'slug', 'start_date', 'end_date', 'name', 'views']) ? 'form' :
-        (session('coupon_view') ?? 'list')
-                                                                                                }}',
-
-                                                                                                editingMember: {
-                                                                                                    id: '{{ old('id') }}',
-                                                                                                    name: '{{ old('member_name') }}',
-                                                                                                    phone: '{{ old('member_phone') }}',
-                                                                                                    email: '{{ old('email') }}'
-                                                                                                },
-
-                                                                                                editingCoupon: {
-                                                                                                    id: '{{ old('id') }}',
-                                                                                                    title: '{{ old('title') }}',
-                                                                                                    slug: '{{ old('slug') }}',
-                                                                                                    start_date: '{{ old('start_date') }}',
-                                                                                                    end_date: '{{ old('end_date') }}',
-                                                                                                    name: '{{ old('usage_limit', 1) }}',
-                                                                                                    views: '{{ old('total_limit', 100) }}'
-                                                                                                },
-
-                                                                                                editingLead: {
-                                                                                                    id: '{{ old('id') }}',
-                                                                                                    name: '{{ old('name') }}',
-                                                                                                    email: '{{ old('email') }}',
-                                                                                                    phone: '{{ old('phone') }}',
-                                                                                                    interested_location: '{{ old('interested_location') }}',
-                                                                                                    budget: '{{ old('budget') }}',
-                                                                                                    },
-                                                                                                    accountDrawer: false,
-                                                                                                    viewOnly: false,
-                                                                                            }">
-=======
 <section class="container mx-auto px-4 lg:px-8 py-12" x-data="{
     activeTab: '{{
         session('active_tab') ?? (
@@ -110,15 +59,9 @@
     },
     accountDrawer: false,
 }">
->>>>>>> 370867d (nav routing)
 
         <div class="mb-10 flex items-center gap-4">
 
-<<<<<<< HEAD
-            <div>
-                <h1 class="text-[#003B7A] text-4xl font-light">My Account</h1>
-                <p class="text-gray-500 mt-2 text-base">Manage your profile and activity from one place.</p>
-=======
         <div>
             <h1 class="text-[#003B7A] text-4xl font-light">My Account</h1>
             <p class="text-gray-500 mt-2 text-base">Manage your profile and activity from one place.</p>
@@ -181,7 +124,6 @@
                     </a>
 
                 </nav>
->>>>>>> 370867d (nav routing)
             </div>
             <!-- মোবাইলের জন্য বাম পাশের ড্রয়ার আইকন -->
             <button @click="accountDrawer = true" class="lg:hidden text-[#003B7A] p-2   active:bg-gray-50">
@@ -220,7 +162,7 @@
                             <i class="fa-solid fa-users-rectangle w-5"></i>
                             <span class="text-base font-medium">My Leads</span>
                         </button>
-                        {{-- <button @click="activeTab = 'team'"
+                    <button @click="activeTab = 'team'"
                             :class="activeTab === 'team' ? 'bg-[#003B7A] text-white' : 'text-gray-700 hover:bg-gray-50'"
                             class="flex items-center gap-3 px-4 py-3 transition-all border-b border-gray-50 text-left">
                             <i class="fa-solid fa-arrows-down-to-people w-5"></i>
@@ -292,26 +234,6 @@
                             <div class="relative inline-block text-left" x-data="{ open: false, showCustom: false }"
                                 @mouseleave.debounce.150ms="open = false; showCustom = false">
 
-<<<<<<< HEAD
-                                <!-- Button -->
-                                <button @mouseenter="open = true"
-                                    class="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-xl text-xs font-bold text-gray-500 shadow-sm transition-all hover:bg-gray-50">
-                                    <i class="far fa-calendar text-gray-600 text-sm"></i>
-                                    <span class="tracking-tight">
-                                        @if(request('date_range') == 'custom' && request('from') && request('to'))
-                                            {{ \Carbon\Carbon::parse(request('from'))->format('d M Y') }} -
-                                            {{ \Carbon\Carbon::parse(request('to'))->format('d M Y') }}
-                                        @elseif(request('date_range') == 'today')
-                                            Today ({{ now()->format('d M Y') }})
-                                        @elseif(request('date_range') == '7_days')
-                                            Last 7 Days
-                                        @elseif(request('date_range') == '30_days')
-                                            Last 30 Days
-                                        @elseif(request('date_range') == 'this_month')
-                                            This Month ({{ now()->format('M Y') }})
-                                        @else
-                                            Date Range
-=======
                             <!-- Button -->
                             <button @mouseenter="open = true"
                                 class="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-xl text-xs font-bold text-gray-500 shadow-sm transition-all hover:bg-gray-50">
@@ -391,7 +313,6 @@
                                                 <i class="fas fa-times-circle mr-1"></i> Clear Filter
                                             </a>
                                         </div>
->>>>>>> 370867d (nav routing)
                                         @endif
                                     </span>
                                     <i class="fas fa-chevron-down text-[10px] ml-1 transition-transform"
@@ -904,24 +825,6 @@
                         </button>
                     </div>
 
-<<<<<<< HEAD
-                    <div class="mb-6" x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show"
-                        x-transition.duration.500ms>
-                        @if (session('success'))
-                            <div
-                                class="mb-4 bg-green-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
-                                <span><i class="fas fa-check-circle mr-2"></i> {{ session('success') }}</span>
-                                <button @click="show = false"><i class="fas fa-times"></i></button>
-                            </div>
-                        @endif
-                        @if (session('error'))
-                            <div
-                                class="mb-4 bg-red-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
-                                <span><i class="fas fa-times-circle mr-2"></i> {{ session('error') }}</span>
-                                <button @click="show = false"><i class="fas fa-times"></i></button>
-                            </div>
-                        @endif
-=======
                     <!-- Name & Phone -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                         <div>
@@ -1048,7 +951,6 @@
                         class="mb-4 bg-green-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
                         <span><i class="fas fa-check-circle mr-2"></i> {{ session('success') }}</span>
                         <button @click="show = false"><i class="fas fa-times"></i></button>
->>>>>>> 370867d (nav routing)
                     </div>
                     @endif
                     @if (session('error'))
@@ -1057,35 +959,6 @@
                         <span><i class="fas fa-times-circle mr-2"></i> {{ session('error') }}</span>
                         <button @click="show = false"><i class="fas fa-times"></i></button>
                     </div>
-<<<<<<< HEAD
-
-                    {{-- ফর্ম ইনক্লুড --}}
-                    <div x-show="leadView === 'form'" x-transition style="display: none;">
-                        @include('frontend.lead.form')
-                    </div>
-
-                    @include('frontend.lead.view-modal')
-
-                </div>
-                <!-- Section: My Team -->
-                <div x-show="activeTab === 'team'" x-transition style="display: none;">
-
-                    <!-- ── টিম হেডার এবং টগল বাটন ── -->
-                    <div class="flex justify-between items-center mb-4">
-                        <div>
-                            <h2 x-show="teamView === 'list'"
-                                class="text-xl font-bold text-[#003B7A] uppercase tracking-wider">
-                                Team Management
-                            </h2>
-                        </div>
-
-                        <button x-show="teamView === 'list'"
-                            @click="teamView = 'form'; editingMember = {id:null, name:'', phone:'', email:''}"
-                            class="bg-[#003B7A] text-white px-5 py-2 rounded-lg text-sm font-bold shadow-md ml-auto">
-                            + Add New Member
-                        </button>
-                    </div>
-=======
                     @endif
                 </div>
 
@@ -1213,7 +1086,6 @@
                             <span class="text-sm font-medium" x-text="item.label"></span>
                         </a>
                     </template>
->>>>>>> 370867d (nav routing)
 
                     <div class="mb-6" x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show"
                         x-transition.duration.500ms>
@@ -1283,65 +1155,9 @@
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
-            <!-- ── ACCOUNT MOBILE LEFT DRAWER ── -->
-            <div x-show="accountDrawer" class="fixed inset-0 z-[100] lg:hidden" style="display: none;">
-                <!-- Overlay -->
-                <div x-show="accountDrawer" x-transition:enter="transition ease-out duration-300"
-                    x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-                    x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100"
-                    x-transition:leave-end="opacity-0" @click="accountDrawer = false"
-                    class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
-
-                <!-- Drawer Content -->
-                <div x-show="accountDrawer" x-transition:enter="transition ease-out duration-300"
-                    x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0"
-                    x-transition:leave="transition ease-in duration-200" x-transition:leave-start="translate-x-0"
-                    x-transition:leave-end="-translate-x-full"
-                    class="absolute left-0 top-0 h-full w-[280px] bg-white shadow-2xl flex flex-col border-r border-gray-100">
-
-                    <div class="p-5 border-b flex justify-between items-center bg-gray-50">
-                        <span class="font-bold text-[#003B7A] uppercase text-xs tracking-widest">Account Menu</span>
-                        <button @click="accountDrawer = false"
-                            class="text-gray-600 hover:text-red-500 text-2xl leading-none">&times;</button>
-                    </div>
-
-                    <nav class="flex flex-col overflow-y-auto pt-2">
-                        <template x-for="item in [
-                                                            { id: 'dashboard', label: 'Dashboard', icon: 'fa-chart-column' },
-                                                            { id: 'profile', label: 'Personal Info', icon: 'fa-user-circle' },
-                                                            { id: 'leads', label: 'My Leads', icon: 'fa-users-rectangle' },
-                                                            { id: 'team', label: 'Team', icon: 'fa-arrows-down-to-people' },
-                                                            { id: 'coupons', label: 'Coupons', icon: 'fa-ticket-simple' }
-                                                        ]">
-                            <button @click="activeTab = item.id; accountDrawer = false"
-                                :class="activeTab === item.id ? 'bg-[#003B7A] text-white' : 'text-gray-700 hover:bg-gray-50'"
-                                class="flex items-center gap-3 px-6 py-4 border-b border-gray-50 text-left transition-colors">
-                                <i class="fa-solid w-5" :class="item.icon"></i>
-                                <span class="text-sm font-medium" x-text="item.label"></span>
-                            </button>
-                        </template>
-
-                        <a href="{{ route('portal.redirect') }}" target="_blank"
-                            class="flex items-center gap-3 px-6 py-4 border-b border-gray-50 text-gray-700 hover:bg-gray-50 transition-colors">
-                            <i class="fa-brands fa-artstation w-5 text-center"></i>
-                            <span class="text-sm font-medium">Marketing Assets</span>
-                        </a>
-
-                        <a href="{{ route('home.index') }}"
-                            class="flex items-center gap-3 px-6 py-4 border-b border-gray-50 text-gray-700 hover:bg-gray-50 transition-colors">
-                            <i class="fa-brands fa-affiliatetheme w-5 text-center"></i>
-                            <span class="text-sm font-medium">Home</span>
-                        </a>
-                    </nav>
-                </div>
-            </div>
-    </section>
-=======
         </div>
 
 </section>
->>>>>>> 370867d (nav routing)
 @endsection
 @push('scripts')
     <script>
