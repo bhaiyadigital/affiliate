@@ -140,8 +140,9 @@
                                             @if (($data['type'] ?? '') == 'image')
                                                 @if ($item->imageUrl)
                                                     <div class="h-10 w-14 rounded border border-gray-100 overflow-hidden bg-gray-50 shadow-sm">
-                                                        <img src="{{ !empty($item->image) ? $item->imageUrl : 'https://ui-avatars.com/api/?name=' . urlencode($item->title) . '&background=3b82f6&color=fff' }}"
-                                                            class="w-full h-full object-cover" alt="{{ $item->title }}">
+                                                         <img src="{{ !empty($item->img_path) ? $item->imageUrl : 'https://ui-avatars.com/api/?name=' . urlencode($item->title ?: ($item->name ?: 'No Name')) . '&background=3b82f6&color=fff' }}"
+                                                            class="w-full h-full object-cover"
+                                                            alt="{{ $item->title }}">
                                                     </div>
                                                 @else
                                                     <span class="text-gray-300 text-[10px] italic">No Image</span>
