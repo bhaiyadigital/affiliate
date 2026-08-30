@@ -13,7 +13,7 @@
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-50">
-                @forelse(auth()->user()->teamMembers as $member)
+                @forelse($members as $member)
                     <tr class="hover:bg-gray-50 transition-colors">
                         <td class="px-6 py-4">
                             <div class="flex items-center gap-3">
@@ -50,7 +50,7 @@
 
     <!-- ২. Mobile Card View (Shown only on small screens) -->
     <div class="md:hidden space-y-4">
-        @forelse(auth()->user()->teamMembers as $member)
+        @forelse($members as $member)
             <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
                 <div class="flex items-center gap-4 mb-4">
                     <img src="{{ $member->avatar_url ?? asset('./images/user/images.png') }}" class="w-12 h-12 rounded-full border object-cover">
@@ -91,6 +91,6 @@
     </div>
       <!-- Pagination -->
     <div class="mt-6">
-        @include('partials.pagination', ['items' => $leads])
+        @include('partials.pagination', ['items' => $members])
     </div>
 </div>
