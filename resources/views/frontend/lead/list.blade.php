@@ -102,7 +102,7 @@
                     </td>
                     <td class="px-6 py-4">
                         <span class="text-sm text-gray-600">
-                            {{ $lead->remarks ? Str::limit($lead->remarks, 50) : '-' }}
+                            {{ $lead->remarks ? Str::limit($lead->remarks, 15) : '-' }}
                         </span>
                     </td>
                     <td class="px-6 py-4">
