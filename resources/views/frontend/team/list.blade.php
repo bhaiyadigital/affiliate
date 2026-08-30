@@ -19,7 +19,7 @@
                             <div class="flex items-center gap-3">
                                 <!-- প্রোফাইল ইমেজ যোগ করা হয়েছে লুকে সৌন্দর্যের জন্য -->
                                 <img src="{{ $member->avatar_url ?? asset('./images/user/images.png') }}" class="w-10 h-10 rounded-full border object-cover">
-                                <a href="{{ route('profile.index', ['active_tab' => 'leads', 'member_id' => $member->id]) }}" class="flex flex-col group">
+                                <a href="{{ route('profile.index', ['tab' => 'leads', 'member_id' => $member->id]) }}" class="flex flex-col group">
                                     <span class="font-bold text-gray-700 text-base group-hover:text-[#003B7A] transition-colors leading-tight">{{ $member->name }}</span>
                                     <span class="text-xs text-gray-500 font-medium">
                                         {{ $member->email }} | {{ $member->phone }}
@@ -36,7 +36,7 @@
                             </span>
                         </td>
                         <td class="px-6 py-4 text-right">
-                            <button @click="editingMember = @js($member); teamView = 'form'" class="text-blue-500 hover:text-blue-700 transition-colors">
+                            <button @click="editingMember = @js($member); showTeamModal = true" class="text-blue-500 hover:text-blue-700 transition-colors">
                                 <i class="fas fa-edit"></i>
                             </button>
                         </td>
@@ -59,7 +59,7 @@
                         <span class="text-xs text-gray-500">{{ $member->phone }}</span>
                     </div>
                     <!-- অ্যাকশন বাটন এখানে মোবাইলের জন্য -->
-                    <button @click="editingMember = @js($member); teamView = 'form'" class="ml-auto text-blue-500 p-2">
+                    <button @click="editingMember = @js($member); showTeamModal = true" class="ml-auto text-blue-500 p-2">
                         <i class="fas fa-edit"></i>
                     </button>
                 </div>
@@ -80,7 +80,7 @@
                 </div>
 
                 <!-- ভিউ লিডস লিঙ্ক -->
-                <a href="{{ route('profile.index', ['active_tab' => 'leads', 'member_id' => $member->id]) }}"
+                <a href="{{ route('profile.index', ['tab' => 'leads', 'member_id' => $member->id]) }}"
                    class="mt-4 block text-center bg-gray-50 text-gray-600 py-2 rounded-lg text-xs font-bold uppercase tracking-wider border border-gray-100">
                     View Member Leads
                 </a>

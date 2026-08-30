@@ -12,6 +12,7 @@
     }
 </style>
 @section('content')
+<<<<<<< HEAD
     <section class="container mx-auto px-4 lg:px-8 py-12" x-data="{
                                                                                                 activeTab: '{{
         session('active_tab') ?? (
@@ -61,12 +62,126 @@
                                                                                                     accountDrawer: false,
                                                                                                     viewOnly: false,
                                                                                             }">
+=======
+<section class="container mx-auto px-4 lg:px-8 py-12" x-data="{
+    activeTab: '{{
+        session('active_tab') ?? (
+            $errors->hasAny(['current_password', 'new_password', 'avatar']) ? 'profile' : (
+                $errors->hasAny(['title', 'slug', 'start_date', 'end_date', 'name', 'views']) ? 'coupons' : (
+                    $errors->hasAny(['name', 'phone', 'email', 'password']) ? 'team' : (
+                        $errors->hasAny(['name', 'phone', 'email', 'budget']) ? 'leads' : $tab
+                    )
+                )
+            )
+        )
+    }}',
+
+    showLeadModal: {{ ($errors->hasAny(['name', 'phone', 'email', 'budget']) || session('lead_view') === 'form') ? 'true' : 'false' }},
+    showTeamModal: {{ ($errors->hasAny(['name', 'phone', 'email', 'password']) || session('team_view') === 'form') ? 'true' : 'false' }},
+    showCouponModal: {{ ($errors->hasAny(['title', 'slug', 'start_date', 'end_date', 'name', 'views']) || session('coupon_view') === 'form') ? 'true' : 'false' }},
+    showViewModal: false,
+    viewingLead: null,
+    viewOnly: false,
+
+    editingMember: {
+        id: '{{ old('id') }}',
+        name: '{{ old('name', old('member_name')) }}',
+        phone: '{{ old('phone', old('member_phone')) }}',
+        email: '{{ old('email') }}'
+    },
+
+    editingCoupon: {
+        id: '{{ old('id') }}',
+        title: '{{ old('title') }}',
+        slug: '{{ old('slug') }}',
+        start_date: '{{ old('start_date') }}',
+        end_date: '{{ old('end_date') }}',
+        name: '{{ old('name', old('usage_limit', 1)) }}',
+        views: '{{ old('views', old('total_limit', 100)) }}'
+    },
+
+    editingLead: {
+        id: '{{ old('id') }}',
+        name: '{{ old('name') }}',
+        email: '{{ old('email') }}',
+        phone: '{{ old('phone') }}',
+        interested_location: '{{ old('interested_location') }}',
+        budget: '{{ old('budget') }}',
+    },
+    accountDrawer: false,
+}">
+>>>>>>> 370867d (nav routing)
 
         <div class="mb-10 flex items-center gap-4">
 
+<<<<<<< HEAD
             <div>
                 <h1 class="text-[#003B7A] text-4xl font-light">My Account</h1>
                 <p class="text-gray-500 mt-2 text-base">Manage your profile and activity from one place.</p>
+=======
+        <div>
+            <h1 class="text-[#003B7A] text-4xl font-light">My Account</h1>
+            <p class="text-gray-500 mt-2 text-base">Manage your profile and activity from one place.</p>
+        </div>
+        <!-- মোবাইলের জন্য বাম পাশের ড্রয়ার আইকন -->
+        <button @click="accountDrawer = true" class="lg:hidden text-[#003B7A] p-2   active:bg-gray-50">
+            <i class="fa-solid fa-bars-staggered text-xl"></i>
+        </button>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+        <!-- ── LEFT SIDEBAR ── -->
+        <div class="lg:col-span-3 hidden lg:block">
+            <div class="bg-white border border-gray-200 rounded-sm shadow-sm overflow-hidden sticky top-24">
+                <div class="p-4 bg-gray-50 border-b border-gray-100 font-bold text-sm uppercase text-gray-600">
+                    Account Settings
+                </div>
+                <nav class="flex flex-col">
+
+                    <!-- Profile Tab Button -->
+                    <a href="{{ route('profile.index', 'dashboard') }}"
+                        :class="activeTab === 'dashboard' ? 'bg-[#003B7A] text-white' : 'text-gray-700 hover:bg-gray-50'"
+                        class="flex items-center gap-3 px-4 py-3 transition-all border-b border-gray-50 text-left">
+                        <i class="fa-solid fa-chart-column w-5"></i>
+                        <span class="text-base font-medium">Dashboard</span>
+                    </a>
+                    <!-- Profile Tab Button -->
+                    <a href="{{ route('profile.index', 'profile') }}"
+                        :class="activeTab === 'profile' ? 'bg-[#003B7A] text-white' : 'text-gray-700 hover:bg-gray-50'"
+                        class="flex items-center gap-3 px-4 py-3 transition-all border-b border-gray-50 text-left">
+                        <i class="fas fa-user-circle w-5"></i>
+                        <span class="text-base font-medium">Personal Info</span>
+                    </a>
+
+                    <a href="{{ route('profile.index', 'leads') }}"
+                        :class="activeTab === 'leads' ? 'bg-[#003B7A] text-white' : 'text-gray-700 hover:bg-gray-50'"
+                        class="flex items-center gap-3 px-4 py-3 transition-all border-b border-gray-50 text-left">
+                        <i class="fa-solid fa-users-rectangle w-5"></i>
+                        <span class="text-base font-medium">My Leads</span>
+                    </a>
+                    <a href="{{ route('profile.index', 'team') }}"
+                        :class="activeTab === 'team' ? 'bg-[#003B7A] text-white' : 'text-gray-700 hover:bg-gray-50'"
+                        class="flex items-center gap-3 px-4 py-3 transition-all border-b border-gray-50 text-left">
+                        <i class="fa-solid fa-arrows-down-to-people w-5"></i>
+                        <span class="text-base font-medium">Team</span>
+                    </a>
+                    <!-- My Coupons Tab Button -->
+                    <a href="{{ route('profile.index', 'coupons') }}"
+                        :class="activeTab === 'coupons' ? 'bg-[#003B7A] text-white' : 'text-gray-700 hover:bg-gray-50'"
+                        class="flex items-center gap-3 px-4 py-3 transition-all border-b border-gray-50 text-left">
+                        <i class="fa-solid fa-ticket-simple w-5"></i>
+                        <span class="text-base font-medium">Coupons</span>
+                    </a>
+
+                    <a href="{{ route('portal.redirect') }}" target="_blank"
+                        class="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 transition-all border-b border-gray-50">
+                        <i class="fa-brands fa-artstation w-5"></i>
+                        <span class="text-base font-medium">Marketing Assets</span>
+                    </a>
+
+                </nav>
+>>>>>>> 370867d (nav routing)
             </div>
             <!-- মোবাইলের জন্য বাম পাশের ড্রয়ার আইকন -->
             <button @click="accountDrawer = true" class="lg:hidden text-[#003B7A] p-2   active:bg-gray-50">
@@ -177,6 +292,7 @@
                             <div class="relative inline-block text-left" x-data="{ open: false, showCustom: false }"
                                 @mouseleave.debounce.150ms="open = false; showCustom = false">
 
+<<<<<<< HEAD
                                 <!-- Button -->
                                 <button @mouseenter="open = true"
                                     class="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-xl text-xs font-bold text-gray-500 shadow-sm transition-all hover:bg-gray-50">
@@ -195,6 +311,87 @@
                                             This Month ({{ now()->format('M Y') }})
                                         @else
                                             Date Range
+=======
+                            <!-- Button -->
+                            <button @mouseenter="open = true"
+                                class="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-xl text-xs font-bold text-gray-500 shadow-sm transition-all hover:bg-gray-50">
+                                <i class="far fa-calendar text-gray-600 text-sm"></i>
+                                <span class="tracking-tight">
+                                    @if(request('date_range') == 'custom' && request('from') && request('to'))
+                                    {{ \Carbon\Carbon::parse(request('from'))->format('d M Y') }} -
+                                    {{ \Carbon\Carbon::parse(request('to'))->format('d M Y') }}
+                                    @elseif(request('date_range') == 'today')
+                                    Today ({{ now()->format('d M Y') }})
+                                    @elseif(request('date_range') == '7_days')
+                                    Last 7 Days
+                                    @elseif(request('date_range') == '30_days')
+                                    Last 30 Days
+                                    @elseif(request('date_range') == 'this_month')
+                                    This Month ({{ now()->format('M Y') }})
+                                    @else
+                                    Date Range
+                                    @endif
+                                </span>
+                                <i class="fas fa-chevron-down text-[10px] ml-1 transition-transform"
+                                    :class="open ? 'rotate-180' : ''"></i>
+                            </button>
+
+                            <!-- Dropdown Wrapper: শুধু positioning, কোনো transform/overflow না -->
+                            <div x-show="open" x-cloak
+                                class="absolute right-0 top-full pt-1 w-56 z-50">
+
+                                <!-- Visual card: শুধু এখানেই overflow-hidden, rounded, shadow -->
+                                <div class="bg-white border border-gray-100 rounded-2xl shadow-2xl overflow-hidden">
+
+                                    <!-- Preset Links -->
+                                    <div class="py-1" x-show="!showCustom" x-cloak>
+                                        <a href="{{ request()->fullUrlWithQuery(['date_range' => 'today']) }}"
+                                            class="block px-4 py-2.5 text-xs font-bold text-gray-600 hover:bg-gray-50 border-b border-gray-50">Today</a>
+                                        <a href="{{ request()->fullUrlWithQuery(['date_range' => '7_days']) }}"
+                                            class="block px-4 py-2.5 text-xs font-bold text-gray-600 hover:bg-gray-50 border-b border-gray-50">7 Days</a>
+                                        <a href="{{ request()->fullUrlWithQuery(['date_range' => '30_days']) }}"
+                                            class="block px-4 py-2.5 text-xs font-bold text-gray-600 hover:bg-gray-50 border-b border-gray-50">30 Days</a>
+                                        <a href="{{ request()->fullUrlWithQuery(['date_range' => 'this_month']) }}"
+                                            class="block px-4 py-2.5 text-xs font-bold text-gray-600 hover:bg-gray-50 border-b border-gray-50">This Month</a>
+                                        <button @click="showCustom = true"
+                                            class="w-full text-left px-4 py-2.5 text-xs font-bold text-[#008060] hover:bg-gray-50 italic">Custom Range...</button>
+                                    </div>
+
+                                    <!-- Custom Date Input Form -->
+                                    <div class="p-4 bg-gray-50" x-show="showCustom" x-cloak>
+                                        <form action="{{ route('profile.index', 'dashboard') }}" method="GET" class="space-y-3">
+                                            <input type="hidden" name="date_range" value="custom">
+
+                                            <div>
+                                                <label class="text-[9px] uppercase font-bold text-gray-600 mb-1 block">From Date</label>
+                                                <input type="datetime-local" name="from" id="fromDate"
+                                                    value="{{ request('from') ? \Carbon\Carbon::parse(request('from'))->format('Y-m-d\TH:i') : '' }}"
+                                                    class="w-full text-xs border-gray-200 rounded-lg p-2 outline-none focus:ring-1 focus:ring-[#008060] date-only-input"
+                                                    required>
+                                            </div>
+                                            <div>
+                                                <label class="text-[9px] uppercase font-bold text-gray-600 mb-1 block">To Date</label>
+                                                <input type="datetime-local" name="to" id="toDate"
+                                                    value="{{ request('to') ? \Carbon\Carbon::parse(request('to'))->format('Y-m-d\TH:i') : '' }}"
+                                                    class="w-full text-xs border-gray-200 rounded-lg p-2 outline-none focus:ring-1 focus:ring-[#008060] date-only-input"
+                                                    required>
+                                            </div>
+
+                                            <div class="flex gap-2">
+                                                <button type="button" @click="showCustom = false"
+                                                    class="flex-1 bg-white border border-gray-200 text-gray-500 py-2 rounded-lg text-[10px] font-bold">Back</button>
+                                                <button type="submit"
+                                                    class="flex-1 bg-[#008060] text-white py-2 rounded-lg text-[10px] font-bold shadow-md shadow-emerald-100">Apply</button>
+                                            </div>
+                                        </form>
+                                        @if(request('date_range'))
+                                        <div class="border-t border-gray-100 mt-1">
+                                            <a href="{{ route('profile.index', 'dashboard') }}"
+                                                class="block px-4 py-2 text-[10px] text-red-500 font-black uppercase hover:bg-red-50 transition-colors">
+                                                <i class="fas fa-times-circle mr-1"></i> Clear Filter
+                                            </a>
+                                        </div>
+>>>>>>> 370867d (nav routing)
                                         @endif
                                     </span>
                                     <i class="fas fa-chevron-down text-[10px] ml-1 transition-transform"
@@ -707,6 +904,7 @@
                         </button>
                     </div>
 
+<<<<<<< HEAD
                     <div class="mb-6" x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show"
                         x-transition.duration.500ms>
                         @if (session('success'))
@@ -723,12 +921,143 @@
                                 <button @click="show = false"><i class="fas fa-times"></i></button>
                             </div>
                         @endif
+=======
+                    <!-- Name & Phone -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-500 uppercase mb-2">Full Name</label>
+                            <input type="text" name="name" value="{{ Auth::user()->name }}"
+                                class="w-full border border-gray-300 px-4 py-2 text-base outline-none focus:border-[#003B7A]">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-500 uppercase mb-2">Phone</label>
+                            <input type="text" name="phone" value="{{ Auth::user()->phone }}"
+                                class="w-full border border-gray-300 px-4 py-2 text-base outline-none focus:border-[#003B7A]">
+                        </div>
                     </div>
 
-                    {{-- লিস্ট ইনক্লুড --}}
-                    <div x-show="leadView === 'list'" x-transition>
-                        @include('frontend.lead.list')
+                    <hr class="my-8 border-gray-100">
+
+                    <h4 class="text-sm font-bold text-[#003B7A] uppercase mb-4 tracking-widest">Change Password</h4>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Current Password</label>
+                            <input type="password" name="current_password"
+                                class="w-full border border-gray-300 px-4 py-2 text-base outline-none focus:border-[#003B7A]">
+                            @error('current_password')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-600 uppercase mb-1">New Password</label>
+                                <input type="password" name="new_password"
+                                    class="w-full border border-gray-300 px-4 py-2 text-base outline-none focus:border-[#003B7A]">
+                                @error('new_password')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Confirm New
+                                    Password</label>
+                                <input type="password" name="new_password_confirmation"
+                                    class="w-full border border-gray-300 px-4 py-2 text-base outline-none focus:border-[#003B7A]">
+                            </div>
+                        </div>
                     </div>
+
+                    <button type="submit"
+                        class="mt-8 bg-[#003B7A] text-white px-8 py-3 font-bold uppercase text-sm tracking-widest hover:bg-blue-900 transition-all">
+                        Update Profile
+                    </button>
+                </form>
+            </div>
+
+            <!-- Section 2: Download History (Show if activeTab is 'history') -->
+            <div x-show="activeTab === 'history'" class="p-0" x-transition style="display: none;">
+                <div class="p-6 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+                    <h2 class="text-lg font-bold text-gray-800 uppercase">Download History</h2>
+                    <span
+                        class="bg-blue-100 text-blue-800 text-sm font-black px-2 py-1 rounded">{{ $downloadLogs->count() }}
+                        Files</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="text-sm uppercase text-gray-600 font-bold border-b border-gray-100 bg-gray-50">
+                                <th class="px-6 py-4">Resource</th>
+                                <th class="px-6 py-4">Type</th>
+                                <th class="px-6 py-4 text-right">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-50">
+                            @forelse($downloadLogs as $log)
+                            @php
+                            $item =
+                            $log->model === 'asset'
+                            ? \App\Models\Asset::find($log->model_id)
+                            : \App\Models\Campaign::find($log->model_id);
+                            @endphp
+                            <tr class="hover:bg-gray-50 transition-colors text-base">
+                                <td class="px-6 py-4">
+                                    @if ($item)
+                                    <a href="{{ route($log->model . '.details', $item->slug) }}"
+                                        class="text-base font-semibold text-[#003B7A] hover:underline">
+                                        {{ $item->title }}
+                                    </a>
+                                    @else
+                                    <span class="text-gray-500 italic">Resource deleted (ID:
+                                        {{ $log->model_id }})</span>
+                                    @endif
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span
+                                        class="text-sm font-bold uppercase px-2 py-0.5 rounded {{ $log->model === 'asset' ? 'bg-blue-100 text-blue-800' : 'bg-teal-100 text-teal-800' }}">
+                                        {{ $log->model }}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-right text-sm text-gray-600">
+                                    {{ $log->updated_at->format('d M Y') }}
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="3" class="px-6 py-12 text-center text-gray-500 italic">No history
+                                    found.</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Section 3: My Leads -->
+            <div x-show="activeTab === 'leads'" x-transition style="display: none;">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-bold text-[#003B7A] uppercase tracking-wider">
+                        Lead Management
+                    </h2>
+
+                    <button @click="editingLead = {id: '', name: '', phone: '', email: '', interested_location: '', budget: ''}; viewOnly = false; showLeadModal = true"
+                        class="bg-[#003B7A] hover:bg-blue-900 text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-md transition-all flex items-center gap-2">
+                        <i class="fas fa-plus"></i> Add New Lead
+                    </button>
+                </div>
+
+                <div class="mb-6" x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show"
+                    x-transition.duration.500ms>
+                    @if (session('success'))
+                    <div
+                        class="mb-4 bg-green-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
+                        <span><i class="fas fa-check-circle mr-2"></i> {{ session('success') }}</span>
+                        <button @click="show = false"><i class="fas fa-times"></i></button>
+>>>>>>> 370867d (nav routing)
+                    </div>
+                    @endif
+                    @if (session('error'))
+                    <div
+                        class="mb-4 bg-red-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
+                        <span><i class="fas fa-times-circle mr-2"></i> {{ session('error') }}</span>
+                        <button @click="show = false"><i class="fas fa-times"></i></button>
+                    </div>
+<<<<<<< HEAD
 
                     {{-- ফর্ম ইনক্লুড --}}
                     <div x-show="leadView === 'form'" x-transition style="display: none;">
@@ -756,6 +1085,135 @@
                             + Add New Member
                         </button>
                     </div>
+=======
+                    @endif
+                </div>
+
+                {{-- লিস্ট ইনক্লুড --}}
+                @include('frontend.lead.list')
+
+                {{-- ফর্ম পপআপ মডাল --}}
+                @include('frontend.lead.form')
+
+                {{-- ভিউ ডিটেইলস মডাল --}}
+                @include('frontend.lead.view-modal')
+            </div>
+
+            <!-- Section: My Team -->
+            <div x-show="activeTab === 'team'" x-transition style="display: none;">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-bold text-[#003B7A] uppercase tracking-wider">
+                        Team Management
+                    </h2>
+
+                    <button @click="editingMember = {id: null, name: '', phone: '', email: ''}; showTeamModal = true"
+                        class="bg-[#003B7A] hover:bg-blue-900 text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-md transition-all flex items-center gap-2">
+                        <i class="fas fa-plus"></i> Add New Member
+                    </button>
+                </div>
+
+                <div class="mb-6" x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show"
+                    x-transition.duration.500ms>
+                    @if (session('success'))
+                    <div
+                        class="mb-4 bg-green-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
+                        <span><i class="fas fa-check-circle mr-2"></i> {{ session('success') }}</span>
+                        <button @click="show = false"><i class="fas fa-times"></i></button>
+                    </div>
+                    @endif
+                    @if (session('error'))
+                    <div
+                        class="mb-4 bg-red-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
+                        <span><i class="fas fa-times-circle mr-2"></i> {{ session('error') }}</span>
+                        <button @click="show = false"><i class="fas fa-times"></i></button>
+                    </div>
+                    @endif
+                </div>
+
+                {{-- টিম লিস্ট ইনক্লুড --}}
+                @include('frontend.team.list')
+
+                {{-- টিম মেম্বার তৈরির পপআপ ফর্ম --}}
+                @include('frontend.team.form')
+            </div>
+
+            <!-- Section: My Coupons -->
+            <div x-show="activeTab === 'coupons'" x-transition style="display: none;">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-bold text-[#003B7A] uppercase tracking-wider">
+                        My Coupons
+                    </h2>
+
+                    <button @click="editingCoupon = { id: null, title: '', slug: '', start_date: '', end_date: '', name: 1, views: 100 }; showCouponModal = true"
+                        class="bg-[#003B7A] hover:bg-blue-900 text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-md transition-all flex items-center gap-2">
+                        <i class="fas fa-plus"></i> Add New Coupon
+                    </button>
+                </div>
+
+                <div class="mb-6" x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show"
+                    x-transition.duration.500ms>
+                    @if (session('success'))
+                    <div
+                        class="mb-4 bg-green-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
+                        <span><i class="fas fa-check-circle mr-2"></i> {{ session('success') }}</span>
+                        <button @click="show = false"><i class="fas fa-times"></i></button>
+                    </div>
+                    @endif
+                    @if (session('error'))
+                    <div
+                        class="mb-4 bg-red-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
+                        <span><i class="fas fa-times-circle mr-2"></i> {{ session('error') }}</span>
+                        <button @click="show = false"><i class="fas fa-times"></i></button>
+                    </div>
+                    @endif
+                </div>
+
+                {{-- কুপন লিস্ট --}}
+                @include('frontend.coupon.list')
+
+                {{-- কুপন তৈরির পপআপ ফর্ম --}}
+                @include('frontend.coupon.form')
+            </div>
+        </div>
+
+        <!-- ── ACCOUNT MOBILE LEFT DRAWER ── -->
+        <div x-show="accountDrawer" class="fixed inset-0 z-[100] lg:hidden" style="display: none;">
+            <!-- Overlay -->
+            <div x-show="accountDrawer" x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0" @click="accountDrawer = false"
+                class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+
+            <!-- Drawer Content -->
+            <div x-show="accountDrawer" x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0"
+                x-transition:leave="transition ease-in duration-200" x-transition:leave-start="translate-x-0"
+                x-transition:leave-end="-translate-x-full"
+                class="absolute left-0 top-0 h-full w-[280px] bg-white shadow-2xl flex flex-col border-r border-gray-100">
+
+                <div class="p-5 border-b flex justify-between items-center bg-gray-50">
+                    <span class="font-bold text-[#003B7A] uppercase text-xs tracking-widest">Account Menu</span>
+                    <button @click="accountDrawer = false"
+                        class="text-gray-600 hover:text-red-500 text-2xl leading-none">&times;</button>
+                </div>
+
+                <nav class="flex flex-col overflow-y-auto pt-2">
+                    <template x-for="item in [
+                                                { id: 'dashboard', label: 'Dashboard', icon: 'fa-chart-column' },
+                                                { id: 'profile', label: 'Personal Info', icon: 'fa-user-circle' },
+                                                { id: 'leads', label: 'My Leads', icon: 'fa-users-rectangle' },
+                                                { id: 'team', label: 'Team', icon: 'fa-arrows-down-to-people' },
+                                                { id: 'coupons', label: 'Coupons', icon: 'fa-ticket-simple' }
+                                            ]">
+                        <a :href="'{{ url('profile') }}/' + item.id"
+                            :class="activeTab === item.id ? 'bg-[#003B7A] text-white' : 'text-gray-700 hover:bg-gray-50'"
+                            class="flex items-center gap-3 px-6 py-4 border-b border-gray-50 text-left transition-colors">
+                            <i class="fa-solid w-5" :class="item.icon"></i>
+                            <span class="text-sm font-medium" x-text="item.label"></span>
+                        </a>
+                    </template>
+>>>>>>> 370867d (nav routing)
 
                     <div class="mb-6" x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show"
                         x-transition.duration.500ms>
@@ -825,6 +1283,7 @@
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
             <!-- ── ACCOUNT MOBILE LEFT DRAWER ── -->
             <div x-show="accountDrawer" class="fixed inset-0 z-[100] lg:hidden" style="display: none;">
                 <!-- Overlay -->
@@ -878,6 +1337,11 @@
                 </div>
             </div>
     </section>
+=======
+        </div>
+
+</section>
+>>>>>>> 370867d (nav routing)
 @endsection
 @push('scripts')
     <script>

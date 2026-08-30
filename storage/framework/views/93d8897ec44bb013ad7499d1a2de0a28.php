@@ -12,50 +12,50 @@
 </style>
 <?php $__env->startSection('content'); ?>
 <section class="container mx-auto px-4 lg:px-8 py-12" x-data="{
-                                                                                    activeTab: '<?php echo e(session('active_tab') ?? (
-        request('active_tab') ?? (
+    activeTab: '<?php echo e(session('active_tab') ?? (
             $errors->hasAny(['current_password', 'new_password', 'avatar']) ? 'profile' : (
                 $errors->hasAny(['title', 'slug', 'start_date', 'end_date', 'name', 'views']) ? 'coupons' : (
-                    $errors->hasAny(['email', 'password']) ? 'team' : (
-                        $errors->hasAny(['name', 'phone', 'email', 'budget']) ? 'leads' : 'dashboard'
+                    $errors->hasAny(['name', 'phone', 'email', 'password']) ? 'team' : (
+                        $errors->hasAny(['name', 'phone', 'email', 'budget']) ? 'leads' : $tab
                     )
                 )
             )
-        ))); ?>',
+        )); ?>',
 
-                                                                                    leadView: '<?php echo e(session('lead_view') ?? ($errors->hasAny(['name', 'phone', 'email', 'budget']) ? 'form' : 'list')); ?>',
-                                                                                    teamView: '<?php echo e($errors->hasAny(['email', 'password']) ? 'form' : (session('team_view') ?? 'list')); ?>',
-                                                                                    couponView: '<?php echo e($errors->hasAny(['title', 'slug', 'start_date', 'end_date', 'name', 'views']) ? 'form' :
-        (session('coupon_view') ?? 'list')); ?>',
+    showLeadModal: <?php echo e(($errors->hasAny(['name', 'phone', 'email', 'budget']) || session('lead_view') === 'form') ? 'true' : 'false'); ?>,
+    showTeamModal: <?php echo e(($errors->hasAny(['name', 'phone', 'email', 'password']) || session('team_view') === 'form') ? 'true' : 'false'); ?>,
+    showCouponModal: <?php echo e(($errors->hasAny(['title', 'slug', 'start_date', 'end_date', 'name', 'views']) || session('coupon_view') === 'form') ? 'true' : 'false'); ?>,
+    showViewModal: false,
+    viewingLead: null,
+    viewOnly: false,
 
-                                                                                    editingMember: {
-                                                                                        id: '<?php echo e(old('id')); ?>',
-                                                                                        name: '<?php echo e(old('member_name')); ?>',
-                                                                                        phone: '<?php echo e(old('member_phone')); ?>',
-                                                                                        email: '<?php echo e(old('email')); ?>'
-                                                                                    },
+    editingMember: {
+        id: '<?php echo e(old('id')); ?>',
+        name: '<?php echo e(old('name', old('member_name'))); ?>',
+        phone: '<?php echo e(old('phone', old('member_phone'))); ?>',
+        email: '<?php echo e(old('email')); ?>'
+    },
 
-                                                                                    editingCoupon: {
-                                                                                        id: '<?php echo e(old('id')); ?>',
-                                                                                        title: '<?php echo e(old('title')); ?>',
-                                                                                        slug: '<?php echo e(old('slug')); ?>',
-                                                                                        start_date: '<?php echo e(old('start_date')); ?>',
-                                                                                        end_date: '<?php echo e(old('end_date')); ?>',
-                                                                                        name: '<?php echo e(old('usage_limit', 1)); ?>',
-                                                                                        views: '<?php echo e(old('total_limit', 100)); ?>'
-                                                                                    },
+    editingCoupon: {
+        id: '<?php echo e(old('id')); ?>',
+        title: '<?php echo e(old('title')); ?>',
+        slug: '<?php echo e(old('slug')); ?>',
+        start_date: '<?php echo e(old('start_date')); ?>',
+        end_date: '<?php echo e(old('end_date')); ?>',
+        name: '<?php echo e(old('name', old('usage_limit', 1))); ?>',
+        views: '<?php echo e(old('views', old('total_limit', 100))); ?>'
+    },
 
-                                                                                    editingLead: {
-                                                                                        id: '<?php echo e(old('id')); ?>',
-                                                                                        name: '<?php echo e(old('name')); ?>',
-                                                                                        email: '<?php echo e(old('email')); ?>',
-                                                                                        phone: '<?php echo e(old('phone')); ?>',
-                                                                                        interested_location: '<?php echo e(old('interested_location')); ?>',
-                                                                                        budget: '<?php echo e(old('budget')); ?>',
-                                                                                        },
-                                                                                        accountDrawer: false,
-                                                                                        viewOnly: false,
-                                                                                }">
+    editingLead: {
+        id: '<?php echo e(old('id')); ?>',
+        name: '<?php echo e(old('name')); ?>',
+        email: '<?php echo e(old('email')); ?>',
+        phone: '<?php echo e(old('phone')); ?>',
+        interested_location: '<?php echo e(old('interested_location')); ?>',
+        budget: '<?php echo e(old('budget')); ?>',
+    },
+    accountDrawer: false,
+}">
 
     <div class="mb-10 flex items-center gap-4">
 
@@ -80,39 +80,39 @@
                 <nav class="flex flex-col">
 
                     <!-- Profile Tab Button -->
-                    <button @click="activeTab = 'dashboard'"
+                    <a href="<?php echo e(route('profile.index', 'dashboard')); ?>"
                         :class="activeTab === 'dashboard' ? 'bg-[#003B7A] text-white' : 'text-gray-700 hover:bg-gray-50'"
                         class="flex items-center gap-3 px-4 py-3 transition-all border-b border-gray-50 text-left">
                         <i class="fa-solid fa-chart-column w-5"></i>
                         <span class="text-base font-medium">Dashboard</span>
-                    </button>
+                    </a>
                     <!-- Profile Tab Button -->
-                    <button @click="activeTab = 'profile'"
+                    <a href="<?php echo e(route('profile.index', 'profile')); ?>"
                         :class="activeTab === 'profile' ? 'bg-[#003B7A] text-white' : 'text-gray-700 hover:bg-gray-50'"
                         class="flex items-center gap-3 px-4 py-3 transition-all border-b border-gray-50 text-left">
                         <i class="fas fa-user-circle w-5"></i>
                         <span class="text-base font-medium">Personal Info</span>
-                    </button>
+                    </a>
 
-                    <button @click="activeTab = 'leads'"
+                    <a href="<?php echo e(route('profile.index', 'leads')); ?>"
                         :class="activeTab === 'leads' ? 'bg-[#003B7A] text-white' : 'text-gray-700 hover:bg-gray-50'"
                         class="flex items-center gap-3 px-4 py-3 transition-all border-b border-gray-50 text-left">
                         <i class="fa-solid fa-users-rectangle w-5"></i>
                         <span class="text-base font-medium">My Leads</span>
-                    </button>
-                    <button @click="activeTab = 'team'"
+                    </a>
+                    <a href="<?php echo e(route('profile.index', 'team')); ?>"
                         :class="activeTab === 'team' ? 'bg-[#003B7A] text-white' : 'text-gray-700 hover:bg-gray-50'"
                         class="flex items-center gap-3 px-4 py-3 transition-all border-b border-gray-50 text-left">
                         <i class="fa-solid fa-arrows-down-to-people w-5"></i>
                         <span class="text-base font-medium">Team</span>
-                    </button>
+                    </a>
                     <!-- My Coupons Tab Button -->
-                    <button @click="activeTab = 'coupons'"
+                    <a href="<?php echo e(route('profile.index', 'coupons')); ?>"
                         :class="activeTab === 'coupons' ? 'bg-[#003B7A] text-white' : 'text-gray-700 hover:bg-gray-50'"
                         class="flex items-center gap-3 px-4 py-3 transition-all border-b border-gray-50 text-left">
                         <i class="fa-solid fa-ticket-simple w-5"></i>
                         <span class="text-base font-medium">Coupons</span>
-                    </button>
+                    </a>
 
                     <a href="<?php echo e(route('portal.redirect')); ?>" target="_blank"
                         class="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 transition-all border-b border-gray-50">
@@ -212,8 +212,7 @@
 
                                     <!-- Custom Date Input Form -->
                                     <div class="p-4 bg-gray-50" x-show="showCustom" x-cloak>
-                                        <form action="<?php echo e(route('profile.index')); ?>" method="GET" class="space-y-3">
-                                            <input type="hidden" name="active_tab" value="dashboard">
+                                        <form action="<?php echo e(route('profile.index', 'dashboard')); ?>" method="GET" class="space-y-3">
                                             <input type="hidden" name="date_range" value="custom">
 
                                             <div>
@@ -240,7 +239,7 @@
                                         </form>
                                         <?php if(request('date_range')): ?>
                                         <div class="border-t border-gray-100 mt-1">
-                                            <a href="<?php echo e(route('profile.index', ['active_tab' => 'dashboard'])); ?>"
+                                            <a href="<?php echo e(route('profile.index', 'dashboard')); ?>"
                                                 class="block px-4 py-2 text-[10px] text-red-500 font-black uppercase hover:bg-red-50 transition-colors">
                                                 <i class="fas fa-times-circle mr-1"></i> Clear Filter
                                             </a>
@@ -698,74 +697,55 @@ unset($__errorArgs, $__bag); ?>
             </div>
             <!-- Section 3: My Leads -->
             <div x-show="activeTab === 'leads'" x-transition style="display: none;">
-
-                <div class="flex justify-between items-center mb-4">
-                    <h2 x-show="leadView === 'list'"
-                        class="text-xl font-bold text-[#003B7A] uppercase tracking-wider pb-4">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-bold text-[#003B7A] uppercase tracking-wider">
                         Lead Management
                     </h2>
 
-                    <button x-show="leadView === 'list'" @click="leadView = 'form'; editingLead = {id:''}"
-                        class="bg-[#003B7A] text-white px-5 py-2 rounded-lg text-sm font-bold shadow-md ml-auto">
-                        + Add New Lead
+                    <button @click="editingLead = {id: '', name: '', phone: '', email: '', interested_location: '', budget: ''}; viewOnly = false; showLeadModal = true"
+                        class="bg-[#003B7A] hover:bg-blue-900 text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-md transition-all flex items-center gap-2">
+                        <i class="fas fa-plus"></i> Add New Lead
                     </button>
                 </div>
-                <div x-data="{ 
-    leadView: 'list', 
-    editingLead: null, 
-    viewOnly: false,
-    viewingLead: null,      
-    showViewModal: false  
-}">
-                    <div class="mb-6" x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show"
-                        x-transition.duration.500ms>
-                        <?php if(session('success')): ?>
-                        <div
-                            class="mb-4 bg-green-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
-                            <span><i class="fas fa-check-circle mr-2"></i> <?php echo e(session('success')); ?></span>
-                            <button @click="show = false"><i class="fas fa-times"></i></button>
-                        </div>
-                        <?php endif; ?>
-                        <?php if(session('error')): ?>
-                        <div
-                            class="mb-4 bg-red-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
-                            <span><i class="fas fa-times-circle mr-2"></i> <?php echo e(session('error')); ?></span>
-                            <button @click="show = false"><i class="fas fa-times"></i></button>
-                        </div>
-                        <?php endif; ?>
+
+                <div class="mb-6" x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show"
+                    x-transition.duration.500ms>
+                    <?php if(session('success')): ?>
+                    <div
+                        class="mb-4 bg-green-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
+                        <span><i class="fas fa-check-circle mr-2"></i> <?php echo e(session('success')); ?></span>
+                        <button @click="show = false"><i class="fas fa-times"></i></button>
                     </div>
-
-                    
-                    <div x-show="leadView === 'list'" x-transition>
-                        <?php echo $__env->make('frontend.lead.list', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+                    <?php endif; ?>
+                    <?php if(session('error')): ?>
+                    <div
+                        class="mb-4 bg-red-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
+                        <span><i class="fas fa-times-circle mr-2"></i> <?php echo e(session('error')); ?></span>
+                        <button @click="show = false"><i class="fas fa-times"></i></button>
                     </div>
-
-
-                    
-                    <div x-show="leadView === 'form'" x-transition style="display: none;">
-                        <?php echo $__env->make('frontend.lead.form', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
-                    </div>
-                    <?php echo $__env->make('frontend.lead.view-modal', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
-
+                    <?php endif; ?>
                 </div>
+
+                
+                <?php echo $__env->make('frontend.lead.list', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+
+                
+                <?php echo $__env->make('frontend.lead.form', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+
+                
+                <?php echo $__env->make('frontend.lead.view-modal', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
             </div>
 
             <!-- Section: My Team -->
             <div x-show="activeTab === 'team'" x-transition style="display: none;">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-bold text-[#003B7A] uppercase tracking-wider">
+                        Team Management
+                    </h2>
 
-                <!-- ── টিম হেডার এবং টগল বাটন ── -->
-                <div class="flex justify-between items-center mb-4">
-                    <div>
-                        <h2 x-show="teamView === 'list'"
-                            class="text-xl font-bold text-[#003B7A] uppercase tracking-wider">
-                            Team Management
-                        </h2>
-                    </div>
-
-                    <button x-show="teamView === 'list'"
-                        @click="teamView = 'form'; editingMember = {id:null, name:'', phone:'', email:''}"
-                        class="bg-[#003B7A] text-white px-5 py-2 rounded-lg text-sm font-bold shadow-md ml-auto">
-                        + Add New Member
+                    <button @click="editingMember = {id: null, name: '', phone: '', email: ''}; showTeamModal = true"
+                        class="bg-[#003B7A] hover:bg-blue-900 text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-md transition-all flex items-center gap-2">
+                        <i class="fas fa-plus"></i> Add New Member
                     </button>
                 </div>
 
@@ -788,29 +768,25 @@ unset($__errorArgs, $__bag); ?>
                 </div>
 
                 
-                <div x-show="teamView === 'list'" x-transition>
-                    <?php echo $__env->make('frontend.team.list', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
-                </div>
+                <?php echo $__env->make('frontend.team.list', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
                 
-                <div x-show="teamView === 'form'" x-transition style="display: none;">
-                    <?php echo $__env->make('frontend.team.form', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
-                </div>
+                <?php echo $__env->make('frontend.team.form', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
             </div>
+
             <!-- Section: My Coupons -->
-            <div x-show="activeTab === 'coupons'" x-transition>
-                <div class="flex justify-between items-center pb-4">
-                    <h2 x-show="couponView === 'list'"
-                        class="text-xl font-bold text-[#003B7A] uppercase tracking-wider">
+            <div x-show="activeTab === 'coupons'" x-transition style="display: none;">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-bold text-[#003B7A] uppercase tracking-wider">
                         My Coupons
                     </h2>
 
-                    <button x-show="couponView === 'list'"
-                        @click="couponView = 'form'; editingCoupon = { id: null, title: '', slug: '', start_date: '', end_date: '', name: 1, views: 100 }"
-                        class="bg-[#003B7A] text-white px-5 py-2 rounded-lg text-sm font-bold shadow-md ml-auto">
-                        + Add New Coupon
+                    <button @click="editingCoupon = { id: null, title: '', slug: '', start_date: '', end_date: '', name: 1, views: 100 }; showCouponModal = true"
+                        class="bg-[#003B7A] hover:bg-blue-900 text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-md transition-all flex items-center gap-2">
+                        <i class="fas fa-plus"></i> Add New Coupon
                     </button>
                 </div>
+
                 <div class="mb-6" x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show"
                     x-transition.duration.500ms>
                     <?php if(session('success')): ?>
@@ -829,14 +805,14 @@ unset($__errorArgs, $__bag); ?>
                     <?php endif; ?>
                 </div>
 
-                <div x-show="couponView === 'list'">
-                    <?php echo $__env->make('frontend.coupon.list', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
-                </div>
-                <div x-show="couponView === 'form'" style="display: none;">
-                    <?php echo $__env->make('frontend.coupon.form', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
-                </div>
+                
+                <?php echo $__env->make('frontend.coupon.list', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+
+                
+                <?php echo $__env->make('frontend.coupon.form', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
             </div>
         </div>
+
         <!-- ── ACCOUNT MOBILE LEFT DRAWER ── -->
         <div x-show="accountDrawer" class="fixed inset-0 z-[100] lg:hidden" style="display: none;">
             <!-- Overlay -->
@@ -867,12 +843,12 @@ unset($__errorArgs, $__bag); ?>
                                                 { id: 'team', label: 'Team', icon: 'fa-arrows-down-to-people' },
                                                 { id: 'coupons', label: 'Coupons', icon: 'fa-ticket-simple' }
                                             ]">
-                        <button @click="activeTab = item.id; accountDrawer = false"
+                        <a :href="'<?php echo e(url('profile')); ?>/' + item.id"
                             :class="activeTab === item.id ? 'bg-[#003B7A] text-white' : 'text-gray-700 hover:bg-gray-50'"
                             class="flex items-center gap-3 px-6 py-4 border-b border-gray-50 text-left transition-colors">
                             <i class="fa-solid w-5" :class="item.icon"></i>
                             <span class="text-sm font-medium" x-text="item.label"></span>
-                        </button>
+                        </a>
                     </template>
                     <a href="<?php echo e(route('profile.index')); ?>"
                         class="flex items-center gap-3 px-6 py-4 border-b border-gray-50 text-left transition-colors <?php echo e(request()->routeIs('profile.index') && request('active_tab', 'profile') === 'profile' ? 'bg-[#003B7A] text-white' : 'text-gray-700 hover:bg-gray-50'); ?>">
@@ -901,6 +877,7 @@ unset($__errorArgs, $__bag); ?>
                 </nav>
             </div>
         </div>
+
 </section>
 <?php $__env->stopSection(); ?>
 <?php $__env->startPush('scripts'); ?>

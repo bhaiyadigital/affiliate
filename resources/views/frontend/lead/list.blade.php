@@ -16,8 +16,12 @@
 </div>
 
 <!-- ── Filter Form (Responsive) ── -->
+<<<<<<< HEAD
 <form action="{{ route('profile.leads') }}" method="GET" class="mb-6 flex flex-col md:flex-row gap-4 items-end">
     <input type="hidden" name="active_tab" value="leads">
+=======
+<form action="{{ route('profile.index', 'leads') }}" method="GET" class="mb-6 flex flex-col md:flex-row gap-4 items-end">
+>>>>>>> 370867d (nav routing)
 
     <!-- Team Member Select -->
     <div class="w-full md:flex-1">
@@ -49,7 +53,7 @@
             class="flex-1 md:flex-none bg-[#003B7A] text-white px-6 py-2.5 rounded-lg text-sm font-bold shadow-md hover:bg-blue-900 transition-colors uppercase tracking-wider">
             Filter
         </button>
-        <a href="{{ route('profile.index') }}?active_tab=leads"
+        <a href="{{ route('profile.index', 'leads') }}"
             class="flex-1 md:flex-none bg-white border border-gray-300 text-gray-600 px-4 py-2.5 rounded-lg text-sm font-bold text-center hover:bg-gray-100 transition-colors uppercase tracking-wider">
             Reset
         </a>
@@ -122,7 +126,7 @@
                             <button @click="viewingLead = @js($lead); showViewModal = true" class="text-emerald-500 hover:scale-110 transition-transform">
                                 <i class="fas fa-eye"></i>
                             </button> @if ($lead->user_id == auth()->id())
-                            <button @click="editingLead = @js($lead); leadView = 'form'; viewOnly = false" class="text-blue-500"><i class="fas fa-edit"></i></button>
+                            <button @click="editingLead = @js($lead); showLeadModal = true; viewOnly = false" class="text-blue-500"><i class="fas fa-edit"></i></button>
                             <form action="{{ route('lead.destroy', $lead->id) }}" method="POST" class="inline" onsubmit="return confirm('Delete?')">
                                 @csrf @method('DELETE')
                                 <button type="submit" class="text-red-500"><i class="fas fa-trash"></i></button>
@@ -170,7 +174,7 @@
                         class="text-emerald-500 hover:scale-110 transition-transform">
                         <i class="fas fa-eye"></i>
                     </button> @if ($lead->user_id == auth()->id())
-                    <button @click="editingLead = @js($lead); leadView = 'form'; viewOnly = false" class="text-blue-500"><i class="fas fa-edit text-base"></i></button>
+                    <button @click="editingLead = @js($lead); showLeadModal = true; viewOnly = false" class="text-blue-500"><i class="fas fa-edit text-base"></i></button>
                     <form action="{{ route('lead.destroy', $lead->id) }}" method="POST" class="inline">
                         @csrf @method('DELETE')
                         <button type="submit" class="text-red-400"><i class="fas fa-trash text-base"></i></button>
