@@ -16,7 +16,7 @@
 </div>
 
 <!-- ── Filter Form (Responsive) ── -->
-<form action="{{ route('profile.leads') }}" method="GET" class="mb-6 flex flex-col md:flex-row gap-4 items-end">
+<form action="{{ route('profile.index') }}" method="GET" class="mb-6 flex flex-col md:flex-row gap-4 items-end">
     <input type="hidden" name="active_tab" value="leads">
 
     <!-- Team Member Select -->
@@ -102,7 +102,7 @@
                     </td>
                     <td class="px-6 py-4">
                         <span class="text-sm text-gray-600">
-                            {{ $lead->remarks ? Str::limit($lead->remarks, 15) : '-' }}
+                            {{ $lead->remarks ? Str::limit($lead->remarks, 50) : '-' }}
                         </span>
                     </td>
                     <td class="px-6 py-4">
