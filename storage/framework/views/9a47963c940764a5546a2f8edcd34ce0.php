@@ -28,21 +28,26 @@
                     <span class="text-[10px] font-bold text-gray-400 uppercase block">Phone</span>
                     <span class="text-sm text-gray-700" x-text="viewingLead?.phone"></span>
                 </div>
+                <div x-show="viewingLead?.email">
+                    <span class="text-[10px] font-bold text-gray-400 uppercase block">Email</span>
+                    <span class="text-sm text-gray-700" x-text="viewingLead?.email"></span>
+                </div>
                 <div>
                     <span class="text-[10px] font-bold text-gray-400 uppercase block">Source</span>
                     <span class="text-sm text-gray-700 uppercase" x-text="viewingLead?.type"></span>
                 </div>
             </div>
 
-            <div>
-                <span class="text-[10px] font-bold text-gray-400 uppercase block">Interested Location</span>
-                <span class="text-sm text-gray-700" x-text="viewingLead?.interested_location"></span>
+         <div x-show="viewingLead?.interested_location">
+    <span class="text-[10px] font-bold text-gray-400 uppercase block">Interested Location</span>
+    <span class="text-sm text-gray-700" x-text="viewingLead?.interested_location"></span>
+</div>
+            <div x-show="viewingLead?.budget">
+                <span class="text-[10px] font-bold text-gray-400 uppercase block">Budget</span>
+                <span class="text-sm text-gray-700" x-text="viewingLead?.budget"></span>
             </div>
 
-            <div>
-                <span class="text-[10px] font-bold text-gray-400 uppercase block">Status</span>
-                <span class="text-sm text-gray-700" x-text="viewingLead?.status_label"></span>
-            </div>
+
 
             
             <div x-show="viewingLead?.remarks">
