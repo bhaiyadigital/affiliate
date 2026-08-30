@@ -309,7 +309,7 @@ class LeadController extends Controller
         }
 
         $validated = $request->validate([
-            'commission_amount' => ['required', 'numeric', 'min:0', 'max:99999999.99'],
+            'commission_amount' => ['required', 'numeric', 'min:0', 'max:99999999'],
             'commission_note'   => ['nullable', 'string', 'max:1000'],
         ]);
 
@@ -320,6 +320,7 @@ class LeadController extends Controller
 
         return back()->with('success', 'Commission added successfully for ' . $lead->name . '.');
     }
+
 
     public function storeCoupon(Request $request)
     {

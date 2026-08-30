@@ -104,6 +104,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         Route::delete('/{id}',          [LeadController::class, 'destroy'])->name('destroy');
     });
     Route::post('leads/{lead}/commission', [LeadController::class, 'addCommission'])->name('admin.leads.commission.store');
+
     Route::resource('asset-types', AssetTypeController::class)
         ->middleware([
             'index'   => 'permission:asset-types.view',
