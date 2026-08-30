@@ -15,10 +15,10 @@
 
         
         <div class="flex justify-center mb-8">
-            <div class="w-12 h-12 rounded-xl bg-blue-500 flex items-center justify-center">
-                <svg width="24" height="24" viewBox="0 0 20 20" fill="white">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" />
-                </svg>
+            <div class=" rounded-xl  flex items-center justify-center">
+                  <img src="<?php echo e(asset('/')); ?>Bhaiya Affiliate Program logo_white.png"
+                    alt="Bhaiya Referral Program"
+                    class="h-[50px]" />
             </div>
         </div>
 
