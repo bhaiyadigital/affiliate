@@ -241,13 +241,9 @@ class LeadController extends Controller
         $validated = $request->validate([
             'name'                => 'required|string|max:255',
             'email'               => 'nullable|email|max:255',
-            'phone'               => [
-                'required',
-                'string',
-                'min:7',
-                'max:20',
-                'regex:/^\+?[0-9]+$/',
-            ],
+
+            'phone'            => 'required|string|max:255', new ValidPhoneNumber(),
+
             'interested_location' => 'nullable|string|max:255',
             'budget'              => 'nullable|numeric',
             'remarks'              => 'nullable|',
