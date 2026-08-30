@@ -16,7 +16,7 @@
     <meta name="keywords" content="Bhaiya Referral Program, Referral Program, Flat Referral, Land Referral, Real Estate Referral, Referral Commission, Referral Income, Real Estate Income, Flat Commission, Land Commission">
 
     <meta name="description" content="Join the Bhaiya Referral Program and refer your acquaintances to buy a flat or land. Upon successful completion of the agreement, receive a referral commission of up to 300,000 BDT directly into your account.">
-    <link rel="shortcut icon" href="{{ asset('favicon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="<?php echo e(asset('favicon.png')); ?>" type="image/x-icon">
 
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,7 +25,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700;900&family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
     <style>
         /* ══════════════════════════════════════════════
        LENIS & BASE RESET
@@ -66,7 +66,7 @@
         /* ১. কোহিনূর বাংলা রেজিস্টার (শুধু ০-৯ এবং চিহ্নের জন্য রেঞ্জ সেট করা) */
         @font-face {
             font-family: 'Kohinoor Bangla';
-            src: url("{{ asset('font/KohinoorBangla/KohinoorBangla-Regular.otf') }}") format('opentype');
+            src: url("<?php echo e(asset('font/KohinoorBangla/KohinoorBangla-Regular.otf')); ?>") format('opentype');
             font-weight: 400;
             font-style: normal;
             /* এই রেঞ্জটি বাংলা ও ইংরেজি সংখ্যা এবং +, . , ৳ কভার করবে */
@@ -75,7 +75,7 @@
 
         @font-face {
             font-family: 'Kohinoor Bangla';
-            src: url("{{ asset('font/KohinoorBangla/KohinoorBangla-Semibold.otf') }}") format('opentype');
+            src: url("<?php echo e(asset('font/KohinoorBangla/KohinoorBangla-Semibold.otf')); ?>") format('opentype');
             font-weight: 600;
             font-style: normal;
             unicode-range: U+09E6-09EF, U+0030-0039, U+002B, U+002E, U+002C, U+09F3;
@@ -83,7 +83,7 @@
 
         @font-face {
             font-family: 'Kohinoor Bangla';
-            src: url("{{ asset('font/KohinoorBangla/KohinoorBangla-Bold.otf') }}") format('opentype');
+            src: url("<?php echo e(asset('font/KohinoorBangla/KohinoorBangla-Bold.otf')); ?>") format('opentype');
             font-weight: 700;
             font-style: normal;
             unicode-range: U+09E6-09EF, U+0030-0039, U+002B, U+002E, U+002C, U+09F3;
@@ -1699,7 +1699,7 @@
             padding: 100px 0;
             position: relative;
             /* আপনার দেওয়া ইমেজটি ব্যাকগ্রাউন্ড হিসেবে */
-            background-image: url("{{ asset('./images/hero/backgroud.jpeg') }}") !important;
+            background-image: url("<?php echo e(asset('./images/hero/backgroud.jpeg')); ?>") !important;
             background-size: cover !important;
             background-position: center !important;
             background-repeat: no-repeat !important;
@@ -2421,12 +2421,12 @@
 
 <body>
 
-    @include('frontend.landing.front.landingNav')
+    <?php echo $__env->make('frontend.landing.front.landingNav', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
     <main>
-        @yield('content')
+        <?php echo $__env->yieldContent('content'); ?>
 
     </main>
-    @include('frontend.landing.front.landingFooter')
+    <?php echo $__env->make('frontend.landing.front.landingFooter', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // ১. অ্যানিমেশন অবজারভার (Reveal effect)
@@ -2452,12 +2452,12 @@
             });
 
             // ৩. লারাভেল এরর থাকলে অটো স্ক্রল করা
-            @if($errors->any())
+            <?php if($errors->any()): ?>
                 const element = document.getElementById('dashboard-section');
                 if (element) {
                     element.scrollIntoView({ behavior: 'smooth' });
                 }
-            @endif
+            <?php endif; ?>
 });
 
         // ৪. FAQ টগল ফাংশন
@@ -2482,7 +2482,7 @@
             if (!select) return;
             const slug = select.value;
             const projectName = select.options[select.selectedIndex].text;
-            const refCode = "{{ auth()->check() ? auth()->user()->referral_code : '' }}";
+            const refCode = "<?php echo e(auth()->check() ? auth()->user()->referral_code : ''); ?>";
 
             if (!slug) { alert('প্রজেক্ট সিলেক্ট করুন'); return; }
 
@@ -2567,3 +2567,4 @@
 </body>
 
 </html>
+<?php /**PATH C:\laragon\www\affiliate-project\resources\views/frontend/layouts/landingFront.blade.php ENDPATH**/ ?>

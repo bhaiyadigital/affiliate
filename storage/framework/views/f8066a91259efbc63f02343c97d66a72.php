@@ -1,6 +1,4 @@
-@extends('frontend.layouts.landingFront')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
     <style>
         @media(max-width: 400px) {
@@ -23,7 +21,7 @@
                     <mark class="kohinoor-bangla">৳৩,০০,০০০</mark> পর্যন্ত রেফারেল কমিশন পান সরাসরি আপনার ব্যাংক অ্যাকাউন্টে।
                 </p>
                 <div class="c-btn-group kohinoor-bangla">
-                    <a href="{{ route('affiliated.register.page') }}" class="btn-green flex-1"> <span>রেফার করুন</span> <i class="fas fa-arrow-right"></i></a>
+                    <a href="<?php echo e(route('affiliated.register.page')); ?>" class="btn-green flex-1"> <span>রেফার করুন</span> <i class="fas fa-arrow-right"></i></a>
                     <a href="tel:01922030303" class="btn-white flex-1"><i class="fas fa-phone"></i> <span>০১৯২২-০৩০৩০৩</span> </a>
                 </div>
                 <!-- <div class="c-stats ">
@@ -44,7 +42,7 @@
 
             <div class="visual-parent anim-float hidden lg:block">
 
-                <img src="{{asset('./images/hero/dot.avif')}}" class="card-bg-img" alt="background">
+                <img src="<?php echo e(asset('./images/hero/dot.avif')); ?>" class="card-bg-img" alt="background">
 
                 <!-- আপনার আসল কার্ড -->
                 <div class="c-visual-card ">
@@ -521,95 +519,7 @@
         </div>
     </section>
 
-    {{-- <section class="dashboard-section" id="dashboard-section">
-        <div class="wrap">
-
-            <div class="section-head">
-                <h2>স্বাগতম@auth ,{{ Auth::user()->name }}@endauth</h2>
-                <p>আপনার রেফারেল এবং কমিশনের সর্বশেষ অবস্থা নিচে দেখুন।</p>
-            </div>
-
-            <div id="dashPanel" class="dash-panel active" style="display: block;">
-                <form id="logout-form" action="{{ route('frontend.logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-                @auth
-
-                    <button class="dash-logout"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        ← লগআউট করুন
-                    </button>
-                @endauth
-                <div class="dash-summary">
-                    <div class="dash-stat"><b>৮</b><span>মোট রেফারেল</span></div>
-                    <div class="dash-stat"><b>৩</b><span>প্রক্রিয়াধীন</span></div>
-                    <div class="dash-stat"><b>২</b><span>বুকিং সম্পন্ন</span></div>
-                    <div class="dash-stat"><b>৳৪,৫০,০০০</b><span>মোট কমিশন (অর্জিত)</span></div>
-                </div>
-                <div class="dash-table-wrap">
-                    <table class="dash-table">
-                        <thead>
-                            <tr>
-                                <th>নাম</th>
-                                <th>প্রজেক্ট</th>
-                                <th>রেফার তারিখ</th>
-                                <th>স্টেজ</th>
-                                <th>কমিশন</th>
-                            </tr>
-                        </thead>
-                        <tbody style="color: #f4efe2;">
-                            <tr>
-                                <td data-label="নাম">রাকিব হাসান</td>
-                                <td data-label="প্রজেক্ট">Gulf Panorama</td>
-                                <td data-label="রেফার তারিখ">০২ জুন ২০২৬</td>
-                                <td data-label="স্টেজ"><span class="stage-pill stage-5">কমিশন প্রদত্ত</span></td>
-                                <td data-label="কমিশন">৳২,৫০,০০০</td>
-                            </tr>
-                            <tr>
-                                <td data-label="নাম">শিরিন আক্তার</td>
-                                <td data-label="প্রজেক্ট">Daisy Dell</td>
-                                <td data-label="রেফার তারিখ">১৮ জুন ২০২৬</td>
-                                <td data-label="স্টেজ"><span class="stage-pill stage-5">কমিশন প্রদত্ত</span></td>
-                                <td data-label="কমিশন">৳২,০০,০০০</td>
-                            </tr>
-                            <tr>
-                                <td data-label="নাম">ইমরান খান</td>
-                                <td data-label="প্রজেক্ট">Olivia</td>
-                                <td data-label="রেফার তারিখ">০৫ জুলাই ২০২৬</td>
-                                <td data-label="স্টেজ"><span class="stage-pill stage-4">বুকিং সম্পন্ন</span></td>
-                                <td data-label="কমিশন">প্রক্রিয়াধীন</td>
-                            </tr>
-                            <tr>
-                                <td data-label="নাম">নাজমুল হক</td>
-                                <td data-label="প্রজেক্ট">Park Oasis</td>
-                                <td data-label="রেফার তারিখ">০৯ জুলাই ২০২৬</td>
-                                <td data-label="স্টেজ"><span class="stage-pill stage-3">সাইট ভিজিট</span></td>
-                                <td data-label="কমিশন">—</td>
-                            </tr>
-                            <tr>
-                                <td data-label="নাম">ফারহানা ইসলাম</td>
-                                <td data-label="প্রজেক্ট">Sheuly's Garden</td>
-                                <td data-label="রেফার তারিখ">১১ জুলাই ২০২৬</td>
-                                <td data-label="স্টেজ"><span class="stage-pill stage-2">যোগাযোগ করা হয়েছে</span></td>
-                                <td data-label="কমিশন">—</td>
-                            </tr>
-                            <tr>
-                                <td data-label="নাম">তানভীর আহমেদ</td>
-                                <td data-label="প্রজেক্ট">Gulf Panorama</td>
-                                <td data-label="রেফার তারিখ">১৩ জুলাই ২০২৬</td>
-                                <td data-label="স্টেজ"><span class="stage-pill stage-1">রেফার করা হয়েছে</span></td>
-                                <td data-label="কমিশন">—</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <p class="link-gen-note" style="color:darkgray">ডেমো ডেটা — বাস্তব ব্যবহারে এই তালিকা আপনার প্রকৃত
-                    রেফারেল
-                    অনুযায়ী
-                    স্বয়ংক্রিয়ভাবে আপডেট হবে।</p>
-            </div>
-        </div>
-    </section> --}}
+    
 
     <!-- Bhaiya Housing Hero Section -->
     <section class="refer-hero-section">
@@ -638,7 +548,7 @@
                             টিম বাকি সব প্রক্রিয়া সহজ করে দেবে।
                         </p>
 
-                        <a href="{{ route('affiliated.register.page') }}" class="cta-button">
+                        <a href="<?php echo e(route('affiliated.register.page')); ?>" class="cta-button">
                             এখনই রেফার শুরু করুন &nbsp; →
                         </a>
                     </div>
@@ -669,7 +579,7 @@
         </div>
     </section>
 
-    @auth
+    <?php if(auth()->guard()->check()): ?>
         <!-- Form Section Header -->
         <div class="container" style="text-align: center; margin-top: 80px; margin-bottom: 40px;">
             <div style="color: #F59E0B; font-weight: 700; font-size: 14px; margin-bottom: 10px;">
@@ -700,23 +610,25 @@
                 <!-- Right Side (Form Section) -->
                 <div class="form-white-side">
                     <h3 class="form-input-title">কাস্টমারের তথ্য</h3>
-                    @if(session('success'))
+                    <?php if(session('success')): ?>
                         <div
                             style="background: #D1FAE5; color: #065F46; padding: 15px; border-radius: 10px; margin-bottom: 20px; font-weight: 600;">
-                            {{ session('success') }}
+                            <?php echo e(session('success')); ?>
+
                         </div>
-                    @endif
+                    <?php endif; ?>
 
                     <!-- সাধারণ এরর মেসেজ প্রদর্শন (যেমন: কুপন ভুল বা রেফার লিংক নেই) -->
-                    @if(session('error'))
+                    <?php if(session('error')): ?>
                         <div
                             style="background: #FEE2E2; color: #B91C1C; padding: 15px; border-radius: 10px; margin-bottom: 20px; font-weight: 600;">
-                            {{ session('error') }}
-                        </div>
-                    @endif
+                            <?php echo e(session('error')); ?>
 
-                    <form action="{{ route('lead.store') }}" method="POST">
-                        @csrf
+                        </div>
+                    <?php endif; ?>
+
+                    <form action="<?php echo e(route('lead.store')); ?>" method="POST">
+                        <?php echo csrf_field(); ?>
                         <!-- ওনার আইডি ধরার জন্য ম্যানুয়াল টাইপ পাঠানো হচ্ছে -->
                         <input type="hidden" name="type" value="manual">
 
@@ -724,31 +636,73 @@
                             <!-- কাস্টমারের নাম -->
                             <div class="input-item">
                                 <label>কাস্টমারের নাম <span style="color:red">*</span></label>
-                                <input type="text" name="name" value="{{ old('name') }}" placeholder="পূর্ণ নাম" required
-                                    style="@error('name') border-color: #EF4444; @enderror">
-                                @error('name') <span
-                                    style="color: #EF4444; font-size: 11px; margin-top: 5px; font-weight: 600;">{{ $message }}</span>
-                                @enderror
+                                <input type="text" name="name" value="<?php echo e(old('name')); ?>" placeholder="পূর্ণ নাম" required
+                                    style="<?php $__errorArgs = ['name'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> border-color: #EF4444; <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>">
+                                <?php $__errorArgs = ['name'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> <span
+                                    style="color: #EF4444; font-size: 11px; margin-top: 5px; font-weight: 600;"><?php echo e($message); ?></span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                             </div>
 
                             <!-- ফোন নম্বর -->
                             <div class="input-item">
                                 <label>ফোন নম্বর <span style="color:red">*</span></label>
-                                <input type="tel" name="phone" value="{{ old('phone') }}" placeholder="017XXXXXXXX" required
-                                    style="@error('phone') border-color: #EF4444; @enderror">
-                                @error('phone') <span
-                                    style="color: #EF4444; font-size: 11px; margin-top: 5px; font-weight: 600;">{{ $message }}</span>
-                                @enderror
+                                <input type="tel" name="phone" value="<?php echo e(old('phone')); ?>" placeholder="017XXXXXXXX" required
+                                    style="<?php $__errorArgs = ['phone'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> border-color: #EF4444; <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>">
+                                <?php $__errorArgs = ['phone'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> <span
+                                    style="color: #EF4444; font-size: 11px; margin-top: 5px; font-weight: 600;"><?php echo e($message); ?></span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                             </div>
 
                             <!-- ইমেল (নতুন যুক্ত করা হয়েছে) -->
                             <div class="input-item">
                                 <label>ইমেল (ঐচ্ছিক)</label>
-                                <input type="email" name="email" value="{{ old('email') }}" placeholder="example@mail.com"
-                                    style="@error('email') border-color: #EF4444; @enderror">
-                                @error('email') <span
-                                    style="color: #EF4444; font-size: 11px; margin-top: 5px; font-weight: 600;">{{ $message }}</span>
-                                @enderror
+                                <input type="email" name="email" value="<?php echo e(old('email')); ?>" placeholder="example@mail.com"
+                                    style="<?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> border-color: #EF4444; <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>">
+                                <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> <span
+                                    style="color: #EF4444; font-size: 11px; margin-top: 5px; font-weight: 600;"><?php echo e($message); ?></span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                             </div>
 
                             <!-- পছন্দের প্রজেক্ট -->
@@ -756,22 +710,37 @@
                                 <label>পছন্দের প্রজেক্ট</label>
                                 <select name="interested_location">
                                     <option value="">— নির্বাচন করুন —</option>
-                                    @foreach ($projects as $project)
-                                        <option value="{{ $project->title }}" {{ old('interested_location') == $project->title ? 'selected' : '' }}>
-                                            {{ $project->title }}
+                                    <?php $__currentLoopData = $projects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($project->title); ?>" <?php echo e(old('interested_location') == $project->title ? 'selected' : ''); ?>>
+                                            <?php echo e($project->title); ?>
+
                                         </option>
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
 
                             <!-- বাজেট -->
                             <div class="input-item">
                                 <label>বাজেট (টাকা)</label>
-                                <input type="number" name="budget" value="{{ old('budget') }}" placeholder="আনুমানিক বাজেট"
-                                    style="@error('budget') border-color: #EF4444; @enderror">
-                                @error('budget') <span
-                                    style="color: #EF4444; font-size: 11px; margin-top: 5px; font-weight: 600;">{{ $message }}</span>
-                                @enderror
+                                <input type="number" name="budget" value="<?php echo e(old('budget')); ?>" placeholder="আনুমানিক বাজেট"
+                                    style="<?php $__errorArgs = ['budget'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> border-color: #EF4444; <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>">
+                                <?php $__errorArgs = ['budget'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> <span
+                                    style="color: #EF4444; font-size: 11px; margin-top: 5px; font-weight: 600;"><?php echo e($message); ?></span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
 
@@ -782,7 +751,7 @@
                 </div>
             </div>
         </section>
-    @endauth
+    <?php endif; ?>
     <section class="faq-section" id="faq">
         <div class="container">
             <!-- Section Header -->
@@ -849,7 +818,7 @@
 
                 <div class="cta-btn-wrapper">
                     <!-- White Button to pop against Green background -->
-                    <a href="{{route('affiliated.login.page')}}" class="cta-white-btn">
+                    <a href="<?php echo e(route('affiliated.login.page')); ?>" class="cta-white-btn">
                         <span>এখনই রেফার জমা দিন</span>
                         <i class="fas fa-arrow-right"></i>
                     </a>
@@ -857,13 +826,13 @@
             </div>
         </div>
     </section>
-@endsection
+<?php $__env->stopSection(); ?>
 
 <script>
 
     document.addEventListener('DOMContentLoaded', function () {
         // ১. যদি ফরমের কোনো ভ্যালিডেশন এরর থাকে (যেমন: ফোন নাম্বার ভুল বা ডুপ্লিকেট)
-        @if($errors->any())
+        <?php if($errors->any()): ?>
             // সব লজিক বাদ দিয়ে সরাসরি ফরম সেকশনে নিয়ে যাবে
             setTimeout(() => {
                 const referSection = document.getElementById('refer-section');
@@ -877,10 +846,10 @@
                     }
                 }
             }, 300); // ৩০০ মিলিসেকেন্ড সময় দেওয়া হলো যাতে পেজ পুরোপুরি লোড হয়
-        @endif
+        <?php endif; ?>
 
         // ২. যদি কন্ট্রোলার থেকে ম্যানুয়ালি কোনো এরর পাঠানো হয় (যেমন: সেশন এরর)
-        @if(session('error'))
+        <?php if(session('error')): ?>
             setTimeout(() => {
                 const referSection = document.getElementById('refer-section');
                 if (referSection) {
@@ -891,10 +860,10 @@
                     }
                 }
             }, 300);
-        @endif
+        <?php endif; ?>
 
         // ৩. শুধুমাত্র সফলভাবে জমা হলে ড্যাশবোর্ডে যাবে (Landing Page Dashboard)
-        @if(session('success'))
+        <?php if(session('success')): ?>
             setTimeout(() => {
                 const dashSection = document.getElementById('dashboard-section');
                 if (dashSection) {
@@ -905,6 +874,8 @@
                     }
                 }
             }, 300);
-        @endif
+        <?php endif; ?>
 });
 </script>
+
+<?php echo $__env->make('frontend.layouts.landingFront', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\laragon\www\affiliate-project\resources\views/frontend/landing/index.blade.php ENDPATH**/ ?>
