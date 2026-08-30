@@ -111,10 +111,10 @@
                             <i class="fa-solid fa-arrows-down-to-people w-5"></i>
                             <span class="text-base font-medium">Team</span>
                         </button> --}}
-                        <a href="{{ route('profile.team') }}"
+                        <!-- <a href="{{ route('profile.team') }}"
                             class="flex items-center gap-3 px-4 py-3 border-b {{ request()->routeIs('profile.team') ? 'bg-[#003B7A] text-white' : 'text-gray-700' }}">
                             <i class="fa-solid fa-arrows-down-to-people w-5"></i> <span>Team</span>
-                        </a>
+                        </a> -->
                         <!-- My Coupons Tab Button -->
                         <button @click="activeTab = 'coupons'"
                             :class="activeTab === 'coupons' ? 'bg-[#003B7A] text-white' : 'text-gray-700 hover:bg-gray-50'"
