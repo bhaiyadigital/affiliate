@@ -1,7 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="p-4 mx-auto max-w-screen-xl md:p-6">
+    <div class="p-4 mx-auto max-w-screen-xl md:p-6" x-data="{
+        commissionModalOpen: false,
+        commissionLeadId: null,
+        commissionLeadName: '',
+        commissionAmount: '',
+        commissionNote: ''
+    }" @open-commission-modal.window="
+        commissionModalOpen = true;
+        commissionLeadId = $event.detail.id;
+        commissionLeadName = $event.detail.name;
+        commissionAmount = $event.detail.amount ?? '';
+        commissionNote = $event.detail.note ?? '';
+    ">
         {{-- Header & Filters --}}
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
             <div>
@@ -78,6 +90,7 @@
                             <th class="px-5 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">Budget</th>
                             <th class="px-5 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">Date</th>
                             <th class="px-5 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">Status</th>
+                            <th class="px-5 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">Commission</th>
                             <th class="px-5 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider text-right">
                                 Actions</th>
                         </tr>
@@ -153,10 +166,57 @@
                                     </span>
                                 </td>
 
+                                {{-- Commission --}}
+                                <td class="px-5 py-4">
+                                    @if ($lead->status == 5)
+                                        @if ($lead->commission_amount)
+                                            {{-- Commission already added: show amount + edit icon --}}
+                                            <div class="flex items-center gap-1">
+                                                <span class="text-sm font-semibold text-green-600 dark:text-green-400">
+                                                    ৳{{ number_format($lead->commission_amount, 2) }}
+                                                </span>
+                                                <button type="button"
+                                                    @click="$dispatch('open-commission-modal', {
+                                                            id: {{ $lead->id }},
+                                                            name: '{{ addslashes($lead->name) }}',
+                                                            amount: '{{ $lead->commission_amount }}',
+                                                            note: '{{ addslashes($lead->commission_note ?? '') }}'
+                                                        })"
+                                                    class="inline-flex items-center justify-center w-6 h-6 rounded-md text-gray-400 hover:bg-blue-50 hover:text-blue-600 dark:hover:bg-blue-900/20 transition-colors"
+                                                    title="Edit Commission">
+                                                    <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor">
+                                                        <path
+                                                            d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        @else
+                                            {{-- Status complete but no commission yet: show Add Commission button --}}
+                                            <button type="button"
+                                                @click="$dispatch('open-commission-modal', {
+                                                        id: {{ $lead->id }},
+                                                        name: '{{ addslashes($lead->name) }}',
+                                                        amount: '',
+                                                        note: ''
+                                                    })"
+                                                class="inline-flex items-center gap-1 px-2.5 h-8 rounded-lg text-xs font-semibold text-green-700 bg-green-50 border border-green-200 hover:bg-green-100 dark:bg-green-900/20 dark:text-green-400 dark:border-green-800 transition-colors">
+                                                <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                        d="M10 2a1 1 0 011 1v6h6a1 1 0 110 2h-6v6a1 1 0 11-2 0v-6H3a1 1 0 110-2h6V3a1 1 0 011-1z" />
+                                                </svg>
+                                                Add Commission
+                                            </button>
+                                        @endif
+                                    @else
+                                        {{-- Status not complete yet --}}
+                                        <span class="text-sm font-semibold text-gray-400 dark:text-gray-500">0</span>
+                                    @endif
+                                </td>
 
                                 {{-- Actions --}}
                                 <td class="px-5 py-4 whitespace-nowrap text-end text-sm font-medium">
                                     <div class="flex items-center justify-end gap-2">
+
                                         {{-- Edit --}}
                                         <a href="{{ route('admin.leads.edit', $lead->id) }}"
                                             class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-gray-500 hover:bg-blue-50 hover:text-blue-600 dark:hover:bg-blue-900/20 transition-colors">
@@ -182,7 +242,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="px-5 py-12 text-center text-sm text-gray-500 dark:text-gray-400">
+                                <td colspan="9" class="px-5 py-12 text-center text-sm text-gray-500 dark:text-gray-400">
                                     No leads found matching your criteria.
                                 </td>
                             </tr>
@@ -194,6 +254,72 @@
             {{-- Pagination --}}
             <div class="px-5 py-4 border-t border-gray-100 dark:border-gray-800">
                 @include('partials.pagination', ['items' => $leads])
+            </div>
+        </div>
+
+        {{-- ===================== Add / Edit Commission Modal ===================== --}}
+        <div x-show="commissionModalOpen" x-cloak
+            class="fixed inset-0 z-50 flex items-center justify-center p-4"
+            style="display: none;">
+            {{-- Backdrop --}}
+            <div class="absolute inset-0 bg-black/50" @click="commissionModalOpen = false"></div>
+
+            {{-- Modal Card --}}
+            <div class="relative bg-white dark:bg-gray-900 rounded-xl shadow-xl w-full max-w-md p-6"
+                x-show="commissionModalOpen"
+                x-transition:enter="transition ease-out duration-150"
+                x-transition:enter-start="opacity-0 scale-95"
+                x-transition:enter-end="opacity-100 scale-100">
+
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-white"
+                        x-text="commissionAmount ? 'Edit Commission' : 'Add Commission'"></h3>
+                    <button type="button" @click="commissionModalOpen = false"
+                        class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" />
+                        </svg>
+                    </button>
+                </div>
+
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                    Lead: <span class="font-semibold text-gray-700 dark:text-gray-200" x-text="commissionLeadName"></span>
+                </p>
+
+                {{-- Adjust action route/method according to your backend --}}
+                <form method="POST" :action="'/admin/leads/' + commissionLeadId + '/commission'">
+                    @csrf
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                            Commission Amount (৳)
+                        </label>
+                        <input type="number" name="commission_amount" step="0.01" min="0" required
+                            x-model="commissionAmount"
+                            class="w-full h-10 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-none dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+                            placeholder="Enter amount">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                            Note (optional)
+                        </label>
+                        <textarea name="commission_note" rows="2" x-model="commissionNote"
+                            class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-none dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+                            placeholder="Any note..."></textarea>
+                    </div>
+
+                    <div class="flex justify-end gap-2 mt-5">
+                        <button type="button" @click="commissionModalOpen = false"
+                            class="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300">
+                            Cancel
+                        </button>
+                        <button type="submit"
+                            class="px-4 py-2 rounded-lg text-sm font-medium text-white bg-green-600 hover:bg-green-700">
+                            Submit
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
