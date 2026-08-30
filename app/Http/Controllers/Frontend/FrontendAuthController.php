@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Mail\OTPMail;
+use App\Models\Content;
 use App\Models\DownloadLog;
 use App\Models\Lead;
 use App\Models\Role;
@@ -82,8 +83,11 @@ class FrontendAuthController extends Controller
         $members = $user->isSuperAdmin()
             ? User::orderBy('name')->get()
             : User::where('parent_id', $user->id)->orWhere('id', $user->id)->orderBy('name')->get();
-
-        return view('frontend.auth.profile', compact('downloadLogs', 'leads', 'members', 'allLeads', 'tab'));
+        $projects = Content::where('module', 'project')
+            ->where('status', 1)
+            ->latest()
+            ->get();
+        return view('frontend.auth.profile', compact('downloadLogs', 'leads', 'members', 'allLeads', 'tab','projects'));
     }
     //profile update
     public function update(Request $request)
@@ -92,7 +96,8 @@ class FrontendAuthController extends Controller
 
         $request->validate([
             'name'             => 'required|string|max:255',
-            'phone'            => 'nullable|string|max:255',new ValidPhoneNumber(),
+            'phone'            => 'nullable|string|max:255',
+            new ValidPhoneNumber(),
             'avatar'           => 'nullable|image',
             'current_password' => 'nullable|required_with:new_password',
             'new_password'     => 'nullable|min:6|confirmed',
@@ -229,7 +234,7 @@ class FrontendAuthController extends Controller
             'otp_expires_at' => now()->addMinutes(10)
         ]);
 
-        $this->sendOtp($user->email, $otp, $user->name,'reset_password' );
+        $this->sendOtp($user->email, $otp, $user->name, 'reset_password');
         session(['verify_email' => $user->email, $user->name, 'otp_purpose' => 'reset_password']);
 
         return redirect()->route('verify.otp')->with('success', 'ওটিপি কোড পাঠানো হয়েছে।');
