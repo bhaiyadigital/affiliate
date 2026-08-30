@@ -33,9 +33,9 @@
             {{-- Collapsed: icon / first letter --}}
             <span x-show="!$store.sidebar.isExpanded && !$store.sidebar.isHovered && !$store.sidebar.isMobileOpen">
 
-                <img src="/favicon.ico"
+                 <img src="{{asset('/')}}Bhaiya-referral-program-logo.png"
                     alt="{{ $siteSetting->site_name }}"
-                    class="w-8 h-8 object-contain" />
+                    class="w-12 h-12 " />
 
             </span>
 
