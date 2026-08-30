@@ -143,7 +143,9 @@
                 $teamLeadsCount = $statsLeads->where('user_id', '!=', auth()->id())->count();
                 $conv = $statsLeads->where('status', \App\Models\Lead::STATUS_COMPLETED)->count();
                 $rate = $total > 0 ? round(($conv / $total) * 100, 1) : 0;
-                $totalCommission = $conv * 15000;
+           $totalCommission = $statsLeads
+    ->where('status', \App\Models\Lead::STATUS_COMPLETED)
+    ->sum('commission_amount');
 
                 // ট্রেন্ড চার্ট ডাটা
                 $chartMonths = [];
@@ -281,11 +283,9 @@
                     <div class="p-6 bg-[#F6FBF9] rounded-xl border border-white shadow-sm flex justify-between items-start transition-all hover:shadow-md">
                         <div class="space-y-2">
                             <p class="text-[11px] font-bold text-gray-600 uppercase tracking-widest">Total Commission</p>
-                            <h3 class="text-4xl font-black text-[#006D44]">৳<?php echo e(number_format($conv * 15000)); ?></h3>
+                            <h3 class="text-4xl font-black text-[#006D44]">৳<?php echo e(number_format($totalCommission)); ?></h3>
                         </div>
-                        <div class="w-14 h-14 bg-[#006D44] text-white rounded-full flex items-center justify-center shadow-lg shadow-[#006d442b]">
-                            <i class="fas fa-wallet text-xl"></i>
-                        </div>
+                  
                     </div>
                 </div>
 
