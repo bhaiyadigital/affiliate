@@ -18,13 +18,8 @@ class LeadController extends Controller
         $request->validate([
             'name'  => 'required|string|max:255',
             'email' => 'nullable|email|max:255',
-            'phone' => [
-                'required',
-                'string',
-                'min:7',
-                'max:20',
-            ],
-            'phone'      => ['required', 'string', new ValidPhoneNumber(),'unique:users,phone'],
+
+            'phone'      => ['required', 'string', new ValidPhoneNumber(), 'unique:users,phone'],
             'budget' => 'nullable|numeric|min:0',
         ]);
 
