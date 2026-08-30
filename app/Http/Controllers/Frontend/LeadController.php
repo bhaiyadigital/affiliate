@@ -22,7 +22,7 @@ class LeadController extends Controller
                 'string',
                 'min:7',
                 'max:20',
-                 'phone'    => ['required', 'string', 'unique:users,phone', 'regex:/^\+?[0-9]+(?:-[0-9]+)*$/'],
+                'phone'    => ['required', 'string', 'unique:users,phone', 'regex:/^\+?[0-9]+(?:-[0-9]+)*$/'],
             ],
             'budget' => 'nullable|numeric|min:0',
         ], [
@@ -301,7 +301,25 @@ class LeadController extends Controller
         return redirect()->route('admin.leads.index')
             ->with('success', 'লিডটি ডিলিট করা হয়েছে।');
     }
+    public function addCommission(Request $request, Lead $lead)
+    {
+        // Optional: only allow commission on completed leads
+        if ($lead->status != 5) {
+            return back()->with('error', 'Commission can only be added for completed leads.');
+        }
 
+        $validated = $request->validate([
+            'commission_amount' => ['required', 'numeric', 'min:0', 'max:99999999.99'],
+            'commission_note'   => ['nullable', 'string', 'max:1000'],
+        ]);
+
+        $lead->update([
+            'commission_amount' => $validated['commission_amount'],
+            'commission_note'   => $validated['commission_note'] ?? null,
+        ]);
+
+        return back()->with('success', 'Commission added successfully for ' . $lead->name . '.');
+    }
 
     public function storeCoupon(Request $request)
     {

@@ -28,6 +28,8 @@ class Lead extends Model
         'coupon_code',
         'remarks',
         'status',
+        'commission_amount',
+        'commission_note',
     ];
 
     public static function statusLabels()
