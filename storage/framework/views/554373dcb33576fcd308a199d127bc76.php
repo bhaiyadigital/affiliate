@@ -10,7 +10,7 @@
         <a href="/" class="brand">
 
             <div>
-                <img src="{{asset('/')}}Bhaiya-referral-program-logo.png" width="180px" alt="">
+                <img src="<?php echo e(asset('/')); ?>Bhaiya-referral-program-logo.png" width="180px" alt="">
             </div>
         </a>
         <!-- শুধু এই বাটনটি brand লিঙ্কের নিচে অ্যাড করুন -->
@@ -20,56 +20,56 @@
         </button>
 
         <nav class="nav-menu">
-            {{-- আপনার আগের লিঙ্কগুলো --}}
-            <a href="{{ route('affiliated.project') }}" class="nav-item">প্রজেক্ট</a>
+            
+            <a href="<?php echo e(route('affiliated.project')); ?>" class="nav-item">প্রজেক্ট</a>
             <a href="#faq" class="nav-item">সাধারণ জিজ্ঞাসা</a>
 
-            @auth
+            <?php if(auth()->guard()->check()): ?>
                 <a href="#refer-section" class="nav-item">রেফার জমা</a>
-                {{-- মোবাইলের জন্য এক্সট্রা প্রোফাইল ও লগআউট লিঙ্ক (নিচে CSS দিয়ে ডেস্কটপে হাইড করা হবে) --}}
+                
                 <hr class="mobile-divider">
-                <a href="{{ route('profile.index') }}" class="nav-item mobile-only">প্রোফাইল</a>
-                <form action="{{ route('frontend.logout') }}" method="POST" class="mobile-only" style="padding: 10px 20px;">
-                    @csrf
+                <a href="<?php echo e(route('profile.index')); ?>" class="nav-item mobile-only">প্রোফাইল</a>
+                <form action="<?php echo e(route('frontend.logout')); ?>" method="POST" class="mobile-only" style="padding: 10px 20px;">
+                    <?php echo csrf_field(); ?>
                     <button type="submit"
                         style="color:#ef4444; font-weight:700; background:none; border:none; cursor:pointer;">লগআউট</button>
                 </form>
-            @else
+            <?php else: ?>
                 <a href="#process" class="nav-item">প্রক্রিয়া</a>
                 <a href="#why-bhaiya" class="nav-item">কেন আমরা</a>
 
-                {{-- মোবাইলের জন্য এক্সট্রা লগইন ও রেজিস্টার লিঙ্ক --}}
+                
                 <hr class="mobile-divider">
-                <a href="{{ route('affiliated.login.page') }}" class="nav-item mobile-only">লগইন</a>
-                <a href="{{ route('affiliated.register.page') }}" class="nav-item mobile-only"
+                <a href="<?php echo e(route('affiliated.login.page')); ?>" class="nav-item mobile-only">লগইন</a>
+                <a href="<?php echo e(route('affiliated.register.page')); ?>" class="nav-item mobile-only"
                     style="color: #175b05; font-weight: 800;">যোগ দিন</a>
-            @endauth
+            <?php endif; ?>
         </nav>
 
         <div class="nav-btns">
-            @auth
-                {{-- লগইন করা থাকলে প্রোফাইল ও লগআউট --}}
+            <?php if(auth()->guard()->check()): ?>
+                
                 <div style="display: flex; align-items: center; gap: 15px;">
-                    <a href="{{ route('profile.index') }}"
+                    <a href="<?php echo e(route('profile.index')); ?>"
                         style="font-size:14.5px; font-weight:700; color:#0F172A;">প্রোফাইল</a>
-                    <form action="{{ route('frontend.logout') }}" method="POST" class="inline">
-                        @csrf
+                    <form action="<?php echo e(route('frontend.logout')); ?>" method="POST" class="inline">
+                        <?php echo csrf_field(); ?>
                         <button type="submit"
                             style="font-size:13px; font-weight:700; color:#ef4444; cursor: pointer;">লগআউট</button>
                     </form>
                 </div>
-            @else
+            <?php else: ?>
                 <!-- এখানে রাউট লিঙ্ক বসানো হয়েছে -->
-                <a href="{{ route('affiliated.login.page') }}"
+                <a href="<?php echo e(route('affiliated.login.page')); ?>"
                     style="font-size:14.5px; font-weight:700; color:#0F172A; padding:10px 20px;">লগইন</a>
 
-                <a href="{{ route('affiliated.register.page') }}" class="btn-aiwave-primary">
+                <a href="<?php echo e(route('affiliated.register.page')); ?>" class="btn-aiwave-primary">
                     যোগ দিন
                     <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="3" fill="none">
                         <path d="M5 12h14M13 6l6 6-6 6" />
                     </svg>
                 </a>
-            @endauth
+            <?php endif; ?>
         </div>
     </div>
 </header>
@@ -189,3 +189,4 @@
         icon.classList.toggle('fa-xmark');
     });
 </script>
+<?php /**PATH C:\laragon\www\affiliate-project\resources\views/frontend/landing/front/landingNav.blade.php ENDPATH**/ ?>
