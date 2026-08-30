@@ -229,7 +229,7 @@ class FrontendAuthController extends Controller
             'otp_expires_at' => now()->addMinutes(10)
         ]);
 
-        $this->sendOtp($user->email, $otp, 'reset_password');
+        $this->sendOtp($user->email, $otp, $user->name,'reset_password' );
         session(['verify_email' => $user->email, $user->name, 'otp_purpose' => 'reset_password']);
 
         return redirect()->route('verify.otp')->with('success', 'ওটিপি কোড পাঠানো হয়েছে।');
