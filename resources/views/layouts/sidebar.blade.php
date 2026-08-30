@@ -35,7 +35,7 @@
 
                  <img src="{{asset('/')}}Bhaiya-referral-program-logo.png"
                     alt="{{ $siteSetting->site_name }}"
-                    class="w-12 h-12 " />
+                    class="w-12 h-12 object-contain" />
 
             </span>
 
