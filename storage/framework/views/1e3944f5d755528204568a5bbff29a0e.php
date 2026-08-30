@@ -9,7 +9,7 @@ $siteSetting = \App\Models\SiteSetting::first();
         <div class="flex items-center gap-3 shrink-0">
             <?php if(auth()->guard()->check()): ?>
             <a href="<?php echo e(route('profile.index')); ?>" class="px-2 py-2 flex items-center">
-                <img src="<?php echo e($siteSetting->logo_url); ?>" alt="Bhaiya Asset" class="w-auto lg:h-[60px] h-[45px] block" />
+                <img src="<?php echo e($siteSetting->logo_url); ?>" alt="Bhaiya Asset" class="w-auto lg:h-[40px] h-[30px] block" />
             </a>
             <?php else: ?>
             <a href="<?php echo e(route('home.index')); ?>" class="px-2 py-2 flex items-center">
@@ -22,12 +22,19 @@ $siteSetting = \App\Models\SiteSetting::first();
             <i class="fa-solid" :class="mobileMenu ? 'fa-xmark' : 'fa-bars'"></i>
         </button>
 
-        <nav class="hidden lg:flex items-stretch gap-0">
-            <a href="<?php echo e(route('affiliated.project')); ?>"
-                class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white transition-colors border-b-2 <?php echo e(request()->routeIs('affiliated.project*') ? 'border-white' : 'border-transparent hover:border-white/40'); ?> hover:border-white/40">
-                <i class="fa-regular fa-building text-lg"></i>
-                <span class="text-sm tracking-wide">Project list</span>
-            </a>
+  <nav class="hidden lg:flex items-stretch gap-0">
+    <a href="<?php echo e(route('home.index')); ?>"
+        class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white transition-colors border-b-2 <?php echo e(request()->routeIs('home.index*') ? 'border-white' : 'border-transparent hover:border-white/40'); ?> hover:border-white/40">
+       <i class="fa-solid fa-house text-lg"></i>
+        <span class="text-sm tracking-wide">Home</span>
+    </a>
+    <a href="<?php echo e(route('affiliated.project')); ?>"
+        class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white transition-colors border-b-2 <?php echo e(request()->routeIs('affiliated.project*') ? 'border-white' : 'border-transparent hover:border-white/40'); ?> hover:border-white/40">
+        <i class="fa-regular fa-building text-lg"></i>
+        <span class="text-sm tracking-wide">Project list</span>
+    </a>
+
+
             <?php if(auth()->guard()->check()): ?>
             <a href="<?php echo e(route('portal.redirect')); ?>" target="_blank"
                 class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 border-b-2 <?php echo e(request()->routeIs('home.index') ? 'border-white' : 'border-transparent hover:border-white/40'); ?>">

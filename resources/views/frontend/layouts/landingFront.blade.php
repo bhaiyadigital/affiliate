@@ -454,7 +454,7 @@
             color: var(--cream);
             line-height: 1.65;
             overflow-x: hidden;
-            
+
         }
 
         a {
@@ -553,7 +553,7 @@
                 height: auto;
                 padding: 5px;
             }
- 
+
         }
 
         /* ৩. ফ্লোটিং অ্যানিমেশন (ডান পাশের কার্ডের জন্য) */
@@ -826,7 +826,7 @@
             }
 
             .c-visual-card {
-              
+
                 padding: 30px 20px !important;
             }
 
@@ -883,7 +883,7 @@
                 padding: 5px;
             }
 
-            
+
 
             /* ছোট ফোনে ৩ লাখ টাকা লেখাটি অ্যাডজাস্টমেন্ট */
             .green-box h2 {
@@ -1398,7 +1398,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 30px 0;
+            padding: 30px 10px;
             background: none;
             border: none;
             font-size: 18px;
@@ -1438,6 +1438,7 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
         }
 
         .faq-item.active .faq-answer {
@@ -1446,6 +1447,7 @@
 
         .faq-answer p {
             padding-bottom: 30px;
+            padding: 0 10px;
             color: #64748B;
             font-size: 15px;
             line-height: 1.8;
@@ -1453,7 +1455,7 @@
 
         /* Hover effect */
         .faq-question:hover .faq-icon {
-            background-color: #E2E8F0;
+            background-color: #0B1120;
         }
 
         /* ---------------- signature SVG animations ---------------- */
@@ -2152,7 +2154,7 @@
         .hero-title {
             color: #ffffff;
             font-size: 42px;
-           
+
             line-height: 1.2;
             margin-bottom: 20px;
         }

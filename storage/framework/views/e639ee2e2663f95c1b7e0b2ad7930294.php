@@ -89,8 +89,9 @@
                             <tr class="hover:bg-gray-50/50 dark:hover:bg-white/[0.02] transition-colors">
                                 <td class="px-4 py-4 whitespace-nowrap">
                                     <div class="flex items-center gap-3">
-                                        <img src="<?php echo e($user->avatar_url); ?>" alt="<?php echo e($user->name); ?>"
-                                             class="w-9 h-9 rounded-full object-cover shrink-0 border border-gray-200 dark:border-gray-700">
+                                        <img src="<?php echo e($user->avatar ? $user->avatar_url : 'https://ui-avatars.com/api/?name=' . urlencode($user->name) . '&background=3b82f6&color=fff'); ?>"
+                                        alt="<?php echo e($user->name); ?>"
+                                        class="w-9 h-9 rounded-full object-cover shrink-0 border border-gray-200 dark:border-gray-700">
                                         <div>
                                             <div class="flex items-center gap-1.5">
                                                 <p class="text-sm font-medium text-gray-900 dark:text-white"><?php echo e($user->name); ?></p>
@@ -122,7 +123,7 @@
 
                                     </span>
                                 </td>
-                               
+
                                 <td class="px-4 py-4 whitespace-nowrap">
                                     <div class="flex items-center justify-end gap-2">
                                         <?php if(auth()->check() && auth()->user()->hasPermission('users.view')): ?>
@@ -235,4 +236,5 @@
     </div>
 </div>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\laragon\www\affiliate\resources\views/users/index.blade.php ENDPATH**/ ?>

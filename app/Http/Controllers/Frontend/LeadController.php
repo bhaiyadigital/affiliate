@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Content;
 use App\Models\Lead;
 use App\Models\User;
+use App\Rules\ValidPhoneNumber;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -14,21 +15,22 @@ class LeadController extends Controller
     public function storeLead(Request $request)
     {
         // ১. ভ্যালিডেশন
-        $request->validate([
+        $validator = \Illuminate\Support\Facades\Validator::make($request->all(), [
             'name'  => 'required|string|max:255',
             'email' => 'nullable|email|max:255',
-            'phone' => [
-                'required',
-                'string',
-                'min:7',
-                'max:20',
-                 'phone'    => ['required', 'string', 'unique:users,phone', 'regex:/^\+?[0-9]+(?:-[0-9]+)*$/'],
-            ],
+
+            'phone'      => ['required', 'string', new ValidPhoneNumber(), 'unique:users,phone'],
             'budget' => 'nullable|numeric|min:0',
-        ], [
-            'phone.regex' => 'সঠিক ফোন নাম্বার দিন ।',
-            'phone.min'   => 'ফোন নাম্বারটি অন্তত ৭ ডিজিটের হতে হবে।',
         ]);
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput()
+                ->with([
+                    'active_tab' => 'leads', // এটি আপনার ভিউতে লিড ট্যাব ধরে রাখবে
+                    'lead_view'  => 'form'   // এটি পপআপটি খোলা রাখবে
+                ]);
+        }
 
         $duplicateQuery = Lead::whereIn('status', [1, 2, 3, 4])
             ->where(function ($q) use ($request) {
@@ -248,13 +250,10 @@ class LeadController extends Controller
         $validated = $request->validate([
             'name'                => 'required|string|max:255',
             'email'               => 'nullable|email|max:255',
-            'phone'               => [
-                'required',
-                'string',
-                'min:7',
-                'max:20',
-                'regex:/^\+?[0-9]+$/',
-            ],
+
+            'phone'            => 'required|string|max:255',
+            new ValidPhoneNumber(),
+
             'interested_location' => 'nullable|string|max:255',
             'budget'              => 'nullable|numeric',
             'remarks'              => 'nullable|',
@@ -301,6 +300,25 @@ class LeadController extends Controller
         return redirect()->route('admin.leads.index')
             ->with('success', 'লিডটি ডিলিট করা হয়েছে।');
     }
+    public function addCommission(Request $request, Lead $lead)
+    {
+        // Optional: only allow commission on completed leads
+        if ($lead->status != 5) {
+            return back()->with('error', 'Commission can only be added for completed leads.');
+        }
+
+        $validated = $request->validate([
+            'commission_amount' => ['required', 'numeric', 'min:0', 'max:99999999'],
+            'commission_note'   => ['nullable', 'string', 'max:1000'],
+        ]);
+
+        $lead->update([
+            'commission_amount' => $validated['commission_amount'],
+            'commission_note'   => $validated['commission_note'] ?? null,
+        ]);
+
+        return back()->with('success', 'Commission added successfully for ' . $lead->name . '.');
+    }
 
 
     public function storeCoupon(Request $request)
@@ -328,7 +346,7 @@ class LeadController extends Controller
             'status'     => 1,
         ]);
 
-        return redirect()->route('profile.index')->with([
+        return redirect()->route('profile.index', 'coupons')->with([
             'success' => 'Coupon generated successfully!',
             'active_tab' => 'coupons',
             'coupon_view' => 'list'
@@ -363,7 +381,7 @@ class LeadController extends Controller
             'views'      => $request->views,
         ]);
 
-        return redirect()->route('profile.index')->with([
+        return redirect()->route('profile.index', 'coupons')->with([
             'success' => 'Coupon updated successfully!',
             'active_tab' => 'coupons',
             'coupon_view' => 'list'
@@ -380,7 +398,7 @@ class LeadController extends Controller
 
         $coupon->delete();
 
-        return redirect()->route('profile.index')->with([
+        return redirect()->route('profile.index', 'coupons')->with([
             'success' => 'Coupon deleted successfully!',
             'active_tab' => 'coupons'
         ]);

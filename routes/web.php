@@ -103,6 +103,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         Route::patch('/{id}/status',    [LeadController::class, 'updateStatus'])->name('update-status');
         Route::delete('/{id}',          [LeadController::class, 'destroy'])->name('destroy');
     });
+    Route::post('leads/{lead}/commission', [LeadController::class, 'addCommission'])->name('admin.leads.commission.store');
 
     Route::resource('asset-types', AssetTypeController::class)
         ->middleware([
@@ -210,7 +211,7 @@ Route::prefix('')->group(function () {
         Route::delete('/coupons/delete/{slug}', [LeadController::class, 'destroyCoupon'])->name('coupons.destroy');
         Route::put('/team/update/{id}', [FrontendAuthController::class, 'updateMember'])->name('team.member.update');
 
-        Route::get('/profile', [FrontendAuthController::class, 'index'])->name('profile.index');
+        Route::get('/profile/{tab?}', [FrontendAuthController::class, 'index'])->where('tab', 'dashboard|profile|leads|team|coupons|history')->name('profile.index');
         Route::put('/profile/update', [FrontendAuthController::class, 'update'])->name('profile.update');
         Route::get('/assets/{asset:slug}/edit-content', [AssetController::class, 'editContent'])
             ->name('assets.edit-content');

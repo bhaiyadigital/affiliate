@@ -52,7 +52,7 @@
                         <td class="px-6 py-4 text-right">
                             <div class="flex items-center justify-end gap-3">
                                 <button type="button" onclick="copyCouponToClipboard('cpn-{{ $coupon->id }}', this)" class="text-gray-400 hover:text-blue-600"><i class="fas fa-copy"></i></button>
-                                <button type="button" @click="couponView = 'form'; editingCoupon = @js([
+                                <button type="button" @click="showCouponModal = true; editingCoupon = @js([
                                     'id' => $coupon->id, 'title' => $coupon->title, 'slug' => $coupon->slug,
                                     'start_date' => $coupon->start_date ? $coupon->start_date->format('Y-m-d\TH:i') : '',
                                     'end_date' => $coupon->end_date ? $coupon->end_date->format('Y-m-d\TH:i') : '',
@@ -85,7 +85,7 @@
                     </div>
                     <div class="flex gap-3">
                          <button type="button" onclick="copyCouponToClipboard('cpn-mob-{{ $coupon->id }}', this)" class="text-blue-500 text-sm"><i class="fas fa-copy"></i></button>
-                         <button type="button" @click="couponView = 'form'; editingCoupon = @js([
+                         <button type="button" @click="showCouponModal = true; editingCoupon = @js([
                             'id' => $coupon->id, 'title' => $coupon->title, 'slug' => $coupon->slug,
                             'start_date' => $coupon->start_date ? $coupon->start_date->format('Y-m-d\TH:i') : '',
                             'end_date' => $coupon->end_date ? $coupon->end_date->format('Y-m-d\TH:i') : '',

@@ -13,8 +13,9 @@
         {{-- Profile Card --}}
         <div class="space-y-5">
             <div class="rounded-xl border border-gray-100 bg-white p-6 dark:border-gray-800 dark:bg-white/[0.03] flex flex-col items-center text-center gap-4">
-                <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}"
-                     class="w-20 h-20 rounded-full object-cover border-2 border-gray-200 dark:border-gray-700">
+                <img src="{{ $user->avatar ? $user->avatar_url : 'https://ui-avatars.com/api/?name=' . urlencode($user->name) . '&background=3b82f6&color=fff&size=200' }}"
+     alt="{{ $user->name }}"
+     class="w-20 h-20 rounded-full object-cover border-2 border-gray-200 dark:border-gray-700">
                 <div>
                     <div class="flex items-center justify-center gap-2 flex-wrap">
                         <h2 class="text-lg font-semibold text-gray-800 dark:text-white/90">{{ $user->name }}</h2>
@@ -43,7 +44,7 @@
 
             {{-- Meta --}}
             <div class="rounded-xl border border-gray-100 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03] space-y-3 text-sm">
-                
+
                 <div class="flex justify-between gap-2">
                     <span class="text-gray-500 dark:text-gray-400">Joined</span>
                     <span class="font-medium text-gray-700 dark:text-gray-300">{{ $user->created_at->format('M d, Y') }}</span>
@@ -154,4 +155,4 @@
         </div>
     </div>
 </div>
-@endsection 
+@endsection

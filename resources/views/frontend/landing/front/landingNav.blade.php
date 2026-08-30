@@ -8,7 +8,7 @@
 
         <!-- 🏠 Left: Brand (Dynamic Home Link) -->
         <a href="/" class="brand">
-            
+
             <div>
                 <img src="{{asset('/')}}Bhaiya-referral-program-logo.png" width="180px" alt="">
             </div>
@@ -19,20 +19,30 @@
             <i class="fa-solid fa-bars"></i>
         </button>
 
-        <!-- 💊 Center: Pill Menu (Dynamic Routes) -->
         <nav class="nav-menu">
-            {{-- সব সময়ের জন্য প্রোজেক্ট লিঙ্ক --}}
+            {{-- আপনার আগের লিঙ্কগুলো --}}
             <a href="{{ route('affiliated.project') }}" class="nav-item">প্রজেক্ট</a>
             <a href="#faq" class="nav-item">সাধারণ জিজ্ঞাসা</a>
-            <!-- <a href="#dashboard-section" class="nav-item">ড্যাশবোর্ড</a> -->
 
             @auth
-                {{-- লগইন করা থাকলে মেনু --}}
                 <a href="#refer-section" class="nav-item">রেফার জমা</a>
+                {{-- মোবাইলের জন্য এক্সট্রা প্রোফাইল ও লগআউট লিঙ্ক (নিচে CSS দিয়ে ডেস্কটপে হাইড করা হবে) --}}
+                <hr class="mobile-divider">
+                <a href="{{ route('profile.index') }}" class="nav-item mobile-only">প্রোফাইল</a>
+                <form action="{{ route('frontend.logout') }}" method="POST" class="mobile-only" style="padding: 10px 20px;">
+                    @csrf
+                    <button type="submit"
+                        style="color:#ef4444; font-weight:700; background:none; border:none; cursor:pointer;">লগআউট</button>
+                </form>
             @else
-                {{-- গেস্ট মোডে মেনু --}}
                 <a href="#process" class="nav-item">প্রক্রিয়া</a>
                 <a href="#why-bhaiya" class="nav-item">কেন আমরা</a>
+
+                {{-- মোবাইলের জন্য এক্সট্রা লগইন ও রেজিস্টার লিঙ্ক --}}
+                <hr class="mobile-divider">
+                <a href="{{ route('affiliated.login.page') }}" class="nav-item mobile-only">লগইন</a>
+                <a href="{{ route('affiliated.register.page') }}" class="nav-item mobile-only"
+                    style="color: #175b05; font-weight: 800;">যোগ দিন</a>
             @endauth
         </nav>
 
@@ -65,6 +75,11 @@
 </header>
 <style>
     /* ══════ রেসপনসিভ ফিক্স ══════ */
+    .mobile-only,
+    .mobile-divider {
+        display: none;
+    }
+
     @media (max-width: 991px) {
         .nav-inner {
             margin-top: 40px;
@@ -77,6 +92,17 @@
 
         .nav-btns {
             display: none;
+        }
+
+        .mobile-only {
+            display: block !important;
+        }
+
+        .mobile-divider {
+            display: block !important;
+            border: 0;
+            border-top: 1px solid #eee;
+            margin: 5px 10px;
         }
 
         /* মোবাইলে বাটন হাইড */
@@ -92,6 +118,8 @@
             border-bottom: 2px solid #175b05;
             border-radius: 0 !important;
         }
+
+
 
         .nav-menu.active {
             display: flex;
