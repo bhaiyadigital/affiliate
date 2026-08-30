@@ -15,13 +15,22 @@ class LeadController extends Controller
     public function storeLead(Request $request)
     {
         // ১. ভ্যালিডেশন
-        $request->validate([
+        $validator = \Illuminate\Support\Facades\Validator::make($request->all(), [
             'name'  => 'required|string|max:255',
             'email' => 'nullable|email|max:255',
 
             'phone'      => ['required', 'string', new ValidPhoneNumber(), 'unique:users,phone'],
             'budget' => 'nullable|numeric|min:0',
         ]);
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput()
+                ->with([
+                    'active_tab' => 'leads', // এটি আপনার ভিউতে লিড ট্যাব ধরে রাখবে
+                    'lead_view'  => 'form'   // এটি পপআপটি খোলা রাখবে
+                ]);
+        }
 
         $duplicateQuery = Lead::whereIn('status', [1, 2, 3, 4])
             ->where(function ($q) use ($request) {
@@ -242,7 +251,8 @@ class LeadController extends Controller
             'name'                => 'required|string|max:255',
             'email'               => 'nullable|email|max:255',
 
-            'phone'            => 'required|string|max:255', new ValidPhoneNumber(),
+            'phone'            => 'required|string|max:255',
+            new ValidPhoneNumber(),
 
             'interested_location' => 'nullable|string|max:255',
             'budget'              => 'nullable|numeric',

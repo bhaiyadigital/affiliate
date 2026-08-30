@@ -17,9 +17,9 @@
 </div>
 
 <!-- ── Filter Form (Responsive) ── -->
- 
+
 <form action="<?php echo e(route('profile.index', 'leads')); ?>" method="GET" class="mb-6 flex flex-col md:flex-row gap-4 items-end">
- 
+
 
     <!-- Team Member Select -->
     <div class="w-full md:flex-1">
@@ -72,6 +72,7 @@
                     <th class="px-6 py-4">Referred By</th>
                     <th class="px-6 py-4">Remarks</th>
                     <th class="px-6 py-4">Status</th>
+                    <th class="px-6 py-4">Commission</th>
                     <th class="px-6 py-4 text-right">Actions</th>
                 </tr>
             </thead>
@@ -119,6 +120,13 @@
                         ?>
                         <span class="<?php echo e($statusColor); ?> px-2 py-1 rounded text-[11px] font-black border uppercase tracking-wider">
                             <?php echo e($lead->status_label); ?>
+
+                        </span>
+                    </td>
+                    <td class="px-6 py-4">
+                        <span class="text-sm font-bold flex items-center gap-1.5 <?php echo e($lead->type === 'manual' ? 'text-gray-500' : 'text-indigo-500'); ?>">
+                           
+                        ৳<?php echo e(number_format($lead->commission_amount)); ?>
 
                         </span>
                     </td>
