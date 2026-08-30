@@ -21,7 +21,7 @@
                     <mark class="kohinoor-bangla">৳৩,০০,০০০</mark> পর্যন্ত রেফারেল কমিশন পান সরাসরি আপনার ব্যাংক অ্যাকাউন্টে।
                 </p>
                 <div class="c-btn-group kohinoor-bangla">
-                    <a href="#refer" class="btn-green flex-1"> <span>রেফার   করুন</span> <i class="fas fa-arrow-right"></i></a>
+                    <a href="<?php echo e(route('affiliated.register.page')); ?>" class="btn-green flex-1"> <span>রেফার করুন</span> <i class="fas fa-arrow-right"></i></a>
                     <a href="tel:01922030303" class="btn-white flex-1"><i class="fas fa-phone"></i> <span>০১৯২২-০৩০৩০৩</span> </a>
                 </div>
                 <!-- <div class="c-stats ">
@@ -438,7 +438,7 @@
     <section class="feature-hub-section" id="why-bhaiya">
         <div class="wrap">
             <!-- Section Header (Centered) -->
-        
+
 
             <div class="header">
                   <div class="top-badge">সুবিধা</div>
@@ -569,7 +569,7 @@
                             </div>
 
                             <div class="card-footer">
-                                প্রতি চুক্তিতে নিশ্চিত বোনাস। সরাসরি ব্যাংক অ্যাকাউন্টে। (শর্ত প্রযোজ্য) 
+                                প্রতি চুক্তিতে নিশ্চিত বোনাস। সরাসরি ব্যাংক অ্যাকাউন্টে। (শর্ত প্রযোজ্য)
                             </div>
                         </div>
                     </div>
