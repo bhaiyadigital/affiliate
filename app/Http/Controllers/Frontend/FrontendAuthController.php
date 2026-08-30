@@ -83,11 +83,13 @@ class FrontendAuthController extends Controller
         $members = $user->isSuperAdmin()
             ? User::orderBy('name')->get()
             : User::where('parent_id', $user->id)->orWhere('id', $user->id)->orderBy('name')->get();
-        $projects = Content::where('module', 'project')
+        $projects = Content::with('parent')
+            ->where('module', 'project')
             ->where('status', 1)
             ->latest()
-            ->get();
-        return view('frontend.auth.profile', compact('downloadLogs', 'leads', 'members', 'allLeads', 'tab','projects'));
+            ->get()
+            ->groupBy(fn($project) => $project->parent->title ?? 'Others');
+        return view('frontend.auth.profile', compact('downloadLogs', 'leads', 'members', 'allLeads', 'tab', 'projects'));
     }
     //profile update
     public function update(Request $request)
