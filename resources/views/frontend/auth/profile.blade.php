@@ -427,7 +427,7 @@
                                     <th class="px-8 py-5">Team</th>
                                     <th class="px-8 py-5 text-center">Status</th>
                                     <th class="px-8 py-5">Date</th>
-                                    <th class="px-8 py-5 text-right">Action</th>
+                                    <th class="px-8 py-5 text-right">Remarks</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-50">
@@ -462,8 +462,10 @@
                                     <td class="px-8 py-5 text-gray-400 text-sm">
                                         {{ $lead->created_at->format('M d, Y') }}
                                     </td>
-                                    <td class="px-8 py-5 text-right">
-                                        <i class="fas fa-chevron-right text-gray-200"></i>
+                                    <td class="px-6 py-4">
+                                        <span class="text-sm text-gray-600">
+                                            {{ $lead->remarks ? Str::limit($lead->remarks, 50) : '-' }}
+                                        </span>
                                     </td>
                                 </tr>
                                 @empty
@@ -687,35 +689,46 @@
                         + Add New Lead
                     </button>
                 </div>
-                <div class="mb-6" x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show"
-                    x-transition.duration.500ms>
-                    @if (session('success'))
-                    <div
-                        class="mb-4 bg-green-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
-                        <span><i class="fas fa-check-circle mr-2"></i> {{ session('success') }}</span>
-                        <button @click="show = false"><i class="fas fa-times"></i></button>
+                <div x-data="{ 
+    leadView: 'list', 
+    editingLead: null, 
+    viewOnly: false,
+    viewingLead: null,      
+    showViewModal: false  
+}">
+                    <div class="mb-6" x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show"
+                        x-transition.duration.500ms>
+                        @if (session('success'))
+                        <div
+                            class="mb-4 bg-green-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
+                            <span><i class="fas fa-check-circle mr-2"></i> {{ session('success') }}</span>
+                            <button @click="show = false"><i class="fas fa-times"></i></button>
+                        </div>
+                        @endif
+                        @if (session('error'))
+                        <div
+                            class="mb-4 bg-red-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
+                            <span><i class="fas fa-times-circle mr-2"></i> {{ session('error') }}</span>
+                            <button @click="show = false"><i class="fas fa-times"></i></button>
+                        </div>
+                        @endif
                     </div>
-                    @endif
-                    @if (session('error'))
-                    <div
-                        class="mb-4 bg-red-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
-                        <span><i class="fas fa-times-circle mr-2"></i> {{ session('error') }}</span>
-                        <button @click="show = false"><i class="fas fa-times"></i></button>
+
+                    {{-- লিস্ট ইনক্লুড --}}
+                    <div x-show="leadView === 'list'" x-transition>
+                        @include('frontend.lead.list')
                     </div>
-                    @endif
-                </div>
-
-                {{-- লিস্ট ইনক্লুড --}}
-                <div x-show="leadView === 'list'" x-transition>
-                    @include('frontend.lead.list')
-                </div>
 
 
-                {{-- ফর্ম ইনক্লুড --}}
-                <div x-show="leadView === 'form'" x-transition style="display: none;">
-                    @include('frontend.lead.form')
+                    {{-- ফর্ম ইনক্লুড --}}
+                    <div x-show="leadView === 'form'" x-transition style="display: none;">
+                        @include('frontend.lead.form')
+                    </div>
+                    @include('frontend.lead.view-modal')
+
                 </div>
             </div>
+
             <!-- Section: My Team -->
             <div x-show="activeTab === 'team'" x-transition style="display: none;">
 
@@ -948,11 +961,11 @@
     });
 </script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         const form = document.querySelector('form[action*="profile.index"]'); // আপনার ফর্মের সঠিক selector দিন
         if (!form) return;
 
-        form.addEventListener('submit', function () {
+        form.addEventListener('submit', function() {
             const fromInput = document.getElementById('fromDate');
             const toInput = document.getElementById('toDate');
 

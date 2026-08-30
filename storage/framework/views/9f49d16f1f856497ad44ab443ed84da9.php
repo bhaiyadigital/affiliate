@@ -421,7 +421,7 @@
                                     <th class="px-8 py-5">Team</th>
                                     <th class="px-8 py-5 text-center">Status</th>
                                     <th class="px-8 py-5">Date</th>
-                                    <th class="px-8 py-5 text-right">Action</th>
+                                    <th class="px-8 py-5 text-right">Remarks</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-50">
@@ -461,8 +461,11 @@
                                         <?php echo e($lead->created_at->format('M d, Y')); ?>
 
                                     </td>
-                                    <td class="px-8 py-5 text-right">
-                                        <i class="fas fa-chevron-right text-gray-200"></i>
+                                    <td class="px-6 py-4">
+                                        <span class="text-sm text-gray-600">
+                                            <?php echo e($lead->remarks ? Str::limit($lead->remarks, 50) : '-'); ?>
+
+                                        </span>
                                     </td>
                                 </tr>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
@@ -707,35 +710,46 @@ unset($__errorArgs, $__bag); ?>
                         + Add New Lead
                     </button>
                 </div>
-                <div class="mb-6" x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show"
-                    x-transition.duration.500ms>
-                    <?php if(session('success')): ?>
-                    <div
-                        class="mb-4 bg-green-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
-                        <span><i class="fas fa-check-circle mr-2"></i> <?php echo e(session('success')); ?></span>
-                        <button @click="show = false"><i class="fas fa-times"></i></button>
+                <div x-data="{ 
+    leadView: 'list', 
+    editingLead: null, 
+    viewOnly: false,
+    viewingLead: null,      
+    showViewModal: false  
+}">
+                    <div class="mb-6" x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show"
+                        x-transition.duration.500ms>
+                        <?php if(session('success')): ?>
+                        <div
+                            class="mb-4 bg-green-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
+                            <span><i class="fas fa-check-circle mr-2"></i> <?php echo e(session('success')); ?></span>
+                            <button @click="show = false"><i class="fas fa-times"></i></button>
+                        </div>
+                        <?php endif; ?>
+                        <?php if(session('error')): ?>
+                        <div
+                            class="mb-4 bg-red-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
+                            <span><i class="fas fa-times-circle mr-2"></i> <?php echo e(session('error')); ?></span>
+                            <button @click="show = false"><i class="fas fa-times"></i></button>
+                        </div>
+                        <?php endif; ?>
                     </div>
-                    <?php endif; ?>
-                    <?php if(session('error')): ?>
-                    <div
-                        class="mb-4 bg-red-600 text-white p-4 rounded shadow-lg text-base flex justify-between items-center">
-                        <span><i class="fas fa-times-circle mr-2"></i> <?php echo e(session('error')); ?></span>
-                        <button @click="show = false"><i class="fas fa-times"></i></button>
+
+                    
+                    <div x-show="leadView === 'list'" x-transition>
+                        <?php echo $__env->make('frontend.lead.list', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
                     </div>
-                    <?php endif; ?>
-                </div>
-
-                
-                <div x-show="leadView === 'list'" x-transition>
-                    <?php echo $__env->make('frontend.lead.list', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
-                </div>
 
 
-                
-                <div x-show="leadView === 'form'" x-transition style="display: none;">
-                    <?php echo $__env->make('frontend.lead.form', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+                    
+                    <div x-show="leadView === 'form'" x-transition style="display: none;">
+                        <?php echo $__env->make('frontend.lead.form', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+                    </div>
+                    <?php echo $__env->make('frontend.lead.view-modal', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+
                 </div>
             </div>
+
             <!-- Section: My Team -->
             <div x-show="activeTab === 'team'" x-transition style="display: none;">
 
@@ -968,11 +982,11 @@ unset($__errorArgs, $__bag); ?>
     });
 </script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         const form = document.querySelector('form[action*="profile.index"]'); // আপনার ফর্মের সঠিক selector দিন
         if (!form) return;
 
-        form.addEventListener('submit', function () {
+        form.addEventListener('submit', function() {
             const fromInput = document.getElementById('fromDate');
             const toInput = document.getElementById('toDate');
 
