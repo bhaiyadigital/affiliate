@@ -77,12 +77,12 @@ class FrontendAuthController extends Controller
                     ->orWhere('interested_location', 'like', "%$search%");
             });
         }
-        $allLeads = (clone $leadQuery)->get();
+$allLeads = (clone $leadQuery)->get();
         $leads = $leadQuery->latest()->paginate(10)->withQueryString();
 
         $members = $user->isSuperAdmin()
-            ? User::orderBy('name')->get()
-            : User::where('parent_id', $user->id)->orWhere('id', $user->id)->orderBy('name')->get();
+            ? User::orderBy('name')->paginate(10)
+            : User::where('parent_id', $user->id)->orWhere('id', $user->id)->orderBy('name')->paginate(10);
         $projects = Content::with('parent')
             ->where('module', 'project')
             ->where('status', 1)
