@@ -328,7 +328,7 @@ class LeadController extends Controller
             'status'     => 1,
         ]);
 
-        return redirect()->route('profile.index')->with([
+        return redirect()->route('profile.index', 'coupons')->with([
             'success' => 'Coupon generated successfully!',
             'active_tab' => 'coupons',
             'coupon_view' => 'list'
@@ -363,7 +363,7 @@ class LeadController extends Controller
             'views'      => $request->views,
         ]);
 
-        return redirect()->route('profile.index')->with([
+        return redirect()->route('profile.index', 'coupons')->with([
             'success' => 'Coupon updated successfully!',
             'active_tab' => 'coupons',
             'coupon_view' => 'list'
@@ -380,7 +380,7 @@ class LeadController extends Controller
 
         $coupon->delete();
 
-        return redirect()->route('profile.index')->with([
+        return redirect()->route('profile.index', 'coupons')->with([
             'success' => 'Coupon deleted successfully!',
             'active_tab' => 'coupons'
         ]);

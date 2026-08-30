@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Http;
 
 class FrontendAuthController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, $tab = 'dashboard')
     {
         $user = auth()->user();
 
@@ -82,7 +82,7 @@ class FrontendAuthController extends Controller
             ? User::orderBy('name')->get()
             : User::where('parent_id', $user->id)->orWhere('id', $user->id)->orderBy('name')->get();
 
-        return view('frontend.auth.profile', compact('downloadLogs', 'leads', 'members', 'allLeads'));
+        return view('frontend.auth.profile', compact('downloadLogs', 'leads', 'members', 'allLeads', 'tab'));
     }
     //profile update
     public function update(Request $request)
