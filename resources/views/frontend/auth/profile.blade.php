@@ -804,11 +804,11 @@
                         $refLink = route('affiliated.project.details', $project->slug) . '?ref=' . auth()->id();
                         @endphp
                         <div class="p-4 space-y-3">
-                          <a href="{{ route('affiliated.project.details', $project->slug) }}"
-    class="flex items-center gap-2 text-blue-600 font-bold text-base leading-tight hover:text-blue-800">
-    <i class="fas fa-eye text-xs"></i>
-    {{ $project->title }}
-</a>
+                            <a href="{{ route('affiliated.project.details', $project->slug) }}"
+                                class="flex items-center gap-2 text-blue-600 font-bold text-base leading-tight hover:text-blue-800">
+                                <i class="fas fa-eye text-xs"></i>
+                                {{ $project->title }}
+                            </a>
                             <div class="flex items-center gap-2">
                                 <input type="text" readonly value="{{ $refLink }}"
                                     id="refLinkM-{{ $project->id }}"

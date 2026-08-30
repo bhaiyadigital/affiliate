@@ -831,12 +831,12 @@ unset($__errorArgs, $__bag); ?>
                         $refLink = route('affiliated.project.details', $project->slug) . '?ref=' . auth()->id();
                         ?>
                         <div class="p-4 space-y-3">
-                          <a href="<?php echo e(route('affiliated.project.details', $project->slug)); ?>"
-    class="flex items-center gap-2 text-blue-600 font-bold text-base leading-tight hover:text-blue-800">
-    <i class="fas fa-eye text-xs"></i>
-    <?php echo e($project->title); ?>
+                            <a href="<?php echo e(route('affiliated.project.details', $project->slug)); ?>"
+                                class="flex items-center gap-2 text-blue-600 font-bold text-base leading-tight hover:text-blue-800">
+                                <i class="fas fa-eye text-xs"></i>
+                                <?php echo e($project->title); ?>
 
-</a>
+                            </a>
                             <div class="flex items-center gap-2">
                                 <input type="text" readonly value="<?php echo e($refLink); ?>"
                                     id="refLinkM-<?php echo e($project->id); ?>"
