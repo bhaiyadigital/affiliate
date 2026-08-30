@@ -1,10 +1,9 @@
-@extends('frontend.layouts.front')
-@section('meta')
-    @include('components.meta-info.add-meta.project-details-meta', ['setup' => $setup])
-@endsection
-@section('title', 'Our Exclusive Events | Bhaiya Hotels | Bhaiya Group')
+<?php $__env->startSection('meta'); ?>
+    <?php echo $__env->make('components.meta-info.add-meta.project-details-meta', ['setup' => $setup], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('title', 'Our Exclusive Events | Bhaiya Hotels | Bhaiya Group'); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     <style>
         .slant-badge {
             clip-path: polygon(0 0, 90% 0, 100% 100%, 0% 100%);
@@ -184,20 +183,22 @@
             <!-- Image Overlap using Negative Margin -->
             <div class="flex   gap-2 text-sm bg-white/70  px-4 py-2 rounded-full  border-gray-100">
 
-                <a href="{{ route('home.index') }}" class="text-gray-600 hover:text-black">
+                <a href="<?php echo e(route('home.index')); ?>" class="text-gray-600 hover:text-black">
                     Home
                 </a>
 
                 <span class="text-gray-300">›</span>
 
-                <a href="{{ route('affiliated.project') ?? '#' }}" class="text-gray-600 hover:text-black">
-                    {{ $project->category->title ?? 'Projects' }}
+                <a href="<?php echo e(route('affiliated.project') ?? '#'); ?>" class="text-gray-600 hover:text-black">
+                    <?php echo e($project->category->title ?? 'Projects'); ?>
+
                 </a>
 
                 <span class="text-gray-300">›</span>
 
                 <span class="text-black font-semibold">
-                    {{ $project->title }}
+                    <?php echo e($project->title); ?>
+
                 </span>
 
             </div>
@@ -212,32 +213,7 @@
                 <div class="lg:col-span-8 flex flex-col h-full ">
                     <!-- Header tab: sits ABOVE the video, flush left -->
                     <div class="flex items-stretch h-9 w-fit mb-0">
-                        {{-- <div
-                            class="slant-badge bg-[#DFE8FF] pl-4 pr-10 flex items-center gap-2 border border-gray-200 border-b-0 border-l-0">
-                            <div class="border border-gray-200 border-b-0 px-1 flex items-center gap-1.5">
-                                <div class="w-12 h-12 flex items-center justify-center">
-                                    <svg width="80" height="80" viewBox="0 0 56 56" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M20.9974 38.5H45.5C51.2986 38.5 56 33.7986 56 28C56 22.2014 51.2986 17.5 45.5 17.5H20.9974C18.7282 15.7928 15.9647 14.8713 13.125 14.875C5.88087 14.875 0 20.7559 0 28C0 35.2441 5.88087 41.125 13.125 41.125C16.0772 41.125 18.8037 40.1476 20.9974 38.5Z"
-                                            fill="#F51E1E" />
-
-                                        <path
-                                            d="M13.125 39.375C19.4072 39.375 24.5 34.2822 24.5 28C24.5 21.7178 19.4072 16.625 13.125 16.625C6.84276 16.625 1.75 21.7178 1.75 28C1.75 34.2822 6.84276 39.375 13.125 39.375Z"
-                                            fill="white" />
-
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M10.066 21.1191C9.93294 21.042 9.78196 21.0014 9.62821 21.0011C9.47446 21.0008 9.32334 21.041 9.19002 21.1176C9.0567 21.1942 8.94587 21.3045 8.86864 21.4374C8.79141 21.5704 8.75049 21.7213 8.75001 21.8751V34.1251C8.74942 34.2792 8.78966 34.4308 8.86664 34.5644C8.94361 34.698 9.05458 34.8088 9.18826 34.8856C9.32195 34.9624 9.47357 35.0024 9.62774 35.0016C9.78191 35.0008 9.93312 34.9592 10.066 34.8811L20.566 28.7561C20.6982 28.679 20.8079 28.5687 20.8841 28.436C20.9603 28.3034 21.0005 28.1531 21.0005 28.0001C21.0005 27.8471 20.9603 27.6968 20.8841 27.5641C20.8079 27.4314 20.6982 27.3211 20.566 27.2441L10.066 21.1191Z"
-                                            fill="#F51E1E" />
-
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M47.25 27.125V25.375H49C49.2321 25.375 49.4546 25.2828 49.6187 25.1187C49.7828 24.9546 49.875 24.7321 49.875 24.5C49.875 24.2679 49.7828 24.0454 49.6187 23.8813C49.4546 23.7172 49.2321 23.625 49 23.625H46.375C46.1429 23.625 45.9204 23.7172 45.7563 23.8813C45.5922 24.0454 45.5 24.2679 45.5 24.5V31.5C45.5 31.7321 45.5922 31.9546 45.7563 32.1187C45.9204 32.2828 46.1429 32.375 46.375 32.375H49C49.2321 32.375 49.4546 32.2828 49.6187 32.1187C49.7828 31.9546 49.875 31.7321 49.875 31.5C49.875 31.2679 49.7828 31.0454 49.6187 30.8813C49.4546 30.7172 49.2321 30.625 49 30.625H47.25V28.875H49C49.2321 28.875 49.4546 28.7828 49.6187 28.6187C49.7828 28.4546 49.875 28.2321 49.875 28C49.875 27.7679 49.7828 27.5454 49.6187 27.3813C49.4546 27.2172 49.2321 27.125 49 27.125H47.25ZM42.0262 24.2874L41.125 27.8924L40.2238 24.2874C40.166 24.0637 40.0222 23.872 39.8237 23.7539C39.6251 23.6359 39.3879 23.6012 39.1639 23.6573C38.9398 23.7134 38.7471 23.8559 38.6276 24.0536C38.5082 24.2513 38.4717 24.4882 38.5262 24.7126L40.2762 31.7126C40.3237 31.9018 40.4329 32.0698 40.5867 32.1897C40.7405 32.3097 40.9299 32.3749 41.125 32.3749C41.3201 32.3749 41.5095 32.3097 41.6633 32.1897C41.8171 32.0698 41.9263 31.9018 41.9738 31.7126L43.7238 24.7126C43.7783 24.4882 43.7418 24.2513 43.6224 24.0536C43.5029 23.8559 43.3102 23.7134 43.0861 23.6573C42.8621 23.6012 42.6249 23.6359 42.4263 23.7539C42.2278 23.872 42.084 24.0637 42.0262 24.2874ZM36.75 31.5V24.5C36.75 24.2679 36.6578 24.0454 36.4937 23.8813C36.3296 23.7172 36.1071 23.625 35.875 23.625C35.6429 23.625 35.4204 23.7172 35.2563 23.8813C35.0922 24.0454 35 24.2679 35 24.5V31.5C35 31.7321 35.0922 31.9546 35.2563 32.1187C35.4204 32.2828 35.6429 32.375 35.875 32.375C36.1071 32.375 36.3296 32.2828 36.4937 32.1187C36.6578 31.9546 36.75 31.7321 36.75 31.5ZM28.875 24.5V31.5C28.875 31.7321 28.9672 31.9546 29.1313 32.1187C29.2954 32.2828 29.5179 32.375 29.75 32.375H32.375C32.6071 32.375 32.8296 32.2828 32.9937 32.1187C33.1578 31.9546 33.25 31.7321 33.25 31.5C33.25 31.2679 33.1578 31.0454 32.9937 30.8813C32.8296 30.7172 32.6071 30.625 32.375 30.625H30.625V24.5C30.625 24.2679 30.5328 24.0454 30.3687 23.8813C30.2046 23.7172 29.9821 23.625 29.75 23.625C29.5179 23.625 29.2954 23.7172 29.1313 23.8813C28.9672 24.0454 28.875 24.2679 28.875 24.5Z"
-                                            fill="white" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <span class="text-[#174BD4] text-sm font-medium whitespace-nowrap">{{ $project->title }}</span>
-                        </div> --}}
+                        
                     </div>
 
                     <!-- Video Thumbnail Container -->
@@ -245,39 +221,39 @@
                         id="details-video-wrapper" onclick="playDetailsInlineVideo()"
                         style="aspect-ratio: 16/9.4; margin-top: -1px;">
 
-                        @php
+                        <?php
                             $displayImage = $project->imageUrl ?? ($project->galleryUrls[0] ?? '');
 
 
-                        @endphp
+                        ?>
 
-                        <img src="{{ $displayImage }}" alt="{{ $project->title ?? 'Project Image' }}"
+                        <img src="<?php echo e($displayImage); ?>" alt="<?php echo e($project->title ?? 'Project Image'); ?>"
                             class="object-contain w-full h-full">
                     </div>
                 </div>
 
                 <!-- RIGHT: Interest Form -->
                 <div class="lg:col-span-4 md:mt-8">
-                    {{-- লগইন করা সাধারণ ইউজারদের জন্য রেফারেল লিংক জেনারেটর --}}
+                    
                     <!-- ── ADMIN & USER ACTION AREA ── -->
                     <div class="mb-4">
-                        @auth
-                            @if(auth()->user()->isSuperAdmin())
-                                {{-- সুপার এডমিনের জন্য এডিট বাটন --}}
+                        <?php if(auth()->guard()->check()): ?>
+                            <?php if(auth()->user()->isSuperAdmin()): ?>
+                                
                                 <div class="mb-4 p-4 bg-white rounded-lg border-2 border-[#2C4798] shadow-sm">
-                                    <a href="{{ route('contents.edit', ['module' => 'project', 'id' => $project->id]) }}"
+                                    <a href="<?php echo e(route('contents.edit', ['module' => 'project', 'id' => $project->id])); ?>"
                                         target="_blank"
                                         class="w-full bg-[#2C4798] hover:bg-[#1a368a] text-white py-3 rounded-md font-bold text-sm flex items-center justify-center gap-2 transition-all shadow-md active:scale-95">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                         Edit This Project (Admin)
                                     </a>
                                 </div>
-                            @else
-                                @if(!session('success'))
-                                    @php
+                            <?php else: ?>
+                                <?php if(!session('success')): ?>
+                                    <?php
                                         $refCode = auth()->user()->referral_code ?? 'NULL';
                                         $baseUrl = route('affiliated.project.details', $project->slug) . '?ref=' . $refCode;
-                                    @endphp
+                                    ?>
 
                                     <div class="bg-[#DFE8FF] p-6 rounded-lg border border-blue-100 shadow-sm mb-4">
                                         <h3
@@ -285,90 +261,92 @@
                                             <i class="fa-solid fa-share-nodes"></i> Your Referral Link
                                         </h3>
 
-                                        {{-- আপনার দেওয়া সেই সুন্দর ডিজাইন --}}
+                                        
                                         <div class="link-row"
                                             style="display: flex; align-items: center; justify-content: space-between; padding: 10px 15px; background: #ffffff; border: 1px solid #c2d4ff; border-radius: 10px; box-shadow: 0 2px 8px rgba(44, 71, 152, 0.05);">
                                             <div style="flex: 1; overflow: hidden; margin-right: 10px;">
                                                 <span
-                                                    style="display: block; font-size: 10px; font-weight: 800; color: #2C4798; text-transform: uppercase; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $project->title }}</span>
+                                                    style="display: block; font-size: 10px; font-weight: 800; color: #2C4798; text-transform: uppercase; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><?php echo e($project->title); ?></span>
                                                 <span id="auto-link-text"
-                                                    style="display: block; font-size: 10px; color: #64748b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $baseUrl }}</span>
+                                                    style="display: block; font-size: 10px; color: #64748b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><?php echo e($baseUrl); ?></span>
                                             </div>
                                             <button type="button"
                                                 style="flex: 0 0 60px; height: 32px; background: #2C4798; color: #ffffff; border-radius: 6px; font-size: 10px; font-weight: 800; cursor: pointer; border: none; transition: all 0.2s;"
                                                 onclick="copyLinkToClipboard('auto-link-text', this)">COPY</button>
                                         </div>
                                     </div>
-                                @endif
-                            @endif
-                        @endauth
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        <?php endif; ?>
                     </div>
                     <div class="bg-[#DFE8FF] p-7 md:p-8 rounded-lg border border-blue-50">
                         <h2 class="text-xl md:text-2xl font-bold text-gray-800 leading-snug mb-6">
                             I am interested in this project.
                         </h2>
 
-                        {{-- Success/Error Message Section --}}
+                        
                         <div class="mb-4">
-                            @if (session('success'))
-                                <div class="p-4 bg-green-100 text-green-700 font-bold rounded">{{ session('success') }}
-                                </div>
-                            @endif
+                            <?php if(session('success')): ?>
+                                <div class="p-4 bg-green-100 text-green-700 font-bold rounded"><?php echo e(session('success')); ?>
 
-                            {{-- এটিই আপনাকে বলবে ডাটা কেন সেভ হচ্ছে না --}}
-                            @if (session('error'))
+                                </div>
+                            <?php endif; ?>
+
+                            
+                            <?php if(session('error')): ?>
                                 <div class="p-4 bg-red-100 text-red-700 font-bold rounded border border-red-300">
-                                    {{ session('error') }}
-                                </div>
-                            @endif
+                                    <?php echo e(session('error')); ?>
 
-                            @if ($errors->any())
+                                </div>
+                            <?php endif; ?>
+
+                            <?php if($errors->any()): ?>
                                 <div class="p-4 bg-orange-100 text-orange-700 rounded border border-orange-300">
                                     <ul class="list-disc list-inside">
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
+                                        <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <li><?php echo e($error); ?></li>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </ul>
                                 </div>
-                            @endif
+                            <?php endif; ?>
                         </div>
-                        <form action="{{ route('lead.store') }}" method="POST" class="flex flex-col gap-4">
-                            @csrf
+                        <form action="<?php echo e(route('lead.store')); ?>" method="POST" class="flex flex-col gap-4">
+                            <?php echo csrf_field(); ?>
 
-                            {{-- ১. রেফারেল কোড চেক: URL অথবা Cookie থেকে --}}
-                            @php
+                            
+                            <?php
                                 $referralCode = request()->query('ref') ?? request()->cookie('referred_by');
-                            @endphp
+                            ?>
 
-                            {{-- হিডেন ইনপুটগুলো --}}
-                            <input type="hidden" name="ref" value="{{ $referralCode }}">
-                            <input type="hidden" name="interested_location" value="{{ $project->title }}">
+                            
+                            <input type="hidden" name="ref" value="<?php echo e($referralCode); ?>">
+                            <input type="hidden" name="interested_location" value="<?php echo e($project->title); ?>">
 
-                            {{-- লজিক: রেফারেল থাকলে 'refer_link', না থাকলে 'manual' --}}
-                            <input type="hidden" name="type" value="{{ $referralCode ? 'refer_link' : 'manual' }}">
+                            
+                            <input type="hidden" name="type" value="<?php echo e($referralCode ? 'refer_link' : 'manual'); ?>">
 
-                            {{-- নাম ইনপুট --}}
+                            
                             <input type="text" name="name" placeholder="Name (required)" required
                                 class="w-full bg-white px-5 py-3.5 text-sm outline-none border border-transparent placeholder:text-gray-400 shadow-sm focus:ring-2 focus:ring-[#2c4294]/20 transition-all"
-                                value="{{ old('name') }}" />
+                                value="<?php echo e(old('name')); ?>" />
 
-                            {{-- ফোন ইনপুট --}}
+                            
                             <input type="tel" name="phone" placeholder="Phone Number (required)" required
                                 class="w-full bg-white px-5 py-3.5 text-sm outline-none border border-transparent placeholder:text-gray-400 shadow-sm focus:ring-2 focus:ring-[#2c4294]/20 transition-all"
-                                value="{{ old('phone') }}" />
+                                value="<?php echo e(old('phone')); ?>" />
 
-                            {{-- বাজেট ইনপুট --}}
+                            
                             <input type="number" name="budget" placeholder="Your Budget (optional)"
                                 class="w-full bg-white px-5 py-3.5 text-sm outline-none border border-transparent placeholder:text-gray-400 shadow-sm focus:ring-2 focus:ring-[#2c4294]/20 transition-all"
-                                value="{{ old('budget') }}" />
+                                value="<?php echo e(old('budget')); ?>" />
 
-                            {{-- ২. কুপন কোড লজিক: যদি রেফারেল কোড না থাকে ($referralCode যদি খালি হয়) --}}
-                            @if(!$referralCode)
+                            
+                            <?php if(!$referralCode): ?>
                                 <input type="text" name="coupon_code" id="coupon_code" placeholder="Coupon Code (optional)"
                                     class="w-full bg-white px-5 py-3.5 text-sm outline-none border border-transparent placeholder:text-gray-400 shadow-sm focus:ring-2 focus:ring-[#2c4294]/20 transition-all"
-                                    value="{{ old('coupon_code') }}" style="text-transform: uppercase;" />
+                                    value="<?php echo e(old('coupon_code')); ?>" style="text-transform: uppercase;" />
                                 <p id="coupon_message" class="text-xs mt-1"></p>
-                            @endif
+                            <?php endif; ?>
 
                             <button type="submit"
                                 class="cursor-pointer w-full bg-[#2C4798] hover:bg-[#1e2d6b] text-white py-4 rounded-xl font-bold text-base flex items-center justify-center gap-3 transition-all">
@@ -381,27 +359,28 @@
             </div>
         </div>
     </section>
-    @php
+    <?php
         $sliderImages = $project->galleryUrls;
 
-    @endphp
+    ?>
 
-    @if (count($sliderImages) > 0)
+    <?php if(count($sliderImages) > 0): ?>
         <section class="hidden bg-[#f2f6ff] py-12 md:pb-6 md:py-16 overflow-hidden">
             <div class="container mx-auto px-4 md:px-10">
                 <!-- Header Info -->
                 <div class="mb-10">
                     <h2 class="text-[28px] md:text-3xl font-bold mb-3 text-gray-900">
-                        {{ $project->title ?? 'Featured Projects' }}
+                        <?php echo e($project->title ?? 'Featured Projects'); ?>
+
                     </h2>
                     <div class="space-y-1 text-gray-600">
                         <div class="flex items-center gap-2 text-sm md:text-base">
                             <i class="fa-solid fa-location-dot text-blue-600"></i>
-                            <span>{{ $project->location ?? 'Location Name' }}</span>
+                            <span><?php echo e($project->location ?? 'Location Name'); ?></span>
                         </div>
                         <div class="flex items-center gap-2 text-sm md:text-base">
                             <i class="fa-solid fa-vector-square text-blue-600"></i>
-                            <span>{{ $project->name ?? 'Project Detail' }}</span>
+                            <span><?php echo e($project->name ?? 'Project Detail'); ?></span>
                         </div>
                     </div>
                 </div>
@@ -421,12 +400,12 @@
 
                     <div class="swiper hotelSwiper">
                         <div class="swiper-wrapper">
-                            @foreach ($sliderImages as $img)
+                            <?php $__currentLoopData = $sliderImages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $img): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <div class="swiper-slide">
-                                    <a href="{{ $img }}" class="glightbox block relative group overflow-hidden">
-                                        <img src="{{ $img }}"
+                                    <a href="<?php echo e($img); ?>" class="glightbox block relative group overflow-hidden">
+                                        <img src="<?php echo e($img); ?>"
                                             class="w-full aspect-square object-cover transition-transform duration-700 group-hover:scale-110 shadow-sm"
-                                            alt="{{ $project->title }}" />
+                                            alt="<?php echo e($project->title); ?>" />
 
                                         <div
                                             class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -434,14 +413,14 @@
                                         </div>
                                     </a>
                                 </div>
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </div>
                         <div class="swiper-pagination !bottom-2"></div>
                     </div>
                 </div>
             </div>
         </section>
-    @endif
+    <?php endif; ?>
 
     <!-- PROJECT DETAILS SECTION -->
     <section class="bg-white py-16 md:py-24">
@@ -452,16 +431,16 @@
                 <div class="lg:col-span-7 lg:border-r border-gray-200 flex flex-col">
                     <div class="lg:pr-16 pb-14">
                         <!-- 1. Project At a Glance -->
-                        @php
+                        <?php
                             $extraData = array_filter($project->extra ?? []);
                             $features = $project->features ?? [];
 
                             $allFeatureIcons = \App\Models\Content::whereIn('module', ['project_glance', 'features'])
                                 ->where('status', 1)
                                 ->get();
-                        @endphp
+                        ?>
 
-                        @if (count($extraData) > 0)
+                        <?php if(count($extraData) > 0): ?>
                             <div class="mb-14">
                                 <div class="border-l-[3px] border-[#224194] pl-4 mb-8">
                                     <h2 class="text-2xl font-bold text-gray-900">
@@ -469,32 +448,32 @@
                                     </h2>
                                 </div>
                                 <div class="grid grid-cols-2 gap-y-6">
-                                    @foreach ($extraData as $key => $value)
-                                        @php
+                                    <?php $__currentLoopData = $extraData; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php
                                             $info = $allFeatureIcons
                                                 ->where('module', 'project_glance')
                                                 ->where('title', $key)
                                                 ->first();
-                                        @endphp
+                                        ?>
                                         <div class="flex items-center gap-4 text-[#3F3F3F] font-medium">
                                             <div class="w-6 h-6 flex items-center justify-center flex-shrink-0">
-                                                @if ($info && $info->img_path)
-                                                    <img src="{{ $info->img_path }}" class="w-full h-full object-contain"
-                                                        alt="{{ $key }}">
-                                                @else
+                                                <?php if($info && $info->img_path): ?>
+                                                    <img src="<?php echo e($info->img_path); ?>" class="w-full h-full object-contain"
+                                                        alt="<?php echo e($key); ?>">
+                                                <?php else: ?>
                                                     <i
-                                                        class="{{ $info->name ?? 'fa-solid fa-circle-check' }} text-[#224194] text-lg text-center"></i>
-                                                @endif
+                                                        class="<?php echo e($info->name ?? 'fa-solid fa-circle-check'); ?> text-[#224194] text-lg text-center"></i>
+                                                <?php endif; ?>
                                             </div>
-                                            <span class="text-base">{{ $key }}: {{ $value }}</span>
+                                            <span class="text-base"><?php echo e($key); ?>: <?php echo e($value); ?></span>
                                         </div>
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </div>
                             </div>
-                        @endif
+                        <?php endif; ?>
 
 
-                        @if (count($features) > 0)
+                        <?php if(count($features) > 0): ?>
                             <div class="mb-14">
                                 <div class="border-l-[3px] border-[#224194] pl-4 mb-8">
                                     <h2 class="text-2xl font-bold text-gray-900">
@@ -502,33 +481,33 @@
                                     </h2>
                                 </div>
                                 <div class="grid grid-cols-2 gap-y-6">
-                                    @foreach ($features as $title)
-                                        @php
+                                    <?php $__currentLoopData = $features; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $title): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php
                                             $info = $allFeatureIcons
                                                 ->where('module', 'features')
                                                 ->where('title', $title)
                                                 ->first();
-                                        @endphp
+                                        ?>
                                         <div class="flex items-center gap-4 text-[#3F3F3F] font-medium">
                                             <div class="w-6 h-6 flex items-center justify-center flex-shrink-0">
-                                                @if ($info && $info->img_path)
-                                                    <img src="{{ $info->img_path }}" class="w-full h-full object-contain"
-                                                        alt="{{ $title }}">
-                                                @else
+                                                <?php if($info && $info->img_path): ?>
+                                                    <img src="<?php echo e($info->img_path); ?>" class="w-full h-full object-contain"
+                                                        alt="<?php echo e($title); ?>">
+                                                <?php else: ?>
                                                     <i
-                                                        class="{{ $info->name ?? 'fa-solid fa-circle-check' }} text-[#224194] text-lg text-center"></i>
-                                                @endif
+                                                        class="<?php echo e($info->name ?? 'fa-solid fa-circle-check'); ?> text-[#224194] text-lg text-center"></i>
+                                                <?php endif; ?>
                                             </div>
-                                            <span class="text-base">{{ $title }}</span>
+                                            <span class="text-base"><?php echo e($title); ?></span>
                                         </div>
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </div>
                             </div>
-                        @endif
+                        <?php endif; ?>
 
                         <!-- 3. Dynamic Description Tabs & PDF Section -->
                         <div class="mb-14">
-                            @php
+                            <?php
                                 $titles = $project->body_titles ?? [];
                                 $statuses = $project->section_statuses ?? [];
 
@@ -550,48 +529,50 @@
                                         ];
                                     }
                                 }
-                            @endphp
+                            ?>
 
-                            @if (count($tabGroups) > 0)
+                            <?php if(count($tabGroups) > 0): ?>
                                 <div class="flex flex-wrap gap-2 mb-6 items-center">
-                                    @foreach ($tabGroups as $id => $group)
-                                        <button onclick="toggleDescriptionTab('{{ $id }}')" id="desc-btn-{{ $id }}"
+                                    <?php $__currentLoopData = $tabGroups; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $id => $group): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <button onclick="toggleDescriptionTab('<?php echo e($id); ?>')" id="desc-btn-<?php echo e($id); ?>"
                                             class="desc-tab-btn px-6 py-2.5 rounded-md font-bold text-sm uppercase transition-all duration-300
-                                                                                                    {{ $loop->first ? 'bg-[#224194] text-white shadow-md' : 'bg-white border border-[#224194] text-gray-600' }}">
-                                            {{ $group['label'] }}
+                                                                                                    <?php echo e($loop->first ? 'bg-[#224194] text-white shadow-md' : 'bg-white border border-[#224194] text-gray-600'); ?>">
+                                            <?php echo e($group['label']); ?>
+
                                         </button>
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </div>
 
                                 <div class="bg-white overflow-hidden">
-                                    @foreach ($tabGroups as $id => $group)
-                                        <div id="desc-pane-{{ $id }}"
-                                            class="blog-content desc-tab-pane {{ $loop->first ? '' : 'hidden' }}">
-                                            {!! $group['content'] !!}
+                                    <?php $__currentLoopData = $tabGroups; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $id => $group): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <div id="desc-pane-<?php echo e($id); ?>"
+                                            class="blog-content desc-tab-pane <?php echo e($loop->first ? '' : 'hidden'); ?>">
+                                            <?php echo $group['content']; ?>
+
                                         </div>
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </div>
-                            @endif
+                            <?php endif; ?>
                         </div>
 
 
                     </div>
 
                     <!-- 3. Download Section -->
-                    @if ($project->url)
+                    <?php if($project->url): ?>
                         <div class="border-t border-gray-200 pt-12 lg:pr-16 flex-grow">
                             <div class="border-l-[3px] border-[#224194] pl-4 mb-8">
                                 <h2 class="text-2xl font-bold text-gray-900 leading-tight">
                                     Download for more detailed information.
                                 </h2>
                             </div>
-                            <a href="{{ $project->url }}" target="_blank"
+                            <a href="<?php echo e($project->url); ?>" target="_blank"
                                 class="inline-flex items-center gap-3 bg-[#224194] text-white px-8 py-3.5 rounded-lg font-bold text-base hover:opacity-90 transition">
                                 <i class="fa-solid fa-cloud-arrow-down text-lg"></i>
                                 Download Now
                             </a>
                         </div>
-                    @endif
+                    <?php endif; ?>
                 </div>
 
                 <!-- RIGHT COLUMN (5/12) -->
@@ -601,34 +582,35 @@
                     </h2>
 
                     <div class="divide-y divide-gray-100 border-b border-gray-100">
-                        @forelse($relatedProjects as $rp)
-                            @php
+                        <?php $__empty_1 = true; $__currentLoopData = $relatedProjects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rp): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                            <?php
                                 // ১. প্রথমে মেইন ইমেজ (imageUrl) চেক করবে, না থাকলে গ্যালারির প্রথম ছবি, তাও না থাকলে প্লেসহোল্ডার
                                 $rpThumb =
                                     $rp->imageUrl ?? ($rp->galleryUrls[0] ?? asset('assets/images/placeholder.jpg'));
-                            @endphp
+                            ?>
 
                             <!-- Project Card - Clickable -->
-                            <a href="{{ route('affiliated.project.details', $rp->slug) }}" aria-label="View project details"
+                            <a href="<?php echo e(route('affiliated.project.details', $rp->slug)); ?>" aria-label="View project details"
                                 class="flex items-start gap-5 py-6 first:pt-0 group cursor-pointer">
 
                                 <!-- Thumbnail -->
                                 <div class="w-32 h-24 flex-shrink-0 overflow-hidden rounded-md bg-gray-50 border">
-                                    <img src="{{ $rpThumb }}"
+                                    <img src="<?php echo e($rpThumb); ?>"
                                         class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
-                                        alt="{{ $rp->title }}"
-                                        onerror="this.onerror=null;this.src='{{ asset('assets/images/placeholder.jpg') }}';" />
+                                        alt="<?php echo e($rp->title); ?>"
+                                        onerror="this.onerror=null;this.src='<?php echo e(asset('assets/images/placeholder.jpg')); ?>';" />
                                 </div>
 
                                 <!-- Content -->
                                 <div class="space-y-1.5 flex-1">
                                     <h4
                                         class="font-bold text-gray-900 text-lg leading-snug group-hover:text-[#224194] transition-colors">
-                                        {{ Str::limit($rp->title, 45) }}
+                                        <?php echo e(Str::limit($rp->title, 45)); ?>
+
                                     </h4>
                                     <div class="flex items-center gap-2 text-gray-500 text-sm">
                                         <i class="fa-solid fa-location-dot"></i>
-                                        <span>{{ $rp->location ?? 'Location' }}</span>
+                                        <span><?php echo e($rp->location ?? 'Location'); ?></span>
                                     </div>
                                     <div class="inline-flex items-center gap-2 text-[#224194] font-bold text-sm mt-1">
                                         View Details
@@ -637,9 +619,9 @@
                                     </div>
                                 </div>
                             </a>
-                        @empty
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                             <p class="py-10 text-gray-400">No related projects found.</p>
-                        @endforelse
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -647,7 +629,7 @@
     </section>
 
 
-@endsection
+<?php $__env->stopSection(); ?>
 <script>
     function playDetailsInlineVideo() {
         const thumb = document.getElementById('details-thumb');
@@ -663,7 +645,7 @@
                 iframe.src += (currentSrc.indexOf('?') === -1 ? '?' : '&') + 'autoplay=1';
             }
 
-            fetch('/increment-video-view/{{ $project->id }}')
+            fetch('/increment-video-view/<?php echo e($project->id); ?>')
                 .then(response => response.json())
                 .catch(err => console.error('Error updating views:', err));
         }
@@ -727,11 +709,11 @@
         function checkCoupon(code) {
             couponMessage.innerHTML = '<span class="text-gray-400">Checking...</span>';
 
-            fetch("{{ route('coupon.check') }}", {
+            fetch("<?php echo e(route('coupon.check')); ?>", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>',
                 },
                 body: JSON.stringify({
                     coupon_code: code
@@ -751,3 +733,4 @@
         }
     });
 </script>
+<?php echo $__env->make('frontend.layouts.front', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\laragon\www\affiliate-project\resources\views/frontend/landing/projectDetails.blade.php ENDPATH**/ ?>

@@ -89,8 +89,9 @@
                             <tr class="hover:bg-gray-50/50 dark:hover:bg-white/[0.02] transition-colors">
                                 <td class="px-4 py-4 whitespace-nowrap">
                                     <div class="flex items-center gap-3">
-                                        <img src="<?php echo e($user->avatar_url ?? asset('images/user/images.png')); ?>" alt="<?php echo e($user->name); ?>"
-                                             class="w-9 h-9 rounded-full object-cover shrink-0 border border-gray-200 dark:border-gray-700">
+                                        <img src="<?php echo e($user->avatar ? $user->avatar_url : 'https://ui-avatars.com/api/?name=' . urlencode($user->name) . '&background=3b82f6&color=fff'); ?>"
+     alt="<?php echo e($user->name); ?>"
+     class="w-9 h-9 rounded-full object-cover shrink-0 border border-gray-200 dark:border-gray-700">
                                         <div>
                                             <div class="flex items-center gap-1.5">
                                                 <p class="text-sm font-medium text-gray-900 dark:text-white"><?php echo e($user->name); ?></p>
