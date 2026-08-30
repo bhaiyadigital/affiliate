@@ -25,7 +25,7 @@ $siteSetting = \App\Models\SiteSetting::first();
   <nav class="hidden lg:flex items-stretch gap-0">
     <a href="{{ route('home.index') }}"
         class="flex flex-col items-center justify-center gap-[5px] px-5 py-2.5 text-white hover:text-white transition-colors border-b-2 {{ request()->routeIs('home.index*') ? 'border-white' : 'border-transparent hover:border-white/40' }} hover:border-white/40">
-        <i class="fa-regular fa-house text-lg"></i>
+       <i class="fa-solid fa-house text-lg"></i>
         <span class="text-sm tracking-wide">Home</span>
     </a>
     <a href="{{ route('affiliated.project') }}"
