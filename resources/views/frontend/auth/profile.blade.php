@@ -287,9 +287,7 @@
                             <p class="text-[11px] font-bold text-gray-600 uppercase tracking-widest">Total Commission</p>
                             <h3 class="text-4xl font-black text-[#006D44]">৳{{ number_format($totalCommission) }}</h3>
                         </div>
-                        <div class="w-14 h-14 bg-[#006D44] text-white rounded-full flex items-center justify-center shadow-lg shadow-[#006d442b]">
-                            <i class="fas fa-wallet text-xl"></i>
-                        </div>
+                  
                     </div>
                 </div>
 
